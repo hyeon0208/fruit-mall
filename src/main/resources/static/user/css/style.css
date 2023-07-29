@@ -1,0 +1,3165 @@
+#join {
+  margin-top: 500px;
+  margin: 120px auto;
+}
+#join .inner .join__1st {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#join .inner .join__1st .join__title {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+#join .inner .join__1st .join__title h4 {
+  font: 800 30px/1 "Nanum Gothic";
+}
+#join .inner .join__1st .inputboxs {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 30px;
+  margin-bottom: 100px;
+}
+#join .inner .join__1st .inputboxs label p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+#join .inner .join__1st .inputboxs label input {
+  width: 450px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  background-color: #fff3eb;
+  border-radius: 5px;
+  border: none;
+}
+#join .inner .join__1st .inputboxs label .wrong__pw__input {
+  border: 1px solid red;
+}
+#join .inner .join__1st .inputboxs label .wrong__pw {
+  color: red;
+  font: normal 11px/1 "Nanum Gothic";
+  margin-top: 7px;
+}
+#join .join__2nd {
+  background-color: #f2f2f2;
+  margin-bottom: 100px;
+}
+#join .join__2nd .terms {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px 50px 750px;
+}
+#join .join__2nd .terms h5 {
+  font: bold 16px/1 "Nanum Gothic";
+  margin-bottom: 30px;
+}
+#join .join__2nd .terms .checkboxs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+#join .join__2nd .terms .checkboxs label {
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+}
+#join .join__2nd .terms .checkboxs label p {
+  font: normal 14px/1 "Nanum Gothic";
+  margin-left: 10px;
+}
+#join .join__2nd .terms .checkboxs label p span {
+  text-decoration: underline;
+  font: bold 14px/1 "Nanum Gothic";
+}
+#join .join__2nd .terms .checkboxs label .agree {
+  font: bold 14px/1 "Nanum Gothic";
+}
+#join .join__2nd .terms .checkboxs label input {
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  border-radius: 50px;
+  border: 1px solid #333;
+}
+#join .join__2nd .terms .checkboxs .all__agreed {
+  margin-left: 0px;
+}
+#join .button {
+  margin: 0 auto;
+}
+#join .button .inner a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#join .button .inner a button {
+  width: 450px;
+  border-radius: 50px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  font: bold 15px/1 "Nanum Gothic";
+  letter-spacing: 1px;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.joinConfirm_wrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.joinConfirm_wrap .inner {
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 100px;
+  width: 50%;
+}
+.joinConfirm_wrap .inner .txt01 {
+  font: 600 20px/1.3 "Nanum Gothic";
+}
+.joinConfirm_wrap .inner .txt02 {
+  font: 500 15px/2 "Nanum Gothic";
+  text-align: center;
+}
+.joinConfirm_wrap .inner .loginbox {
+  padding: 50px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+.joinConfirm_wrap .inner .loginbox p {
+  font: 800 18px/1.7 "Nanum Gothic";
+  letter-spacing: 1px;
+}
+.joinConfirm_wrap .inner .txt03 a button {
+  width: 180px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font: 400 13px/1.3 "Nanum Gothic";
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.joinConfirm_wrap .inner .txt03 a button:hover {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.joinConfirm_wrap .inner .txt03 a .go__to__main {
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.joinConfirm_wrap .inner .txt03 a .go__to__main:hover {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+}
+.joinConfirm_wrap .inner .txt03 a:first-child {
+  margin-right: 30px;
+}
+
+#login {
+  margin-top: 500px;
+  margin: 120px auto;
+  margin-bottom: 0px;
+  background-color: #fedbc5;
+  padding: 100px 0px;
+}
+#login .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+#login .inner .login__title {
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+#login .inner .login__title h4 {
+  font: bold 30px/1 "Nanum Gothic";
+}
+#login .inner .login__input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#login .inner .login__input label input {
+  width: 400px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  border-radius: 5px;
+  border: none;
+  background: #fff3eb;
+}
+#login .inner .login__input label p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+#login .inner .login__input .input__pw {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#login .inner .login__input .input__pw .eyes {
+  position: absolute;
+  left: 75%;
+  top: 27px;
+  color: orange;
+}
+
+#login .inner .login__input .input__pw .wrong__pw {
+  color: red;
+  font: normal 11px/1 "Nanum Gothic";
+  margin-top: 7px;
+}
+#login .inner .login__button {
+  margin-top: 50px;
+}
+#login .inner .login__button .inner {
+  width: 400px;
+}
+#login .inner .login__button .inner button {
+  width: 400px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font: 400 13px/1.3 "Nanum Gothic";
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#login .inner .login__button .inner button:hover {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+#login .inner .join__button {
+  margin-top: 10px;
+}
+#login .inner .join__button .inner {
+  width: 400px;
+}
+#login .inner .join__button .inner button {
+  width: 400px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 5px;
+  font: 400 13px/1.3 "Nanum Gothic";
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 20px;
+}
+#login .inner .join__button .inner button:hover {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+}
+#login .inner .join__button .inner .button__white {
+  background-color: #fff;
+  border: 1px solid #444;
+  color: #444;
+}
+#login .inner .join__button .inner .button__white:hover {
+  background-color: #444;
+  border: 1px solid #fff;
+  color: #fff;
+}
+#login .inner .login__txt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 14px/1 "Nanum Gothic";
+  width: 400px;
+  padding: 0px 10px;
+  margin-top: 0px;
+  margin-bottom: 70px;
+}
+#login .inner .login__txt .stay__login {
+  display: flex;
+  align-items: center;
+}
+#login .inner .login__txt .stay__login label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+#login .inner .login__txt .stay__login label input[type=checkbox] {
+  appearance: none;
+  position: relative;
+  border: max(2px, 0.1em) solid var(--primary-color);
+  border-radius: 1.25em;
+  width: 2.25em;
+  height: 1.25em;
+}
+#login .inner .login__txt .stay__login label input[type=checkbox]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0.8);
+  background-color: var(--primary-color);
+  transition: left 250ms linear;
+}
+#login .inner .login__txt .stay__login label input[type=checkbox]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+#login .inner .login__txt .stay__login label input[type=checkbox]:checked::before {
+  background-color: white;
+  left: 1em;
+}
+#login .inner .sns__txt {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 80px;
+  flex-direction: column;
+}
+#login .inner .sns__txt span {
+  font: normal 16px/1 "Nanum Gothic";
+  margin-bottom: 30px;
+}
+#login .inner .sns__txt .sns__img {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  cursor: pointer;
+}
+#login .box-shadow {
+  box-shadow: 0px 8.7288131714px 8.7288131714px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  width: 700px;
+}
+
+.findPw_wrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  margin-bottom: 0px;
+  background-color: #fedbc5;
+  padding: 80px 0px;
+}
+.findPw_wrap .inner {
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 100px;
+  width: 50%;
+}
+.findPw_wrap .inner .txt01 {
+  font: 600 20px/1.3 "Nanum Gothic";
+}
+.findPw_wrap .inner .txt02 {
+  font: 500 15px/2 "Nanum Gothic";
+  text-align: center;
+}
+.findPw_wrap .inner .txt03 input {
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  border-radius: 5px;
+  border: none;
+  background: #fff3eb;
+}
+.findPw_wrap .inner .txt03 a button {
+  width: 130px;
+  height: 40px;
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font: 400 13px/1.3 "Nanum Gothic";
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.findPw_wrap .inner .txt03 a button:hover {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.findPw_wrap .inner .txt03 a:first-child {
+  margin-right: 30px;
+}
+.findPw_wrap .box-shadow {
+  box-shadow: 0px 8.7288131714px 8.7288131714px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  width: 700px;
+}
+
+.txt04 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.txt04 .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+.txt04 .inner h4 {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 200px;
+  font: 800 18px/2 "Nanum Gothic";
+}
+.txt04 .inner h5 {
+  width: 500px;
+  height: 200px;
+  background-color: #fff;
+  text-align: center;
+  padding: 45px;
+  font: 500 18px/2 "Nanum Gothic";
+}
+.txt04 .inner h5 a {
+  display: block;
+  border: none;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border-top: none;
+  width: 120px;
+  color: #fff;
+  padding: 5px 0px;
+  margin: 0 auto;
+  margin-top: 30px;
+  font: 500 16px/2 "Nanum Gothic";
+}
+
+.txt05 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.txt05 .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+.txt05 .inner h4 {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 200px;
+  font: 800 18px/2 "Nanum Gothic";
+}
+.txt05 .inner h5 {
+  width: 500px;
+  height: 200px;
+  background-color: #fff;
+  text-align: center;
+  padding: 45px;
+  font: 500 18px/2 "Nanum Gothic";
+}
+.txt05 .inner h5 a {
+  display: block;
+  border: none;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border-top: none;
+  width: 120px;
+  color: #fff;
+  padding: 5px 0px;
+  margin: 0 auto;
+  margin-top: 30px;
+  font: 500 16px/2 "Nanum Gothic";
+}
+
+.changePw_wrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  margin-bottom: 0px;
+  background-color: #fedbc5;
+  padding: 150px 0px 80px;
+}
+.changePw_wrap .inner {
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 100px;
+  width: 50%;
+}
+.changePw_wrap .inner .txt01 {
+  font: 600 20px/1.3 "Nanum Gothic";
+}
+.changePw_wrap .inner .txt02 {
+  font: 500 15px/2 "Nanum Gothic";
+  text-align: center;
+}
+.changePw_wrap .inner .txt02 p span {
+  text-decoration: underline;
+  font: 600 15px/2 "Nanum Gothic";
+  color: var(--primary-color);
+}
+.changePw_wrap .inner .txt03 label p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.changePw_wrap .inner .txt03 label input {
+  width: 300px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  border-radius: 5px;
+  border: none;
+  position: relative;
+  background-color: #FFF3EB;
+  margin-bottom: 30px;
+}
+.changePw_wrap .inner .txt03 a {
+  display: flex;
+  margin-top: 20px;
+}
+.changePw_wrap .inner .txt03 a button {
+  width: 300px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font: 400 13px/1.3 "Nanum Gothic";
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.changePw_wrap .inner .txt03 a button:hover {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.changePw_wrap .inner .txt03 a:first-child {
+  margin-right: 30px;
+}
+.changePw_wrap .inner .txt04 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.changePw_wrap .inner .txt04 .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  background-color: transparent;
+}
+.changePw_wrap .inner .txt04 .inner h4 {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 200px;
+}
+.changePw_wrap .inner .txt04 .inner h5 {
+  width: 500px;
+  height: 200px;
+  background-color: #fff;
+  text-align: center;
+  padding: 35px;
+  font: 500 16px/2 "Nanum Gothic";
+}
+.changePw_wrap .inner .txt04 .inner h5 a {
+  display: block;
+  border: 1px solid #444;
+  background-color: #444;
+  border-radius: 20px;
+  border-top: none;
+  width: 120px;
+  color: #fff;
+  padding: 5px 0px;
+  margin: 0 auto;
+  margin-top: 30px;
+  font: 500 14px/2 "Nanum Gothic";
+  transition: all 0.3s;
+}
+.changePw_wrap .inner .txt04 .inner h5 a:hover {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+}
+.changePw_wrap .box-shadow {
+  box-shadow: 0px 8.7288131714px 8.7288131714px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  width: 700px;
+}
+
+#detail {
+  margin-top: 120px;
+}
+#detail .detail__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  padding: 80px 0px;
+}
+#detail .detail__inner .box01 {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+}
+#detail .detail__inner .box01 .left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+#detail .detail__inner .box01 .left img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+#detail .detail__inner .box01 .right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+#detail .detail__inner .box01 .right .right__txt01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__txt01 h2 {
+  font: 800 25px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt01 span {
+  color: red;
+  font-size: 30px;
+}
+#detail .detail__inner .box01 .right .right__txt02 {
+  margin-top: 50px;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 span {
+  color: var(--primary-color);
+  font: 800 20px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 p span {
+  color: #333;
+  font: 800 20px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 p span:first-child {
+  text-decoration: line-through;
+  font: 600 14px/1 "Nanum Gothic";
+  margin-right: 10px;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__02 {
+  margin-top: 20px;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__02 p {
+  color: #333;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__02 p .free {
+  color: #bbb;
+  font: 400 13px/1 "Nanum Gothic";
+  margin-left: 3px;
+}
+#detail .detail__inner .box01 .right .right__txt03 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  height: 170px;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart {
+  position: relative;
+  top: 0px;
+  right: -450px;
+  width: 87px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #333;
+  color: #333;
+  font: bold 14px/1 "Nanum Gothic";
+  text-align: center;
+  cursor: pointer;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner button:first-child {
+  background-color: transparent;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner button:last-child {
+  background-color: transparent;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner input {
+  width: 35px;
+  height: 25px;
+  border: none;
+  text-align: center;
+  font: 800 14px/1 "Nanum Gothic";
+  color: #252525;
+  background-color: transparent;
+  border: 1px solid #333;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart span {
+  font: 400 12px/1 "Nanum Gothic";
+  margin-top: 7px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .right__txt03__01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: var(--primary-color);
+  font: 600 18px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt03 .right__txt03__01 span:nth-of-type(2) {
+  font: 800 25px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt03 .right__txt03__02 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: #333;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+#detail .detail__inner .box01 .right .right__buttons button {
+  border: none;
+  cursor: pointer;
+  height: 70px;
+  width: 580px;
+  padding: 20px;
+  font: 600 20px/1 "Nanum Gothic";
+  letter-spacing: 1px;
+  border-radius: 10px;
+}
+#detail .detail__inner .box01 .right .right__buttons button:last-child {
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+#detail .detail__inner .box01 .right .right__buttons button:last-child:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+#detail .detail__inner .box01 .right .right__modal .inner h4 {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px 200px;
+}
+#detail .detail__inner .box01 .right .right__modal .inner h5 .buttons {
+  display: flex;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__modal .inner h5 .buttons a {
+  width: 180px;
+  height: 45px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+#detail .detail__inner .box01 .right .right__modal .inner h5 .buttons a button {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  color: #fff;
+  font: 500 16px/2 "Nanum Gothic";
+  cursor: pointer;
+}
+#detail .detail__inner .box02 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+#detail .detail__inner .box02 a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#detail .detail__inner .box02 a .detailed__info,
+#detail .detail__inner .box02 a .review,
+#detail .detail__inner .box02 a .question {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#detail .detail__inner .box02 a .detailed__info {
+  background-color: #252525;
+}
+#detail .detail__inner .box02 a .review,
+#detail .detail__inner .box02 a .question {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#detail .detail__inner .box02 a .question {
+  margin-right: 0px;
+}
+
+#review {
+  margin-top: 120px;
+}
+#review .detail__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  padding: 80px 0px;
+}
+#review .detail__inner .box01 {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+}
+#review .detail__inner .box01 .left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+#review .detail__inner .box01 .left img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+#review .detail__inner .box01 .right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+#review .detail__inner .box01 .right .right__txt01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#review .detail__inner .box01 .right .right__txt01 h2 {
+  font: 800 25px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__txt01 span {
+  color: red;
+  font-size: 30px;
+}
+#review .detail__inner .box01 .right .right__txt02 {
+  margin-top: 50px;
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__01 span {
+  color: var(--primary-color);
+  font: 800 20px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__01 p span {
+  color: #333;
+  font: 800 20px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__01 p span:first-child {
+  text-decoration: line-through;
+  font: 600 14px/1 "Nanum Gothic";
+  margin-right: 10px;
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__02 {
+  margin-top: 20px;
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__02 p {
+  color: #333;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__txt02 .right__txt02__02 p .free {
+  color: #bbb;
+  font: 400 13px/1 "Nanum Gothic";
+  margin-left: 3px;
+}
+#review .detail__inner .box01 .right .right__txt03 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  height: 170px;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart {
+  position: relative;
+  top: 0px;
+  right: -450px;
+  width: 87px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart .inner {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart .inner button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #333;
+  color: #333;
+  font: bold 14px/1 "Nanum Gothic";
+  text-align: center;
+  cursor: pointer;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart .inner button:first-child {
+  background-color: transparent;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart .inner button:last-child {
+  background-color: transparent;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart .inner input {
+  width: 35px;
+  height: 25px;
+  border: none;
+  text-align: center;
+  font: 800 14px/1 "Nanum Gothic";
+  color: #252525;
+  background-color: transparent;
+  border: 1px solid #333;
+}
+#review .detail__inner .box01 .right .right__txt03 .cart span {
+  font: 400 12px/1 "Nanum Gothic";
+  margin-top: 7px;
+}
+#review .detail__inner .box01 .right .right__txt03 .right__txt03__01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: var(--primary-color);
+  font: 600 18px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__txt03 .right__txt03__01 span:nth-of-type(2) {
+  font: 800 25px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__txt03 .right__txt03__02 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: #333;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#review .detail__inner .box01 .right .right__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+#review .detail__inner .box01 .right .right__buttons button {
+  border: none;
+  cursor: pointer;
+  height: 70px;
+  width: 580px;
+  padding: 20px;
+  font: 600 20px/1 "Nanum Gothic";
+  letter-spacing: 1px;
+  border-radius: 10px;
+}
+#review .detail__inner .box01 .right .right__buttons button:last-child {
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+#review .detail__inner .box01 .right .right__buttons button:last-child:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+#review .detail__inner .box01 .right .right__modal .inner h4 {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px 200px;
+}
+#review .detail__inner .box01 .right .right__modal .inner h5 .buttons {
+  display: flex;
+  align-items: center;
+}
+#review .detail__inner .box01 .right .right__modal .inner h5 .buttons a {
+  width: 180px;
+  height: 45px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+#review .detail__inner .box01 .right .right__modal .inner h5 .buttons a button {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  color: #fff;
+  font: 500 16px/2 "Nanum Gothic";
+  cursor: pointer;
+}
+#review .detail__inner .box02 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+#review .detail__inner .box02 a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#review .detail__inner .box02 a .detailed__info,
+#review .detail__inner .box02 a .review,
+#review .detail__inner .box02 a .question {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#review .detail__inner .box02 a .review {
+  background-color: #252525;
+}
+#review .detail__inner .box02 a .detailed__info,
+#review .detail__inner .box02 a .question {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#review .detail__inner .box02 a .question {
+  margin-right: 0px;
+}
+#review .detail__inner .write {
+  margin-left: auto;
+  margin-top: -80px;
+  margin-right: 3px;
+}
+#review .detail__inner .write button {
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  color: var(--primary-color);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 600 16px/1 "Nanum Gothic";
+  letter-spacing: 1px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#review .detail__inner .write button span:first-child {
+  margin-right: 10px;
+}
+#review .detail__inner .write button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+#review .detail__inner .write .review__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#review .detail__inner .write .review__modal .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  width: 500px;
+}
+#review .detail__inner .write .review__modal .inner h4 {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 200px;
+  font: 800 18px/2 "Nanum Gothic";
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 40px 30px;
+  background-color: #fff;
+  position: relative;
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap h5 {
+  width: 100%;
+  background-color: #fff;
+  margin: 0px 20px 30px;
+  padding-left: 5px;
+  font: 500 18px/1 "Nanum Gothic";
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap input {
+  width: 100%;
+  height: 330px;
+  background-color: #e7e7e7;
+  padding: 20px;
+  font: 500 14px/1 "Nanum Gothic";
+  border: none;
+  border-radius: 20px;
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap .count {
+  position: absolute;
+  bottom: 120px;
+  right: 50px;
+  font: 400 14px/1 "Nanum Gothic";
+  color: #c8c8c8;
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap .review__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap .review__buttons .review__cancel,
+#review .detail__inner .write .review__modal .inner .modal__wrap .review__buttons .review__confirm {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Nanum Gothic";
+  padding: 13px 30px;
+  color: #333;
+  background-color: #fff;
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap .review__buttons .review__confirm {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+#review .detail__inner .write .review__modal .inner .modal__wrap .review__buttons .review__confirm a {
+  color: #fff;
+}
+#review .detail__inner .write .review__cancel__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#review .detail__inner .write .review__cancel__modal .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  width: 500px;
+}
+#review .detail__inner .write .review__cancel__modal .inner h4 {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 200px;
+  font: 800 18px/2 "Nanum Gothic";
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 40px 30px;
+  background-color: #fff;
+  position: relative;
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap h5 {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  font: 500 18px/1.5 "Nanum Gothic";
+  text-align: center;
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap input {
+  width: 100%;
+  height: 330px;
+  background-color: #e7e7e7;
+  padding: 20px;
+  font: 500 14px/1 "Nanum Gothic";
+  border: none;
+  border-radius: 20px;
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap .count {
+  position: absolute;
+  bottom: 120px;
+  right: 50px;
+  font: 400 14px/1 "Nanum Gothic";
+  color: #c8c8c8;
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap .review__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap .review__buttons .review__cancel,
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap .review__buttons .review__confirm {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Nanum Gothic";
+  padding: 13px 30px;
+  color: #333;
+  background-color: #fff;
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap .review__buttons .review__confirm {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+#review .detail__inner .write .review__cancel__modal .inner .cancel__modal__wrap .review__buttons .review__confirm a {
+  color: #fff;
+}
+#review .detail__inner .write .review__confirm__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#review .detail__inner .write .review__confirm__modal .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  width: 500px;
+}
+#review .detail__inner .write .review__confirm__modal .inner h4 {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 200px;
+  font: 800 18px/2 "Nanum Gothic";
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 40px 30px;
+  background-color: #fff;
+  position: relative;
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap h5 {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  font: 500 18px/1.5 "Nanum Gothic";
+  text-align: center;
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap input {
+  width: 100%;
+  height: 330px;
+  background-color: #e7e7e7;
+  padding: 20px;
+  font: 500 14px/1 "Nanum Gothic";
+  border: none;
+  border-radius: 20px;
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .count {
+  position: absolute;
+  bottom: 120px;
+  right: 50px;
+  font: 400 14px/1 "Nanum Gothic";
+  color: #c8c8c8;
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .review__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .review__buttons .review__cancel,
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .review__buttons .review__confirm {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Nanum Gothic";
+  padding: 13px 30px;
+  color: #333;
+  background-color: #fff;
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .review__buttons .review__confirm {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+#review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .review__buttons .review__confirm a {
+  color: #fff;
+}
+#review .detail__inner .box03 ul li {
+  border: 2px solid #b3b3b3;
+  border-radius: 10px;
+  width: 840px;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+#review .detail__inner .box03 ul li:last-child {
+  margin-bottom: 0px;
+}
+#review .detail__inner .box03 ul li span {
+  font: 800 16px/1 "Nanum Gothic";
+}
+#review .detail__inner .box03 ul li p {
+  font: 400 16px/1.5 "Nanum Gothic";
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+#review .detail__inner .box03 ul li p button {
+  padding: 8px 20px;
+  cursor: pointer;
+  font: 400 14px/1 "Nanum Gothic";
+  background-color: #252525;
+  color: #fff;
+  border-radius: 5px;
+}
+#review .detail__inner .box03 ul .seller {
+  background-color: #f2f2f2;
+  position: relative;
+  right: -170px;
+}
+#review .detail__inner .box03 .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+#review .detail__inner .box03 .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 13px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#review .detail__inner .box03 .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#review .detail__inner .box03 .pagination a span {
+  margin: 0 20px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: #fff;
+}
+#review .detail__inner .box03 .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: var(--primary-color);
+  font: 800 13px/1 "Nanum Gothic";
+}
+#review .detail__inner .box03 .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#mypage {
+  margin-top: 120px;
+}
+#mypage .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 147px;
+}
+#mypage .inner h2 {
+  font: 700 30px/1 "Noto Sans";
+  margin-bottom: 52px;
+}
+#mypage .inner .tab__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+}
+#mypage .inner .tab__menu a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#mypage .inner .tab__menu a .history,
+#mypage .inner .tab__menu a .delivery,
+#mypage .inner .tab__menu a .memberInfo {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#mypage .inner .tab__menu a .history {
+  background-color: #252525;
+}
+#mypage .inner .tab__menu a .delivery,
+#mypage .inner .tab__menu a .memberInfo {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#mypage .inner .tab__menu a .memberInfo {
+  margin-right: 0px;
+}
+#mypage .inner .search__box {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 29px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 135px;
+  margin-bottom: 70px;
+}
+#mypage .inner .search__box .first {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#mypage .inner .search__box .first span {
+  font: 700 16px/1 "Noto Sans";
+  padding-left: 30px;
+}
+#mypage .inner .search__box .first .search__box__buttons button {
+  padding: 3px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+#mypage .inner .search__box .first .date label input {
+  padding: 3px 23px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: #fff;
+  cursor: pointer;
+}
+#mypage .inner .search__box .first .date span {
+  margin: 0px 7px;
+  padding-left: 0px;
+}
+#mypage .inner .search__box .second {
+  width: 100%;
+  padding: 0px;
+}
+#mypage .inner .search__box .second select {
+  width: 15%;
+  height: 27px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-left: 3px;
+  padding-left: 10px;
+}
+#mypage .inner .search__box .second label input {
+  width: 63%;
+  height: 27px;
+  border: 1px solid green;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding-left: 10px;
+}
+#mypage .inner .search__box .second button {
+  width: 10%;
+  height: 27px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font: normal 15px/1 "Noto Sans";
+  background-color: #fff;
+}
+#mypage .inner .search__box .second button:last-child {
+  color: #fff;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+#mypage .inner .history2 {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+}
+#mypage .inner .history2 h4 {
+  font: 800 20px/1 "Noto Sans";
+}
+#mypage .inner .history2 .history__line {
+  height: 3px;
+  width: 100%;
+  background-color: #333;
+  margin: 10px 0px 20px 0px;
+}
+#mypage .inner .history2 .history__contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+#mypage .inner .history2 .history__contents .first,
+#mypage .inner .history2 .history__contents .second,
+#mypage .inner .history2 .history__contents .third {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 720px;
+}
+#mypage .inner .history2 .history__contents .first {
+  width: 15%;
+}
+#mypage .inner .history2 .history__contents .first ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 35px;
+}
+#mypage .inner .history2 .history__contents .first ul li {
+  font: 600 16px/1.3 "Noto Sans";
+  text-align: center;
+}
+#mypage .inner .history2 .history__contents .first ul li .orderNo {
+  font: 400 16px/1.3 "Noto Sans";
+}
+#mypage .inner .history2 .history__contents .first ul li button {
+  background-color: #252525;
+  color: #fff;
+  border-radius: 50px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+#mypage .inner .history2 .history__contents .second {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 55%;
+}
+#mypage .inner .history2 .history__contents .second p {
+  font: 800 16px/1.3 "Noto Sans";
+  margin-bottom: 30px;
+}
+#mypage .inner .history2 .history__contents .second ul {
+  display: flex;
+  flex-direction: column;
+}
+#mypage .inner .history2 .history__contents .second ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+#mypage .inner .history2 .history__contents .second ul li img {
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+#mypage .inner .history2 .history__contents .second ul li span {
+  font: 800 16px/1.7 "Noto Sans";
+}
+#mypage .inner .history2 .history__contents .second ul li .product__name {
+  margin-left: -65px;
+}
+#mypage .inner .history2 .history__contents .second ul li .quant {
+  font: 400 14px/1.7 "Noto Sans";
+  position: relative;
+  top: 15px;
+}
+#mypage .inner .history2 .history__contents .second .delivery__info {
+  border-top: 2px dashed #6c6c6c;
+}
+#mypage .inner .history2 .history__contents .second .delivery__info p {
+  margin-top: 40px;
+}
+#mypage .inner .history2 .history__contents .second .delivery__info ul li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  padding-left: 50px;
+}
+#mypage .inner .history2 .history__contents .second .delivery__info ul li .delivery__add,
+#mypage .inner .history2 .history__contents .second .delivery__info ul li .delivery__note {
+  font: 400 16px/1.3 "Noto Sans";
+  width: 70px;
+  color: #828282;
+}
+#mypage .inner .history2 .history__contents .third {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+}
+#mypage .inner .history2 .history__contents .third p {
+  font: 800 16px/1.3 "Noto Sans";
+  margin-bottom: 30px;
+}
+#mypage .inner .history2 .history__contents .third ul li {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+#mypage .inner .history2 .history__contents .third ul li span {
+  font: 500 16px/1 "Noto Sans";
+  display: flex;
+  justify-content: space-between;
+  color: #252525;
+}
+#mypage .inner .history2 .history__contents .third .total {
+  border-top: 2px dashed #6c6c6c;
+  height: 215px;
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+}
+#mypage .inner .history2 .history__contents .third .total span {
+  font: 800 24px/1.3 "Noto Sans";
+  display: flex;
+  justify-content: flex-end;
+  color: var(--primary-color);
+}
+#mypage .inner .history2 .history__contents .third .total .total__price {
+  font: 600 16px/1.3 "Noto Sans";
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 50px;
+  color: #252525;
+}
+#mypage .inner .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+#mypage .inner .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 13px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#mypage .inner .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#mypage .inner .pagination a span {
+  margin: 0 20px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: #fff;
+}
+#mypage .inner .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: var(--primary-color);
+  font: 800 13px/1 "Nanum Gothic";
+}
+#mypage .inner .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#mypage_delivery {
+  margin-top: 120px;
+}
+#mypage_delivery .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 147px;
+}
+#mypage_delivery .inner h2 {
+  font: 700 30px/1 "Noto Sans";
+  margin-bottom: 52px;
+}
+#mypage_delivery .inner .tab__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+}
+#mypage_delivery .inner .tab__menu a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#mypage_delivery .inner .tab__menu a .history,
+#mypage_delivery .inner .tab__menu a .delivery,
+#mypage_delivery .inner .tab__menu a .memberInfo {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#mypage_delivery .inner .tab__menu a .delivery {
+  background-color: #252525;
+}
+#mypage_delivery .inner .tab__menu a .history,
+#mypage_delivery .inner .tab__menu a .memberInfo {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#mypage_delivery .inner .tab__menu a .memberInfo {
+  margin-right: 0px;
+}
+#mypage_delivery .inner .txt__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin-bottom: 20px;
+}
+#mypage_delivery .inner .txt__box p {
+  font: 700 18px/2.5 "Noto Sans";
+}
+#mypage_delivery .inner .txt__box p span {
+  font: 400 18px/1 "Noto Sans";
+}
+#mypage_delivery .inner .txt__box button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  font: 400 16px/1 "Noto Sans";
+}
+#mypage_delivery .inner .delivery__wrap {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+  width: 100%;
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+}
+#mypage_delivery .inner .delivery__wrap .buttons {
+  margin-left: auto;
+}
+#mypage_delivery .inner .delivery__wrap .buttons button {
+  border-radius: 50px;
+  background: #252525;
+  color: #fff;
+  padding: 5px 15px;
+  cursor: pointer;
+  border: 1px solid #252525;
+  margin-right: 5px;
+}
+#mypage_delivery .inner .delivery__wrap .buttons button:last-child {
+  color: #333;
+  background: #fff;
+  border: 1px solid #252525;
+  margin-right: 0px;
+}
+#mypage_delivery .inner .delivery__wrap ul {
+  width: 70%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+#mypage_delivery .inner .delivery__wrap ul li {
+  width: 100%;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.3);
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+#mypage_delivery .inner .delivery__wrap ul li .li__title {
+  font: 700 18px/1 "Noto Sans";
+  width: 130px;
+}
+#mypage_delivery .inner .delivery__wrap ul li .li__title > span {
+  font: 600 18px/1 "Noto Sans";
+}
+#mypage_delivery .inner .delivery__wrap ul li:last-child {
+  border-bottom: none;
+}
+#mypage_delivery .delivery__add {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__add .delivery__add__inner {
+  width: 600px;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 80px;
+  font: 800 18px/80px "Noto Sans";
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 600px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom label {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom label p {
+  font: 800 16px/1 "Noto Sans";
+  width: 20%;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom label input {
+  width: 80%;
+  height: 40px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: none;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .phone input {
+  width: 30%;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .phone input:last-child {
+  width: 45%;
+  margin-left: 5%;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .add {
+  flex-wrap: wrap;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .add button {
+  width: 30%;
+  height: 40px;
+  border: none;
+  background-color: #252525;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .add input {
+  width: 80%;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .add .postalCode {
+  width: 45%;
+  margin-left: 5%;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .bottom .add .postalCode2 {
+  width: 80%;
+  margin-top: 30px;
+  margin-left: auto;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  justify-content: center;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__cancel,
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Nanum Gothic";
+  padding: 13px 30px;
+  color: #333;
+  background-color: #fff;
+  border-radius: 5px;
+}
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm a {
+  color: #fff;
+}
+#mypage_delivery .delivery__add__confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner {
+  width: 600px;
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 250px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner .bottom span {
+  font: 600 18px/1 "Noto Sans";
+  margin-bottom: 20px;
+  text-align: center;
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner .delivery__add__confirm__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  justify-content: center;
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner .delivery__add__confirm__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#mypage_delivery .delivery__add__confirm .delivery__add__confirm__inner .delivery__add__confirm__buttons button a {
+  color: #fff;
+}
+#mypage_delivery .delivery__add__calcel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner {
+  width: 600px;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 250px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .bottom span {
+  font: 600 18px/2 "Noto Sans";
+  margin-bottom: 20px;
+  text-align: center;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .delivery__add__calcel__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: center;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .delivery__add__calcel__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .delivery__add__calcel__buttons button a {
+  color: #fff;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .delivery__add__calcel__buttons button:first-child {
+  background-color: #fff;
+  border: 1px solid #252525;
+}
+#mypage_delivery .delivery__add__calcel .delivery__add__calcel__inner .delivery__add__calcel__buttons button:first-child a {
+  color: #252525;
+}
+#mypage_delivery .delivery__delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner {
+  width: 600px;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 250px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .bottom span {
+  font: 600 18px/2 "Noto Sans";
+  margin-bottom: 40px;
+  text-align: center;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .delivery__delete__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: center;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .delivery__delete__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .delivery__delete__buttons button a {
+  color: #fff;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .delivery__delete__buttons button:first-child {
+  background-color: #fff;
+  border: 1px solid #252525;
+}
+#mypage_delivery .delivery__delete .delivery__delete__inner .delivery__delete__buttons button:first-child a {
+  color: #252525;
+}
+#mypage_delivery .delivery__edit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner {
+  width: 600px;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 80px;
+  font: 800 18px/80px "Noto Sans";
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 600px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom label {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom label p {
+  font: 800 16px/1 "Noto Sans";
+  width: 20%;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom label input {
+  width: 80%;
+  height: 40px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: none;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .phone input {
+  width: 30%;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .phone input:last-child {
+  width: 45%;
+  margin-left: 5%;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .add {
+  flex-wrap: wrap;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .add button {
+  width: 30%;
+  height: 40px;
+  border: none;
+  background-color: #252525;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .add input {
+  width: 80%;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .add .postalCode {
+  width: 45%;
+  margin-left: 5%;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .bottom .add .postalCode2 {
+  width: 80%;
+  margin-top: 30px;
+  margin-left: auto;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .delivery__edit__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  justify-content: center;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .delivery__edit__buttons .delivery__edit__cancel,
+#mypage_delivery .delivery__edit .delivery__edit__inner .delivery__edit__buttons .delivery__edit__confirm {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Nanum Gothic";
+  padding: 13px 30px;
+  color: #333;
+  background-color: #fff;
+  border-radius: 5px;
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .delivery__edit__buttons .delivery__edit__confirm {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+#mypage_delivery .delivery__edit .delivery__edit__inner .delivery__edit__buttons .delivery__edit__confirm a {
+  color: #fff;
+}
+
+#mypageEdit {
+  margin-top: 120px;
+}
+#mypageEdit .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 147px;
+}
+#mypageEdit .inner h2 {
+  font: 700 30px/1 "Noto Sans";
+  margin-bottom: 52px;
+}
+#mypageEdit .inner .tab__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+}
+#mypageEdit .inner .tab__menu a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#mypageEdit .inner .tab__menu a .history,
+#mypageEdit .inner .tab__menu a .delivery,
+#mypageEdit .inner .tab__menu a .memberInfo {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#mypageEdit .inner .tab__menu a .memberInfo {
+  background-color: #252525;
+}
+#mypageEdit .inner .tab__menu a .delivery,
+#mypageEdit .inner .tab__menu a .history {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#mypageEdit .inner .tab__menu a .memberInfo {
+  margin-right: 0px;
+}
+#mypageEdit .inner .txt_box {
+  font: 600 25px/1 "Noto Sans";
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+#mypageEdit .inner .txt_box p {
+  margin-bottom: 30px;
+}
+#mypageEdit .inner .txt_box span {
+  font: 500 16px/1.5 "Noto Sans";
+}
+#mypageEdit .inner label p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+#mypageEdit .inner label input {
+  width: 450px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 50px;
+}
+#mypageEdit .inner .wrong {
+  display: flex;
+  flex-direction: column;
+}
+#mypageEdit .inner .wrong input {
+  border: 1px solid red;
+  margin-bottom: 5px;
+}
+#mypageEdit .inner .wrong span {
+  color: red;
+  font: 400 12px/1 "Noto Sans";
+  margin-bottom: 50px;
+}
+#mypageEdit .inner .button {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-bottom: 80px;
+}
+#mypageEdit .inner .button button {
+  background-color: var(--primary-color);
+  border: none;
+  width: 450px;
+  padding: 10px;
+  border-radius: 5px;
+}
+#mypageEdit .inner .button button a {
+  color: #fff;
+  font: bold 16px/1 "Nanum Gothic";
+}
+#mypageEdit .inner .button span {
+  font: normal 12px/3 "Nanum Gothic";
+  color: #848484;
+}
+
+#mypageEdit {
+  margin-top: 120px;
+}
+#mypageEdit .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 147px;
+}
+#mypageEdit .inner h2 {
+  font: 700 30px/1 "Noto Sans";
+  margin-bottom: 52px;
+}
+#mypageEdit .inner .tab__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+}
+#mypageEdit .inner .tab__menu a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#mypageEdit .inner .tab__menu a .history,
+#mypageEdit .inner .tab__menu a .delivery,
+#mypageEdit .inner .tab__menu a .memberInfo {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#mypageEdit .inner .tab__menu a .memberInfo {
+  background-color: #252525;
+}
+#mypageEdit .inner .tab__menu a .delivery,
+#mypageEdit .inner .tab__menu a .history {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#mypageEdit .inner .tab__menu a .memberInfo {
+  margin-right: 0px;
+}
+#mypageEdit .inner .txt_box {
+  font: 600 25px/1 "Noto Sans";
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+#mypageEdit .inner .txt_box p {
+  margin-bottom: 30px;
+}
+#mypageEdit .inner .txt_box span {
+  font: 500 16px/1.5 "Noto Sans";
+}
+#mypageEdit .inner label {
+  width: 500px;
+}
+#mypageEdit .inner label p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+#mypageEdit .inner label input {
+  width: 400px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 30px;
+  margin-right: 10px;
+}
+#mypageEdit .inner label button {
+  width: 70px;
+  background-color: #252525;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 20px;
+  border: none;
+  cursor: pointer;
+}
+#mypageEdit .inner .email input {
+  width: 485px;
+}
+#mypageEdit .inner .change__PW {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+#mypageEdit .inner .change__PW .button__box {
+  border: 1px solid #b8b8b8;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  margin-bottom: 80px;
+}
+#mypageEdit .inner .change__PW .button__box button {
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+#mypageEdit .inner .mypageEdit__button {
+  display: flex;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 80px;
+}
+#mypageEdit .inner .mypageEdit__button button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  width: 200px;
+  padding: 13px;
+  border-radius: 5px;
+}
+#mypageEdit .inner .mypageEdit__button button a {
+  color: #fff;
+  font: bold 16px/1 "Nanum Gothic";
+}
+#mypageEdit .inner .mypageEdit__button button:first-child {
+  background-color: #fff;
+  border: 1px solid #252525;
+}
+#mypageEdit .inner .mypageEdit__button button:first-child a {
+  color: #252525;
+}
+#mypageEdit .mypageEdit__cancel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner {
+  width: 600px;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 250px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .bottom span {
+  font: 400 18px/1.5 "Noto Sans";
+  margin-bottom: 20px;
+  text-align: center;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .mypageEdit__cancel__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  justify-content: center;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .mypageEdit__cancel__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .mypageEdit__cancel__buttons button a {
+  color: #fff;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .mypageEdit__cancel__buttons button:first-child {
+  border: 1px solid #252525;
+  background-color: #fff;
+}
+#mypageEdit .mypageEdit__cancel .mypageEdit__cancel__inner .mypageEdit__cancel__buttons button:first-child a {
+  color: #252525;
+}
+#mypageEdit .mypageEdit__confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner {
+  width: 600px;
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 250px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner .bottom span {
+  font: 400 18px/1.5 "Noto Sans";
+  margin-bottom: 20px;
+  text-align: center;
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner .mypageEdit__confirm__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  justify-content: center;
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner .mypageEdit__confirm__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 50px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#mypageEdit .mypageEdit__confirm .mypageEdit__confirm__inner .mypageEdit__confirm__buttons button a {
+  color: #fff;
+}
+
+:root {
+  --primary-color: #ff7d04;
+  --border-radius: 15px;
+}
+
+/*COMMON*/
+body {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  display: block;
+}
+
+/*INNER*/
+.inner {
+  width: 1180px;
+  margin: 0 auto;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #fff !important;
+  z-index: 1;
+  border-bottom: 2px solid #bbb;
+}
+header .inner {
+  height: 120px;
+}
+header .inner .logo {
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .inner .logo img {
+  height: 70px;
+}
+header .inner .sub-menu {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: flex;
+}
+header .inner .sub-menu ul {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+header .inner .sub-menu ul li {
+  position: relative;
+}
+header .inner .sub-menu ul li::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #e5e5e5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+header .inner .sub-menu ul li:first-child::before {
+  display: none;
+}
+header .inner .sub-menu ul li a {
+  font-size: 12px;
+  color: #656565;
+  padding: 11px 16px;
+  display: block;
+}
+header .inner .sub-menu ul li a:hover {
+  color: #000;
+}
+header .inner .main-menu {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+header .inner .main-menu .item {
+  color: #111;
+}
+header .inner .main-menu .item .item__name {
+  padding: 10px 20px 34px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font: normal 14px/1 "Nanum Gothic";
+}
+header .inner .main-menu .item .item__name a {
+  color: #111;
+}
+header .inner .main-menu .item:hover .item__name {
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+}
+header .inner .main-menu .item:last-child {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50px;
+  height: 35px;
+  margin-left: 30px;
+}
+header .inner .main-menu .item .red {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 15px;
+}
+header .inner .main-menu .item .red .material-icons {
+  margin-left: 10px;
+}
+
+#visual {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #f6f5f0;
+  margin-top: 120px;
+}
+#visual .promotion {
+  width: 100%;
+  position: relative;
+  transition: height 0.4s;
+  overflow: hidden;
+  margin: 0 auto;
+}
+#visual .promotion .swiper .swiper-wrapper .swiper-slide img {
+  width: 100%;
+}
+#visual .promotion .swiper-button-prev {
+  margin: 0px 360px;
+}
+#visual .promotion .swiper-button-next {
+  margin: 0px 350px;
+}
+#visual .promotion .swiper-button-next,
+#visual .promotion .swiper-button-prev,
+#visual .promotion .swiper-pagination {
+  color: #fff;
+}
+
+#search {
+  margin-top: 50px;
+}
+#search .inner {
+  display: flex;
+  flex-direction: column;
+}
+#search .inner input {
+  width: 70%;
+  height: 50px;
+  margin: 0 auto;
+  border: 2px solid #333;
+  border-radius: 30px;
+  padding: 5px 20px;
+}
+#search .inner .material-icons {
+  font-size: 25px;
+  position: absolute;
+  right: 200px;
+  top: 12px;
+  cursor: pointer;
+}
+#search .inner .buttons {
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+#search .inner .buttons button {
+  padding: 5px 20px;
+  height: 35px;
+  display: inline-block;
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  margin-right: 20px;
+  background-color: #fff;
+  color: var(--primary-color);
+  font: normal 13px/1 "Nanum Gothic";
+  cursor: pointer;
+}
+
+#products {
+  width: 1180px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+#products .inner ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+#products .inner ul li {
+  width: 30%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+#products .inner ul li a img {
+  width: 100%;
+  height: 220px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+}
+#products .inner ul li .icons {
+  position: relative;
+  top: -210px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 0px;
+}
+#products .inner ul li .icons .red__heart {
+  color: red;
+}
+#products .inner ul li .txt {
+  margin-top: -15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#products .inner ul li .txt .price {
+  font: 800 16px/1 "Nanum Gothic";
+}
+#products .inner ul .cart__click a img {
+  filter: brightness(0.3);
+}
+#products .inner ul .cart__click .icons a {
+  background-color: transparent;
+}
+#products .inner ul .cart__click .cart {
+  position: relative;
+}
+#products .inner ul .cart__click .cart .inner {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  top: -165px;
+  left: 130px;
+}
+#products .inner ul .cart__click .cart .inner button {
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font: bold 14px/1 "Nanum Gothic";
+  text-align: center;
+  cursor: pointer;
+}
+#products .inner ul .cart__click .cart .inner button:first-child {
+  background-color: #949494;
+}
+#products .inner ul .cart__click .cart .inner button:last-child {
+  background-color: #252525;
+}
+#products .inner ul .cart__click .cart .inner input {
+  width: 25px;
+  height: 25px;
+  border: none;
+  text-align: center;
+  font: bold 14px/1 "Nanum Gothic";
+  color: #252525;
+}
+#products .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+#products .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 13px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#products .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#products .pagination a span {
+  margin: 0 20px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: #fff;
+}
+#products .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: var(--primary-color);
+  font: 800 13px/1 "Nanum Gothic";
+}
+#products .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#aside {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 120px;
+}
+#aside .sidebar ul {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-radius: var(--border-radius);
+}
+#aside .sidebar ul li {
+  background-color: var(--primary-color);
+}
+#aside .sidebar ul li:first-child {
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+#aside .sidebar ul li:last-child {
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+#aside .sidebar ul li a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  color: #fff;
+}
+#aside .sidebar ul li a p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-top: 10px;
+}
+#aside .sidebar ul li a span {
+  font-size: 40px;
+}
+#aside .sidebar ul li .line {
+  background-color: #fff;
+  opacity: 0.7;
+  width: 90px;
+  height: 1px;
+  margin: 0 auto;
+}
+#aside .sidebar ul .right__cart,
+#aside .sidebar ul .right__favorite {
+  position: relative;
+}
+#aside .sidebar ul .right__cart a .cart__count,
+#aside .sidebar ul .right__cart a .favorite__count,
+#aside .sidebar ul .right__favorite a .cart__count,
+#aside .sidebar ul .right__favorite a .favorite__count {
+  position: absolute;
+  top: 27px;
+  right: 35px;
+  background-color: #ff1b1b;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font: normal 13px/20px "Nanum Gothic";
+}
+#aside .sidebar ul .right__cart {
+  margin-bottom: -10px;
+}
+#aside .sidebar ul .last a {
+  padding: 20px 10px;
+}
+#aside .sidebar ul .last a span {
+  margin: 10px 0px 0px;
+  font-size: 27px;
+}
+#aside .sidebar ul .last a p {
+  margin-bottom: 20px;
+}
+#aside .sidebar ul .last a p:last-child {
+  margin-bottom: 10px;
+}
+#aside .sidebar ul .last a img {
+  width: 100px;
+  height: 80px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+#footer {
+  width: 100%;
+  padding: 50px 0;
+  background: #2d2d2d;
+  position: relative;
+}
+#footer .inner {
+  width: 1180px;
+  margin: 0 auto;
+}
+#footer .inner::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#footer .inner h1 {
+  float: left;
+}
+#footer .inner h1 img {
+  width: 30%;
+}
+#footer .inner ul {
+  float: right;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+}
+#footer .inner ul li {
+  float: left;
+  margin-left: 20px;
+}
+#footer .inner ul li a {
+  font: 14px/1 "Nanum Gothic";
+  color: #fff;
+  transition: 0.5s;
+}
+#footer .inner ul li a:hover {
+  color: #868686;
+  transition: 0.5s;
+}
+#footer .inner address {
+  float: left;
+  width: 100%;
+  font: 12px/1.7 "Nanum Gothic";
+  color: #fff;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  border-top: 1px solid #888;
+}
+#footer .inner address span {
+  font: bold 14px/1.5 "Nanum Gothic";
+}
+#footer .inner p {
+  float: left;
+  width: 100%;
+  font: 13px/1 "Nanum Gothic";
+  color: #fff;
+  padding-left: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

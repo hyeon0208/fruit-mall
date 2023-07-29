@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<th:block th:fragment="headerLayout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프룻프룻 쇼핑몰</title>
+
+    <!--Open Graph-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="프룻프룻 Shopping Mall" />
+    <meta property="og:title" content="프룻프룻 Shopping Mall" />
+    <meta property="og:description" content="프룻프룻 Shopping Mall 입니다." />
+    <meta property="og:image" content="/user/img/openGraph.png" />
+    <meta property="og:url" content="https://prpr-shopping-mall.co.kr" />
+
+    <!--파비콘-->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!--비밀번호 보이기 감추기 버튼-->
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <th:block th:insert="~{includes/library}"></th:block>
+    <th:block th:insert="~{includes/style}"></th:block>
+    <th:block th:insert="~{includes/scripts}"></th:block>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+    <div class="inner">
+
+        <a href="/" class="logo">
+            <img src="/user/img/푸릇푸릇 로고.png" alt="logo"/>
+        </a>
+
+        <div class="sub-menu">
+            <ul class="menu">
+                <section id="login-auth" th:if="${session.authentic == null}">
+                    <li>
+                    <li>
+                        <a href="/user/login">Sign In</a>
+                    </li>
+
+                    <li>
+                        <a href="/user/join">Join</a>
+                    </li>
+                    </li>
+                </section>
+
+                <section id="notLogin-auth" th:unless="${session.authentic == null}">
+                    <li>
+                        <form id="logoutForm" method="post" action="/user/logout">
+                            <a href="#!">
+                                <button id="logoutBtn">Logout</button>
+                            </a>
+                        </form>
+                    </li>
+                </section>
+
+                <li>
+                    <a href="javascript:void(0)">language</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="main-menu">
+            <li class="item">
+                <div class="item__name">
+                    <a href="/">HOME</a>
+                </div>
+            </li>
+
+            <li class="item">
+                <div class="item__name">
+                    <a href="/user/search">상품소개</a>
+                </div>
+            </li>
+
+            <li class="item">
+                <div class="item__name">
+                    <a href="/user/search">구매내역</a>
+                </div>
+            </li>
+
+            <li class="item">
+                <div class="item__name">
+                    <a href="/user/mypage">마이페이지</a>
+                </div>
+            </li>
+
+            <li class="item">
+                <div class="item__name red">
+                    장바구니
+                    <span class="material-icons">
+                            shopping_cart
+                        </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+</body>
+</th:block>
+</html>

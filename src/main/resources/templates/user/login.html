@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+
+<section id="login">
+        <div class="inner box-shadow">
+            <div class="login__title">
+                <h4>로그인</h4>
+            </div>
+            <form method="post" action="/user/login">
+                <div class="login__input">
+                    <label for="id">
+                        <p>이메일주소(ID)</p>
+                        <input type="textbox" name="user_email" placeholder="이메일 주소 입력" id="id" autofocus>
+                    </label>
+
+                    <div class="input__pw">
+                        <label for="pw">
+                            <p>비밀번호</p>
+                            <input type="password" name="user_pwd" placeholder="영문, 숫자, 특수문자 (8자-20자 이내)" id="pw">
+                            <div class="eyes">
+                                <i class="fa fa-eye fa-lg"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="login__button">
+                    <div class="inner">
+                            <button id="loginBtn">로그인</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="join__button">
+                <div class="inner">
+                    <a href="/user/join.html">
+                        <button>회원가입</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="login__txt">
+                <div class="search__pw">
+                    <a href="/user/findPw.html">비밀번호 찾기</a>
+                </div>
+
+                <!-- 로그인 유지 토글 -->
+                <div class="stay__login">
+                    <label>
+                        <input role="switch" type="checkbox" />
+                        <span>로그인 유지</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="sns__txt">
+                <span>SNS 계정으로 간편하게 로그인하세요</span>
+
+                <div class="sns__img">
+                    <a href="/oauth2/authorization/google" role="button">
+                        <img src="./img/카카오.png" alt="카카오">
+                    </a>
+
+                    <a href="/oauth2/authorization/google" role="button">
+                        <img src="./img/네이버.png" alt="네이버">
+                    </a>
+
+                    <a href="/oauth2/authorization/google" role="button">
+                        <img src="./img/구글.png" alt="구글">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</th:block>
+</html>

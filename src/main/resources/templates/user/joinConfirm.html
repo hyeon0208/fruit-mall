@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<body>
+    <div class="joinConfirm_wrap">
+        <div class="inner">
+            <div class="txt01">
+                <p>프룻프룻 홈페이지 회원가입을 축하드립니다.</p>
+            </div>
+
+            <div class="txt02">
+                <p>프룻프룻 홈페이지 회원계정이 생성되었습니다. <br> 회원가입한 이메일로 로그인 해주세요.</p>
+            </div>
+
+            <div class="loginbox">
+                <p>회원가입 아이디</p>
+                <p th:text="${email}"></p>
+            </div>
+
+            <div class="txt03">
+                <a href="/">
+                    <button class="go__to__main">메인으로</button>
+                </a>
+                <a href="/user/login">
+                    <button>로그인</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</th:block>
+</html>
