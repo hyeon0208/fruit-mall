@@ -38,15 +38,16 @@ public class UserController {
 
     @PostMapping("/joinUser")
     public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6,  Model model) {
-        String email = user.getUser_email();
+        user.setUser_status(Role.USER);
         userService.insertUser(user);
+
+        String email = user.getUser_email();
         model.addAttribute("email", email);
 
         Integer termFlag5 = term_flag5 ? 1 : 0;
         Integer termFlag6 = term_flag6 ? 1 : 0;
 
         Long user_id_no = userService.selectOnlyUserIdNo(email);
-
         Term term5 = Term.builder()
                 .user_id_no(user_id_no)
                 .term_name("선택약관5")
