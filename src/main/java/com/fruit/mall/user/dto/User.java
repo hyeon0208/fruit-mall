@@ -13,7 +13,7 @@ public class User implements Serializable {
     private String user_email;
     private String user_name;
     private String user_pwd;
-    private String user_state;
+    private int user_status;
 
     @Builder
     public User(String user_email, String user_name, String user_pwd) {
