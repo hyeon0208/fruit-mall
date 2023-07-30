@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,11 +18,6 @@ public class UserController {
     private final UserService userService;
 
     private final static String LOGIN_USER = "authentic";
-
-    @GetMapping("/join")
-    public String joinForm() {
-        return "user/join";
-    }
 
     @PostMapping("/login")
     public String loginForm(@ModelAttribute User user, HttpServletRequest request) {
@@ -43,15 +37,30 @@ public class UserController {
     }
 
     @PostMapping("/joinUser")
-    public String joinConfirm(@ModelAttribute User user, Model model) {
+    public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6,  Model model) {
         String email = user.getUser_email();
         userService.insertUser(user);
         model.addAttribute("email", email);
 
-//        Long user_id_no = userService.selectOnlyUserIdNo(email);
-//        term.setTerm_id_no(user_id_no);
-//        userService.insertFirstTerm(term);
-//        userService.insertSecondTerm(term);
+        Integer termFlag5 = term_flag5 ? 1 : 0;
+        Integer termFlag6 = term_flag6 ? 1 : 0;
+
+        Long user_id_no = userService.selectOnlyUserIdNo(email);
+
+        Term term5 = Term.builder()
+                .user_id_no(user_id_no)
+                .term_name("선택약관5")
+                .term_flag(termFlag5)
+                .build();
+
+        Term term6 = Term.builder()
+                .user_id_no(user_id_no)
+                .term_name("선택약관6")
+                .term_flag(termFlag6)
+                .build();
+
+        userService.insertTerm(term5);
+        userService.insertTerm(term6);
 
         return "user/joinConfirm";
     }
