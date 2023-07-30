@@ -1,3 +1,9 @@
+.error-message {
+  margin-top: 5px;
+  font-size: 0.85em;
+  color: red;
+}
+
 #join {
   margin-top: 500px;
   margin: 120px auto;
