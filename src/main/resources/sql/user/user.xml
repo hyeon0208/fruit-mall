@@ -5,7 +5,7 @@
 <mapper namespace="com.fruit.mall.user.UserMapper">
     <insert id="insertUser" parameterType="com.fruit.mall.user.dto.User">
         INSERT INTO user (USER_EMAIL, USER_NAME, USER_PWD, USER_STATUS)
-        VALUES (#{user_email}, #{user_name}, #{user_pwd}, 1)
+        VALUES (#{user_email}, #{user_name}, #{user_pwd}, #{user_status})
     </insert>
 
     <insert id="insertTerm" parameterType="com.fruit.mall.user.dto.Term">
