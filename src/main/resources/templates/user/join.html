@@ -1,83 +1,118 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
 <th:block layout:fragment="content">
+<section id="join">
+    <div class="inner">
 
-<body>
-    <section id="join">
+        <!-- 회원가입 -->
+        <div class="join__1st">
+            <div class="join__title">
+                <h4>회원가입</h4>
+            </div>
+            <div class="inputboxs">
+                <label for="user_email">
+                    <p>이메일주소(ID)</p>
+                    <input type="textbox" name="user_email" placeholder="이메일 주소 입력" id="user_email" autofocus>
+                    <div class="error-message" id="email-error"></div>
+                </label>
+                <label for="user_name">
+                    <p>닉네임</p>
+                    <input type="textbox" name="user_name" placeholder="닉네임 입력 (2자 이상)" id="user_name">
+                    <div class="error-message" id="name-error"></div>
+                </label>
+                <label for="user_pwd">
+                    <p>비밀번호</p>
+                    <input type="textbox" name="user_pwd" placeholder="영문, 숫자, 특수문자 (8자-20자 이내)" id="user_pwd">
+                </label>
+                <label for="pw2">
+                    <p>비밀번호 확인</p>
+                    <input type="textbox" name="pw2" placeholder="비밀번호를 한번 더 입력해주세요." id="pw2" class="wrong__pw__input">
+                    <p class="wrong__pw">비밀번호가 일치하지 않습니다.</p>
+                </label>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- 약관동의 -->
+    <div class="join__2nd">
+        <div class="terms">
+            <div>
+                <h5>약관동의</h5>
+            </div>
+
+            <!-- 약관동의 체크박스들 -->
+            <div class="checkboxs">
+                <!-- 모든약관에 동의 체크하면 모두 체크되게.. -->
+                <label for="chk1" class="all__agreed">
+                    <input type="checkbox" name="status" value="진행중" id="chk1">
+                    <p class="agree">모든 약관에 동의합니다.</p>
+                </label>
+
+                <label for="chk2">
+                    <input type="checkbox" name="status" value="진행중" id="chk2">
+                    <p>[필수] 만 14세 이상입니다.</p>
+                </label>
+
+                <label for="chk3">
+                    <input type="checkbox" name="status" value="진행중" id="chk3">
+                    <p>[필수] 이용약관 <span>보기</span></p>
+                </label>
+
+                <label for="chk4">
+                    <input type="checkbox" name="status" value="진행중" id="chk4">
+                    <p>[필수] 개인정보수집·이용동의서 <span>보기</span></p>
+                </label>
+
+                <label for="chk5">
+                    <input type="checkbox" name="term_flag5" value="true" id="chk5">
+                    <p>[선택] 마케팅 정보 수신동의 <span>보기</span></p>
+                </label>
+
+                <label for="chk6">
+                    <input type="checkbox" name="term_flag6" value="true" id="chk6">
+                    <p>[선택] 개인정보수집·이용동의서 <span>보기</span></p>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="button">
         <div class="inner">
-
-            <!-- 회원가입 -->
-            <div class="join__1st">
-                <div class="join__title">
-                    <h4>회원가입</h4>
-                </div>
-                <div class="inputboxs">
-                    <label for="user_email">
-                        <p>이메일주소(ID)</p>
-                        <input type="textbox" name="user_email" placeholder="이메일 주소 입력" id="user_email" autofocus>
-                    </label>
-                    <label for="user_name">
-                        <p>닉네임</p>
-                        <input type="textbox" name="user_name" placeholder="닉네임 입력 (2자 이상)" id="user_name">
-                    </label>
-                    <label for="user_pwd">
-                        <p>비밀번호</p>
-                        <input type="textbox" name="user_pwd" placeholder="영문, 숫자, 특수문자 (8자-20자 이내)" id="user_pwd">
-                    </label>
-                    <label for="pw2">
-                        <p>비밀번호 확인</p>
-                        <input type="textbox" name="pw2" placeholder="비밀번호를 한번 더 입력해주세요." id="pw2" class="wrong__pw__input">
-                        <p class="wrong__pw">비밀번호가 일치하지 않습니다.</p>
-                    </label>
-                </div>
-            </div>
+            <form method="post" action="/user/joinUser">
+                <input type="hidden" name="user_email" id="hidUserEmail">
+                <input type="hidden" name="user_name" id="hidUserName">
+                <input type="hidden" name="user_pwd" id="hidUserPwd">
+                <input type="hidden" name="term_flag5" id="hidTermFlag5">
+                <input type="hidden" name="term_flag6" id="hidTermFlag6">
+                <a href="#!">
+                    <button id="joinBtn">회원가입</button>
+                </a>
+            </form>
         </div>
+    </div>
+</section>
+</th:block>
 
+<th:block layout:fragment="customScript">
+    <script>
+        $(document).ready(function() {
 
-        <!-- 약관동의 -->
-        <div class="join__2nd">
-            <div class="terms">
-                <div>
-                    <h5>약관동의</h5>
-                </div>
+            $("#user_email").on("change", function () {
+                $.get("/user/check-email", { user_email: $(this).val() }, function(result) {
+                    $("#email-error").text(result);
+                });
+            });
 
-                <!-- 약관동의 체크박스들 -->
-                <div class="checkboxs">
-                    <!-- 모든약관에 동의 체크하면 모두 체크되게.. -->
-                    <label for="chk1" class="all__agreed">
-                        <input type="checkbox" name="status" value="진행중" id="chk1">
-                        <p class="agree">모든 약관에 동의합니다.</p>
-                    </label>
+            $("#user_name").on("change", function () {
+                $.get("/user/check-name", { user_name: $(this).val() }, function(result) {
+                    $("#name-error").text(result);
+                });
+            });
 
-                    <label for="chk2">
-                        <input type="checkbox" name="status" value="진행중" id="chk2">
-                        <p>[필수] 만 14세 이상입니다.</p>
-                    </label>
-
-                    <label for="chk3">
-                        <input type="checkbox" name="status" value="진행중" id="chk3">
-                        <p>[필수] 이용약관 <span>보기</span></p>
-                    </label>
-
-                    <label for="chk4">
-                        <input type="checkbox" name="status" value="진행중" id="chk4">
-                        <p>[필수] 개인정보수집·이용동의서 <span>보기</span></p>
-                    </label>
-
-                    <label for="chk5">
-                        <input type="checkbox" name="term_flag5" value="true" id="chk5">
-                        <p>[선택] 마케팅 정보 수신동의 <span>보기</span></p>
-                    </label>
-
-                    <label for="chk6">
-                        <input type="checkbox" name="term_flag6" value="true" id="chk6">
-                        <p>[선택] 개인정보수집·이용동의서 <span>보기</span></p>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <script>
             // 체크박스 전체 선택
             $(".checkboxs").on("click", "#all__agreed", function () {
                 const checked = $(this).is(":checked");
@@ -88,24 +123,8 @@
                     $(this).parents(".checkboxs").find('input').prop("checked", false);
                 }
             });
-        </script>
 
-        <div class="button">
-            <div class="inner">
-                <form method="post" action="/user/joinUser">
-                    <input type="hidden" name="user_email" id="hidUserEmail">
-                    <input type="hidden" name="user_name" id="hidUserName">
-                    <input type="hidden" name="user_pwd" id="hidUserPwd">
-                    <input type="hidden" name="term_flag5" id="hidTermFlag5">
-                    <input type="hidden" name="term_flag6" id="hidTermFlag6">
-                    <a href="#!">
-                        <button id="joinBtn">회원가입</button>
-                    </a>
-                </form>
-            </div>
-        </div>
-
-    </section>
-</body>
+        });
+    </script>
 </th:block>
 </html>
