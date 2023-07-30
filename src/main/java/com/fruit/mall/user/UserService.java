@@ -22,8 +22,9 @@ public class UserService implements UserMapper {
     @Override
     public User selectByUserEmail(String loginUserEmail) {
         User user = userMapper.selectByUserEmail(loginUserEmail);
-        if (user.getUser_email() != loginUserEmail) {
-        }
+//        if (user.getUser_email() != loginUserEmail) {
+//        }
+
         return userMapper.selectByUserEmail(loginUserEmail);
     }
 
@@ -33,12 +34,8 @@ public class UserService implements UserMapper {
     }
 
     @Override
-    public void insertFirstTerm(Term fristTerm) {
-        userMapper.insertFirstTerm(fristTerm);
+    public void insertTerm(Term fristTerm) {
+        userMapper.insertTerm(fristTerm);
     }
 
-    @Override
-    public void insertSecondTerm(Term secondTerm) {
-        userMapper.insertFirstTerm(secondTerm);
-    }
 }
