@@ -9,10 +9,13 @@ public interface UserMapper {
 
     void insertUser(User user);
 
-    User selectByUserEmail(String userEmail);
+    User selectUserByUserEmail(String userEmail);
 
     Long selectOnlyUserIdNo(String email);
 
     void insertTerm(Term term);
+
+    String selectEmailByUserEmail(String email);
+    String selectUserNameByUserName(String name);
 
 }
