@@ -2,122 +2,120 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 <th:block layout:fragment="content">
 
-<body>
-    <section id="detail">
-        <div class="inner detail__inner">
+<section id="detail">
+    <div class="inner detail__inner">
 
-            <div class="box01">
-                <div class="left">
-                    <img src="./img/상세페이지_망고스틴.png" alt="망고스틴 상세페이지">
+        <div class="box01">
+            <div class="left">
+                <img src="./img/상세페이지_망고스틴.png" alt="망고스틴 상세페이지">
+            </div>
+
+            <div class="right">
+
+                <div class="right__txt01">
+                    <h2> (직수입) 태국 열대과일 생과 망고스틴 1kg 2kg </h2>
+                    <span class="material-icons red__heart">favorite</span>
                 </div>
 
-                <div class="right">
-
-                    <div class="right__txt01">
-                        <h2> (직수입) 태국 열대과일 생과 망고스틴 1kg 2kg </h2>
-                        <span class="material-icons red__heart">favorite</span>
+                <div class="right__txt02">
+                    <div class="right__txt02__01">
+                        <span>10%</span>
+                        <p>
+                            <span>35,000원</span>
+                            <span>27,000원</span>
+                        </p>
                     </div>
 
-                    <div class="right__txt02">
-                        <div class="right__txt02__01">
-                            <span>10%</span>
-                            <p>
-                                <span>35,000원</span>
-                                <span>27,000원</span>
-                            </p>
-                        </div>
-
-                        <div class="right__txt02__02">
-                            <p>배송비 3,000원
-                                <span class="free">(50,000원이상 결제시 무료배송)</span>
-                            </p>
-                        </div>
+                    <div class="right__txt02__02">
+                        <p>배송비 3,000원
+                            <span class="free">(50,000원이상 결제시 무료배송)</span>
+                        </p>
                     </div>
+                </div>
 
-                    <div class="right__txt03">
-                        <!-- 장바구니 클릭 시 수량 증감버튼 -->
-                        <div class="cart">
-                            <div class="inner">
-                                <button>-</button>
-                                <input type="text" value="2">
-                                <button>+</button>
-                            </div>
-                            <span>남은수량 999개</span>
-                        </div>
-
-                        <div class="right__txt03__01">
-                            <span>총 상품 금액</span>
-                            <span>54,000원</span>
-                        </div>
-
-                        <div class="right__txt03__02">
-                            <span>배송비</span>
-                            <span>무료</span>
-                        </div>
-
-                    </div>
-
-                    <div class="right__buttons">
-                        <button>장바구니</button>
-                        <button>바로구매</button>
-                    </div>
-
-                    <!-- 장바구니에 담겼습니다. 모달 창 -->
-                    <div class="txt04 right__modal" style="display: none;">
+                <div class="right__txt03">
+                    <!-- 장바구니 클릭 시 수량 증감버튼 -->
+                    <div class="cart">
                         <div class="inner">
-
-                            <h4>알림</h4>
-
-                            <h5>
-                                <span>장바구니에 담겼습니다.</span>
-
-                                <div class="buttons">
-                                    <a href="./detail.html">
-                                        <button>계속 쇼핑하기</button>
-                                    </a>
-
-                                    <a href="#">
-                                        <button>장바구니로 이동</button>
-                                    </a>
-                                </div>
-
-                            </h5>
-
+                            <button>-</button>
+                            <input type="text" value="2">
+                            <button>+</button>
                         </div>
+                        <span>남은수량 999개</span>
+                    </div>
+
+                    <div class="right__txt03__01">
+                        <span>총 상품 금액</span>
+                        <span>54,000원</span>
+                    </div>
+
+                    <div class="right__txt03__02">
+                        <span>배송비</span>
+                        <span>무료</span>
                     </div>
 
                 </div>
-            </div>
 
-            <div class="box02">
-                <a href="./detail.html">
-                    <div class="detailed__info">
-                        <p>상세정보</p>
+                <div class="right__buttons">
+                    <button>장바구니</button>
+                    <button>바로구매</button>
+                </div>
+
+                <!-- 장바구니에 담겼습니다. 모달 창 -->
+                <div class="txt04 right__modal" style="display: none;">
+                    <div class="inner">
+
+                        <h4>알림</h4>
+
+                        <h5>
+                            <span>장바구니에 담겼습니다.</span>
+
+                            <div class="buttons">
+                                <a href="./detail.html">
+                                    <button>계속 쇼핑하기</button>
+                                </a>
+
+                                <a href="#">
+                                    <button>장바구니로 이동</button>
+                                </a>
+                            </div>
+
+                        </h5>
+
                     </div>
-                </a>
+                </div>
 
-
-                <a href="./review.html">
-                    <div class="review">
-                        <p>상품리뷰</p>
-                    </div>
-                </a>
-
-
-                <a href="#">
-                    <div class="question">
-                        <p>상품문의</p>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="box03">
-                <img src="./img/망고스틴_상세페이지.png" alt="망고스틴 상세페이지">
             </div>
         </div>
-    </section>
 
-</body>
+        <div class="box02">
+            <a href="./detail.html">
+                <div class="detailed__info">
+                    <p>상세정보</p>
+                </div>
+            </a>
+
+
+            <a href="./review.html">
+                <div class="review">
+                    <p>상품리뷰</p>
+                </div>
+            </a>
+
+
+            <a href="#">
+                <div class="question">
+                    <p>상품문의</p>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="box03">
+            <img src="./img/망고스틴_상세페이지.png" alt="망고스틴 상세페이지">
+        </div>
+    </div>
+</section>
+
 </th:block>
 </html>

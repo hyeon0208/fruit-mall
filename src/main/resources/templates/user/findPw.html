@@ -2,53 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 <th:block layout:fragment="content">
 
-<body>
-    <div class="findPw_wrap">
-        <div class="inner box-shadow">
-            <div class="txt01">
-                <p>비밀번호 찾기</p>
-            </div>
+<div class="findPw_wrap">
+    <div class="inner box-shadow">
+        <div class="txt01">
+            <p>비밀번호 찾기</p>
+        </div>
 
-            <div class="txt02">
-                <p>가입시 로그인한 이력이 있는 이메일 입력 후 <br> 새로운 비밀번호로 변경 부탁드립니다.</p>
-            </div>
+        <div class="txt02">
+            <p>가입시 로그인한 이력이 있는 이메일 입력 후 <br> 새로운 비밀번호로 변경 부탁드립니다.</p>
+        </div>
 
-            <div class="txt03">
-                <input type="textbox" name="id" value="이메일을 입력해주세요." id="id">
+        <div class="txt03">
+            <input type="textbox" name="id" value="이메일을 입력해주세요." id="id">
 
-                <a href="#">
-                    <button>확인</button>
-                </a>
-            </div>
+            <a href="#">
+                <button>확인</button>
+            </a>
         </div>
     </div>
+</div>
 
-    <!-- 이메일 확인 되었습니다. 모달 창 -->
-    <div class="txt04" style="display: none;">
-        <div class="inner">
+<!-- 이메일 확인 되었습니다. 모달 창 -->
+<div class="txt04" style="display: none;">
+    <div class="inner">
 
-            <h4>알림</h4>
+        <h4>알림</h4>
 
-            <h5>이메일이 확인 되었습니다.
-                <a href="#">확인</a>
-            </h5>
+        <h5>이메일이 확인 되었습니다.
+            <a href="#">확인</a>
+        </h5>
 
-        </div>
     </div>
+</div>
 
-    <!-- 등록된 이메일(ID)가 존재하지 않습니다. 모달 창 -->
-    <div class="txt05" style="display: none;">
-        <div class="inner">
+<!-- 등록된 이메일(ID)가 존재하지 않습니다. 모달 창 -->
+<div class="txt05" style="display: none;">
+    <div class="inner">
 
-            <h4>아이디 확인</h4>
+        <h4>아이디 확인</h4>
 
-            <h5>등록된 이메일(ID)가 존재하지 않습니다.
-                <a href="#">닫기</a>
-            </h5>
+        <h5>등록된 이메일(ID)가 존재하지 않습니다.
+            <a href="#">닫기</a>
+        </h5>
 
-        </div>
     </div>
+</div>
 
-</body>
 </th:block>
 </html>
