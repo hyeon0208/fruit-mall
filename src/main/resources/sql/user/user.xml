@@ -24,7 +24,15 @@
         SELECT USER_ID_NO FROM user WHERE USER_EMAIL = #{user_email}
     </select>
 
-    <select id="selectByUserEmail" parameterType="String" resultMap="UserResultMap">
-        SELECT * FROM user WHERE USER_EMAIL = #{user_email}
+    <select id="selectUserByUserEmail" parameterType="String" resultMap="UserResultMap">
+        SELECT USER_EMAIL FROM user WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <select id="selectEmailByUserEmail" parameterType="String" resultMap="UserResultMap" resultType="String">
+        SELECT USER_EMAIL FROM user WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <select id="selectUserNameByUserName" parameterType="String" resultMap="UserResultMap" resultType="String">
+        SELECT USER_NAME FROM user WHERE USER_EMAIL = #{user_name}
     </select>
 </mapper>
