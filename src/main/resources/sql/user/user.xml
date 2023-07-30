@@ -9,8 +9,8 @@
     </insert>
 
     <insert id="insertTerm" parameterType="com.fruit.mall.user.dto.Term">
-        INSERT INTO user (USER_ID_NO, TEAM_NAME, TEAM_FLAG)
-        VALUES (#{user_id_no}, #{team_name}, #{team_flag})
+        INSERT INTO term (USER_ID_NO, TERM_NAME, TERM_FLAG)
+        VALUES (#{user_id_no}, #{term_name}, #{term_flag})
     </insert>
 
     <resultMap id="UserResultMap" type="com.fruit.mall.user.dto.User">
