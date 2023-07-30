@@ -17,7 +17,7 @@
         <result property="user_email" column="user_email" />
         <result property="user_name" column="user_name" />
         <result property="user_pwd" column="user_pwd" />
-        <result property="user_status" column="user_status" />
+        <result property="user_status" column="user_status" typeHandler="com.fruit.mall.user.RoleTypeHandler" />
     </resultMap>
 
     <select id="selectOnlyUserIdNo" parameterType="String" resultType="Long">
