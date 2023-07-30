@@ -17,7 +17,6 @@ public interface UserMapper {
 
     Long selectOnlyUserIdNo(String email);
 
-    void insertFirstTerm(Term term);
+    void insertTerm(Term term);
 
-    void insertSecondTerm(Term term);
 }
