@@ -15,7 +15,7 @@ public interface UserMapper {
 
     void insertTerm(Term term);
 
-    String selectEmailByUserEmail(String email);
-    String selectUserNameByUserName(String name);
+    String selectEmailByUserEmail(String user_email);
+    String selectUserNameByUserName(String user_name);
 
 }
