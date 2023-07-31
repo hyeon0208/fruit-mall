@@ -9,43 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {
-
+public class UserJoinController {
     private final UserService userService;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    private final static String LOGIN_USER = "authentic";
-
-    @PostMapping("/login")
-    public String loginForm(@ModelAttribute User user, HttpServletRequest request) {
-        User loginUser = userService.selectUserByUserEmail(user.getUser_email());
-        if (!userService.loginCheck(user.getUser_email(),user.getUser_pwd())) {
-            // 로그인 실패 시
-        }
-        HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USER, loginUser);
-        return "redirect:/";
-    }
-
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        return "redirect:/";
-    }
-
     @PostMapping("/joinUser")
-    public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6,  Model model) {
+    public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6, Model model) {
         User joinUser = User.builder()
                 .user_email(user.getUser_email())
                 .user_name(user.getUser_name())
