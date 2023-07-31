@@ -3,12 +3,15 @@ package com.fruit.mall.user;
 import com.fruit.mall.user.dto.Term;
 import com.fruit.mall.user.dto.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,11 +20,16 @@ public class UserController {
 
     private final UserService userService;
 
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     private final static String LOGIN_USER = "authentic";
 
     @PostMapping("/login")
     public String loginForm(@ModelAttribute User user, HttpServletRequest request) {
-        User loginUser = userService.selectByUserEmail(user.getUser_email());
+        User loginUser = userService.selectUserByUserEmail(user.getUser_email());
+        if (!userService.loginCheck(user.getUser_email(),user.getUser_pwd())) {
+            // 로그인 실패 시
+        }
         HttpSession session = request.getSession();
         session.setAttribute(LOGIN_USER, loginUser);
         return "redirect:/";
@@ -38,10 +46,15 @@ public class UserController {
 
     @PostMapping("/joinUser")
     public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6,  Model model) {
-        user.setUser_status(Role.USER);
-        userService.insertUser(user);
+        User joinUser = User.builder()
+                .user_email(user.getUser_email())
+                .user_name(user.getUser_name())
+                .user_pwd(passwordEncoder.encode(user.getUser_pwd()))
+                .user_status(Role.USER)
+                .build();
+        userService.insertUser(joinUser);
 
-        String email = user.getUser_email();
+        String email = joinUser.getUser_email();
         model.addAttribute("email", email);
 
         Integer termFlag5 = term_flag5 ? 1 : 0;
@@ -64,5 +77,19 @@ public class UserController {
         userService.insertTerm(term6);
 
         return "user/joinConfirm";
+    }
+
+    @PostMapping("/check-email")
+    @ResponseBody
+    public String checkUserEmail(@RequestParam String user_email) {
+        String findEmail = userService.selectEmailByUserEmail(user_email);
+        return findEmail != null ? "이미 가입된 계정입니다." : "";
+    }
+
+    @PostMapping("/check-name")
+    @ResponseBody
+    public String checkUserName(@RequestBody HashMap<String, Object> param) {
+        String findUsername = userService.selectUserNameByUserName((String) param.get("user_name"));
+        return findUsername != null ? "해당 닉네임은 이미 사용 중 입니다." : "";
     }
 }
