@@ -33,6 +33,10 @@ $(document).on('click', '#joinBtn', (e) => {
         return;
     }
 
+    if ($('#pwd-regex').text().length > 0) {
+        showErrorModal('비밀번호 입력 조건을 다시 확인해주세요.', $('#user_pwd'));
+        return;
+    }
 
     // 폼 전송 코드
     $('#hidUserEmail').val($('#user_email').val())
@@ -72,6 +76,22 @@ $(document).ready(function() {
         }).then(res => {
             $("#name-error").text(res.data);
         })
+    });
+
+    $("#user_name").on("focusout", () => {
+        if ($('#user_name').val().length < 2) {
+            $("#name-error").text("닉네임은 2글자 이상을 입력해주세요.");
+        }
+    });
+
+    $("#user_pwd").on("focusout", () => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
+
+        if (!($('#user_pwd').val().match(passwordRegex))) {
+            $("#pwd-regex").text("영문자 / 숫자 / 특수문자 포함 최소 8자리 이상 20자리 이내로 입력해주세요.");
+        }  else {
+            $("#pwd-regex").text(""); // 여기를 추가하십시오
+        }
     });
 
     $("#pwd_check").on("focusout", () => {
