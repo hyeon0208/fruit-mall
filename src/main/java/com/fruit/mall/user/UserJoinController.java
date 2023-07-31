@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class UserJoinController {
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @PostMapping("/joinUser")
-    public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6, Model model) {
+    public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6, RedirectAttributes redirectAttributes) {
         User joinUser = User.builder()
                 .user_email(user.getUser_email())
                 .user_name(user.getUser_name())
@@ -27,14 +28,11 @@ public class UserJoinController {
                 .user_status(Role.USER)
                 .build();
         userService.insertUser(joinUser);
-
-        String email = joinUser.getUser_email();
-        model.addAttribute("email", email);
+        Long user_id_no = joinUser.getUser_id_no();
 
         Integer termFlag5 = term_flag5 ? 1 : 0;
         Integer termFlag6 = term_flag6 ? 1 : 0;
 
-        Long user_id_no = userService.selectOnlyUserIdNo(email);
         Term term5 = Term.builder()
                 .user_id_no(user_id_no)
                 .term_name("선택약관5")
@@ -50,6 +48,14 @@ public class UserJoinController {
         userService.insertTerm(term5);
         userService.insertTerm(term6);
 
+        redirectAttributes.addAttribute("email", joinUser.getUser_email());
+
+        return "redirect:/user/joinConfirm?email={email}";
+    }
+
+    @GetMapping("/joinConfirm")
+    public String joinConfirm(@RequestParam String email, Model model) {
+        model.addAttribute("email", email);
         return "user/joinConfirm";
     }
 
