@@ -25,10 +25,10 @@
                     <p>비밀번호</p>
                     <input type="textbox" name="user_pwd" placeholder="영문, 숫자, 특수문자 (8자-20자 이내)" id="user_pwd">
                 </label>
-                <label for="pw2">
+                <label for="pwd_check">
                     <p>비밀번호 확인</p>
-                    <input type="textbox" name="pw2" placeholder="비밀번호를 한번 더 입력해주세요." id="pw2" class="wrong__pw__input">
-                    <p class="wrong__pw">비밀번호가 일치하지 않습니다.</p>
+                    <input type="textbox" name="pwd_check" placeholder="비밀번호를 한번 더 입력해주세요." id="pwd_check" class="wrong__pw__input">
+                    <p class="wrong__pw" id="pwd-error">비밀번호가 일치하지 않습니다.</p>
                 </label>
             </div>
         </div>
@@ -79,7 +79,7 @@
 
     <div class="button">
         <div class="inner">
-            <form method="post" action="/user/joinUser">
+            <form method="post" id="joinForm" action="/user/joinUser">
                 <input type="hidden" name="user_email" id="hidUserEmail">
                 <input type="hidden" name="user_name" id="hidUserName">
                 <input type="hidden" name="user_pwd" id="hidUserPwd">
@@ -92,5 +92,13 @@
         </div>
     </div>
 </section>
+
+<div id="errorModal" class="modal">
+    <div class="modal-content">
+        <p id="modalErrorMessage"></p>
+        <button id="modalCloseBtn">확인</button>
+    </div>
+</div>
+
 </th:block>
 </html>
