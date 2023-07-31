@@ -36,27 +36,21 @@
 
         <div class="sub-menu">
             <ul class="menu">
-                <section id="login-auth" th:if="${session.authentic == null}">
-                    <li>
-                    <li>
+                    <li th:if="${session.authentic == null}">
                         <a href="/login">Sign In</a>
                     </li>
 
-                    <li>
+                    <li th:if="${session.authentic == null}">
                         <a href="/join">Join</a>
                     </li>
-                    </li>
-                </section>
 
-                <section id="notLogin-auth" th:unless="${session.authentic == null}">
-                    <li>
+                    <li th:unless="${session.authentic == null}">
                         <form id="logoutForm" method="post" action="/user/logout">
                             <a href="#!">
                                 <button id="logoutBtn">Logout</button>
                             </a>
                         </form>
                     </li>
-                </section>
 
                 <li>
                     <a href="javascript:void(0)">language</a>
