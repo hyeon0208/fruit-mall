@@ -7,17 +7,19 @@
         <div class="login__title">
             <h4>로그인</h4>
         </div>
-        <form method="post" action="/user/login">
+        <form method="post" id="loginForm" action="/user/login">
             <div class="login__input">
                 <label for="id">
                     <p>이메일주소(ID)</p>
                     <input type="textbox" name="user_email" placeholder="이메일 주소 입력" id="id" autofocus>
+                    <div class="error-message" id="id-error"></div>
                 </label>
 
                 <div class="input__pw">
                     <label for="pw">
                         <p>비밀번호</p>
                         <input type="password" name="user_pwd" placeholder="영문, 숫자, 특수문자 (8자-20자 이내)" id="pw">
+                        <div class="error-message" id="pwd-error"></div>
                         <div class="eyes">
                             <i class="fa fa-eye fa-lg"></i>
                         </div>
@@ -27,7 +29,7 @@
 
             <div class="login__button">
                 <div class="inner">
-                        <button>로그인</button>
+                    <button id="loginBtn">로그인</button>
                 </div>
             </div>
         </form>
@@ -73,5 +75,14 @@
         </div>
     </div>
 </section>
+
+<!--모달창-->
+<div id="errorModal" class="modal">
+    <div class="modal-content">
+        <p id="modalErrorMessage"></p>
+        <button id="modalCloseBtn">확인</button>
+    </div>
+</div>
+
 </th:block>
 </html>
