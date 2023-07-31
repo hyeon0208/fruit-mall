@@ -22,7 +22,7 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/user/{pageName}")
+    @GetMapping("/{pageName}")
     public String goSubPage(@PathVariable String pageName) {
         return "user/" + pageName;
     }
