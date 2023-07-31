@@ -32,10 +32,7 @@
                 </label>
             </div>
         </div>
-
-
     </div>
-
 
     <!-- 약관동의 -->
     <div class="join__2nd">
@@ -95,36 +92,5 @@
         </div>
     </div>
 </section>
-</th:block>
-
-<th:block layout:fragment="customScript">
-    <script>
-        $(document).ready(function() {
-
-            $("#user_email").on("change", function () {
-                $.get("/user/check-email", { user_email: $(this).val() }, function(result) {
-                    $("#email-error").text(result);
-                });
-            });
-
-            $("#user_name").on("change", function () {
-                $.get("/user/check-name", { user_name: $(this).val() }, function(result) {
-                    $("#name-error").text(result);
-                });
-            });
-
-            // 체크박스 전체 선택
-            $(".checkboxs").on("click", "#all__agreed", function () {
-                const checked = $(this).is(":checked");
-
-                if(checked){
-                    $(this).parents(".checkboxs").find('input').prop("checked", true);
-                } else {
-                    $(this).parents(".checkboxs").find('input').prop("checked", false);
-                }
-            });
-
-        });
-    </script>
 </th:block>
 </html>
