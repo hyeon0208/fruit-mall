@@ -16,13 +16,11 @@ public class UserService implements UserMapper {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public boolean loginCheck(String email, String pwd) {
-        User loginUser = userMapper.selectUserByUserEmail(email);
-        if (passwordEncoder.matches(pwd, loginUser.getUser_pwd())) {
-            return true;
-        } else {
+    public boolean loginCheck(String pwd, User loginUser) {
+        if (loginUser == null || !passwordEncoder.matches(pwd, loginUser.getUser_pwd())) {
             return false;
         }
+        return true;
     }
 
     @Override
