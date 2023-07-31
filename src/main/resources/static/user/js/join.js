@@ -7,25 +7,26 @@ $(document).on('click', '#joinBtn', () => {
 })
 
 $(document).ready(function() {
-    $("#user_email").on("focusout", function () {
+    $("#user_email").on("focusout", () => {
+        //@RequestParam으로 받는방법
         axios({
             method: "post",
             url: "/user/check-email",
-            data: { user_email: $(this).val()},
-            dataType: "json", // 응답 데이터 타입
-            headers: {'Content-Type': 'application/json'}
+            data: "user_email=" + encodeURIComponent($("#user_email").val()),
+            dataType: "String", // 응답 데이터 타입
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(res => {
             $("#email-error").text(res.data);
         })
     });
 
-    $("#user_name").on("focusout", function () {
+    $("#user_name").on("focusout", () => {
         axios({
             method: "post",
-            url: "/user/check-name", // "/alert" URL 로 요청
-            data: { user_name: $(this).val() } ,
+            url: "/user/check-name",
+            data: { user_name: $("#user_name").val() } ,
             dataType: "json", // 응답 데이터 타입
-            headers: {'Content-Type': 'application/json'} // 요청 헤더에 JSON 형식으로 데이터 전송
+            headers: {'Content-Type': 'application/json'}
         }).then(res => {
             $("#name-error").text(res.data);
         })
