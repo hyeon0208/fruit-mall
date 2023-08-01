@@ -4,6 +4,17 @@
   color: #fff;
 }
 
+.admin-top-bar {
+  width: 1000rem;
+  height: 50px;
+  text-align: center;
+  max-width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(27, 36, 179, 0.84);
+  position: absolute;z-index: 1;
+}
+
 #admin_product {
   width: 85%;
   position: fixed;
