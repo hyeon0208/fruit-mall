@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+
+<section id="admin_product02">
+        <div class="inner">
+            <div class="title">
+                <h2>상품등록</h2>
+            </div>
+
+            <div class="admin_product02__wrap">
+                <label for="productName" class="productName">
+                    <p> <span>*</span> 상품명</p>
+                    <input type="textbox" name="productName" placeholder="상품명을 입력해주세요." id="productName">
+                    <div class="error-message" id="productName-error"></div>
+                </label>
+
+                <label for="sort">
+                    <p> <span>*</span> 분류</p>
+                    <select name="sort">
+                        <p>분류</p>
+                        <option value="봄과일">봄과일</option>
+                        <option value="여름과일">여름과일</option>
+                        <option value="가을과일">가을과일</option>
+                        <option value="겨울과일">겨울과일</option>
+                    </select>
+                    <div class="error-message" id="sort-error"></div>
+                </label>
+
+                <label for="price">
+                    <p> <span>*</span> 상품금액</p>
+                    <input type="textbox" name="price" placeholder="0" id="price">
+                    원
+                    <div class="error-message" id="price-error"></div>
+                </label>
+
+                <label for="discount">
+                    <p> 상품할인율 </p>
+                    <input type="textbox" name="discount" placeholder="0" id="discount">
+                    %
+                    <div class="error-message" id="discount-error"></div>
+                </label>
+
+                <label for="totalPrice" class="totalPrice">
+                    <p> 할인적용 후 금액 </p>
+                    <input type="textbox" name="totalPrice" value="0" id="totalPrice" readonly>
+                    원
+                </label>
+
+                <label for="stock">
+                    <p> <span>*</span> 재고수량 </p>
+                    <input type="textbox" name="stock" placeholder="0" id="stock">
+                    원
+                    <div class="error-message" id="stock-error"></div>
+                </label>
+
+                <label for="productPicture" class="productPicture">
+                    <p> <span>*</span> 상품이미지 </p>
+                    <div>+ 추가</div>
+                    <input type="file" name="productPicture" id="productPicture" accept="image/*">
+                    <img src="./img/이미지위치.png" alt="미리보기 이미지">
+                </label>
+                <div class="error-message" id="image-error"></div>
+
+                <label for="description" class="description">
+                    <p> <span>*</span> 상품 상세정보 </p>
+                    <input type="textbox" name="description" id="description">
+                    <div class="error-message" id="description-error"></div>
+                </label>
+
+            </div>
+
+            <div class="buttons">
+                <button id ="cancelBtn">취소하기</button>
+                <button id ="addBtn">등록하기</button>
+            </div>
+        </div>
+    </section>
+
+    <!--    모달창 -->
+    <div class="txt05" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5><br>
+            </h5>
+            <a href="/admin/product">확인</a>
+        </div>
+    </div>
+</th:block>
+</html>
