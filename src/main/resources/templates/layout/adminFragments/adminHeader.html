@@ -21,9 +21,6 @@
     <link rel="stylesheet" href="/admin/css/style.css">
     <link rel="stylesheet" href="/admin/css/modal.css">
 
-    <!-- CHART JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-
     <th:block th:insert="~{includes/library}"></th:block>
     <th:block th:insert="~{includes/scripts}"></th:block>
   </head>
@@ -31,7 +28,6 @@
   <!-- HEADER -->
   <header id="header">
     <div class="inner">
-
       <a href="/admin/dashboard" class="logo">
         <img src="/admin/img/푸릇푸릇 로고.png" alt="logo" />
       </a>
@@ -63,7 +59,7 @@
 
         <li class="item">
           <div class="item__name">
-            <a href="../../../../../../Fruit-ADMIN-Publish-master/review.html">
+            <a href="/admin/review">
               <span class="material-symbols-outlined">rate_review</span>
               리뷰관리</a>
           </div>
@@ -71,7 +67,7 @@
 
         <li class="item">
           <div class="item__name">
-            <a href="../../../../../../Fruit-ADMIN-Publish-master/member.html">
+            <a href="/admin/member">
               <span class="material-symbols-outlined">groups</span>
               회원관리</a>
           </div>
@@ -79,9 +75,17 @@
 
         <li class="item">
           <div class="item__name">
-            <a href="../../../../../../Fruit-ADMIN-Publish-master/notification.html">
+            <a href="/admin/notifications">
               <span class="material-symbols-outlined">notifications</span>
               알림관리</a>
+          </div>
+        </li>
+
+        <li class="item" th:if="${session.authentic != null}">
+          <div class="item__name">
+            <a href="/admin/logout">
+              로그아웃
+            </a>
           </div>
         </li>
       </ul>
