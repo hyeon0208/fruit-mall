@@ -4,6 +4,12 @@
   color: #fff;
 }
 
+.error-message {
+  margin-top: 5px;
+  font-size: 0.85em;
+  color: red;
+}
+
 .admin-top-bar {
   width: 1000rem;
   height: 50px;
