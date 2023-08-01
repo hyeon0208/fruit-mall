@@ -35,4 +35,9 @@
     <select id="selectUserNameByUserName" parameterType="String" resultType="String">
         SELECT USER_NAME FROM user WHERE USER_NAME = #{user_name}
     </select>
+
+
+    <update id="updateNewPassword" parameterType="String">
+        UPDATE user SET USER_PWD = #{user_pwd} WHERE USER_EMAIL = #{user_email}
+    </update>
 </mapper>
