@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
-public class product {
+public class Product {
     private Long productId;
     private Long categoryId;
     private String productName;
@@ -21,7 +21,7 @@ public class product {
     private Timestamp productCreatedAt;
 
     @Builder
-    public product(Long categoryId, String productName, int productPrice, int productStock, String productDescription, int productDiscount, String productSaleStatus, Timestamp productUpdatedAt, Timestamp productCreatedAt) {
+    public Product(Long categoryId, String productName, int productPrice, int productStock, String productDescription, int productDiscount, String productSaleStatus, Timestamp productUpdatedAt, Timestamp productCreatedAt) {
         this.categoryId = categoryId;
         this.productName = productName;
         this.productPrice = productPrice;
