@@ -2,7 +2,7 @@
 <html lang="ko">
 <th:block th:fragment="adminHeaderLayout">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프룻프룻 쇼핑몰</title>
@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="프룻프룻 Shopping Mall" />
     <meta property="og:title" content="프룻프룻 Shopping Mall" />
     <meta property="og:description" content="프룻프룻 Shopping Mall 입니다." />
-    <meta property="og:image" content="./img/openGraph.png" />
+    <meta property="og:image" content="/admin/img/openGraph.png" />
     <meta property="og:url" content="https://prpr-shopping-mall.co.kr" />
 
     <!--파비콘-->
@@ -23,7 +23,7 @@
 
     <th:block th:insert="~{includes/library}"></th:block>
     <th:block th:insert="~{includes/scripts}"></th:block>
-  </head>
+</head>
 
   <!-- HEADER -->
   <header id="header">
@@ -83,13 +83,14 @@
 
         <li class="item" th:if="${session.authentic != null}">
           <div class="item__name">
-            <a href="/admin/logout">
+            <a href="#" id="logout">
               로그아웃
             </a>
           </div>
+          <form id="logout-form" action="/admin/logout" method="post" style="display: none;">
+          </form>
         </li>
       </ul>
-
     </div>
   </header>
 </th:block>
