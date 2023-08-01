@@ -54,12 +54,11 @@ $(document).ready(function() {
     $('#pwd-error').hide();
 
     $("#user_email").on("focusout", () => {
-        //@RequestParam으로 받는방법
         axios({
             method: "post",
             url: "/user/check-email",
             data: "user_email=" + encodeURIComponent($("#user_email").val()),
-            dataType: "String", // 응답 데이터 타입
+            dataType: "String",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(res => {
             $("#email-error").text(res.data);
@@ -71,7 +70,7 @@ $(document).ready(function() {
             method: "post",
             url: "/user/check-name",
             data: { user_name: $("#user_name").val() } ,
-            dataType: "json", // 응답 데이터 타입
+            dataType: "json",
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
             $("#name-error").text(res.data);
@@ -90,7 +89,7 @@ $(document).ready(function() {
         if (!($('#user_pwd').val().match(passwordRegex))) {
             $("#pwd-regex").text("영문자 / 숫자 / 특수문자 포함 최소 8자리 이상 20자리 이내로 입력해주세요.");
         }  else {
-            $("#pwd-regex").text(""); // 여기를 추가하십시오
+            $("#pwd-regex").text("");
         }
     });
 
