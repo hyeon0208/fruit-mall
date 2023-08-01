@@ -59,4 +59,9 @@ public class UserService implements UserMapper {
     public String selectUserNameByUserName(String user_name) {
         return userMapper.selectUserNameByUserName(user_name);
     }
+
+    @Override
+    public void updateNewPassword(String user_email, String user_pwd) {
+        userMapper.updateNewPassword(user_email, passwordEncoder.encode(user_pwd));
+    }
 }

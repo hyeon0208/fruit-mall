@@ -3,6 +3,7 @@ package com.fruit.mall.user;
 import com.fruit.mall.user.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,5 +42,30 @@ public class UserLoginController {
     public String checkLoginPwd(@RequestParam String user_email) {
         String findEmail = userService.selectEmailByUserEmail(user_email);
         return findEmail == null ? "이메일이 존재하지 않습니다." : "";
+    }
+
+    @PostMapping("/findPw")
+    @ResponseBody
+    public String findPassword(@RequestParam String user_email) {
+        String findEmail = userService.selectEmailByUserEmail(user_email);
+        if (findEmail == null) {
+            return "not_found";
+        }
+        return "success";
+    }
+
+    @GetMapping("/changePw")
+    public String changePw(@RequestParam String user_email, Model model) {
+        model.addAttribute("email", user_email);
+        return "user/changePw";
+    }
+
+    @PostMapping("/changeNewPw")
+    @ResponseBody
+    public String changePassword(@RequestBody User user) {
+        String newPassword = user.getUser_pwd();
+        String email = user.getUser_email();
+        userService.updateNewPassword(email, newPassword);
+        return "success";
     }
 }
