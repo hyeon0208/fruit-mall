@@ -3021,9 +3021,10 @@ header .inner .main-menu .item .red .material-icons {
 
 #aside {
   position: fixed;
-  top: 0;
+  top: 8rem;
   right: 0;
   width: 120px;
+  z-index: 100;
 }
 #aside .sidebar ul {
   display: flex;
