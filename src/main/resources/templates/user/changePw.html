@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<div class="changePw_wrap">
+        <div class="inner box-shadow">
+            <div class="txt01">
+                <p>비밀번호 변경</p>
+            </div>
+
+            <div class="txt02">
+                <p>비밀번호는
+                    <span>영문자 + 숫자 + 특수문자 포함 최소 8자리 이상 <br> 20자리 이내</span>로 설정해주세요.
+                </p>
+            </div>
+
+            <div class="txt03">
+                <label for="newpw">
+                    <p>새비밀번호</p>
+                    <input type="textbox" name="newpw" placeholder="비밀번호를 입력해주세요. (특수문자포함 8자리 이상)" id="newpw">
+                    <div class="error-message" id="regex-error"></div>
+                </label>
+
+                <label for="newpw">
+                    <p>새비밀번호 확인</p>
+                    <input type="textbox" name="newpw-check" placeholder="비밀번호를 한번 더 입력해주세요." id="newpw-check">
+                    <div class="error-message" id="check-error"></div>
+                </label>
+
+                <input type="hidden" id="user_email" th:value="${email}" />
+
+                <a>
+                    <button id="changePwBtn">비밀번호 변경</button>
+                </a>
+            </div>
+
+            <!-- 비밀번호가 정상적으로 변경되었습니다. 모달 창 -->
+            <div class="txt04" style="display: none;">
+                <div class="inner">
+                    <h4>알림</h4>
+                    <h5>비밀번호가 정상적으로 변경되었습니다. <br>
+                        로그인 화면으로 이동합니다.
+                        <a href="/login">확인</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="txt05" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5>영문자 / 숫자 / 특수문자 포함 최소 8자리 이상 20자리 이내로 입력해주세요. <br>
+                <a href="#">확인</a>
+            </h5>
+        </div>
+    </div>
+
+    <div class="txt06" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5>비밀번호가 일치하지 않습니다. <br>
+                <a href="#">확인</a>
+            </h5>
+        </div>
+    </div>
+
+</th:block>
+</html>
