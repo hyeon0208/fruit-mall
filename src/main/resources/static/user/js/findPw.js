@@ -6,8 +6,6 @@ $(document).on('click', '#findPwBtn', () => {
         dataType: "String",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(res => {
-        console.log(res.data)
-
         if (res.data === "success") {
             $('.txt04').show(); // 이메일이 확인되었을 때
 
