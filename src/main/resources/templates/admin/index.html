@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+
+<section id="admin">
+        <div class="inner">
+            <div class="login">
+                <div class="login__title">
+                    <h1>프룻프룻 관리자센터 <br> 로그인</h1>
+                </div>
+
+                <div class="login__input">
+                    <label for="id">
+                        <p>이메일주소(ID)</p>
+                        <input type="textbox" name="id" placeholder="이메일 주소 입력" id="id">
+                    </label>
+
+                    <div class="input__pw">
+                        <label for="pw">
+                            <p>비밀번호</p>
+                            <input type="textbox" name="pw" placeholder="영문, 숫자, 특수문자 (8자-20자 이내)" id="pw">
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="login__button">
+                    <div class="login__button__inner">
+                        <button type="button" id="adminLoginBtn">로그인</button>
+                    </div>
+                </div>
+
+                <div class="login__txt">
+                    <div class="search__pw">
+                        <a href="/admin/findPw">비밀번호 찾기</a>
+                    </div>
+
+                    <!-- 로그인 유지 토글 -->
+                    <div class="stay__login">
+                        <label>
+                            <input role="switch" type="checkbox" />
+                            <span>로그인 유지</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--    모달창 -->
+    <div class="txt05" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5>아이디 또는 비밀번호가 일치하지 않습니다.<br>
+                <a href="#">확인</a>
+            </h5>
+        </div>
+    </div>
+</th:block>
+</html>
