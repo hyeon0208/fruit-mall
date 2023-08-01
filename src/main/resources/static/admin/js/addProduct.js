@@ -17,14 +17,20 @@ function showErrorMessage(id) {
 
                 if ($(id).val() === "") {
                     // 숫자가 아닌 값이 입력되었을 때 에러 메시지 표시
-                    $(`${id}-error`).text("숫자만 입력해 주세요.");
+                    $(`${id}-error`).text("숫자만 입력 가능합니다.");
                 }
             }
             if (id === "#discount") {
                 // 할인 필드에 특정 조건을 추가하여 에러 메시지 표시
-                let discount = parseInt($(id).val());
-                if (discount < 1 || discount > 100) {
-                    $(`${id}-error`).text("1 ~ 100 까지의 숫자만 입력가능합니다.");
+                let regexDiscount = $(id).val().replace(/[^0-9]/g, '');
+                $(id).val(regexDiscount);
+                if ($(id).val() === "") {
+                    $(`${id}-error`).text("숫자만 입력 가능합니다.");
+                } else {
+                    let discount = parseInt($(id).val());
+                    if (discount < 1 || discount > 100) {
+                        $(`${id}-error`).text("1 ~ 100 까지의 숫자만 입력가능합니다.");
+                    }
                 }
             }
         }
@@ -35,6 +41,10 @@ function calculateTotal() {
     let price = $("#price").val();
     let discount = $("#discount").val();
     let totalPrice = price - (price * discount / 100);
+    console.log(totalPrice)
+    if (isNaN(totalPrice)) {
+       $("#totalPrice").val(0);
+    }
     $("#totalPrice").val(totalPrice.toFixed(0)); // 소수점 둘째 자리까지 표시
 }
 
@@ -75,6 +85,7 @@ $(() => {
 
         if (checkErrorAndShowModal("#productName")) return;
         if (checkErrorAndShowModal("#price")) return;
+        if (checkErrorAndShowModal("#discount")) return;
         if (checkErrorAndShowModal("#stock")) return;
         if (checkErrorAndShowModal("#description")) return;
 
