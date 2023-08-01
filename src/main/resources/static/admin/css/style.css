@@ -1,0 +1,2946 @@
+@charset "UTF-8";
+#admin_product_header .main-menu .item:nth-of-type(3) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_product {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  right: 0;
+  background-color: #e7e7e7;
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+}
+#admin_product .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#admin_product .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_product .inner .title h2 {
+  font: bold 25px/1 "Noto Sans";
+}
+#admin_product .inner .title button {
+  background-color: #234397;
+  border-radius: 50px;
+  padding: 7px 25px;
+  border: none;
+  cursor: pointer;
+}
+#admin_product .inner .title button a {
+  color: #fff;
+}
+#admin_product .inner .box01 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+#admin_product .inner .box01 ul {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+#admin_product .inner .box01 ul li {
+  font: normal 14px/1 "Noto Sans";
+  text-align: center;
+}
+#admin_product .inner .box01 ul li span {
+  font: bold 14px/1 "Noto Sans";
+}
+#admin_product .inner .box02 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#admin_product .inner .box02 .status,
+#admin_product .inner .box02 .sort,
+#admin_product .inner .box02 .search {
+  display: flex;
+  align-items: center;
+}
+#admin_product .inner .box02 .status span,
+#admin_product .inner .box02 .sort span,
+#admin_product .inner .box02 .search span {
+  margin-right: 20px;
+  font: bold 13px/2 "Noto Sans";
+  width: 100px;
+  height: 100%;
+  text-align: left;
+}
+#admin_product .inner .box02 .status .buttons,
+#admin_product .inner .box02 .sort .buttons,
+#admin_product .inner .box02 .search .buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_product .inner .box02 .status .buttons button,
+#admin_product .inner .box02 .sort .buttons button,
+#admin_product .inner .box02 .search .buttons button {
+  border-radius: 20px;
+  padding: 5px 30px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+#admin_product .inner .box02 .status .buttons button:first-child,
+#admin_product .inner .box02 .sort .buttons button:first-child,
+#admin_product .inner .box02 .search .buttons button:first-child {
+  background-color: #333;
+  color: #fff;
+}
+#admin_product .inner .box02 .status input,
+#admin_product .inner .box02 .sort input,
+#admin_product .inner .box02 .search input {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+#admin_product .inner .box03 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 13px/1 "Noto Sans";
+  margin-top: 40px;
+}
+#admin_product .inner .box03 .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#admin_product .inner .box03 .left .margin {
+  margin-right: 20px;
+}
+#admin_product .inner .box03 .left .margin .bold {
+  font: bold 13px/1 "Noto Sans";
+}
+#admin_product .inner .box03 .left button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_product .inner .box03 .left button:last-child {
+  margin-right: 0px;
+}
+#admin_product .inner .box03 .right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_product .inner .box03 .right select,
+#admin_product .inner .box03 .right button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_product .inner .box03 .right button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_product .inner .box04 {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+#admin_product .inner .box04 table {
+  width: 100%;
+}
+#admin_product .inner .box04 table thead {
+  background-color: #234397;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  font: bold 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_product .inner .box04 table tbody {
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  font: normal 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_product .inner .box04 table tbody tr td button {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+#admin_product .inner .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-top: 25px;
+}
+#admin_product .inner .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 12px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#admin_product .inner .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#admin_product .inner .pagination a span {
+  margin: 0 20px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+#admin_product .inner .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: #333;
+  font: 800 13px/1 "Nanum Gothic";
+}
+#admin_product .inner .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#dashboard_product_header .main-menu .item:nth-of-type(1) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#dashboard {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #e7e7e7;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+}
+#dashboard .inner {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px;
+  gap: 50px;
+}
+#dashboard .inner .txt__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#dashboard .inner .txt__box h3 {
+  font: bold 20px/1 "Noto Sans";
+}
+#dashboard .inner .txt__box .input__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+#dashboard .inner .txt__box .input__box button {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  padding: 7px 20px;
+  font: 400 13px/1 "Noto Sans";
+  cursor: pointer;
+}
+#dashboard .inner .txt__box .input__box button:first-child {
+  background-color: #fff;
+  color: #333;
+}
+#dashboard .inner .txt__box .input__box button:nth-of-type(2) {
+  margin-right: 12px;
+}
+#dashboard .inner .txt__box .input__box button:last-child {
+  padding: 7px 17px;
+}
+#dashboard .inner .txt__box .input__box input {
+  border-radius: 5px;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+#dashboard .inner .txt__box .input__box span {
+  font: 400 13px/1 "Noto Sans";
+}
+#dashboard .inner .chart-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #fff;
+  border-radius: 15px;
+}
+#dashboard .inner .chart-wrap .chart-inner {
+  width: 80%;
+  height: 500px;
+  margin: 0 auto;
+  padding: 50px;
+}
+#dashboard .inner .chart-wrap .chart__txt {
+  width: 20%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px 10px;
+}
+#dashboard .inner .chart-wrap .chart__txt div {
+  background-color: #000a25;
+  text-align: center;
+  margin: 0 auto;
+  width: 120px;
+  height: 80px;
+  font: 400 14px/50px "Noto Sans";
+  color: #fff;
+  border-radius: 5px;
+}
+#dashboard .inner .chart-wrap .chart__txt div p {
+  color: #fff;
+  font: 800 20px/1px "Noto Sans";
+}
+
+#admin_product_header .main-menu .item:nth-of-type(3) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_product02 {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+  background-color: #e7e7e7;
+}
+#admin_product02 .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px;
+}
+#admin_product02 .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_product02 .inner .title h2 {
+  font: bold 20px/1 "Noto Sans";
+}
+#admin_product02 .inner .admin_product02__wrap {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+#admin_product02 .inner .admin_product02__wrap label {
+  font: 500 14px/1 "Noto Sans";
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#admin_product02 .inner .admin_product02__wrap label p {
+  font: 500 14px/1 "Noto Sans";
+  width: 120px;
+}
+#admin_product02 .inner .admin_product02__wrap label p span {
+  color: red;
+  font-weight: bold;
+}
+#admin_product02 .inner .admin_product02__wrap label input,
+#admin_product02 .inner .admin_product02__wrap label select {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  height: 30px;
+  color: #a7a7a7;
+  font: 400 12px/1 "Noto Sans";
+  padding-left: 10px;
+}
+#admin_product02 .inner .admin_product02__wrap label select {
+  color: #333;
+}
+#admin_product02 .inner .admin_product02__wrap .productName input {
+  width: 300px;
+}
+#admin_product02 .inner .admin_product02__wrap .totalPrice input {
+  background-color: #a7a7a7;
+  color: #333;
+}
+#admin_product02 .inner .admin_product02__wrap .productPicture div {
+  background-color: #000a25;
+  border: none;
+  color: #fff;
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#admin_product02 .inner .admin_product02__wrap .productPicture input {
+  display: none;
+  margin-right: 20px;
+}
+#admin_product02 .inner .admin_product02__wrap .productPicture img {
+  margin-left: 20px;
+  cursor: pointer;
+}
+#admin_product02 .inner .admin_product02__wrap .description input {
+  width: 500px;
+  height: 300px;
+}
+#admin_product02 .inner .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#admin_product02 .inner .buttons button {
+  padding: 18px 80px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 50px;
+  background-color: #fff;
+  font: 600 14px/1 "Noto Sans";
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+#admin_product02 .inner .buttons button:first-child {
+  border: 1px solid #333;
+}
+#admin_product02 .inner .buttons button:last-child {
+  border: 1px solid #234397;
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_member_header .main-menu .item:nth-of-type(5) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_member {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  right: 0;
+  background-color: #e7e7e7;
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+}
+#admin_member .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#admin_member .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_member .inner .title h2 {
+  font: bold 25px/1 "Noto Sans";
+}
+#admin_member .inner .title button {
+  background-color: #234397;
+  border-radius: 50px;
+  padding: 7px 25px;
+  border: none;
+  cursor: pointer;
+}
+#admin_member .inner .title button a {
+  color: #fff;
+}
+#admin_member .inner .box01 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+#admin_member .inner .box01 ul {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+#admin_member .inner .box01 ul li {
+  font: normal 14px/1 "Noto Sans";
+  text-align: center;
+}
+#admin_member .inner .box01 ul li span {
+  font: bold 14px/1 "Noto Sans";
+}
+#admin_member .inner .box02 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#admin_member .inner .box02 .status,
+#admin_member .inner .box02 .search {
+  display: flex;
+  align-items: center;
+}
+#admin_member .inner .box02 .status span,
+#admin_member .inner .box02 .search span {
+  margin-right: 20px;
+  font: bold 13px/2 "Noto Sans";
+  width: 100px;
+  height: 100%;
+  text-align: left;
+}
+#admin_member .inner .box02 .status .buttons,
+#admin_member .inner .box02 .search .buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_member .inner .box02 .status .buttons button,
+#admin_member .inner .box02 .search .buttons button {
+  border-radius: 20px;
+  padding: 5px 30px;
+  border: 1px solid #333;
+  cursor: pointer;
+  background-color: #fff;
+}
+#admin_member .inner .box02 .status .buttons button:first-child,
+#admin_member .inner .box02 .search .buttons button:first-child {
+  background-color: #333;
+  color: #fff;
+}
+#admin_member .inner .box02 .status input,
+#admin_member .inner .box02 .search input {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+  font: 400 12px/1 "Noto Sans";
+  color: #a7a7a7;
+}
+#admin_member .inner .box02 .status select,
+#admin_member .inner .box02 .search select {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 5px 30px;
+  color: #333;
+  font: 400 12px/1 "Noto Sans";
+  padding-left: 15px;
+  margin-right: 10px;
+}
+#admin_member .inner .box03 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 13px/1 "Noto Sans";
+  margin-top: 40px;
+}
+#admin_member .inner .box03 .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#admin_member .inner .box03 .left .margin {
+  margin-right: 20px;
+}
+#admin_member .inner .box03 .left .margin .bold {
+  font: bold 13px/1 "Noto Sans";
+}
+#admin_member .inner .box03 .left button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_member .inner .box03 .left button:last-child {
+  margin-right: 0px;
+}
+#admin_member .inner .box03 .right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_member .inner .box03 .right select,
+#admin_member .inner .box03 .right button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_member .inner .box03 .right button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_member .inner .box04 {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+#admin_member .inner .box04 table {
+  width: 100%;
+}
+#admin_member .inner .box04 table thead {
+  background-color: #234397;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  font: bold 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_member .inner .box04 table tbody {
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  font: normal 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_member .inner .box04 table tbody tr td button {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+#admin_member .inner .box04 table tbody tr td a {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0066ff;
+}
+#admin_member .inner .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-top: 25px;
+}
+#admin_member .inner .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 12px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#admin_member .inner .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#admin_member .inner .pagination a span {
+  margin: 0 20px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+#admin_member .inner .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: #333;
+  font: 800 13px/1 "Nanum Gothic";
+}
+#admin_member .inner .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+#admin_member .admin__delivery {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_member .admin__delivery .admin__delivery__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_member .admin__delivery .admin__delivery__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_member .admin__delivery .admin__delivery__inner .middie {
+  background-color: #fff;
+  padding: 50px 80px;
+}
+#admin_member .admin__delivery .admin__delivery__inner .middie button {
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid #333;
+  text-align: center;
+  font: 400 14px/1 "Noto Sans";
+  background-color: #fff;
+  cursor: pointer;
+}
+#admin_member .admin__delivery .admin__delivery__inner .middie button:first-child {
+  background-color: #333;
+  color: #fff;
+}
+#admin_member .admin__delivery .admin__delivery__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  height: 450px;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -40px;
+}
+#admin_member .admin__delivery .admin__delivery__inner .bottom ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#admin_member .admin__delivery .admin__delivery__inner .bottom ul li {
+  border-bottom: 2px dashed #bbb;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding: 20px 0px;
+}
+#admin_member .admin__delivery .admin__delivery__inner .bottom ul li span {
+  font: 400 16px/1 "Noto Sans";
+  text-align: center;
+  display: inline-block;
+}
+#admin_member .admin__delivery .admin__delivery__inner .bottom ul li span:first-child {
+  font: 800 16px/1 "Noto Sans";
+  width: 80px;
+  text-align: left;
+}
+#admin_member .admin__delivery .admin__delivery__inner .admin__delivery__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+#admin_member .admin__delivery .admin__delivery__inner .admin__delivery__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#admin_member .admin__delivery .admin__delivery__inner .admin__delivery__buttons button a {
+  color: #fff;
+}
+#admin_member .admin__cancel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_member .admin__cancel .admin__cancel__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_member .admin__cancel .admin__cancel__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_member .admin__cancel .admin__cancel__inner .middle {
+  background-color: #fff;
+  padding: 50px 80px;
+}
+#admin_member .admin__cancel .admin__cancel__inner .middle p {
+  font: 800 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_member .admin__cancel .admin__cancel__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  margin-top: -40px;
+}
+#admin_member .admin__cancel .admin__cancel__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+#admin_member .admin__cancel .admin__cancel__inner .bottom button:first-child {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #252525;
+}
+#admin_member .admin__cancel__confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_member .admin__cancel__confirm .admin__cancel__confirm__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_member .admin__cancel__confirm .admin__cancel__confirm__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_member .admin__cancel__confirm .admin__cancel__confirm__inner .middle {
+  background-color: #fff;
+  padding: 50px 80px;
+}
+#admin_member .admin__cancel__confirm .admin__cancel__confirm__inner .middle p {
+  font: 800 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_member .admin__cancel__confirm .admin__cancel__confirm__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  margin-top: -40px;
+}
+#admin_member .admin__cancel__confirm .admin__cancel__confirm__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+#admin_member .admin__quantity {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_member .admin__quantity .admin__quantity__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_member .admin__quantity .admin__quantity__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 16px/60px "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle01 {
+  background-color: #fff;
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle01 span {
+  font: 800 16px/1 "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle01 span:last-child {
+  font: 400 16px/1 "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 {
+  background-color: #fff;
+  padding: 20px 40px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .bottom__txt {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 15px;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .bottom__txt span {
+  font: 800 14px/1 "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 ul li {
+  border: 1px solid #333;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 ul li .li_txt {
+  display: flex;
+  flex-direction: column;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 ul li .li_txt span {
+  font: 800 14px/2 "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 ul li .li_txt span:last-child {
+  color: #234397;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 ul li span {
+  font: 400 14px/2 "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 12px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .pagination a span {
+  margin: 0 20px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: #333;
+  font: 800 13px/1 "Nanum Gothic";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .bottom {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px 50px;
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .bottom span {
+  font: 800 14px/2 "Noto Sans";
+}
+#admin_member .admin__quantity .admin__quantity__inner .middle02 .bottom span:last-child {
+  color: #234397;
+}
+#admin_member .admin__quantity .admin__quantity__inner .admin__quantity__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0px;
+}
+#admin_member .admin__quantity .admin__quantity__inner .admin__quantity__buttons button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 15px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#admin_member .admin__quantity .admin__quantity__inner .admin__quantity__buttons button a {
+  color: #fff;
+}
+
+#admin_review_header .main-menu .item:nth-of-type(4) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_review {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  right: 0;
+  background-color: #e7e7e7;
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+}
+#admin_review .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#admin_review .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_review .inner .title h2 {
+  font: bold 25px/1 "Noto Sans";
+}
+#admin_review .inner .title button {
+  background-color: #234397;
+  border-radius: 50px;
+  padding: 7px 25px;
+  border: none;
+  cursor: pointer;
+}
+#admin_review .inner .title button a {
+  color: #fff;
+}
+#admin_review .inner .box01 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+#admin_review .inner .box01 ul {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+#admin_review .inner .box01 ul li {
+  font: normal 14px/1 "Noto Sans";
+  text-align: center;
+}
+#admin_review .inner .box01 ul li span {
+  font: bold 14px/1 "Noto Sans";
+}
+#admin_review .inner .box02 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#admin_review .inner .box02 .status,
+#admin_review .inner .box02 .sort,
+#admin_review .inner .box02 .search {
+  display: flex;
+  align-items: center;
+}
+#admin_review .inner .box02 .status span,
+#admin_review .inner .box02 .sort span,
+#admin_review .inner .box02 .search span {
+  margin-right: 20px;
+  font: bold 13px/2 "Noto Sans";
+  width: 100px;
+  height: 100%;
+  text-align: left;
+}
+#admin_review .inner .box02 .status .buttons,
+#admin_review .inner .box02 .sort .buttons,
+#admin_review .inner .box02 .search .buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_review .inner .box02 .status .buttons button,
+#admin_review .inner .box02 .sort .buttons button,
+#admin_review .inner .box02 .search .buttons button {
+  border-radius: 20px;
+  padding: 5px 20px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+#admin_review .inner .box02 .status .buttons button:nth-of-type(3),
+#admin_review .inner .box02 .sort .buttons button:nth-of-type(3),
+#admin_review .inner .box02 .search .buttons button:nth-of-type(3) {
+  background-color: #333;
+  color: #fff;
+}
+#admin_review .inner .box02 .status input,
+#admin_review .inner .box02 .sort input,
+#admin_review .inner .box02 .search input {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+#admin_review .inner .box02 .status .buttons button {
+  background-color: #fff;
+}
+#admin_review .inner .box02 .sort .buttons button {
+  border: none;
+}
+#admin_review .inner .box02 .sort input {
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  border: none;
+  margin-left: 10px;
+}
+#admin_review .inner .box02 .search select {
+  border-radius: 20px;
+  padding: 5px 20px;
+  margin-right: 10px;
+}
+#admin_review .inner .box02 .search .buttons button {
+  background-color: #333;
+  color: #fff;
+}
+#admin_review .inner .box03 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 13px/1 "Noto Sans";
+  margin-top: 40px;
+}
+#admin_review .inner .box03 .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#admin_review .inner .box03 .left .margin {
+  margin-right: 20px;
+}
+#admin_review .inner .box03 .left .margin .bold {
+  font: bold 13px/1 "Noto Sans";
+}
+#admin_review .inner .box03 .left button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_review .inner .box03 .left button:last-child {
+  margin-right: 0px;
+}
+#admin_review .inner .box03 .left button:hover {
+  border: 1px solid #333;
+}
+#admin_review .inner .box03 .right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_review .inner .box03 .right select,
+#admin_review .inner .box03 .right button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_review .inner .box03 .right button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_review .inner .box04 {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+#admin_review .inner .box04 table {
+  width: 100%;
+}
+#admin_review .inner .box04 table thead {
+  background-color: #234397;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  font: bold 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_review .inner .box04 table tbody {
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  font: normal 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_review .inner .box04 table tbody tr td button {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font: normal 11px/1 "Noto Sans";
+}
+#admin_review .inner .box04 table tbody tr td .answer {
+  background-color: #234397;
+  color: #fff;
+  border: 1px solid #234397;
+}
+#admin_review .inner .box04 table tbody tr td a {
+  text-decoration: underline;
+  color: #0047ff;
+}
+#admin_review .inner .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-top: 25px;
+}
+#admin_review .inner .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 12px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#admin_review .inner .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#admin_review .inner .pagination a span {
+  margin: 0 20px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+#admin_review .inner .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: #333;
+  font: 800 13px/1 "Nanum Gothic";
+}
+#admin_review .inner .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+#admin_review .inner .admin__review {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_review .inner .admin__review .admin__review__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_review .inner .admin__review .admin__review__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_review .inner .admin__review .admin__review__inner .middle {
+  background-color: #fff;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#admin_review .inner .admin__review .admin__review__inner .middle p {
+  font: 800 16px/1 "Noto Sans";
+}
+#admin_review .inner .admin__review .admin__review__inner .middle input {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  border: 1px solid #333;
+}
+#admin_review .inner .admin__review .admin__review__inner .middle .line {
+  width: 100%;
+  height: 1px;
+  border: 1px dashed #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#admin_review .inner .admin__review .admin__review__inner .middle span {
+  font: 400 14px/1 "Noto Sans";
+}
+#admin_review .inner .admin__review .admin__review__inner .bottom {
+  background-color: #fff;
+  padding: 0px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+#admin_review .inner .admin__review .admin__review__inner .bottom p {
+  font: 800 16px/1 "Noto Sans";
+}
+#admin_review .inner .admin__review .admin__review__inner .bottom input {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #333;
+  position: relative;
+}
+#admin_review .inner .admin__review .admin__review__inner .bottom span {
+  position: relative;
+  color: #c8c8c8;
+  left: 420px;
+  bottom: 65px;
+  font: 400 14px/1 "Noto Sans";
+}
+#admin_review .inner .admin__review .admin__review__inner .admin__review__buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: -30px;
+}
+#admin_review .inner .admin__review .admin__review__inner .admin__review__buttons button {
+  border: 1px solid #252525;
+  cursor: pointer;
+  font: 600 14px/1 "Noto Sans";
+  padding: 13px 25px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+}
+#admin_review .inner .admin__review .admin__review__inner .admin__review__buttons button a {
+  color: #fff;
+}
+#admin_review .inner .admin__review__cancel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner .middle {
+  background-color: #fff;
+  padding: 50px 80px;
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner .middle p {
+  font: 800 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  margin-top: -40px;
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+#admin_review .inner .admin__review__cancel .admin__review__cancel__inner .bottom button:first-child {
+  background-color: #fff;
+  border: 1px solid #333;
+  color: #333;
+}
+#admin_review .inner .admin__review__confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_review .inner .admin__review__confirm .admin__review__confirm__inner {
+  width: 600px;
+  background-color: #fff;
+}
+#admin_review .inner .admin__review__confirm .admin__review__confirm__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_review .inner .admin__review__confirm .admin__review__confirm__inner .middle {
+  background-color: #fff;
+  padding: 50px 80px;
+}
+#admin_review .inner .admin__review__confirm .admin__review__confirm__inner .middle p {
+  font: 800 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_review .inner .admin__review__confirm .admin__review__confirm__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  margin-top: -40px;
+}
+#admin_review .inner .admin__review__confirm .admin__review__confirm__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+#admin_banner_header .main-menu .item:nth-of-type(2) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_banner {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  right: 0;
+  background-color: #e7e7e7;
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+}
+#admin_banner .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#admin_banner .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_banner .inner .title h2 {
+  font: bold 25px/1 "Noto Sans";
+}
+#admin_banner .inner .title button {
+  background-color: #234397;
+  border-radius: 50px;
+  padding: 7px 25px;
+  border: none;
+  cursor: pointer;
+}
+#admin_banner .inner .title button a {
+  color: #fff;
+}
+#admin_banner .inner .box01 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+#admin_banner .inner .box01 ul {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+#admin_banner .inner .box01 ul li {
+  font: normal 14px/1 "Noto Sans";
+  text-align: center;
+}
+#admin_banner .inner .box01 ul li span {
+  font: bold 14px/1 "Noto Sans";
+}
+#admin_banner .inner .box02 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#admin_banner .inner .box02 .status,
+#admin_banner .inner .box02 .search {
+  display: flex;
+  align-items: center;
+}
+#admin_banner .inner .box02 .status span,
+#admin_banner .inner .box02 .search span {
+  margin-right: 20px;
+  font: bold 13px/2 "Noto Sans";
+  width: 100px;
+  height: 100%;
+  text-align: left;
+}
+#admin_banner .inner .box02 .status .buttons,
+#admin_banner .inner .box02 .search .buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_banner .inner .box02 .status .buttons button,
+#admin_banner .inner .box02 .search .buttons button {
+  border-radius: 20px;
+  padding: 5px 30px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+#admin_banner .inner .box02 .status .buttons button:first-child,
+#admin_banner .inner .box02 .search .buttons button:first-child {
+  background-color: #333;
+  color: #fff;
+}
+#admin_banner .inner .box02 .status input,
+#admin_banner .inner .box02 .search input {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+  font: 400 12px/1 "Noto Sans";
+}
+#admin_banner .inner .box03 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 13px/1 "Noto Sans";
+  margin-top: 40px;
+}
+#admin_banner .inner .box03 .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#admin_banner .inner .box03 .left .margin {
+  margin-right: 20px;
+}
+#admin_banner .inner .box03 .left .margin .bold {
+  font: bold 13px/1 "Noto Sans";
+}
+#admin_banner .inner .box03 .left button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_banner .inner .box03 .left button:last-child {
+  margin-right: 0px;
+}
+#admin_banner .inner .box03 .left button:hover {
+  border: 1px solid #333;
+}
+#admin_banner .inner .box03 .right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_banner .inner .box03 .right select,
+#admin_banner .inner .box03 .right button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_banner .inner .box03 .right button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_banner .inner .box04 {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+#admin_banner .inner .box04 table {
+  width: 100%;
+}
+#admin_banner .inner .box04 table thead {
+  background-color: #234397;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  font: bold 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_banner .inner .box04 table tbody {
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  font: normal 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_banner .inner .box04 table tbody tr td button {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+#admin_banner .inner .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-top: 25px;
+}
+#admin_banner .inner .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 12px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#admin_banner .inner .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#admin_banner .inner .pagination a span {
+  margin: 0 20px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+#admin_banner .inner .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: #333;
+  font: 800 13px/1 "Nanum Gothic";
+}
+#admin_banner .inner .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+#admin_banner .inner .admin__banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_banner .inner .admin__banner .admin__banner__inner {
+  width: 600px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#admin_banner .inner .admin__banner .admin__banner__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_banner .inner .admin__banner .admin__banner__inner .middle {
+  background-color: #fff;
+  padding: 50px 0px 0px;
+}
+#admin_banner .inner .admin__banner .admin__banner__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+#admin_banner .inner .admin__banner .admin__banner__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+#admin_banner_header .main-menu .item:nth-of-type(2) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_bannerEdit {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+  background-color: #e7e7e7;
+}
+#admin_bannerEdit .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px;
+}
+#admin_bannerEdit .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_bannerEdit .inner .title h2 {
+  font: bold 20px/1 "Noto Sans";
+}
+#admin_bannerEdit .inner .admin_product02__wrap {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+#admin_bannerEdit .inner .admin_product02__wrap label {
+  font: 500 14px/1 "Noto Sans";
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#admin_bannerEdit .inner .admin_product02__wrap label p {
+  font: 500 14px/1 "Noto Sans";
+  width: 120px;
+}
+#admin_bannerEdit .inner .admin_product02__wrap label p span {
+  color: red;
+  font-weight: bold;
+}
+#admin_bannerEdit .inner .admin_product02__wrap label input,
+#admin_bannerEdit .inner .admin_product02__wrap label select {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  height: 30px;
+  color: #a7a7a7;
+  font: 400 12px/1 "Noto Sans";
+  padding-left: 10px;
+  color: #333;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .bannerName input {
+  width: 435px;
+  color: #a7a7a7;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .date button {
+  border-radius: 20px;
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 5px 20px;
+  text-align: center;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .howlong input {
+  background-color: #a7a7a7;
+  text-align: center;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .time select {
+  text-align: center;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .bannerPicture div {
+  background-color: #000a25;
+  border: none;
+  color: #fff;
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .bannerPicture input {
+  display: none;
+  margin-right: 20px;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .bannerPicture img {
+  margin-left: 20px;
+  cursor: pointer;
+  width: 400px;
+}
+#admin_bannerEdit .inner .admin_product02__wrap .bannerPicture button {
+  color: #fff;
+  background-color: #000a25;
+  font: 400 12px/1 "Noto Sans";
+  padding: 3px 5px;
+  position: relative;
+  top: -45px;
+  right: 85px;
+  cursor: pointer;
+}
+#admin_bannerEdit .inner .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#admin_bannerEdit .inner .buttons button {
+  padding: 18px 80px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 50px;
+  background-color: #fff;
+  font: 600 14px/1 "Noto Sans";
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+#admin_bannerEdit .inner .buttons button:first-child {
+  border: 1px solid #333;
+}
+#admin_bannerEdit .inner .buttons button:last-child {
+  border: 1px solid #234397;
+  background-color: #234397;
+  color: #fff;
+}
+#admin_bannerEdit .inner .admin__banner__edit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_bannerEdit .inner .admin__banner__edit .admin__banner__edit__inner {
+  width: 600px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#admin_bannerEdit .inner .admin__banner__edit .admin__banner__edit__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_bannerEdit .inner .admin__banner__edit .admin__banner__edit__inner .middle {
+  background-color: #fff;
+  padding: 50px 0px 0px;
+}
+#admin_bannerEdit .inner .admin__banner__edit .admin__banner__edit__inner .middle p {
+  font: 400 18px/1 "Noto Sans";
+}
+#admin_bannerEdit .inner .admin__banner__edit .admin__banner__edit__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+#admin_bannerEdit .inner .admin__banner__edit .admin__banner__edit__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+#admin_banner_header .main-menu .item:nth-of-type(2) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_banner02 {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+  background-color: #e7e7e7;
+}
+#admin_banner02 .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px;
+}
+#admin_banner02 .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_banner02 .inner .title h2 {
+  font: bold 20px/1 "Noto Sans";
+}
+#admin_banner02 .inner .admin_product02__wrap {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+#admin_banner02 .inner .admin_product02__wrap label {
+  font: 500 14px/1 "Noto Sans";
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#admin_banner02 .inner .admin_product02__wrap label p {
+  font: 500 14px/1 "Noto Sans";
+  width: 120px;
+}
+#admin_banner02 .inner .admin_product02__wrap label p span {
+  color: red;
+  font-weight: bold;
+}
+#admin_banner02 .inner .admin_product02__wrap label input,
+#admin_banner02 .inner .admin_product02__wrap label select {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  height: 30px;
+  color: #a7a7a7;
+  font: 400 12px/1 "Noto Sans";
+  padding-left: 10px;
+  color: #333;
+}
+#admin_banner02 .inner .admin_product02__wrap .bannerName input {
+  width: 435px;
+  color: #a7a7a7;
+}
+#admin_banner02 .inner .admin_product02__wrap .date button {
+  border-radius: 20px;
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 5px 20px;
+  text-align: center;
+}
+#admin_banner02 .inner .admin_product02__wrap .howlong input {
+  background-color: #a7a7a7;
+  text-align: center;
+}
+#admin_banner02 .inner .admin_product02__wrap .time select {
+  text-align: center;
+}
+#admin_banner02 .inner .admin_product02__wrap .bannerPicture div {
+  background-color: #000a25;
+  border: none;
+  color: #fff;
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#admin_banner02 .inner .admin_product02__wrap .bannerPicture input {
+  display: none;
+  margin-right: 20px;
+}
+#admin_banner02 .inner .admin_product02__wrap .bannerPicture img {
+  margin-left: 20px;
+  cursor: pointer;
+  width: 400px;
+}
+#admin_banner02 .inner .admin_product02__wrap .bannerPicture button {
+  color: #fff;
+  background-color: #000a25;
+  font: 400 12px/1 "Noto Sans";
+  padding: 3px 5px;
+  position: relative;
+  top: -45px;
+  right: 85px;
+  cursor: pointer;
+}
+#admin_banner02 .inner .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#admin_banner02 .inner .buttons button {
+  padding: 18px 80px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 50px;
+  background-color: #fff;
+  font: 600 14px/1 "Noto Sans";
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+#admin_banner02 .inner .buttons button:first-child {
+  border: 1px solid #333;
+}
+#admin_banner02 .inner .buttons button:last-child {
+  border: 1px solid #234397;
+  background-color: #234397;
+  color: #fff;
+}
+#admin_banner02 .inner .admin__banner02 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner {
+  width: 600px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner .middle {
+  background-color: #fff;
+  padding: 50px 0px 0px;
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner .middle p {
+  font: 400 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: #fff;
+}
+#admin_banner02 .inner .admin__banner02 .admin__banner02__inner .bottom button:first-child {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+}
+#admin_banner02 .inner .admin__banner02__confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_banner02 .inner .admin__banner02__confirm .admin__banner02__confirm__inner {
+  width: 600px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#admin_banner02 .inner .admin__banner02__confirm .admin__banner02__confirm__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_banner02 .inner .admin__banner02__confirm .admin__banner02__confirm__inner .middle {
+  background-color: #fff;
+  padding: 50px 0px 0px;
+}
+#admin_banner02 .inner .admin__banner02__confirm .admin__banner02__confirm__inner .middle p {
+  font: 400 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_banner02 .inner .admin__banner02__confirm .admin__banner02__confirm__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+#admin_banner02 .inner .admin__banner02__confirm .admin__banner02__confirm__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: #fff;
+}
+
+#admin_notification_header .main-menu .item:nth-of-type(6) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_notification {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  right: 0;
+  background-color: #e7e7e7;
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+}
+#admin_notification .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#admin_notification .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_notification .inner .title h2 {
+  font: bold 25px/1 "Noto Sans";
+}
+#admin_notification .inner .title button {
+  background-color: #234397;
+  border-radius: 50px;
+  padding: 7px 25px;
+  border: none;
+  cursor: pointer;
+}
+#admin_notification .inner .title button a {
+  color: #fff;
+}
+#admin_notification .inner .box01 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+#admin_notification .inner .box01 ul {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+#admin_notification .inner .box01 ul li {
+  font: normal 14px/1 "Noto Sans";
+  text-align: center;
+}
+#admin_notification .inner .box01 ul li span {
+  font: bold 14px/1 "Noto Sans";
+}
+#admin_notification .inner .box02 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#admin_notification .inner .box02 .status,
+#admin_notification .inner .box02 .sort,
+#admin_notification .inner .box02 .search {
+  display: flex;
+  align-items: center;
+}
+#admin_notification .inner .box02 .status span,
+#admin_notification .inner .box02 .sort span,
+#admin_notification .inner .box02 .search span {
+  margin-right: 20px;
+  font: bold 13px/2 "Noto Sans";
+  width: 100px;
+  height: 100%;
+  text-align: left;
+}
+#admin_notification .inner .box02 .status .buttons,
+#admin_notification .inner .box02 .sort .buttons,
+#admin_notification .inner .box02 .search .buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_notification .inner .box02 .status .buttons button,
+#admin_notification .inner .box02 .sort .buttons button,
+#admin_notification .inner .box02 .search .buttons button {
+  border-radius: 20px;
+  padding: 5px 30px;
+  border: 1px solid #333;
+  cursor: pointer;
+  background-color: #fff;
+}
+#admin_notification .inner .box02 .status .buttons button:first-child,
+#admin_notification .inner .box02 .sort .buttons button:first-child,
+#admin_notification .inner .box02 .search .buttons button:first-child {
+  background-color: #333;
+  color: #fff;
+}
+#admin_notification .inner .box02 .status input,
+#admin_notification .inner .box02 .sort input,
+#admin_notification .inner .box02 .search input {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+#admin_notification .inner .box03 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 13px/1 "Noto Sans";
+  margin-top: 40px;
+}
+#admin_notification .inner .box03 .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#admin_notification .inner .box03 .left .margin {
+  margin-right: 20px;
+}
+#admin_notification .inner .box03 .left .margin .bold {
+  font: bold 13px/1 "Noto Sans";
+}
+#admin_notification .inner .box03 .left button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_notification .inner .box03 .left button:last-child {
+  margin-right: 0px;
+}
+#admin_notification .inner .box03 .left button:hover {
+  border: 1px solid #333;
+}
+#admin_notification .inner .box03 .right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#admin_notification .inner .box03 .right select,
+#admin_notification .inner .box03 .right button {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 15px;
+}
+#admin_notification .inner .box03 .right button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_notification .inner .box04 {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+#admin_notification .inner .box04 table {
+  width: 100%;
+}
+#admin_notification .inner .box04 table thead {
+  background-color: #234397;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  font: bold 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_notification .inner .box04 table tbody {
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  font: normal 13px/40px "Noto Sans";
+  text-align: center;
+}
+#admin_notification .inner .box04 table tbody tr td button {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+#admin_notification .inner .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-top: 25px;
+}
+#admin_notification .inner .pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 12px/1 "Nanum Gothic";
+  color: #333;
+  transition: 0.3s;
+  padding: 5px;
+}
+#admin_notification .inner .pagination a:hover {
+  color: #111;
+  font-weight: bold;
+}
+#admin_notification .inner .pagination a span {
+  margin: 0 20px;
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+#admin_notification .inner .pagination a .bold {
+  margin: 0px;
+  background-color: transparent;
+  border-radius: none;
+  color: #333;
+  font: 800 13px/1 "Nanum Gothic";
+}
+#admin_notification .inner .pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#admin_product_header .main-menu .item:nth-of-type(3) {
+  background-color: #234397;
+  color: #fff;
+}
+
+#admin_nofitication02 {
+  width: 85%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0; /* 화면 하단까지 영역을 확장 */
+  overflow-y: auto; /* 스크롤이 내용을 넘어갈 경우 스크롤 생성 */
+  background-color: #e7e7e7;
+}
+#admin_nofitication02 .inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px;
+}
+#admin_nofitication02 .inner .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#admin_nofitication02 .inner .title h2 {
+  font: bold 20px/1 "Noto Sans";
+}
+#admin_nofitication02 .inner .admin_product02__wrap {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+#admin_nofitication02 .inner .admin_product02__wrap label {
+  font: 500 14px/1 "Noto Sans";
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin_product02__wrap label p {
+  font: 500 14px/1 "Noto Sans";
+  width: 120px;
+}
+#admin_nofitication02 .inner .admin_product02__wrap label p span {
+  color: red;
+  font-weight: bold;
+}
+#admin_nofitication02 .inner .admin_product02__wrap label input,
+#admin_nofitication02 .inner .admin_product02__wrap label select {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+  height: 30px;
+  color: #a7a7a7;
+  font: 400 12px/1 "Noto Sans";
+  padding-left: 10px;
+}
+#admin_nofitication02 .inner .admin_product02__wrap label select {
+  color: #333;
+}
+#admin_nofitication02 .inner .admin_product02__wrap .notificationName input {
+  width: 500px;
+}
+#admin_nofitication02 .inner .admin_product02__wrap .sort button {
+  color: #fff;
+  background-color: #000A25;
+  border: 1px solid #333;
+  padding: 5px 30px;
+  border-radius: 5px;
+}
+#admin_nofitication02 .inner .admin_product02__wrap .sort button:last-child {
+  background-color: #fff;
+  color: #333;
+}
+#admin_nofitication02 .inner .admin_product02__wrap .search select {
+  width: 150px;
+}
+#admin_nofitication02 .inner .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#admin_nofitication02 .inner .buttons button {
+  padding: 18px 80px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 50px;
+  background-color: #fff;
+  font: 600 14px/1 "Noto Sans";
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+#admin_nofitication02 .inner .buttons button:first-child {
+  border: 1px solid #333;
+}
+#admin_nofitication02 .inner .buttons button:last-child {
+  border: 1px solid #234397;
+  background-color: #234397;
+  color: #fff;
+}
+#admin_nofitication02 .inner .admin__notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner {
+  width: 600px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner .middle {
+  background-color: #fff;
+  padding: 50px 0px 0px;
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner .middle p {
+  font: 400 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: #fff;
+}
+#admin_nofitication02 .inner .admin__notification .admin__notification__inner .bottom button:first-child {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+}
+#admin_nofitication02 .inner .admin__notification__confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) fixed;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin__notification__confirm .admin__notification__confirm__inner {
+  width: 600px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin__notification__confirm .admin__notification__confirm__inner .top {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  font: 800 18px/60px "Noto Sans";
+}
+#admin_nofitication02 .inner .admin__notification__confirm .admin__notification__confirm__inner .middle {
+  background-color: #fff;
+  padding: 50px 0px 0px;
+}
+#admin_nofitication02 .inner .admin__notification__confirm .admin__notification__confirm__inner .middle p {
+  font: 400 18px/2 "Noto Sans";
+  text-align: center;
+}
+#admin_nofitication02 .inner .admin__notification__confirm .admin__notification__confirm__inner .bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+#admin_nofitication02 .inner .admin__notification__confirm .admin__notification__confirm__inner .bottom button {
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  font: 600 16px/1 "Noto Sans";
+  padding: 13px 30px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: #fff;
+}
+
+:root {
+  --primary-color: #234397;
+  --border-radius: 15px;
+  --admin-main-color: #000a25;
+}
+
+/*COMMON*/
+body {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+/*INNER*/
+.inner {
+  width: 1180px;
+  margin: 0 auto;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+header {
+  width: 15%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--admin-main-color);
+  z-index: 1;
+}
+header .inner {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+header .inner .logo {
+  margin-top: 50px;
+}
+header .inner .logo img {
+  height: 70px;
+}
+header .inner .main-menu {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  width: 100%;
+}
+header .inner .main-menu .item {
+  color: #111;
+  width: 100%;
+  text-align: center;
+}
+header .inner .main-menu .item .item__name {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font: normal 14px/1 "Noto Sans";
+  padding: 25px 20px;
+}
+header .inner .main-menu .item .item__name a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+header .inner .main-menu .item:hover .item__name {
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#admin {
+  width: 85%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #e7e7e7;
+}
+#admin .inner {
+  width: 1180px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin .inner .login {
+  width: 450px;
+  height: 550px;
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+#admin .inner .login .login__title {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#admin .inner .login .login__title h1 {
+  font: bold 25px/1.5 "Nanum Gothic";
+  text-align: center;
+}
+#admin .inner .login .login__input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#admin .inner .login .login__input label input {
+  width: 370px;
+  padding: 10px;
+  font: normal 12px/1 "Nanum Gothic";
+  color: #bbb;
+  border-radius: 5px;
+  border: none;
+  background: #e7e7e7;
+}
+#admin .inner .login .login__input label p {
+  font: bold 14px/1 "Nanum Gothic";
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+#admin .inner .login .login__input .input__pw {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+#admin .inner .login .login__input .input__pw .wrong__pw {
+  color: red;
+  font: normal 11px/1 "Nanum Gothic";
+  margin-top: 7px;
+}
+#admin .inner .login .login__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#admin .inner .login .login__button .login__button__inner {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#admin .inner .login .login__button .login__button__inner button {
+  width: 370px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font: 400 13px/1.3 "Noto Sans";
+  letter-spacing: 0.7px;
+  cursor: pointer;
+}
+#admin .inner .login .login__txt {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: normal 13px/1 "Nanum Gothic";
+  width: 400px;
+  padding: 0px 10px;
+  margin-bottom: 70px;
+  margin-top: 10px;
+}
+#admin .inner .login .login__txt .stay__login {
+  display: flex;
+  align-items: center;
+}
+#admin .inner .login .login__txt .stay__login label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+#admin .inner .login .login__txt .stay__login label input[type=checkbox] {
+  appearance: none;
+  position: relative;
+  border: max(2px, 0.1em) solid var(--primary-color);
+  border-radius: 1.25em;
+  width: 2.25em;
+  height: 1.25em;
+}
+#admin .inner .login .login__txt .stay__login label input[type=checkbox]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0.8);
+  background-color: var(--primary-color);
+  transition: left 250ms linear;
+}
+#admin .inner .login .login__txt .stay__login label input[type=checkbox]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+#admin .inner .login .login__txt .stay__login label input[type=checkbox]:checked::before {
+  background-color: white;
+  left: 1em;
+}
+
+/*# sourceMappingURL=style.css.map */
