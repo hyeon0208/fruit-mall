@@ -10,7 +10,6 @@ function showLoginErrorModal(errorMessage, inputElement) {
 
 $(document).ready(() => {
     $("#id").on("focusout", function() {
-        console.log($(this).val());
         axios({
             method: "post",
             url: "/user/check-login",
@@ -18,7 +17,6 @@ $(document).ready(() => {
             dataType: "String", // 응답 데이터 타입
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(res => {
-            console.log(res.data)
             $("#id-error").text(res.data);
         })
     });
