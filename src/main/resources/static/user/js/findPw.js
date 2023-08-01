@@ -11,7 +11,7 @@ $(document).on('click', '#findPwBtn', () => {
 
             $('.txt04 a').click(function() {
                 $('.txt04').hide(); // 확인 버튼 클릭 시 모달 닫힘
-                window.location.href = "/changePw";
+                window.location.href = "/changePw?user_email=" + encodeURIComponent($("#user_email").val());
             });
 
         } else if (res.data === "not_found") {
