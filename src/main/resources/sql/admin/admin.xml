@@ -7,4 +7,6 @@
         SELECT * FROM admin WHERE id = #{id}
     </select>
 
+
+
 </mapper>
