@@ -1,9 +1,13 @@
 package com.fruit.mall.admin;
 
+import com.fruit.mall.admin.product.Product;
 import com.google.api.Http;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.users.SparseUserDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +17,7 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminLoginController {
-
     private final AdminService adminService;
-
     private final static String LOGIN_USER = "authentic";
 
     @GetMapping("/{pageName}")
