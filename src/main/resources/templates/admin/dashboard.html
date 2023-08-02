@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+
+<section id="dashboard">
+    <div class="inner">
+        <div class="txt__box">
+            <h3>회원통계</h3>
+
+            <div class="input__box">
+                <button>지난주</button>
+                <button>이번주</button>
+
+                <input type="date" value="2023-07-01">
+                <span>~</span>
+                <input type="date" value="2023-07-07">
+
+                <button>검색</button>
+            </div>
+        </div>
+
+        <div class="chart-wrap">
+
+            <div class="chart-inner">
+                <canvas id="myChart"></canvas>
+            </div>
+
+            <div class="chart__txt">
+                <div>
+                    전체회원
+                    <p>567</p>
+                </div>
+
+                <div>
+                    일 방문자
+                    <p>867</p>
+                </div>
+
+                <div>
+                    일 회원가입자
+                    <p>112</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="chart-wrap">
+
+            <div class="chart-inner">
+                <canvas id="myChart2"></canvas>
+            </div>
+
+            <div class="chart__txt">
+                <div>
+                    전체회원
+                    <p>567</p>
+                </div>
+
+                <div>
+                    일 방문자
+                    <p>867</p>
+                </div>
+
+                <div>
+                    일 회원가입자
+                    <p>112</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</th:block>
+</html>
