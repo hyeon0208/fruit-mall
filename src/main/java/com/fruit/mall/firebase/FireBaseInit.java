@@ -19,10 +19,12 @@ public class FireBaseInit {
     @PostConstruct
     public void init() {
         try {
+            // ApiKey를 읽어 인증정보 불러오기
             FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(
                     GoogleCredentials.fromStream(
                             new ClassPathResource(firebaseApiKey).getInputStream())).build();
 
+            // FireBaseApp이 초기화 되었는지 확인 (중복 초기화 방지)
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
             }
