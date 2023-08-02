@@ -17,8 +17,9 @@
 
                 <label for="sort">
                     <p> <span>*</span> 분류</p>
-                    <select name="sort">
+                    <select id="sort" name="sort">
                         <p>분류</p>
+                        <option value="">선택</option>
                         <option value="봄과일">봄과일</option>
                         <option value="여름과일">여름과일</option>
                         <option value="가을과일">가을과일</option>
@@ -50,7 +51,7 @@
                 <label for="stock">
                     <p> <span>*</span> 재고수량 </p>
                     <input type="textbox" name="stock" placeholder="0" id="stock">
-                    원
+                    개
                     <div class="error-message" id="stock-error"></div>
                 </label>
 
@@ -58,7 +59,7 @@
                     <p> <span>*</span> 상품이미지 </p>
                     <div>+ 추가</div>
                     <input type="file" name="productPicture" id="productPicture" accept="image/*">
-                    <img src="./img/이미지위치.png" alt="미리보기 이미지">
+                    <img id="previewImage" alt="미리보기 이미지">
                 </label>
                 <div class="error-message" id="image-error"></div>
 
