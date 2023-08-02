@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fruit.mall.admin.image.Image">
+    <insert id="insertImage" parameterType="com.fruit.mall.admin.image.Image" useGeneratedKeys="true" keyProperty="imageId">
+    INSERT INTO image (
+                       PRODUCT_ID,
+                       IMAGE_URL,
+                       IMAGE_PATH,
+                       IMAGE_FILENAME
+                       )
+                VALUES (
+                        #{productId},
+                        #{imageUrl},
+                        #{imagePath},
+                        #{imageFilename}
+                        )
+    </insert>
+</mapper>
