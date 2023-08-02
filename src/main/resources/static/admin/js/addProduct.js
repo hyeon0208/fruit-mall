@@ -5,32 +5,18 @@ function showModal() {
 function showErrorMessage(id) {
     $(id).on("focusout", () => {
         if ($(id).val().trim() === "") {
+
             $(`${id}-error`).text("필수 입력 값을 입력해주세요.");
         } else {
             $(`${id}-error`).text("");
 
             if (id === "#price") {
-                // 가격 필드에 특정 조건을 추가하여 에러 메시지 표시
                 let price = $(id).val().replace(/[^0-9]/g, '');
                 let formattedPrice = price.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $(id).val(formattedPrice);
 
                 if ($(id).val() === "") {
-                    // 숫자가 아닌 값이 입력되었을 때 에러 메시지 표시
                     $(`${id}-error`).text("숫자만 입력 가능합니다.");
-                }
-            }
-            if (id === "#discount") {
-                // 할인 필드에 특정 조건을 추가하여 에러 메시지 표시
-                let regexDiscount = $(id).val().replace(/[^0-9]/g, '');
-                $(id).val(regexDiscount);
-                if ($(id).val() === "") {
-                    $(`${id}-error`).text("숫자만 입력 가능합니다.");
-                } else {
-                    let discount = parseInt($(id).val());
-                    if (discount < 1 || discount > 100) {
-                        $(`${id}-error`).text("1 ~ 100 까지의 숫자만 입력가능합니다.");
-                    }
                 }
             }
         }
@@ -38,14 +24,15 @@ function showErrorMessage(id) {
 }
 
 function calculateTotal() {
-    let price = $("#price").val();
-    let discount = $("#discount").val();
-    let totalPrice = price - (price * discount / 100);
-    console.log(totalPrice)
+    let price = parseInt($("#price").val().replace(/,/g, ''));
+    let discount = parseInt($("#discount").val());
+    let totalPrice = price * (100 - discount) / 100;
     if (isNaN(totalPrice)) {
        $("#totalPrice").val(0);
+    } else {
+        let formattedTotalPrice = totalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#totalPrice").val(formattedTotalPrice);
     }
-    $("#totalPrice").val(totalPrice.toFixed(0)); // 소수점 둘째 자리까지 표시
 }
 
 function checkErrorAndShowModal(id) {
@@ -63,8 +50,22 @@ function checkErrorAndShowModal(id) {
 
 $(() => {
     showErrorMessage("#productName");
+    showErrorMessage("#sort");
     showErrorMessage("#price");
-    showErrorMessage("#discount");
+
+    $("#discount").on("focusout", () => {
+        let regexDiscount = $("#discount").val().replace(/[^0-9]/g, '');
+        console.log(regexDiscount);
+        if (regexDiscount === "") {
+            $("#discount-error").text("숫자만 입력가능 합니다.");
+        } else if (parseInt(regexDiscount) < 1 || parseInt(regexDiscount) > 100) {
+            $("#discount-error").text("1 ~ 100 까지의 숫자만 입력가능합니다.");
+        } else {
+            $("#discount-error").text("");
+        }
+    });
+
+    // showErrorMessage("#discount");
     showErrorMessage("#stock");
     showErrorMessage("#description");
 
@@ -85,6 +86,7 @@ $(() => {
 
         if (checkErrorAndShowModal("#productName")) return;
         if (checkErrorAndShowModal("#price")) return;
+        if (checkErrorAndShowModal("#sort")) return;
         if (checkErrorAndShowModal("#discount")) return;
         if (checkErrorAndShowModal("#stock")) return;
         if (checkErrorAndShowModal("#description")) return;
