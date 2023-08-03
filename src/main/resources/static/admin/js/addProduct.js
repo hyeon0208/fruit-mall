@@ -2,6 +2,8 @@ function showModal() {
     $(".txt05").css("display", "block");
 }
 
+const formData = new FormData();
+
 function uploadImage() {
     const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
     const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
@@ -10,7 +12,6 @@ function uploadImage() {
         const path = "images"; // 이미지 저장 경로 (원하는 경로로 변경 가능)
         const fileName = file.name; // 업로드할 이미지 파일의 원래 이름 사용
 
-        const formData = new FormData();
         formData.append("file", file);
         formData.append("path", path);
         formData.append("fileName", fileName);
@@ -151,31 +152,27 @@ $(() => {
         if (checkErrorAndShowModal("#stock")) return;
         if (checkErrorAndShowModal("#description")) return;
 
-        const formData = {
-            productName: $("#productName").val(),
-            price: parseInt($("#price").val()),
-            sort: $("#sort").val(),
-            discount: parseInt($("#discount").val()),
-            stock: parseInt($("#stock").val()),
-            description: tinymce.get("description").getContent(),
-            imageUrl: $("#previewImage").attr("src")
-        };
-
+        formData.append("productName", $("#productName").val());
+        formData.append("price", parseInt($("#price").val()));
+        formData.append("sort", $("#sort").val());
+        formData.append("discount", parseInt($("#discount").val()));
+        formData.append("stock", parseInt($("#stock").val()));
+        formData.append("description", tinymce.get("description").getContent());
+        formData.append("imageUrl", $("#previewImage").attr("src"));
 
         axios({
             method: "post",
             url: "/add/product",
             data: formData,
-            dataType: "json",
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'multipart/form-data'}
         }).then(res => {
-            if(res.data.success) {
+            if (res.data === "success") {
                 $(".txt05 h5").html('상품등록이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
                 showModal();
             } else {
                 $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
                 showModal();
-                $('.txt05 a').click(function() {
+                $('.txt05 a').click(function () {
                     $('.txt05').hide();
                 });
             }
