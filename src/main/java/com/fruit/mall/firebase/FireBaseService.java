@@ -7,13 +7,16 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Slf4j
 public class FireBaseService {
-    private String firebaseBucket = "fruitmall-394009.appspot.com";
+
+    @Value("${firebase.bucket}")
+    private String firebaseBucket;
 
     public String uploadFiles(MultipartFile file, String path, String fileName) throws IOException {
 
