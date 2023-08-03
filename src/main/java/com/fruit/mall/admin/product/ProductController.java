@@ -3,11 +3,14 @@ package com.fruit.mall.admin.product;
 import com.fruit.mall.admin.category.CategoryService;
 import com.fruit.mall.admin.image.Image;
 import com.fruit.mall.admin.image.ImageService;
+import com.fruit.mall.firebase.FireBaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Timestamp;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,7 +18,9 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final ImageService imageService;
+    private final FireBaseService fireBaseService;
 
+    private final static String PATH = "images";
 
     @PostMapping("/add/product")
     @ResponseBody
@@ -25,9 +30,7 @@ public class ProductController {
                                 @RequestParam("discount") int discount,
                                 @RequestParam("stock") int stock,
                                 @RequestParam("description") String description,
-                                @RequestParam("imageUrl") String imageUrl,
-                                @RequestParam("fileName") String fileName,
-                                @RequestParam("path") String path) {
+                                @RequestParam("files") List<MultipartFile> files) throws IOException {
 
         Long categoryId = categoryService.selectIdByCategoryName(sort);
         Product product = Product.builder()
@@ -41,13 +44,16 @@ public class ProductController {
                 .build();
         productService.insertProduct(product);
 
-        Image image = Image.builder()
-                .productId(product.getProductId())
-                .imageUrl(imageUrl)
-                .path(path)
-                .fileName(fileName)
-                .build();
-        imageService.insertImage(image);
+        for (MultipartFile file : files) {
+            String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
+            Image image = Image.builder()
+                    .productId(product.getProductId())
+                    .imageUrl(firebaseImageUrl)
+                    .path(PATH)
+                    .fileName(file.getOriginalFilename())
+                    .build();
+            imageService.insertImage(image);
+        }
 
         return "success";
     }

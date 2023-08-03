@@ -2,6 +2,7 @@ function showModal() {
     $(".txt05").css("display", "block");
 }
 
+const imageFiles = [];
 const formData = new FormData();
 
 function uploadImage() {
@@ -9,25 +10,13 @@ function uploadImage() {
     const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
 
     if (file) {
-        const path = "images"; // 이미지 저장 경로 (원하는 경로로 변경 가능)
-        const fileName = file.name; // 업로드할 이미지 파일의 원래 이름 사용
+        // 추가: 이미지 미리보기를 생성하는 로직
+        const reader = new FileReader();
 
-        formData.append("file", file);
-        formData.append("path", path);
-        formData.append("fileName", fileName);
-
-        // FireBaseService의 uploadFiles 메서드를 호출하여 이미지 업로드
-        axios({
-            method: "post",
-            url: "/upload",
-            data: formData,
-            dataType: "json",
-        }).then(res => {
-                // 이미지 업로드가 성공한 경우 처리
-                const imageUrl = res.data; // 업로드된 이미지의 다운로드 URL
-                const previewImg = document.getElementById("previewImage");
-                previewImg.src = imageUrl; // 업로드된 이미지의 미리보기를 이미지 태그에 표시
-            })
+        reader.onload = function (e) {
+            $('#previewImage').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(file);
     }
 }
 
@@ -54,7 +43,7 @@ function calculateTotal() {
     let discount = parseInt($("#discount").val());
     let totalPrice = price * (100 - discount) / 100;
     if (isNaN(totalPrice)) {
-       $("#totalPrice").val(0);
+        $("#totalPrice").val(0);
     } else {
         let formattedTotalPrice = totalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         $("#totalPrice").val(formattedTotalPrice);
@@ -93,17 +82,12 @@ $(() => {
     });
 
     $("#productPicture").on("change", () => {
-        if ($("#productPicture").val() == null) {
-            $("#image-error").text("이미지를 추가해주세요.")
-        } else {
-            $("#image-error").text("")
+        const fileList = $("#productPicture")[0].files;
+        for (const file of fileList) {
+            imageFiles.push(file);
         }
-    });
-
-    // 파일 선택 시 업로드 함수를 자동 호출하도록 change 이벤트 추가
-    $("#productPicture").on("change", () => {
         uploadImage();
-    })
+    });
 
     // TinyMCE 초기화
     tinymce.init({
@@ -113,23 +97,12 @@ $(() => {
         width: 900,
         toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image", // 'image' 버튼 툴바에 추가
         paste_data_images: true, // 이미지 붙여넣기 설정 활성화
-        automatic_uploads: true, // 이미지를 업로드할 때 자동으로 업로드하도록 설정
         file_picker_types: 'image', // TinyMCE에서 이미지를 선택할 때, 이미지 파일만 선택 (옵션 : media, file 등)
         images_upload_handler: function (blobInfo, success) { // 이미지를 업로드하는 핸들러 함수
-            const formData = new FormData();
             // blobInfo : TinyMCE에서 이미지 업로드 시 사용되는 정보를 담고 있는 객체
-            formData.append('file', blobInfo.blob());
-            formData.append('path', 'images');
-            formData.append('fileName', blobInfo.filename());
-            axios({
-                method: "post",
-                url: "/upload",
-                data: formData,
-                dataType: "json",
-            }).then(res => {
-                const imageUrl = res.data; // 업로드된 이미지의 다운로드 URL
-                success(imageUrl); // 성공 시 이미지 URL을 TinyMCE 에디터에 전달
-            })
+            const file = new File([blobInfo.blob()], blobInfo.filename());
+            imageFiles.push(file);
+            success(URL.createObjectURL(file));
         }
     });
 
@@ -160,7 +133,10 @@ $(() => {
         formData.append("discount", parseInt($("#discount").val()));
         formData.append("stock", parseInt($("#stock").val()));
         formData.append("description", tinymce.get("description").getContent());
-        formData.append("imageUrl", $("#previewImage").attr("src"));
+
+        for (const file of imageFiles) {
+            formData.append("files", file);
+        }
 
         axios({
             method: "post",
