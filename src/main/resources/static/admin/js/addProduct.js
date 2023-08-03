@@ -10,13 +10,13 @@ function uploadImage() {
     const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
 
     if (file) {
-        // 추가: 이미지 미리보기를 생성하는 로직
+        // 이미지 미리보기를 생성하는 로직
         const reader = new FileReader();
 
-        reader.onload = function (e) {
+        // 파일 읽기가 완료되면 실행
+        reader.onload = (e) => {
             $('#previewImage').attr('src', e.target.result);
         }
-        reader.readAsDataURL(file);
     }
 }
 
@@ -71,11 +71,11 @@ $(() => {
     showErrorMessage("#description");
 
     $("#discount").on("focusout", () => {
-        let regexDiscount = $("#discount").val().replace(/[^0-9]/g, '');
-        if (regexDiscount === "") {
-            $("#discount-error").text("숫자만 입력가능 합니다.");
-        } else if (parseInt(regexDiscount) < 1 || parseInt(regexDiscount) > 100) {
-            $("#discount-error").text("1 ~ 100 까지의 숫자만 입력가능합니다.");
+        let regexDiscount = $("#discount").val().replace(/[^\d]/g, '');
+        $("#discount").val(regexDiscount); // 입력값을 숫자만 남긴 값으로 대체
+        let discountValue = parseInt(regexDiscount);
+        if (discountValue < 1 || discountValue > 100) {
+            $("#discount-error").text("1부터 100까지의 숫자만 입력해주세요.");
         } else {
             $("#discount-error").text("");
         }
@@ -98,11 +98,11 @@ $(() => {
         toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image", // 'image' 버튼 툴바에 추가
         paste_data_images: true, // 이미지 붙여넣기 설정 활성화
         file_picker_types: 'image', // TinyMCE에서 이미지를 선택할 때, 이미지 파일만 선택 (옵션 : media, file 등)
-        images_upload_handler: function (blobInfo, success) { // 이미지를 업로드하는 핸들러 함수
+        images_upload_handler(blobInfo, success) { // 이미지를 업로드하는 핸들러 함수
             // blobInfo : TinyMCE에서 이미지 업로드 시 사용되는 정보를 담고 있는 객체
             const file = new File([blobInfo.blob()], blobInfo.filename());
             imageFiles.push(file);
-            success(URL.createObjectURL(file));
+            success(URL.createObjectURL(file)); // Blob 객체의 임시 URL을 생성해 이미지 미리보기 적용
         }
     });
 
