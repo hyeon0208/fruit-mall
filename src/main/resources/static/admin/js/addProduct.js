@@ -109,6 +109,8 @@ $(() => {
     tinymce.init({
         selector: "#description", // TinyMCE를 적용할 textarea 요소의 선택자를 지정
         plugins: "paste image imagetools", // 'paste', 'image', 'imagetools' 플러그인 추가
+        height: 500,
+        width: 900,
         toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image", // 'image' 버튼 툴바에 추가
         paste_data_images: true, // 이미지 붙여넣기 설정 활성화
         automatic_uploads: true, // 이미지를 업로드할 때 자동으로 업로드하도록 설정
@@ -153,7 +155,7 @@ $(() => {
         if (checkErrorAndShowModal("#description")) return;
 
         formData.append("productName", $("#productName").val());
-        formData.append("price", parseInt($("#price").val()));
+        formData.append("price", parseInt($("#price").val().replace(/,/g, '')));
         formData.append("sort", $("#sort").val());
         formData.append("discount", parseInt($("#discount").val()));
         formData.append("stock", parseInt($("#stock").val()));
