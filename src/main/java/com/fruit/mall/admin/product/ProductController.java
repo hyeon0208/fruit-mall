@@ -21,6 +21,7 @@ public class ProductController {
     private final FireBaseService fireBaseService;
 
     private final static String PATH = "images";
+    private final static String ON_SALE = "판매중";
 
     @PostMapping("/add/product")
     @ResponseBody
@@ -33,19 +34,24 @@ public class ProductController {
                                 @RequestParam("files") List<MultipartFile> files) throws IOException {
 
         Long categoryId = categoryService.selectIdByCategoryName(sort);
-        Product product = Product.builder()
-                .categoryId(categoryId)
-                .productName(productName)
-                .productPrice(price)
-                .productStock(stock)
-                .productDescription(description)
-                .productDiscount(discount)
-                .productSaleStatus("판매중")
-                .build();
-        productService.insertProduct(product);
+
 
         for (MultipartFile file : files) {
             String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
+
+            String updatedDescription = description.replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
+
+            Product product = Product.builder()
+                    .categoryId(categoryId)
+                    .productName(productName)
+                    .productPrice(price)
+                    .productStock(stock)
+                    .productDescription(updatedDescription)
+                    .productDiscount(discount)
+                    .productSaleStatus(ON_SALE)
+                    .build();
+            productService.insertProduct(product);
+
             Image image = Image.builder()
                     .productId(product.getProductId())
                     .imageUrl(firebaseImageUrl)
