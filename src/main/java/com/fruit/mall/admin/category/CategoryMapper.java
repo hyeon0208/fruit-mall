@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CategoryMapper {
-    void insertCategory(@Param("categoryName") String categoryName);
+    Long selectIdByCategoryName(@Param("categoryName") String categoryName);
 }

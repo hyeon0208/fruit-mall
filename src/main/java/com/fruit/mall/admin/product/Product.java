@@ -3,6 +3,7 @@ package com.fruit.mall.admin.product;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
@@ -21,7 +22,7 @@ public class Product {
     private Timestamp productCreatedAt;
 
     @Builder
-    public Product(Long categoryId, String productName, int productPrice, int productStock, String productDescription, int productDiscount, String productSaleStatus, Timestamp productUpdatedAt, Timestamp productCreatedAt) {
+    public Product(Long categoryId, String productName, int productPrice, int productStock, String productDescription, int productDiscount, String productSaleStatus) {
         this.categoryId = categoryId;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -29,7 +30,5 @@ public class Product {
         this.productDescription = productDescription;
         this.productDiscount = productDiscount;
         this.productSaleStatus = productSaleStatus;
-        this.productUpdatedAt = productUpdatedAt;
-        this.productCreatedAt = productCreatedAt;
     }
 }

@@ -11,7 +11,7 @@ public class ImageService implements ImageMapper {
     private final ImageMapper imageMapper;
 
     @Override
-    public void insertImage(Long productId, String imageUrl, String imagePath, String imageFilename) {
-        imageMapper.insertImage(productId, imageUrl, imagePath, imageFilename);
+    public void insertImage(Image image) {
+        imageMapper.insertImage(image);
     }
 }

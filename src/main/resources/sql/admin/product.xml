@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.fruit.mall.admin.product.Product">
+<mapper namespace="com.fruit.mall.admin.product.ProductMapper">
     <insert id="insertProduct" parameterType="com.fruit.mall.admin.product.Product" useGeneratedKeys="true" keyProperty="productId">
         INSERT INTO product (
                              CATEGORY_ID,
@@ -11,13 +11,16 @@
                              PRODUCT_STOCK,
                              PRODUCT_DESCRIPTION,
                              PRODUCT_DISCOUNT,
-                             PRODUCT_SALE_STATUS)
+                             PRODUCT_SALE_STATUS
+                             )
                     VALUES (
                             #{categoryId},
                             #{productName},
                             #{productPrice},
                             #{productStock},
                             #{productDescription},
-                            #{productDiscount}, '판매중')
+                            #{productDiscount},
+                            #{productSaleStatus}
+                            )
     </insert>
 </mapper>

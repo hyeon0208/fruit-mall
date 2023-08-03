@@ -11,7 +11,7 @@ public class CategoryService implements CategoryMapper {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public void insertCategory(String categoryName) {
-        categoryMapper.insertCategory(categoryName);
+    public Long selectIdByCategoryName(String categoryName) {
+        return categoryMapper.selectIdByCategoryName(categoryName);
     }
 }

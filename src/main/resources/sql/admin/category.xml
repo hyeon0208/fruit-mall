@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.fruit.mall.admin.category.Category">
-    <insert id="insertCategory" parameterType="com.fruit.mall.admin.category.Category" useGeneratedKeys="true" keyProperty="categoryId">>
-        INSERT INTO category (CATEGORY_NAME) VALUES (#{categoryName})
-    </insert>
+<mapper namespace="com.fruit.mall.admin.category.CategoryMapper">
+    <select id="selectIdByCategoryName" parameterType="String" resultType="Long">
+        SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{categoryName}
+    </select>
 </mapper>
