@@ -34,4 +34,19 @@ public class ProductService implements ProductMapper {
         List<Product> products = selectAll();
         return new PageInfo<>(products);
     }
+
+    @Override
+    public int countOnSaleProducts() {
+        return productMapper.countOnSaleProducts();
+    }
+
+    @Override
+    public int countOffSaleProducts() {
+        return productMapper.countOffSaleProducts();
+    }
+
+    @Override
+    public int countSoldOutProducts() {
+        return productMapper.countSoldOutProducts();
+    }
 }

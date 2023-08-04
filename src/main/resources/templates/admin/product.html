@@ -17,13 +17,13 @@
                         전체상품 <span th:text="${pageInfo.total}"></span>건
                     </li>
                     <li>
-                        판매중 <span>3</span>건
+                        판매중 <span th:text="${onSaleCount}"></span>건
                     </li>
                     <li>
-                        판매중지 <span>1</span>건
+                        판매중지 <span th:text="${offSaleCount}"></span>건
                     </li>
                     <li>
-                        품절 <span>1</span>건
+                        품절 <span th:text="${soldOutCount}"></span>건
                     </li>
                 </ul>
             </div>

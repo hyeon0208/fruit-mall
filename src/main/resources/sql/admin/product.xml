@@ -32,4 +32,22 @@
         SELECT * FROM product
     </select>
 
+    <select id="countOnSaleProducts" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE PRODUCT_SALE_STATUS = '판매중'
+    </select>
+
+    <select id="countOffSaleProducts" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE PRODUCT_SALE_STATUS = '판매중지'
+    </select>
+
+    <select id="countSoldOutProducts" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE PRODUCT_SALE_STATUS = '품절'
+    </select>
+
 </mapper>

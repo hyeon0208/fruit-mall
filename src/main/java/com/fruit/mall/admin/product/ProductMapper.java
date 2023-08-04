@@ -13,4 +13,10 @@ public interface ProductMapper {
     Product selectProductAllById(@Param("productId") Long id);
 
     List<Product> selectAll();
+
+    int countOnSaleProducts();
+
+    int countOffSaleProducts();
+
+    int countSoldOutProducts();
 }

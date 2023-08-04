@@ -19,6 +19,15 @@ public class ProductManagementController {
                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         PageInfo<Product> pageInfo = productService.getProducts(pageNum, pageSize);
+
+        int onSaleCount = productService.countOnSaleProducts();
+        int offSaleCount = productService.countOffSaleProducts();
+        int soldOutCount = productService.countSoldOutProducts();
+
+        model.addAttribute("onSaleCount", onSaleCount);
+        model.addAttribute("offSaleCount", offSaleCount);
+        model.addAttribute("soldOutCount", soldOutCount);
+
         model.addAttribute("pageInfo", pageInfo);
         return "admin/product";
     }
