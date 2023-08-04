@@ -100,19 +100,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="product : ${pageInfo.list}">
+                        <tr th:each="product, productStat : ${pageInfo.list}">
                             <td>
                                 <input type="checkbox">
                             </td>
                             <td th:text="${product.productId}"></td>
                             <td th:text="${product.productSaleStatus}"></td>
-                            <td th:text="${product.categoryId}"></td>
+                            <td>
+                                <span th:switch="${product.categoryId}">
+                                    <span th:case="1">봄과일</span>
+                                    <span th:case="2">여름과일</span>
+                                    <span th:case="3">가을과일</span>
+                                    <span th:case="4">겨울과일</span>
+                                </span>
+                            </td>
                             <td th:text="${product.productName}"></td>
-                            <td th:text="${product.productPrice}"></td>
-                            <td th:text="${product.productDiscount}"></td>
-                            <td th:text="찜수">찜수</td>
-                            <td th:text="결제횟수">결제횟수</td>
-                            <td th:text="리뷰수">리뷰수</td>
+                            <td class="productPrice" th:text="${product.productPrice}" th:attr="data-price=${product.productPrice}" th:data-index="${productStat.index}"></td>
+                            <td th:text="${product.productDiscount + '%'}"></td>
+                            <td name="찜수">-</td>
+                            <td name="결제횟수">-</td>
+                            <td name="리뷰수">-</td>
                             <td th:text="${#dates.format(product.productCreatedAt, 'yyyy.MM.dd')}"></td>
                             <td>
                                 <button>수정</button>
