@@ -1,5 +1,6 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.user.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class UserLoginController {
             return "이메일 또는 비밀번호가 일치하지 않습니다.";
         }
         HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USER, loginUser);
+        session.setAttribute(LOGIN_USER, new SessionUser(loginUser));
         return "success";
     }
 
