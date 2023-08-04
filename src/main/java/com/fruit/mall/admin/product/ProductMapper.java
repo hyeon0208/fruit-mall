@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Param;
 public interface ProductMapper {
 
     void insertProduct(Product product);
+
+    Product selectAllById(@Param("productId") Long id);
 }

@@ -14,4 +14,9 @@ public class ProductService implements ProductMapper {
     public void insertProduct(Product product) {
         productMapper.insertProduct(product);
     }
+
+    @Override
+    public Product selectAllById(Long id) {
+        return productMapper.selectAllById(id);
+    }
 }

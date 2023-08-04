@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fruit.mall.admin.product.ProductMapper">
-    <insert id="insertProduct" parameterType="com.fruit.mall.admin.product.Product" useGeneratedKeys="true" keyProperty="productId">
+    <insert id="insertProduct" parameterType="com.fruit.mall.admin.product.Product" keyProperty="productId">
         INSERT INTO product (
                              CATEGORY_ID,
                              PRODUCT_NAME,
@@ -23,4 +23,8 @@
                             #{productSaleStatus}
                             )
     </insert>
+
+    <select id="selectAllById" parameterType="Long" resultType="com.fruit.mall.admin.product.Product">
+        SELECT * FROM product WHERE PRODUCT_ID = #{productId}
+    </select>
 </mapper>

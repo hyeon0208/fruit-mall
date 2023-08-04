@@ -14,4 +14,9 @@ public class ImageService implements ImageMapper {
     public void insertImage(Image image) {
         imageMapper.insertImage(image);
     }
+
+    @Override
+    public Image selectAllById(Long id) {
+        return imageMapper.selectAllById(id);
+    }
 }
