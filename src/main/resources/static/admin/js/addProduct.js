@@ -1,24 +1,8 @@
-function showModal() {
-    $(".txt05").css("display", "block");
-}
-
 let imageFiles = [];
 let formData = new FormData();
 
-function uploadImage() {
-    const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
-    const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
-
-    if (file) {
-        // 이미지 미리보기를 생성하는 로직
-        const reader = new FileReader();
-
-        // 파일 읽기가 완료되면 실행
-        reader.onload = (e) => {
-            $('#previewImage').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(file); // file을 Data URL로 읽어오고, 읽기가 완료되면 이미지 미리보기로 표시
-    }
+function showModal() {
+    $(".txt05").css("display", "block");
 }
 
 function showErrorMessage(id) {
@@ -39,19 +23,6 @@ function showErrorMessage(id) {
     });
 }
 
-function calculateTotal() {
-    let price = parseInt($("#price").val().replace(/,/g, ''));
-    let discount = parseInt($("#discount").val());
-    let totalPrice = price * (100 - discount) / 100;
-
-    if (isNaN(totalPrice)) {
-        $("#totalPrice").val(0);
-    } else {
-        let formattedTotalPrice = totalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $("#totalPrice").val(formattedTotalPrice);
-    }
-}
-
 function checkErrorAndShowModal(id) {
     if ($(id + '-error').text().length > 0) {
         $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
@@ -63,6 +34,19 @@ function checkErrorAndShowModal(id) {
         return true; // 필수 입력 값이 없는 경우 true 반환
     }
     return false;
+}
+
+function calculateTotal() {
+    let price = parseInt($("#price").val().replace(/,/g, ''));
+    let discount = parseInt($("#discount").val());
+    let totalPrice = price * (100 - discount) / 100;
+
+    if (isNaN(totalPrice)) {
+        $("#totalPrice").val(0);
+    } else {
+        let formattedTotalPrice = totalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#totalPrice").val(formattedTotalPrice);
+    }
 }
 
 $(() => {
@@ -94,11 +78,19 @@ $(() => {
     });
 
     $("#productPicture").on("change", () => {
-        const fileList = $("#productPicture")[0].files;
-        for (const file of fileList) {
+        const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
+        const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
+        if (file) {
             imageFiles.push(file);
+            // 이미지 미리보기를 생성하는 로직
+            const reader = new FileReader();
+
+            // 파일 읽기가 완료되면 실행
+            reader.onload = (e) => {
+                $('#previewImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file); // file을 Data URL로 읽어오고, 읽기가 완료되면 이미지 미리보기로 표시
         }
-        uploadImage();
     });
 
     // TinyMCE 초기화
