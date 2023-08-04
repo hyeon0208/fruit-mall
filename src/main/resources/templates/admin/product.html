@@ -14,7 +14,7 @@
             <div class="box01">
                 <ul>
                     <li>
-                        전체상품 <span>1</span>건
+                        전체상품 <span th:text="${pageInfo.total}"></span>건
                     </li>
                     <li>
                         판매중 <span>3</span>건
@@ -100,111 +100,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr th:each="product : ${pageInfo.list}">
                             <td>
                                 <input type="checkbox">
                             </td>
-                            <td>05</td>
-                            <td>판매중</td>
-                            <td>겨울과일</td>
-                            <td>맛있는 아삭아삭 충주 산지직송 사...</td>
-                            <td>18,900원</td>
-                            <td>10%</td>
-                            <td>269</td>
-                            <td>135</td>
-                            <td>23</td>
-                            <td>2023. 07. 21</td>
+                            <td th:text="${product.productId}"></td>
+                            <td th:text="${product.productSaleStatus}"></td>
+                            <td th:text="${product.categoryId}"></td>
+                            <td th:text="${product.productName}"></td>
+                            <td th:text="${product.productPrice}"></td>
+                            <td th:text="${product.productDiscount}"></td>
+                            <td th:text="찜수">찜수</td>
+                            <td th:text="결제횟수">결제횟수</td>
+                            <td th:text="리뷰수">리뷰수</td>
+                            <td th:text="${#dates.format(product.productCreatedAt, 'yyyy.MM.dd')}"></td>
                             <td>
                                 <button>수정</button>
                             </td>
                             <td>
                                 <button>중지</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>04</td>
-                            <td>판매중지</td>
-                            <td>겨울과일</td>
-                            <td>프리미엄 수입 석류 대과</td>
-                            <td>8,900원</td>
-                            <td>-</td>
-                            <td>19</td>
-                            <td>2</td>
-                            <td>-</td>
-                            <td>2023. 06. 24</td>
-                            <td>
-                                <button>수정</button>
-                            </td>
-                            <td>2023. 06. 25</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>03</td>
-                            <td>판매중</td>
-                            <td>겨울과일</td>
-                            <td>고흥유자 유자청용 유자</td>
-                            <td>18,900원</td>
-                            <td>5%</td>
-                            <td>3675</td>
-                            <td>2689</td>
-                            <td>328</td>
-                            <td>2023. 06. 13</td>
-                            <td>
-                                <button>수정</button>
-                            </td>
-                            <td>
-                                <button>중지</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>02</td>
-                            <td>판매중</td>
-                            <td>봄과일</td>
-                            <td>국내산 냉동 딸기 1kg</td>
-                            <td>15,900원</td>
-                            <td>3%</td>
-                            <td>569</td>
-                            <td>102</td>
-                            <td>13</td>
-                            <td>2023. 06. 08</td>
-                            <td>
-                                <button>수정</button>
-                            </td>
-                            <td>
-                                <button>중지</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>01</td>
-                            <td>품절</td>
-                            <td>봄과일</td>
-                            <td>하동직송 청매실 대 5kg</td>
-                            <td>17,900원</td>
-                            <td>-</td>
-                            <td>27769</td>
-                            <td>3405</td>
-                            <td>1537</td>
-                            <td>2023. 06. 03</td>
-                            <td>
-                                <button>수정</button>
-                            </td>
-                            <td>
-                                -
                             </td>
                         </tr>
                     </tbody>
@@ -212,26 +126,23 @@
             </div>
 
             <div class="pagination">
-                <a href="#" class="prev">
-                    <span class="material-symbols-outlined">
-                        chevron_left
-                    </span>
+                <a th:if="${pageInfo.hasPreviousPage}"
+                   th:href="@{/admin/product(pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}"
+                   class="prev">
+                    <span class="material-symbols-outlined">chevron_left</span>
                 </a>
 
                 <p class="numbers">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">
-                        <span class="bold">4</span>
-                    </a>
-                    <a href="#">5</a>
+                    <th:block th:each="i : ${#numbers.sequence(1, pageInfo.pages)}">
+                        <a th:href="@{/admin/product(pageNum=${i}, pageSize=${pageInfo.pageSize})}"
+                           th:text="${i}" th:if="${i != pageInfo.pageNum}"></a>
+                        <a th:text="${i}" th:classappend='bold' th:if="${i == pageInfo.pageNum}"></a>
+                    </th:block>
                 </p>
 
-                <a href="#" class="next">
-                    <span class="material-symbols-outlined">
-                        chevron_right
-                    </span>
+                <a th:if="${pageInfo.hasNextPage}"
+                   th:href="@{/admin/product(pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
+                    <span class="material-symbols-outlined">chevron_right</span>
                 </a>
             </div>
         </div>

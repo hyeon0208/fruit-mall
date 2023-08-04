@@ -24,7 +24,12 @@
                             )
     </insert>
 
-    <select id="selectAllById" parameterType="Long" resultType="com.fruit.mall.admin.product.Product">
+    <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall.admin.product.Product">
         SELECT * FROM product WHERE PRODUCT_ID = #{productId}
     </select>
+
+    <select id="selectAll" resultType="com.fruit.mall.admin.product.Product">
+        SELECT * FROM product
+    </select>
+
 </mapper>

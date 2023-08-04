@@ -1,8 +1,12 @@
 package com.fruit.mall.admin.product;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,7 +20,18 @@ public class ProductService implements ProductMapper {
     }
 
     @Override
-    public Product selectAllById(Long id) {
-        return productMapper.selectAllById(id);
+    public Product selectProductAllById(Long id) {
+        return productMapper.selectProductAllById(id);
+    }
+
+    @Override
+    public List<Product> selectAll() {
+        return productMapper.selectAll();
+    }
+
+    public PageInfo<Product> getProducts(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Product> products = selectAll();
+        return new PageInfo<>(products);
     }
 }
