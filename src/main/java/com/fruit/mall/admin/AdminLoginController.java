@@ -1,13 +1,9 @@
 package com.fruit.mall.admin;
 
-import com.fruit.mall.admin.product.Product;
-import com.google.api.Http;
+import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.users.SparseUserDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +35,7 @@ public class AdminLoginController {
             return "fail";
         }
         HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USER, loginAdmin);
+        session.setAttribute(LOGIN_USER, new SessionUser(loginAdmin));
         return "success";
     }
 
