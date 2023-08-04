@@ -31,10 +31,9 @@ public class ProductController {
                                 @RequestParam("discount") int discount,
                                 @RequestParam("stock") int stock,
                                 @RequestParam("description") String description,
-                                @RequestParam("files") List<MultipartFile> files) throws IOException {
+                                @RequestPart("files") List<MultipartFile> files) throws IOException {
 
         Long categoryId = categoryService.selectIdByCategoryName(sort);
-
 
         for (MultipartFile file : files) {
             String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
