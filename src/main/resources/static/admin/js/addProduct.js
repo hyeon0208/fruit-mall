@@ -2,8 +2,8 @@ function showModal() {
     $(".txt05").css("display", "block");
 }
 
-const imageFiles = [];
-const formData = new FormData();
+let imageFiles = [];
+let formData = new FormData();
 
 function uploadImage() {
     const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
@@ -43,6 +43,7 @@ function calculateTotal() {
     let price = parseInt($("#price").val().replace(/,/g, ''));
     let discount = parseInt($("#discount").val());
     let totalPrice = price * (100 - discount) / 100;
+
     if (isNaN(totalPrice)) {
         $("#totalPrice").val(0);
     } else {
@@ -76,10 +77,20 @@ $(() => {
         $("#discount").val(regexDiscount); // 입력값을 숫자만 남긴 값으로 대체
         let discountValue = parseInt(regexDiscount);
         if (discountValue < 1 || discountValue > 100) {
-            $("#discount-error").text("1부터 100까지의 숫자만 입력해주세요.");
+            if (discountValue !== 0) {
+                $("#discount-error").text("1부터 100까지의 숫자만 입력해주세요.");
+            } else {
+                $("#discount-error").text("");
+            }
         } else {
             $("#discount-error").text("");
         }
+
+        if (isNaN(discountValue)) {
+            $("#discount").val(0)
+        }
+
+        calculateTotal();
     });
 
     $("#productPicture").on("change", () => {
@@ -93,7 +104,7 @@ $(() => {
     // TinyMCE 초기화
     tinymce.init({
         selector: "#description", // TinyMCE를 적용할 textarea 요소의 선택자를 지정
-        plugins: "paste image imagetools", // 'paste', 'image', 'imagetools' 플러그인 추가
+        plugins: "paste image", // 'paste', 'image', 'imagetools' 플러그인 추가
         height: 500,
         width: 900,
         toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image", // 'image' 버튼 툴바에 추가
@@ -112,12 +123,6 @@ $(() => {
             }
         }
     });
-
-    // #discount 필드의 값이 변경될 때 calculateTotal() 함수 호출
-    $("#discount").on("focusout", () => {
-        calculateTotal();
-    });
-
 
     $("#cancelBtn").on("click", () => {
         $(".txt05 h5").html('작성중이던 항목이 모두 삭제됩니다. 취소하겠습니까?' + '<br><a href="/admin/product">확인</a>');
@@ -152,6 +157,8 @@ $(() => {
             headers: {'Content-Type': 'multipart/form-data'}
         }).then(res => {
             if (res.data === "success") {
+                imageFiles = null;
+                formData = null;
                 $(".txt05 h5").html('상품등록이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
                 showModal();
             } else {
