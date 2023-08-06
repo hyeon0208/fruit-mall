@@ -3,6 +3,7 @@ package com.fruit.mall.admin.product;
 import com.fruit.mall.admin.category.CategoryService;
 import com.fruit.mall.admin.image.Image;
 import com.fruit.mall.admin.image.ImageService;
+import com.fruit.mall.admin.product.dto.ProductRegistrationForm;
 import com.fruit.mall.firebase.FireBaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,28 +26,21 @@ public class ProductController {
 
     @PostMapping("/add/product")
     @ResponseBody
-    public String addProduct(   @RequestParam("productName") String productName,
-                                @RequestParam("price") int price,
-                                @RequestParam("sort") String sort,
-                                @RequestParam("discount") int discount,
-                                @RequestParam("stock") int stock,
-                                @RequestParam("description") String description,
-                                @RequestPart("files") List<MultipartFile> files) throws IOException {
-
-        Long categoryId = categoryService.selectIdByCategoryName(sort);
+    public String addProduct(@ModelAttribute ProductRegistrationForm form, @RequestPart("files") List<MultipartFile> files) throws IOException {
+        Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
 
         for (MultipartFile file : files) {
             String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
 
-            String updatedDescription = description.replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
+            String updatedDescription = form.getDescription().replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
 
             Product product = Product.builder()
                     .categoryId(categoryId)
-                    .productName(productName)
-                    .productPrice(price)
-                    .productStock(stock)
+                    .productName(form.getProductName())
+                    .productPrice(form.getPrice())
+                    .productStock(form.getStock())
                     .productDescription(updatedDescription)
-                    .productDiscount(discount)
+                    .productDiscount(form.getDiscount())
                     .productSaleStatus(ON_SALE)
                     .build();
             productService.insertProduct(product);
