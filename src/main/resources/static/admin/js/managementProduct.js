@@ -1,17 +1,18 @@
 $(() => {
-    $(".productPrice").each(function() {
-        const price = $(this).data('price');
-        if (typeof price !== 'undefined') {
-            $(this).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-        }
+    // 상품 가격 천자리 구분 기호 표시
+    $(".productPrice").each((index, element) => {
+        const price = $(element).text();
+        $(element).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
     });
 
+    // $개 보기 셀렉트 박스 클릭 이벤트
     $("#pageSizeSelect").on("change", () => {
         const selectedPageSize = $("#pageSizeSelect").val();
         window.location.search = "pageNum=" + 1 + "&pageSize=" + selectedPageSize;
     });
 
-    $("#excelDownloadBtn").on("click", function() {
+    // 엑셀 다운로드 버튼 클릭 이벤트
+    $("#excelDownloadBtn").on("click", () => {
         const data = $(".product-table").html();
         const blob = new Blob([data], {type: "application/vnd.ms-excel"});
         const link = document.createElement("a");
@@ -20,8 +21,9 @@ $(() => {
         link.click();
     });
 
-    $(".stopSaleBtn").each((index, element) => {
-        const btn = $(element);
+    // 새로 고침 시에도 판매 중지 열의 시간 표시
+    $(".stopSaleBtn").each(function() {
+        const btn = $(this);
         const productId = btn.data("product-id");
         const status = localStorage.getItem(productId);
         if (status === "Status_SaleOut") {
@@ -35,6 +37,7 @@ $(() => {
         }
     });
 
+    // 판매 중지 버튼 클릭 이벤트
     $(".stopSaleBtn").on("click", (e) => {
         const btn = $(e.currentTarget);
         const productId = btn.data("product-id");

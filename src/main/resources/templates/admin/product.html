@@ -32,9 +32,9 @@
                 <div class="status">
                     <span>게시상태</span>
                     <div class="buttons">
-                        <button>판매중</button>
-                        <button>판매중지</button>
-                        <button>품절</button>
+                        <button th:field="showOnSaleProductsBtn">판매중</button>
+                        <button th:field="showStopSaleProductsBtn" >판매중지</button>
+                        <button th:field="showSoldOutProductsBtn">품절</button>
                     </div>
                 </div>
                 <div class="sort">
@@ -115,7 +115,7 @@
                                 </span>
                             </td>
                             <td th:text="${product.productName}"></td>
-                            <td class="productPrice" th:text="${product.productPrice}" th:attr="data-price=${product.productPrice}" th:data-index="${productStat.index}"></td>
+                            <td class="productPrice" th:text="${product.productPrice}"></td>
                             <td th:if="${product.productDiscount} == 0">-</td>
                             <td th:if="${product.productDiscount} != 0" th:text="${product.productDiscount + '%'}"></td>
                             <td name="찜수">-</td>
