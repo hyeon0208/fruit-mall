@@ -105,7 +105,7 @@
                                 <input type="checkbox">
                             </td>
                             <td th:text="${product.productId}"></td>
-                            <td th:text="${product.productSaleStatus}"></td>
+                            <td class="product_Status" th:text="${product.productSaleStatus}"></td>
                             <td>
                                 <span th:switch="${product.categoryId}">
                                     <span th:case="1">봄과일</span>

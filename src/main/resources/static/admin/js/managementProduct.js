@@ -56,6 +56,9 @@ $(() => {
             timeSpan.text(formattedTime);
             timeSpan.show();
 
+            const productStatus = btn.closest('tr').find('.product_Status');
+            productStatus.text("판매중지");
+
             localStorage.setItem(productId, "Status_SaleOut");
             localStorage.setItem(`updatedTime-${productId}`, formattedTime);
         })
