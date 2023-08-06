@@ -50,4 +50,10 @@
         WHERE PRODUCT_SALE_STATUS = '품절'
     </select>
 
+    <update id="updateProductStatus" >
+        UPDATE product
+        SET PRODUCT_SALE_STATUS = #{status}
+        WHERE PRODUCT_ID = #{productId}
+    </update>
+
 </mapper>

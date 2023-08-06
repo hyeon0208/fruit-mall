@@ -20,26 +20,44 @@ $(() => {
         link.click();
     });
 
-    $("#stop-sale-btn").on("click", function () {
-        const btn = $(this);
+    $(".stopSaleBtn").each((index, element) => {
+        const btn = $(element);
+        const productId = btn.data("product-id");
+        const status = localStorage.getItem(productId);
+        if (status === "Status_SaleOut") {
+            btn.hide();
+            const timeSpan = btn.next(".updateTime");
+            const storedDate = localStorage.getItem(`updatedTime-${productId}`);
+            if (storedDate) {
+                timeSpan.text(storedDate);
+            }
+            timeSpan.show();
+        }
+    });
+
+    $(".stopSaleBtn").on("click", (e) => {
+        const btn = $(e.currentTarget);
         const productId = btn.data("product-id");
 
-        $.ajax({
-            url: "/updateProductStatus",
-            type: "post",
+        axios({
+            method: "post",
+            url: "/admin/salestop",
             data: {
                 productId: productId,
                 status: "판매중지",
             },
-            success: function (response) {
-                const row = btn.closest("tr"); // 버튼의 상위 테이블 행 찾기
-                row.find("td:eq(2)").text("판매중지"); // 상태 열의 텍스트를 "판매중지"로 변경
-                btn.replaceWith("<span>판매중지</span>"); // 버튼을 텍스트로 교체
-            },
-            error: function (error) {
-                // 에러 처리
-                alert("상품 상태 업데이트에 실패했습니다. 다시 시도해주세요.");
-            },
-        });
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            const updatedTime = res.data
+            btn.hide();
+            const timeSpan = btn.next(".updateTime");
+            const formattedTime = updatedTime.substring(0, 10).replaceAll('-', '.');
+            timeSpan.text(formattedTime);
+            timeSpan.show();
+
+            localStorage.setItem(productId, "Status_SaleOut");
+            localStorage.setItem(`updatedTime-${productId}`, formattedTime);
+        })
     });
-})
+});

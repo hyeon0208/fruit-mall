@@ -19,4 +19,6 @@ public interface ProductMapper {
     int countOffSaleProducts();
 
     int countSoldOutProducts();
+
+    void updateProductStatus(@Param("productId") Long productId, @Param("status") String status);
 }

@@ -49,4 +49,9 @@ public class ProductService implements ProductMapper {
     public int countSoldOutProducts() {
         return productMapper.countSoldOutProducts();
     }
+
+    @Override
+    public void updateProductStatus(Long productId, String status) {
+        productMapper.updateProductStatus(productId, status);
+    }
 }
