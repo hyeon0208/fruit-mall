@@ -36,11 +36,8 @@ public class ProductManagementController {
     @PostMapping("/salestop")
     @ResponseBody
     public String clickSaleStopBtn(@RequestBody SaleStopDto saleStopDTO) {
-        System.out.println("받은 데이터 : " + saleStopDTO.getProductId() + " | " + saleStopDTO.getStatus());
         productService.updateProductStatus(saleStopDTO.getProductId(), saleStopDTO.getStatus());
         Product updatedProduct = productService.selectProductAllById(saleStopDTO.getProductId());
-
-        System.out.println("업데이트 상품 : " + updatedProduct);
         String updatedTime = String.valueOf(updatedProduct.getProductUpdatedAt());
 
         return updatedTime;
