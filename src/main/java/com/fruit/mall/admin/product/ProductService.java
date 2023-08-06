@@ -30,7 +30,7 @@ public class ProductService implements ProductMapper {
     }
 
     public PageInfo<Product> getProducts(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
         List<Product> products = selectAll();
         return new PageInfo<>(products);
     }
