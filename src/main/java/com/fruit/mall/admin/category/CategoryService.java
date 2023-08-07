@@ -7,11 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CategoryService implements CategoryMapper {
-    private final CategoryMapper categoryMapper;
+public class CategoryService {
+    private final CategoryRepository categoryRepository;
 
-    @Override
     public Long selectIdByCategoryName(String categoryName) {
-        return categoryMapper.selectIdByCategoryName(categoryName);
+        return categoryRepository.selectIdByCategoryName(categoryName);
     }
 }

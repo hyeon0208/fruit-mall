@@ -11,8 +11,8 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ProductService implements ProductMapper {
-    private final ProductMapper productMapper;
+public class ProductService {
+    private final ProductRepository productRepository;
 
     public PageInfo<Product> getProducts(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
@@ -22,13 +22,13 @@ public class ProductService implements ProductMapper {
 
     public PageInfo<Product> getProductsByStatus(int pageNum, int pageSize, String status) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = selectAllByStatus(status);
+        List<Product> products = productRepository.selectAllByStatus(status);
         return new PageInfo<>(products);
     }
 
     public PageInfo<Product> getProductsByCategory(int pageNum, int pageSize, String category) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = selectAllByCategory(category);
+        List<Product> products = productRepository.selectAllByCategory(category);
         return new PageInfo<>(products);
     }
 
@@ -38,58 +38,39 @@ public class ProductService implements ProductMapper {
         return new PageInfo<>(products);
     }
 
-    @Override
     public void insertProduct(Product product) {
-        productMapper.insertProduct(product);
+        productRepository.insertProduct(product);
     }
 
-    @Override
     public Product selectProductAllById(Long id) {
-        return productMapper.selectProductAllById(id);
+        return productRepository.selectProductAllById(id);
     }
 
-    @Override
     public List<Product> selectAll() {
-        return productMapper.selectAll();
+        return productRepository.selectAll();
     }
 
-    @Override
-    public List<Product> selectAllByStatus(String status) {
-        return productMapper.selectAllByStatus(status);
-    }
-
-    @Override
-    public List<Product> selectAllByCategory(String category) {
-        return productMapper.selectAllByCategory(category);
-    }
-
-    @Override
     public List<Product> selectAllByStatusAndCategory(String status, String category) {
-        return productMapper.selectAllByStatusAndCategory(status, category);
+        return productRepository.selectAllByStatusAndCategory(status, category);
     }
 
-    @Override
     public int countTotalProducts() {
-        return productMapper.countTotalProducts();
+        return productRepository.countTotalProducts();
     }
 
-    @Override
     public int countOnSaleProducts() {
-        return productMapper.countOnSaleProducts();
+        return productRepository.countOnSaleProducts();
     }
 
-    @Override
     public int countOffSaleProducts() {
-        return productMapper.countOffSaleProducts();
+        return productRepository.countOffSaleProducts();
     }
 
-    @Override
     public int countSoldOutProducts() {
-        return productMapper.countSoldOutProducts();
+        return productRepository.countSoldOutProducts();
     }
 
-    @Override
     public void updateProductStatus(Long productId, String status) {
-        productMapper.updateProductStatus(productId, status);
+        productRepository.updateProductStatus(productId, status);
     }
 }

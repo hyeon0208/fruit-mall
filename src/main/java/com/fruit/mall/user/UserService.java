@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserService implements UserMapper {
+public class UserService {
 
-    private final UserMapper userMapper;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public boolean loginCheck(String pwd, User loginUser) {
@@ -23,45 +23,34 @@ public class UserService implements UserMapper {
         return true;
     }
 
-    @Override
     public void insertUser(User user) {
-        userMapper.insertUser(user);
+        userRepository.insertUser(user);
     }
 
-    @Transactional(readOnly = true)
-    @Override
     public User selectUserByUserEmail(String loginUserEmail) {
 
-        return userMapper.selectUserByUserEmail(loginUserEmail);
+        return userRepository.selectUserByUserEmail(loginUserEmail);
     }
 
-    @Transactional(readOnly = true)
-    @Override
     public Long selectOnlyUserIdNo(String email) {
-        return userMapper.selectOnlyUserIdNo(email);
+        return userRepository.selectOnlyUserIdNo(email);
     }
 
-    @Override
     public void insertTerm(Term term) {
 
 
-        userMapper.insertTerm(term);
+        userRepository.insertTerm(term);
     }
 
-    @Transactional(readOnly = true)
-    @Override
     public String selectEmailByUserEmail(String user_email) {
-        return userMapper.selectEmailByUserEmail(user_email);
+        return userRepository.selectEmailByUserEmail(user_email);
     }
 
-    @Transactional(readOnly = true)
-    @Override
     public String selectUserNameByUserName(String user_name) {
-        return userMapper.selectUserNameByUserName(user_name);
+        return userRepository.selectUserNameByUserName(user_name);
     }
 
-    @Override
     public void updateNewPassword(String user_email, String user_pwd) {
-        userMapper.updateNewPassword(user_email, passwordEncoder.encode(user_pwd));
+        userRepository.updateNewPassword(user_email, passwordEncoder.encode(user_pwd));
     }
 }

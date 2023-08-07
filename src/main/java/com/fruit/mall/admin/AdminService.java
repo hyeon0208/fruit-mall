@@ -6,13 +6,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AdminService implements AdminMapper {
+public class AdminService {
 
-    private final AdminMapper adminMapper;
+    private final AdminRepository adminRepository;
 
-    @Override
     public Admin selectAdminById(String id) {
-        return adminMapper.selectAdminById(id);
+        return adminRepository.selectAdminById(id);
     }
 
     public boolean loginCheck(String inputId, String inputPwd, Admin findAdmin) {

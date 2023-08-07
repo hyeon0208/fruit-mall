@@ -7,16 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ImageService implements ImageMapper {
-    private final ImageMapper imageMapper;
+public class ImageService {
+    private final ImageRepository imageRepository;
 
-    @Override
     public void insertImage(Image image) {
-        imageMapper.insertImage(image);
+        imageRepository.insertImage(image);
     }
 
-    @Override
     public Image selectAllById(Long id) {
-        return imageMapper.selectAllById(id);
+        return imageRepository.selectAllById(id);
     }
 }
