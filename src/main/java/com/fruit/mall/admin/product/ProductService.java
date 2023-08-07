@@ -14,6 +14,18 @@ import java.util.List;
 public class ProductService implements ProductMapper {
     private final ProductMapper productMapper;
 
+    public PageInfo<Product> getProducts(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
+        List<Product> products = selectAll();
+        return new PageInfo<>(products);
+    }
+
+    public PageInfo<Product> getOnSaleProducts(int pageNum, int pageSize, String status) {
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
+        List<Product> products = selectAllByOnSaleProducts(status);
+        return new PageInfo<>(products);
+    }
+
     @Override
     public void insertProduct(Product product) {
         productMapper.insertProduct(product);
@@ -29,10 +41,9 @@ public class ProductService implements ProductMapper {
         return productMapper.selectAll();
     }
 
-    public PageInfo<Product> getProducts(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = selectAll();
-        return new PageInfo<>(products);
+    @Override
+    public List<Product> selectAllByOnSaleProducts(String status) {
+        return productMapper.selectAllByOnSaleProducts(status);
     }
 
     @Override

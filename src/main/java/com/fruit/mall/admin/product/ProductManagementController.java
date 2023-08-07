@@ -14,12 +14,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 public class ProductManagementController {
     private final ProductService productService;
+    private final static String ALL_PRODUCT = "전체상품";
 
     @GetMapping("/product")
     public String paging(@Login SessionUser admin, Model model,
-                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        PageInfo<Product> pageInfo = productService.getProducts(pageNum, pageSize);
+                                      @RequestParam(value = "status", defaultValue = ALL_PRODUCT) String status,
+                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+
+        PageInfo<Product> pageInfo;
+        if (status.equalsIgnoreCase(ALL_PRODUCT)) {
+            pageInfo = productService.getProducts(pageNum, pageSize);
+        } else {
+            pageInfo = productService.getOnSaleProducts(pageNum, pageSize, status);
+        }
 
         int onSaleCount = productService.countOnSaleProducts();
         int offSaleCount = productService.countOffSaleProducts();
@@ -28,8 +36,8 @@ public class ProductManagementController {
         model.addAttribute("onSaleCount", onSaleCount);
         model.addAttribute("offSaleCount", offSaleCount);
         model.addAttribute("soldOutCount", soldOutCount);
-
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("saleStatus", status);
         return "admin/product";
     }
 

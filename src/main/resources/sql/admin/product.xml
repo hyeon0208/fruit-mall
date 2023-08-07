@@ -50,6 +50,10 @@
         WHERE PRODUCT_SALE_STATUS = '품절'
     </select>
 
+    <select id="selectAllByOnSaleProducts" parameterType="String" resultType="com.fruit.mall.admin.product.Product">
+        SELECT * FROM product WHERE PRODUCT_SALE_STATUS = #{status}
+    </select>
+
     <update id="updateProductStatus" >
         UPDATE product
         SET PRODUCT_SALE_STATUS = #{status}

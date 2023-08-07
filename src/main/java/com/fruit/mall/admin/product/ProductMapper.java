@@ -14,6 +14,8 @@ public interface ProductMapper {
 
     List<Product> selectAll();
 
+    List<Product> selectAllByOnSaleProducts(@Param("status") String status);
+
     int countOnSaleProducts();
 
     int countOffSaleProducts();
