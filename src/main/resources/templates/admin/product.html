@@ -33,19 +33,21 @@
                     <span>게시상태</span>
                     <div class="buttons">
                         <form method="get" action="/admin/product">
-                            <button th:name="status" th:value="판매중">판매중</button>
-                            <button th:name="status" th:value="판매중지">판매중지</button>
-                            <button th:name="status" th:value="품절">품절</button>
+                            <button th:name="status" th:value="판매중" th:classappend="${saleStatus == '판매중'} ? 'active'">판매중</button>
+                            <button th:name="status" th:value="판매중지" th:classappend="${saleStatus == '판매중지'} ? 'active'">판매중지</button>
+                            <button th:name="status" th:value="품절" th:classappend="${saleStatus == '품절'} ? 'active'">품절</button>
                         </form>
                     </div>
                 </div>
                 <div class="sort">
                     <span>분류</span>
                     <div class="buttons">
-                        <button>봄과일</button>
-                        <button>여름과일</button>
-                        <button>가을과일</button>
-                        <button>겨울과일</button>
+                        <form method="get" action="/admin/product">
+                            <button th:name="category" th:value="봄과일" th:classappend="${category == '봄과일'} ? 'active'">봄과일</button>
+                            <button th:name="category" th:value="여름과일" th:classappend="${category == '여름과일'} ? 'active'">여름과일</button>
+                            <button th:name="category" th:value="가을과일" th:classappend="${category == '가을과일'} ? 'active'">가을과일</button>
+                            <button th:name="category" th:value="겨울과일" th:classappend="${category == '겨울과일'} ? 'active'">겨울과일</button>
+                        </form>
                     </div>
                 </div>
                 <div class="search">

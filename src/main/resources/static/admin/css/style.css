@@ -104,6 +104,7 @@
   align-items: center;
   gap: 10px;
 }
+
 #admin_product .inner .box02 .status .buttons button,
 #admin_product .inner .box02 .sort .buttons button,
 #admin_product .inner .box02 .search .buttons button {
@@ -112,12 +113,14 @@
   border: 1px solid #333;
   cursor: pointer;
 }
-#admin_product .inner .box02 .status .buttons button:first-child,
-#admin_product .inner .box02 .sort .buttons button:first-child,
-#admin_product .inner .box02 .search .buttons button:first-child {
+
+#admin_product .inner .box02 .status .buttons button.active,
+#admin_product .inner .box02 .sort .buttons button.active,
+#admin_product .inner .box02 .search .buttons button.active {
   background-color: #333;
   color: #fff;
 }
+
 #admin_product .inner .box02 .status input,
 #admin_product .inner .box02 .sort input,
 #admin_product .inner .box02 .search input {
@@ -1636,6 +1639,7 @@
   border: 1px solid #333;
   cursor: pointer;
 }
+
 #admin_banner .inner .box02 .status .buttons button:first-child,
 #admin_banner .inner .box02 .search .buttons button:first-child {
   background-color: #333;
