@@ -16,7 +16,7 @@ public class ProductService {
 
     public PageInfo<Product> getProducts(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = selectAll();
+        List<Product> products = productRepository.selectAll();
         return new PageInfo<>(products);
     }
 
@@ -34,7 +34,13 @@ public class ProductService {
 
     public PageInfo<Product> getProductsByStatusAndCategory(int pageNum, int pageSize, String status, String category) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = selectAllByStatusAndCategory(status, category);
+        List<Product> products = productRepository.selectAllByStatusAndCategory(status, category);
+        return new PageInfo<>(products);
+    }
+
+    public PageInfo<Product> getProductsBySearchCond(int pageNum, int pageSize, String searchCond) {
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
+        List<Product> products = productRepository.selectAllBySearchCond(searchCond);
         return new PageInfo<>(products);
     }
 
@@ -46,13 +52,6 @@ public class ProductService {
         return productRepository.selectProductAllById(id);
     }
 
-    public List<Product> selectAll() {
-        return productRepository.selectAll();
-    }
-
-    public List<Product> selectAllByStatusAndCategory(String status, String category) {
-        return productRepository.selectAllByStatusAndCategory(status, category);
-    }
 
     public int countTotalProducts() {
         return productRepository.countTotalProducts();

@@ -41,6 +41,11 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
+    public List<Product> selectAllBySearchCond(String searchCond) {
+        return productMapper.selectAllBySearchCond(searchCond);
+    }
+
+    @Override
     public int countTotalProducts() {
         return productMapper.countTotalProducts();
     }

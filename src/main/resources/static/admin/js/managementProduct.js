@@ -37,6 +37,19 @@ $(() => {
         }
     });
 
+    // 모두 체크
+    $("#allCheck").click(function() {
+        // chk1 체크박스의 체크 여부에 따라 모든 체크박스 상태를 변경
+        const isChecked = $(this).prop("checked");
+        $("input[type='checkbox']").prop("checked", isChecked);
+    });
+
+    $("#searchBtn").on("click", () => {
+        const name = $("#searchCond").val();
+        $("#searchCondHid").val(name);
+        $("#searchForm").submit();
+    })
+
     // 판매 중지 버튼 클릭 이벤트
     $(".stopSaleBtn").on("click", (e) => {
         const btn = $(e.currentTarget);

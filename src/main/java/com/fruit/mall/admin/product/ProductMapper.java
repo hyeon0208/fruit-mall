@@ -20,6 +20,8 @@ public interface ProductMapper {
 
     List<Product> selectAllByStatusAndCategory(@Param("status") String status, @Param("category") String category);
 
+    List<Product> selectAllBySearchCond(@Param("searchCond") String searchCond);
+
     int countTotalProducts();
 
     int countOnSaleProducts();

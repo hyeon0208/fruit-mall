@@ -68,6 +68,11 @@
         WHERE PRODUCT_SALE_STATUS = #{status} AND CATEGORY_ID = (SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{category})
     </select>
 
+    <select id="selectAllBySearchCond" resultType="com.fruit.mall.admin.product.Product">
+        SELECT * FROM product
+        WHERE PRODUCT_NAME LIKE CONCAT('%', #{searchCond}, '%');
+    </select>
+
     <update id="updateProductStatus" >
         UPDATE product
         SET PRODUCT_SALE_STATUS = #{status}

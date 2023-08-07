@@ -16,15 +16,18 @@ public class ProductManagementController {
     private final ProductService productService;
     private final static String ALL_STATUS = "전체상태";
     private final static String ALL_CATEGORY = "전체카테고리";
+    private final static String NO_SEARCH = "no";
 
     @GetMapping("/product")
-    public String paging(@Login SessionUser admin, Model model,
-                                          @RequestParam(value = "status", defaultValue = ALL_STATUS) String status,
-                                      @RequestParam(value = "category", defaultValue = ALL_CATEGORY) String category,
-                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+    public String paging(Model model,
+                         @RequestParam(value = "status", defaultValue = ALL_STATUS) String status,
+                         @RequestParam(value = "category", defaultValue = ALL_CATEGORY) String category,
+                         @RequestParam(value = "searchCond", defaultValue = NO_SEARCH) String searchCond,
+                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
 
         PageInfo<Product> pageInfo;
+
         if (status.equals(ALL_STATUS) && category.equals(ALL_CATEGORY)) {
             pageInfo = productService.getProducts(pageNum, pageSize);
         } else if (!status.equals(ALL_STATUS) && category.equals(ALL_CATEGORY)) {
@@ -33,6 +36,10 @@ public class ProductManagementController {
             pageInfo = productService.getProductsByCategory(pageNum, pageSize, category);
         } else {
             pageInfo = productService.getProductsByStatusAndCategory(pageNum, pageSize, status, category);
+        }
+
+        if (!searchCond.equals(NO_SEARCH)) {
+            pageInfo = productService.getProductsBySearchCond(pageNum, pageSize, searchCond);
         }
 
         int totalCount = productService.countTotalProducts();

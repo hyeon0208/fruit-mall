@@ -52,10 +52,13 @@
                 </div>
                 <div class="search">
                     <span>검색</span>
-                    <input type="text" placeholder="상품명 검색">
-                    <div class="buttons">
-                        <button>검색</button>
-                    </div>
+                        <input id="searchCond" type="text" placeholder="상품명 검색">
+                        <div class="buttons">
+                            <button id="searchBtn">검색</button>
+                        </div>
+                    <form id="searchForm" method="get" action="/admin/product">
+                        <input type="hidden" id="searchCondHid" name="searchCond">
+                    </form>
                 </div>
             </div>
 
