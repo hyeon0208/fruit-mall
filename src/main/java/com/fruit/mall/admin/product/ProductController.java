@@ -1,6 +1,7 @@
 package com.fruit.mall.admin.product;
 
 import com.fruit.mall.admin.category.CategoryService;
+import com.fruit.mall.admin.image.FileInfo;
 import com.fruit.mall.admin.image.Image;
 import com.fruit.mall.admin.image.ImageService;
 import com.fruit.mall.admin.product.dto.ProductRegistrationForm;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,27 +31,34 @@ public class ProductController {
     public String addProduct(@ModelAttribute ProductRegistrationForm form, @RequestPart("files") List<MultipartFile> files) throws IOException {
         Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
 
+        String updatedDescription = null;
+        List<FileInfo> imageInfo = new ArrayList<>();
         for (MultipartFile file : files) {
             String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
+            String fileName = file.getOriginalFilename();
 
-            String updatedDescription = form.getDescription().replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
+            updatedDescription = form.getDescription().replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
 
-            Product product = Product.builder()
-                    .categoryId(categoryId)
-                    .productName(form.getProductName())
-                    .productPrice(form.getPrice())
-                    .productStock(form.getStock())
-                    .productDescription(updatedDescription)
-                    .productDiscount(form.getDiscount())
-                    .productSaleStatus(ON_SALE)
-                    .build();
-            productService.insertProduct(product);
+            imageInfo.add(new FileInfo(firebaseImageUrl, fileName));
+        }
 
+        Product product = Product.builder()
+                .categoryId(categoryId)
+                .productName(form.getProductName())
+                .productPrice(form.getPrice())
+                .productStock(form.getStock())
+                .productDescription(updatedDescription)
+                .productDiscount(form.getDiscount())
+                .productSaleStatus(ON_SALE)
+                .build();
+        productService.insertProduct(product);
+
+        for (FileInfo fileInfo : imageInfo) {
             Image image = Image.builder()
                     .productId(product.getProductId())
-                    .imageUrl(firebaseImageUrl)
+                    .imageUrl(fileInfo.getFirebaseImageUrl())
                     .path(PATH)
-                    .fileName(file.getOriginalFilename())
+                    .fileName(fileInfo.getFileName())
                     .build();
             imageService.insertImage(image);
         }

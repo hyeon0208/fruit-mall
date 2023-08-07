@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Getter
-@NoArgsConstructor
 public class Image {
     private Long imageId;
     private Long productId;

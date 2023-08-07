@@ -130,7 +130,7 @@
                             <td name="리뷰수">-</td>
                             <td th:text="${#dates.format(product.productCreatedAt, 'yyyy.MM.dd')}"></td>
                             <td>
-                                <button>수정</button>
+                                <button class="editBtn" th:data-product-id-edit="${product.productId}">수정</button>
                             </td>
                             <td>
                                 <button class="stopSaleBtn" th:data-product-id="${product.productId}">중지</button>
