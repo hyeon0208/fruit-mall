@@ -47,6 +47,11 @@ public class ProductService implements ProductMapper {
     }
 
     @Override
+    public int countTotalProducts() {
+        return productMapper.countTotalProducts();
+    }
+
+    @Override
     public int countOnSaleProducts() {
         return productMapper.countOnSaleProducts();
     }

@@ -29,10 +29,12 @@ public class ProductManagementController {
             pageInfo = productService.getOnSaleProducts(pageNum, pageSize, status);
         }
 
+        int totalCount = productService.countTotalProducts();
         int onSaleCount = productService.countOnSaleProducts();
         int offSaleCount = productService.countOffSaleProducts();
         int soldOutCount = productService.countSoldOutProducts();
 
+        model.addAttribute("totalCount", totalCount);
         model.addAttribute("onSaleCount", onSaleCount);
         model.addAttribute("offSaleCount", offSaleCount);
         model.addAttribute("soldOutCount", soldOutCount);

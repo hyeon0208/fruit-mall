@@ -25,39 +25,44 @@
     </insert>
 
     <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall.admin.product.Product">
-        SELECT * FROM product WHERE PRODUCT_ID = #{productId}
+        SELECT * FROM product WHERE PRODUCT_ID = #{productId};
     </select>
 
     <select id="selectAll" resultType="com.fruit.mall.admin.product.Product">
-        SELECT * FROM product
+        SELECT * FROM product;
+    </select>
+
+    <select id="countTotalProducts" resultType="int">
+        SELECT COUNT(*)
+        FROM product;
     </select>
 
     <select id="countOnSaleProducts" parameterType="String" resultType="int">
         SELECT COUNT(*)
         FROM product
-        WHERE PRODUCT_SALE_STATUS = '판매중'
+        WHERE PRODUCT_SALE_STATUS = '판매중';
     </select>
 
     <select id="countOffSaleProducts" parameterType="String" resultType="int">
         SELECT COUNT(*)
         FROM product
-        WHERE PRODUCT_SALE_STATUS = '판매중지'
+        WHERE PRODUCT_SALE_STATUS = '판매중지';
     </select>
 
     <select id="countSoldOutProducts" parameterType="String" resultType="int">
         SELECT COUNT(*)
         FROM product
-        WHERE PRODUCT_SALE_STATUS = '품절'
+        WHERE PRODUCT_SALE_STATUS = '품절';
     </select>
 
     <select id="selectAllByOnSaleProducts" parameterType="String" resultType="com.fruit.mall.admin.product.Product">
-        SELECT * FROM product WHERE PRODUCT_SALE_STATUS = #{status}
+        SELECT * FROM product WHERE PRODUCT_SALE_STATUS = #{status};
     </select>
 
     <update id="updateProductStatus" >
         UPDATE product
         SET PRODUCT_SALE_STATUS = #{status}
-        WHERE PRODUCT_ID = #{productId}
+        WHERE PRODUCT_ID = #{productId};
     </update>
 
 </mapper>
