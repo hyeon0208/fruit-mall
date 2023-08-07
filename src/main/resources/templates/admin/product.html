@@ -140,20 +140,20 @@
 
             <div class="pagination">
                 <a th:if="${pageInfo.hasPreviousPage}"
-                   th:href="@{/admin/product(status=${saleStatus}, pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}" class="prev">
+                   th:href="@{/admin/product(status=${saleStatus}, category=${category}, pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}" class="prev">
                     <span class="material-symbols-outlined">chevron_left</span>
                 </a>
 
                 <p class="numbers">
                     <th:block th:each="i : ${#numbers.sequence(1, pageInfo.pages)}">
-                        <a th:href="@{/admin/product(status=${saleStatus}, pageNum=${i}, pageSize=${pageInfo.pageSize})}"
+                        <a th:href="@{/admin/product(status=${saleStatus}, category=${category}, pageNum=${i}, pageSize=${pageInfo.pageSize})}"
                            th:text="${i}" th:if="${i != pageInfo.pageNum}"></a>
                         <a th:text="${i}" th:classappend='bold' th:if="${i == pageInfo.pageNum}"></a>
                     </th:block>
                 </p>
 
                 <a th:if="${pageInfo.hasNextPage}"
-                   th:href="@{/admin/product(status=${saleStatus}, pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
+                   th:href="@{/admin/product(status=${saleStatus}, category=${category}, pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
                     <span class="material-symbols-outlined">chevron_right</span>
                 </a>
             </div>

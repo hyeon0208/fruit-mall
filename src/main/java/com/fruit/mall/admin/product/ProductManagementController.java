@@ -14,19 +14,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 public class ProductManagementController {
     private final ProductService productService;
-    private final static String ALL_PRODUCT = "전체상품";
+    private final static String ALL_STATUS = "전체상태";
+    private final static String ALL_CATEGORY = "전체카테고리";
 
     @GetMapping("/product")
     public String paging(@Login SessionUser admin, Model model,
-                                      @RequestParam(value = "status", defaultValue = ALL_PRODUCT) String status,
+                                          @RequestParam(value = "status", defaultValue = ALL_STATUS) String status,
+                                      @RequestParam(value = "category", defaultValue = ALL_CATEGORY) String category,
                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
 
         PageInfo<Product> pageInfo;
-        if (status.equalsIgnoreCase(ALL_PRODUCT)) {
+        if (status.equals(ALL_STATUS) && category.equals(ALL_CATEGORY)) {
             pageInfo = productService.getProducts(pageNum, pageSize);
+        } else if (!status.equals(ALL_STATUS) && category.equals(ALL_CATEGORY)) {
+            pageInfo = productService.getProductsByStatus(pageNum, pageSize, status);
+        } else if (status.equals(ALL_STATUS) && !category.equals(ALL_CATEGORY)) {
+            pageInfo = productService.getProductsByCategory(pageNum, pageSize, category);
         } else {
-            pageInfo = productService.getOnSaleProducts(pageNum, pageSize, status);
+            pageInfo = productService.getProductsByStatusAndCategory(pageNum, pageSize, status, category);
         }
 
         int totalCount = productService.countTotalProducts();
@@ -40,6 +46,7 @@ public class ProductManagementController {
         model.addAttribute("soldOutCount", soldOutCount);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("saleStatus", status);
+        model.addAttribute("category", category);
         return "admin/product";
     }
 

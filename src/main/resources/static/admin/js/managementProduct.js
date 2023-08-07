@@ -8,7 +8,7 @@ $(() => {
     // $개 보기 셀렉트 박스 클릭 이벤트
     $("#pageSizeSelect").on("change", () => {
         const selectedPageSize = $("#pageSizeSelect").val();
-        window.location.search = "pageNum=" + 1 + "&pageSize=" + selectedPageSize;
+        window.location.search = "pageNum=1" + "&pageSize=" + selectedPageSize;
     });
 
     // 엑셀 다운로드 버튼 클릭 이벤트

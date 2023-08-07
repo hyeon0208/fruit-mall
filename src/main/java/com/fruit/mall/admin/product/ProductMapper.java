@@ -14,7 +14,11 @@ public interface ProductMapper {
 
     List<Product> selectAll();
 
-    List<Product> selectAllByOnSaleProducts(@Param("status") String status);
+    List<Product> selectAllByStatus(@Param("status") String status);
+
+    List<Product> selectAllByCategory(@Param("category") String category);
+
+    List<Product> selectAllByStatusAndCategory(@Param("status") String status, @Param("category") String category);
 
     int countTotalProducts();
 

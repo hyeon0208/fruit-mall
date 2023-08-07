@@ -20,9 +20,21 @@ public class ProductService implements ProductMapper {
         return new PageInfo<>(products);
     }
 
-    public PageInfo<Product> getOnSaleProducts(int pageNum, int pageSize, String status) {
+    public PageInfo<Product> getProductsByStatus(int pageNum, int pageSize, String status) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = selectAllByOnSaleProducts(status);
+        List<Product> products = selectAllByStatus(status);
+        return new PageInfo<>(products);
+    }
+
+    public PageInfo<Product> getProductsByCategory(int pageNum, int pageSize, String category) {
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
+        List<Product> products = selectAllByCategory(category);
+        return new PageInfo<>(products);
+    }
+
+    public PageInfo<Product> getProductsByStatusAndCategory(int pageNum, int pageSize, String status, String category) {
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
+        List<Product> products = selectAllByStatusAndCategory(status, category);
         return new PageInfo<>(products);
     }
 
@@ -42,8 +54,18 @@ public class ProductService implements ProductMapper {
     }
 
     @Override
-    public List<Product> selectAllByOnSaleProducts(String status) {
-        return productMapper.selectAllByOnSaleProducts(status);
+    public List<Product> selectAllByStatus(String status) {
+        return productMapper.selectAllByStatus(status);
+    }
+
+    @Override
+    public List<Product> selectAllByCategory(String category) {
+        return productMapper.selectAllByCategory(category);
+    }
+
+    @Override
+    public List<Product> selectAllByStatusAndCategory(String status, String category) {
+        return productMapper.selectAllByStatusAndCategory(status, category);
     }
 
     @Override

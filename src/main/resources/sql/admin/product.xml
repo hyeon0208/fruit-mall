@@ -55,8 +55,17 @@
         WHERE PRODUCT_SALE_STATUS = '품절';
     </select>
 
-    <select id="selectAllByOnSaleProducts" parameterType="String" resultType="com.fruit.mall.admin.product.Product">
+    <select id="selectAllByStatus" parameterType="String" resultType="com.fruit.mall.admin.product.Product">
         SELECT * FROM product WHERE PRODUCT_SALE_STATUS = #{status};
+    </select>
+
+    <select id="selectAllByCategory" resultType="com.fruit.mall.admin.product.Product">
+        SELECT * FROM product WHERE CATEGORY_ID = (SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{category})
+    </select>
+
+    <select id="selectAllByStatusAndCategory" resultType="com.fruit.mall.admin.product.Product">
+        SELECT * FROM product
+        WHERE PRODUCT_SALE_STATUS = #{status} AND CATEGORY_ID = (SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{category})
     </select>
 
     <update id="updateProductStatus" >
