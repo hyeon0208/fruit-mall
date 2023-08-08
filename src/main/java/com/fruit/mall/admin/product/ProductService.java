@@ -20,27 +20,9 @@ public class ProductService {
         return new PageInfo<>(products);
     }
 
-    public PageInfo<Product> getProductsByStatus(int pageNum, int pageSize, String status) {
+    public PageInfo<Product> getProductsByFilter(int pageNum, int pageSize, String status, String category, String searchCond) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = productRepository.selectAllByStatus(status);
-        return new PageInfo<>(products);
-    }
-
-    public PageInfo<Product> getProductsByCategory(int pageNum, int pageSize, String category) {
-        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = productRepository.selectAllByCategory(category);
-        return new PageInfo<>(products);
-    }
-
-    public PageInfo<Product> getProductsByStatusAndCategory(int pageNum, int pageSize, String status, String category) {
-        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = productRepository.selectAllByStatusAndCategory(status, category);
-        return new PageInfo<>(products);
-    }
-
-    public PageInfo<Product> getProductsBySearchCond(int pageNum, int pageSize, String searchCond) {
-        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<Product> products = productRepository.selectAllBySearchCond(searchCond);
+        List<Product> products = productRepository.selectAllByFilter(status, category, searchCond);
         return new PageInfo<>(products);
     }
 

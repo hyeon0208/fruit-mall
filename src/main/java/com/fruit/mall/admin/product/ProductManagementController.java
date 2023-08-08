@@ -1,8 +1,7 @@
 package com.fruit.mall.admin.product;
 
+import com.fruit.mall.admin.product.dto.PageResDto;
 import com.fruit.mall.admin.product.dto.SaleStopDto;
-import com.fruit.mall.config.Login;
-import com.fruit.mall.config.SessionUser;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,27 +19,10 @@ public class ProductManagementController {
 
     @GetMapping("/product")
     public String paging(Model model,
-                         @RequestParam(value = "status", defaultValue = ALL_STATUS) String status,
-                         @RequestParam(value = "category", defaultValue = ALL_CATEGORY) String category,
-                         @RequestParam(value = "searchCond", defaultValue = NO_SEARCH) String searchCond,
                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
 
-        PageInfo<Product> pageInfo;
-
-        if (status.equals(ALL_STATUS) && category.equals(ALL_CATEGORY)) {
-            pageInfo = productService.getProducts(pageNum, pageSize);
-        } else if (!status.equals(ALL_STATUS) && category.equals(ALL_CATEGORY)) {
-            pageInfo = productService.getProductsByStatus(pageNum, pageSize, status);
-        } else if (status.equals(ALL_STATUS) && !category.equals(ALL_CATEGORY)) {
-            pageInfo = productService.getProductsByCategory(pageNum, pageSize, category);
-        } else {
-            pageInfo = productService.getProductsByStatusAndCategory(pageNum, pageSize, status, category);
-        }
-
-        if (!searchCond.equals(NO_SEARCH)) {
-            pageInfo = productService.getProductsBySearchCond(pageNum, pageSize, searchCond);
-        }
+        PageInfo<Product> pageInfo = productService.getProducts(pageNum, pageSize);
 
         int totalCount = productService.countTotalProducts();
         int onSaleCount = productService.countOnSaleProducts();
@@ -52,9 +34,22 @@ public class ProductManagementController {
         model.addAttribute("offSaleCount", offSaleCount);
         model.addAttribute("soldOutCount", soldOutCount);
         model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("saleStatus", status);
-        model.addAttribute("category", category);
         return "admin/product";
+    }
+
+    @GetMapping("/searchfilter")
+    @ResponseBody
+    public PageResDto searchFilter(
+            @RequestParam(value = "status",  required = false) String status,
+            @RequestParam(value = "category",  required = false) String category,
+            @RequestParam(value = "searchCond",  required = false) String searchCond,
+            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+
+        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
+        PageResDto pageResDto = new PageResDto(pageInfo.getList());
+
+        return pageResDto;
     }
 
     @PostMapping("/salestop")
@@ -65,5 +60,12 @@ public class ProductManagementController {
         String updatedTime = String.valueOf(updatedProduct.getProductUpdatedAt());
 
         return updatedTime;
+    }
+
+    @GetMapping("/edit/product/{productId}")
+    public String updateProduct(@PathVariable("productId") Long productId, Model model) {
+        Product product = productService.selectProductAllById(productId);
+        model.addAttribute("product", product);
+        return "admin/editForm";
     }
 }

@@ -14,6 +14,8 @@ public interface ProductMapper {
 
     List<Product> selectAll();
 
+    List<Product> selectAllByFilter(@Param("status") String status, @Param("category") String category, @Param("searchCond") String searchCond);
+
     List<Product> selectAllByStatus(@Param("status") String status);
 
     List<Product> selectAllByCategory(@Param("category") String category);

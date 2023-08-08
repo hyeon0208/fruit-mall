@@ -26,6 +26,11 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
+    public List<Product> selectAllByFilter(String status, String category, String searchCond) {
+        return productMapper.selectAllByFilter(status, category, searchCond);
+    }
+
+    @Override
     public List<Product> selectAllByStatus(String status) {
         return productMapper.selectAllByStatus(status);
     }
@@ -69,5 +74,4 @@ public class ProductRepository implements ProductMapper {
     public void updateProductStatus(Long productId, String status) {
         productMapper.updateProductStatus(productId, status);
     }
-
 }
