@@ -55,7 +55,7 @@
         SELECT * FROM product;
     </select>
 
-    <select id="selectAllByFilter" parameterType="map" resultType="com.fruit.mall.admin.product.Product">
+    <select id="selectAllByFilter" resultType="com.fruit.mall.admin.product.Product">
         SELECT * FROM product
         <where>
             <if test="status != null and status !=''">

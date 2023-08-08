@@ -31,26 +31,6 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
-    public List<Product> selectAllByStatus(String status) {
-        return productMapper.selectAllByStatus(status);
-    }
-
-    @Override
-    public List<Product> selectAllByCategory(String category) {
-        return productMapper.selectAllByCategory(category);
-    }
-
-    @Override
-    public List<Product> selectAllByStatusAndCategory(String status, String category) {
-        return productMapper.selectAllByStatusAndCategory(status, category);
-    }
-
-    @Override
-    public List<Product> selectAllBySearchCond(String searchCond) {
-        return productMapper.selectAllBySearchCond(searchCond);
-    }
-
-    @Override
     public int countTotalProducts() {
         return productMapper.countTotalProducts();
     }

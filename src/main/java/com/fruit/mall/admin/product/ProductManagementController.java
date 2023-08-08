@@ -1,6 +1,5 @@
 package com.fruit.mall.admin.product;
 
-import com.fruit.mall.admin.product.dto.PageResDto;
 import com.fruit.mall.admin.product.dto.SaleStopDto;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ public class ProductManagementController {
     public String paging(Model model,
                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-
         PageInfo<Product> pageInfo = productService.getProducts(pageNum, pageSize);
 
         int totalCount = productService.countTotalProducts();
@@ -39,7 +37,7 @@ public class ProductManagementController {
 
     @GetMapping("/searchfilter")
     @ResponseBody
-    public PageResDto searchFilter(
+    public PageInfo<Product> searchFilter(
             @RequestParam(value = "status",  required = false) String status,
             @RequestParam(value = "category",  required = false) String category,
             @RequestParam(value = "searchCond",  required = false) String searchCond,
@@ -47,9 +45,7 @@ public class ProductManagementController {
             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
 
         PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
-        PageResDto pageResDto = new PageResDto(pageInfo.getList());
-
-        return pageResDto;
+        return pageInfo;
     }
 
     @PostMapping("/salestop")

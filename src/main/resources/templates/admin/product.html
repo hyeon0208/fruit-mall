@@ -32,18 +32,18 @@
                 <div class="status">
                     <span>게시상태</span>
                     <div class="buttons">
-                        <button class="statusBtn" data-status="판매중" name="status" value="판매중" th:classappend="${saleStatus == '판매중'} ? 'active'">판매중</button>
-                        <button class="statusBtn" data-status="판매중지" name="status" value="판매중지" th:classappend="${saleStatus == '판매중지'} ? 'active'">판매중지</button>
-                        <button class="statusBtn" data-status="품절" name="status" value="품절" th:classappend="${saleStatus == '품절'} ? 'active'">품절</button>
+                        <button class="statusBtn" value="판매중" th:classappend="${saleStatus == '판매중'} ? 'active'">판매중</button>
+                        <button class="statusBtn" value="판매중지" th:classappend="${saleStatus == '판매중지'} ? 'active'">판매중지</button>
+                        <button class="statusBtn" value="품절" th:classappend="${saleStatus == '품절'} ? 'active'">품절</button>
                     </div>
                 </div>
                 <div class="sort">
                     <span>분류</span>
                     <div class="buttons">
-                        <button class="categoryBtn" data-category="봄과일" name="category" value="봄과일" th:classappend="${category == '봄과일'} ? 'active'">봄과일</button>
-                        <button class="categoryBtn" data-category="여름과일" name="category" value="여름과일" th:classappend="${category == '여름과일'} ? 'active'">여름과일</button>
-                        <button class="categoryBtn" data-category="가을과일" name="category" value="가을과일" th:classappend="${category == '가을과일'} ? 'active'">가을과일</button>
-                        <button class="categoryBtn" data-category="겨울과일" name="category" value="겨울과일" th:classappend="${category == '겨울과일'} ? 'active'">겨울과일</button>
+                        <button class="categoryBtn" value="봄과일" th:classappend="${category == '봄과일'} ? 'active'">봄과일</button>
+                        <button class="categoryBtn" value="여름과일" th:classappend="${category == '여름과일'} ? 'active'">여름과일</button>
+                        <button class="categoryBtn" value="가을과일" th:classappend="${category == '가을과일'} ? 'active'">가을과일</button>
+                        <button class="categoryBtn" value="겨울과일" th:classappend="${category == '겨울과일'} ? 'active'">겨울과일</button>
                     </div>
                 </div>
                 <div class="search">
@@ -58,7 +58,7 @@
 
             <div class="box03">
                 <div class="left">
-                    <span class="margin">검색결과 <span class="bold" th:text="${pageInfo.pageSize}"></span>건</span>
+                    <span class="margin">검색결과 <span class="bold" th:text="${pageInfo.total}"></span>건</span>
                     <button>선택 판매중지</button>
                     <button>선택삭제</button>
                 </div>
@@ -124,10 +124,10 @@
                             <td name="리뷰수">-</td>
                             <td th:text="${#dates.format(product.productCreatedAt, 'yyyy.MM.dd')}"></td>
                             <td>
-                                <button class="editBtn" th:data-product-id-edit="${product.productId}">수정</button>
+                                <button class="editBtn" th:value="${product.productId}">수정</button>
                             </td>
                             <td>
-                                <button class="stopSaleBtn" th:data-product-id="${product.productId}">중지</button>
+                                <button class="stopSaleBtn" th:value="${product.productId}">중지</button>
                                 <span class="updateTime" style="display: none;"></span>
                             </td>
                         </tr>
@@ -137,20 +137,19 @@
 
             <div class="pagination">
                 <a th:if="${pageInfo.hasPreviousPage}"
-                   th:href="@{/admin/product(status=${saleStatus}, category=${category}, pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}" class="prev">
+                   th:href="@{/admin/product(pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}" class="prev">
                     <span class="material-symbols-outlined">chevron_left</span>
                 </a>
 
                 <p class="numbers">
                     <th:block th:each="i : ${#numbers.sequence(1, pageInfo.pages)}">
-                        <a th:href="@{/admin/product(status=${saleStatus}, category=${category}, pageNum=${i}, pageSize=${pageInfo.pageSize})}"
-                           th:text="${i}" th:if="${i != pageInfo.pageNum}"></a>
-                        <a th:text="${i}" th:classappend='bold' th:if="${i == pageInfo.pageNum}"></a>
+                        <a th:href="@{/admin/product(pageNum=${i}, pageSize=${pageInfo.pageSize})}"
+                           th:text="${i}" th:style="${i == pageInfo.pageNum} ? 'font-weight: bold; font-size: 16px;' : ''"></a>
                     </th:block>
                 </p>
 
                 <a th:if="${pageInfo.hasNextPage}"
-                   th:href="@{/admin/product(status=${saleStatus}, category=${category}, pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
+                   th:href="@{/admin/product(pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
                     <span class="material-symbols-outlined">chevron_right</span>
                 </a>
             </div>
