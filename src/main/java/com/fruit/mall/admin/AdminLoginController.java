@@ -22,8 +22,12 @@ public class AdminLoginController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, HttpServletRequest request) {
         model.addAttribute("admin", new Admin());
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            return "redirect:/admin/dashboard";
+        }
         return "admin/index";
     }
 
