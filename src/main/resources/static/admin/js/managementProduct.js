@@ -3,19 +3,19 @@ let selectedStatus, selectedCategory, selectedSearch;
 let currentPage= 1;
 
 // 이전 페이지 버튼
-$(document).on('click', '.prev', () => {
+$(document).on('click', '.prevBtn', () => {
     currentPage -= 1;
     updateProductList();
 });
 
 // 페이지 번호 버튼
 $(document).on('click', '.numberBtn', (e) => {
-    currentPage = $(e.currentTarget).attr("value");
+    currentPage = parseInt($(e.currentTarget).attr("value"));
     updateProductList();
 });
 
 // 다음 페이지 버튼
-$(document).on('click', '.next', () => {
+$(document).on('click', '.nextBtn', () => {
     currentPage += 1;
     updateProductList();
 });
@@ -176,21 +176,21 @@ function updateProductList() {
         const numbersDiv = $('<p>').addClass('numbers');
         paginationDiv.empty();
 
-        const totalData = res.data.pages;
-        const totalPages = res.data.navigatepageNums;
+        const totalData = res.data.pages; // 총 데이터 수
+        const pageNumberList = res.data.navigatepageNums; // 페이지 번호들의 순서를 담은 배열
         const currentPage = res.data.pageNum;
 
         // 이전 페이지 버튼
         if (res.data.hasPreviousPage) {
             const prevBtn = $('<a>')
                 .attr('href', '#')
-                .addClass('prev')
+                .addClass('prevBtn')
                 .attr('value', res.data.prePage)
                 .html('<span class="material-symbols-outlined">chevron_left</span>');
             paginationDiv.append(prevBtn);
         }
 
-        totalPages.forEach((pageNumber) => {
+        pageNumberList.forEach((pageNumber) => {
             if (pageNumber <= totalData) {
                 const numberBtn = $('<a>')
                     .text(pageNumber)
@@ -210,7 +210,7 @@ function updateProductList() {
         if (res.data.hasNextPage) {
             const nextBtn = $('<a>')
                 .attr('href', '#')
-                .addClass('next')
+                .addClass('nextBtn')
                 .attr('value', res.data.nextPage)
                 .html('<span class="material-symbols-outlined">chevron_right</span>');
             paginationDiv.append(nextBtn);
