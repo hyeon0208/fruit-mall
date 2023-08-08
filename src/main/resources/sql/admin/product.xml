@@ -58,12 +58,22 @@
     <select id="selectAllByFilter" resultType="com.fruit.mall.admin.product.Product">
         SELECT * FROM product
         <where>
-            <if test="status != null and status !=''">
-                PRODUCT_SALE_STATUS = #{status}
+            <if test="status == '전체상품'">
+                <!-- status가 '전체상품'인 경우, 다른 조건 무시 -->
             </if>
-            <if test="category != null and category !=''">
+
+            <if test="status != '전체상품' and status != null and status != ''">
+                AND PRODUCT_SALE_STATUS = #{status}
+            </if>
+
+            <if test="category == '전체카테고리'">
+                <!-- category가 '전체카테고리'인 경우, 다른 조건 무시 -->
+            </if>
+
+            <if test="category != '전체카테고리' and category != null and category != ''">
                 AND CATEGORY_ID = (SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{category})
             </if>
+
             <if test="searchCond != null and searchCond !=''">
                 AND PRODUCT_NAME LIKE CONCAT('%', #{searchCond}, '%')
             </if>

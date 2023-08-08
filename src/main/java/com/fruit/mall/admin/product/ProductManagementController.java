@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
@@ -14,7 +16,7 @@ public class ProductManagementController {
     private final ProductService productService;
     private final static String ALL_STATUS = "전체상태";
     private final static String ALL_CATEGORY = "전체카테고리";
-    private final static String NO_SEARCH = "no";
+    private final static String NO_SEARCH = "NO";
 
     @GetMapping("/product")
     public String paging(Model model,
@@ -38,13 +40,11 @@ public class ProductManagementController {
     @GetMapping("/searchfilter")
     @ResponseBody
     public PageInfo<Product> searchFilter(
-            @RequestParam(value = "status",  required = false) String status,
-            @RequestParam(value = "category",  required = false) String category,
-            @RequestParam(value = "searchCond",  required = false) String searchCond,
+            @RequestParam HashMap<String, String> params,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
 
-        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
+        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, params.get("status"), params.get("category"), params.get("searchCond"));
         return pageInfo;
     }
 
