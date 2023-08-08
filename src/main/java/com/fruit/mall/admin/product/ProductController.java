@@ -36,9 +36,7 @@ public class ProductController {
         for (MultipartFile file : files) {
             String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
             String fileName = file.getOriginalFilename();
-
             updatedDescription = form.getDescription().replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
-
             imageInfo.add(new FileInfo(firebaseImageUrl, fileName));
         }
 
