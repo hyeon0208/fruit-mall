@@ -60,6 +60,7 @@ $(document).on("click", ".statusBtn", (e) => {
 // 카테고리 분류 버튼
 $(document).on("click", ".categoryBtn", (e) => {
     selectedCategory =  $(e.currentTarget).val();
+    console.log(selectedCategory)
     updateProductList();
 });
 
@@ -101,17 +102,17 @@ $(document).on("click", ".stopSaleBtn", (e) => {
 
 $(() => {
     // 상품 가격 천자리 구분 기호 표시
-    $(".productPrice").each((index, element) => {
-        const price = $(element).text();
-        $(element).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+    $(".productPrice").each((i, e) => {
+        const price = $(e).text();
+        $(e).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
     });
 
     // 새로 고침 시에도 판매 중지 열의 시간 표시
-    $(".stopSaleBtn").each((index, e) => {
+    $(".stopSaleBtn").each((i, e) => {
         const btn = $(e);
         const productId = btn.val();
         const status = localStorage.getItem(productId);
-        if (status === "Status_SaleOut") {
+        if (status === "판매중지") {
             btn.hide();
             const timeSpan = btn.next(".updateTime");
             const storedDate = localStorage.getItem(`updatedTime-${productId}`);
@@ -134,17 +135,54 @@ function updateProductList() {
         method: "get",
         url: "/admin/searchfilter",
         params: {
-            status: selectedStatus || null,
-            category: selectedCategory || null,
-            searchCond: selectedSearch || null,
-            pageNum: currentPage || 1
+            status: selectedStatus,
+            category: selectedCategory,
+            searchCond: selectedSearch,
+            pageNum: currentPage
         }
     }).then((res) => {
+        const products = res.data.pageInfo.list;
+        const pageInfo = res.data.pageInfo;
+        const status = res.data.status;
+        const category = res.data.category;
+
+        // 클릭한 버튼 색상 추가
+        $('.statusBtn').each((i, e) => {
+            const btn = $(e);
+            btn.removeClass('active');
+
+            if (status === "전체상태" && btn.val() === "전체상태") {
+                btn.addClass('active');
+            } else if (status === "판매중" && btn.val() === "판매중") {
+                btn.addClass('active');
+            } else if (status === "판매중지" && btn.val() === "판매중지") {
+                btn.addClass('active');
+            } else if (status === "품절" && btn.val() === "품절") {
+                btn.addClass('active');
+            }
+        });
+
+        $('.categoryBtn').each((i, e) => {
+            const btn = $(e);
+            btn.removeClass('active');
+
+            if (category === "전체카테고리" && btn.val() === "전체카테고리") {
+                btn.addClass('active');
+            } else if (category === "봄과일" && btn.val() === "봄과일") {
+                btn.addClass('active');
+            } else if (category === "여름과일" && btn.val() === "여름과일") {
+                btn.addClass('active');
+            } else if (category === "가을과일" && btn.val() === "가을과일") {
+                btn.addClass('active');
+            } else if (category === "겨울과일" && btn.val() === "겨울과일") {
+                btn.addClass('active');
+            }
+        });
 
         // .product-table 클래스 내부의 tbody 내부 내용 교체
-        const products = res.data.list;
         const tableRows = products.map((product) => {
-            $(".margin .bold").text(res.data.total);
+
+            $(".margin .bold").text(pageInfo.total);
 
             let stopBtn = $(`<button class="stopSaleBtn" data-product-id="${product.productId}">중지</button>`);
             let updateTime = "";
@@ -176,16 +214,16 @@ function updateProductList() {
         const numbersDiv = $('<p>').addClass('numbers');
         paginationDiv.empty();
 
-        const totalData = res.data.pages; // 총 데이터 수
-        const pageNumberList = res.data.navigatepageNums; // 페이지 번호들의 순서를 담은 배열
-        const currentPage = res.data.pageNum;
+        const totalData = pageInfo.pages; // 총 데이터 수
+        const pageNumberList = pageInfo.navigatepageNums; // 페이지 번호들의 순서를 담은 배열
+        const currentPage = pageInfo.pageNum;
 
         // 이전 페이지 버튼
-        if (res.data.hasPreviousPage) {
+        if (pageInfo.hasPreviousPage) {
             const prevBtn = $('<a>')
                 .attr('href', '#')
                 .addClass('prevBtn')
-                .attr('value', res.data.prePage)
+                .attr('value', pageInfo.prePage)
                 .html('<span class="material-symbols-outlined">chevron_left</span>');
             paginationDiv.append(prevBtn);
         }
@@ -207,11 +245,11 @@ function updateProductList() {
         paginationDiv.append(numbersDiv);
 
         // 다음 페이지 버튼
-        if (res.data.hasNextPage) {
+        if (pageInfo.hasNextPage) {
             const nextBtn = $('<a>')
                 .attr('href', '#')
                 .addClass('nextBtn')
-                .attr('value', res.data.nextPage)
+                .attr('value', pageInfo.nextPage)
                 .html('<span class="material-symbols-outlined">chevron_right</span>');
             paginationDiv.append(nextBtn);
         }

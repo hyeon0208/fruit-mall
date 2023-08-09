@@ -58,16 +58,16 @@
     <select id="selectAllByFilter" resultType="com.fruit.mall.admin.product.Product">
         SELECT * FROM product
         <where>
-            <if test="status == '전체상품'">
-                1 = 1
+            <if test="status == '전체상태'">
+                <!-- -->
             </if>
 
-            <if test="status != '전체상품' and status != null and status != ''">
+            <if test="status != '전체상태' and status != null and status != ''">
                 AND PRODUCT_SALE_STATUS = #{status}
             </if>
 
             <if test="category == '전체카테고리'">
-                1 = 1
+                <!-- -->
             </if>
 
             <if test="category != '전체카테고리' and category != null and category != ''">

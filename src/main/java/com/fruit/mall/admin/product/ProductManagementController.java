@@ -1,5 +1,6 @@
 package com.fruit.mall.admin.product;
 
+import com.fruit.mall.admin.product.dto.PageResDto;
 import com.fruit.mall.admin.product.dto.SaleStopDto;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +15,6 @@ import java.util.HashMap;
 @RequestMapping("/admin")
 public class ProductManagementController {
     private final ProductService productService;
-    private final static String ALL_STATUS = "전체상태";
-    private final static String ALL_CATEGORY = "전체카테고리";
-    private final static String NO_SEARCH = "NO";
 
     @GetMapping("/product")
     public String paging(Model model,
@@ -39,13 +37,24 @@ public class ProductManagementController {
 
     @GetMapping("/searchfilter")
     @ResponseBody
-    public PageInfo<Product> searchFilter(
+    public PageResDto searchFilter(
             @RequestParam HashMap<String, String> params,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+        String status = params.get("status");
+        String category = params.get("category");
+        String searchCond = params.get("searchCond");
 
-        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, params.get("status"), params.get("category"), params.get("searchCond"));
-        return pageInfo;
+        System.out.println("category : " + category);
+        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
+
+        PageResDto pageResDto = PageResDto.builder()
+                .pageInfo(pageInfo)
+                .status(status)
+                .category(category)
+                .build();
+
+        return pageResDto;
     }
 
     @PostMapping("/salestop")
