@@ -28,11 +28,20 @@ public class ProductController {
 
     @PostMapping("/add/product")
     @ResponseBody
-    public String addProduct(@ModelAttribute ProductRegistrationForm form, @RequestPart("files") List<MultipartFile> files) throws IOException {
-        Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
+    public String addProduct(@ModelAttribute ProductRegistrationForm form,
+                             @RequestParam("productImage") MultipartFile productImage,
+                             @RequestParam("editorImages") List<MultipartFile> editorImages) throws IOException {
 
+        List<MultipartFile> files = new ArrayList<>();
+        files.add(productImage);
+        for (MultipartFile editorImage : editorImages) {
+            files.add(editorImage);
+        }
+
+        Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
         String updatedDescription = null;
         List<FileInfo> imageInfo = new ArrayList<>();
+
         for (MultipartFile file : files) {
             String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
             String fileName = file.getOriginalFilename();

@@ -1,4 +1,4 @@
-let imageFiles = [];
+let editorImages = [];
 let formData = new FormData();
 
 function showModal() {
@@ -81,7 +81,7 @@ $(() => {
         const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
         const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
         if (file) {
-            imageFiles.push(file);
+            formData.append("productImage", file);
             // 이미지 미리보기를 생성하는 로직
             const reader = new FileReader();
 
@@ -110,7 +110,7 @@ $(() => {
             if (fileName.includes("blobid")) {
                 success(URL.createObjectURL(file));
             } else {
-                imageFiles.push(file);
+                editorImages.push(file);
                 success(URL.createObjectURL(file)); // Blob 객체의 임시 URL을 생성해 이미지 미리보기 적용
             }
         }
@@ -138,8 +138,8 @@ $(() => {
         formData.append("stock", parseInt($("#stock").val()));
         formData.append("description", tinymce.get("description").getContent());
 
-        for (const file of imageFiles) {
-            formData.append("files", file);
+        for (const file of editorImages) {
+            formData.append("editorImages", file);
         }
 
         axios({
