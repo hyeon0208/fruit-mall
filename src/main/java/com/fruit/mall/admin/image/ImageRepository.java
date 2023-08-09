@@ -3,6 +3,8 @@ package com.fruit.mall.admin.image;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class ImageRepository implements ImageMapper {
@@ -17,5 +19,10 @@ public class ImageRepository implements ImageMapper {
     @Override
     public Image selectAllById(Long id) {
         return imageMapper.selectAllById(id);
+    }
+
+    @Override
+    public List<String> selectImageUrlByProductId(Long id) {
+        return imageMapper.selectImageUrlByProductId(id);
     }
 }

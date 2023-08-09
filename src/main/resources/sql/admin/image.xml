@@ -19,6 +19,14 @@
     </insert>
 
     <select id="selectAllById" parameterType="Long" resultType="com.fruit.mall.admin.image.Image">
-        SELECT * FROM image WHERE IMAGE_ID = #{imageId}
+        SELECT *
+        FROM image
+        WHERE IMAGE_ID = #{imageId};
+    </select>
+
+    <select id="selectImageUrlByProductId" resultType="String">
+        SELECT IMAGE_URL
+        FROM image
+        WHERE PRODUCT_ID = #{productId};
     </select>
 </mapper>

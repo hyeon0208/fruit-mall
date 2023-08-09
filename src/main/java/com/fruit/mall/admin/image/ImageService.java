@@ -19,4 +19,8 @@ public class ImageService {
     public Image selectAllById(Long id) {
         return imageRepository.selectAllById(id);
     }
+
+    public List<String> selectImageUrlByProductId(Long id) {
+        return imageRepository.selectImageUrlByProductId(id);
+    }
 }
