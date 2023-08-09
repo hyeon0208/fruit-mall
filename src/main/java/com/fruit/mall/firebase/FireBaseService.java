@@ -1,6 +1,7 @@
 package com.fruit.mall.firebase;
 
 import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Bucket;
 import com.google.firebase.cloud.StorageClient;
 import java.io.ByteArrayInputStream;
@@ -27,9 +28,8 @@ public class FireBaseService {
         }
 
         StringBuilder sb = new StringBuilder();
-        if (!path.equals("")) {
-            sb.append(path + "/");
-        }
+        sb.append(path);
+        sb.append("/");
         sb.append(fileName);
 
         // Firebase Storage의 버킷을 가져온다.
@@ -40,6 +40,8 @@ public class FireBaseService {
 
         // Firebase 스토리지에 파일 업로드. (업로드될 파일의 경로와 파일 이름, 파일의 내용, 파일 타입 )
         Blob blob = bucket.create(sb.toString(), content, file.getContentType());
+
+        log.info("이미지 저장 경로 {}", sb.toString());
 
         // 업로드된 파일의 다운로드 URL을 반환
         return blob.getMediaLink();
