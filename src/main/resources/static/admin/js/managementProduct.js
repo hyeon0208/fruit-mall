@@ -60,7 +60,6 @@ $(document).on("click", ".statusBtn", (e) => {
 // 카테고리 분류 버튼
 $(document).on("click", ".categoryBtn", (e) => {
     selectedCategory =  $(e.currentTarget).val();
-    console.log(selectedCategory)
     updateProductList();
 });
 
@@ -87,7 +86,7 @@ $(document).on("click", ".stopSaleBtn", (e) => {
     }).then(res => {
         const updatedTime = res.data
         btn.hide();
-        const timeSpan = btn.next(".updateTime");
+        const timeSpan = btn.closest('td').find(".updateTime");
         const formattedTime = updatedTime.substring(0, 10).replaceAll('-', '.');
         timeSpan.text(formattedTime);
         timeSpan.show();
@@ -95,7 +94,7 @@ $(document).on("click", ".stopSaleBtn", (e) => {
         const productStatus = btn.closest('tr').find('.product_Status');
         productStatus.text("판매중지");
 
-        localStorage.setItem(productId, "Status_SaleOut");
+        localStorage.setItem(productId, "판매중지");
         localStorage.setItem(`updatedTime-${productId}`, formattedTime);
     })
 });
@@ -112,6 +111,7 @@ $(() => {
         const btn = $(e);
         const productId = btn.val();
         const status = localStorage.getItem(productId);
+
         if (status === "판매중지") {
             btn.hide();
             const timeSpan = btn.next(".updateTime");
@@ -184,7 +184,7 @@ function updateProductList() {
 
             $(".margin .bold").text(pageInfo.total);
 
-            let stopBtn = $(`<button class="stopSaleBtn" data-product-id="${product.productId}">중지</button>`);
+            let stopBtn = $(`<button class="stopSaleBtn" value="${product.productId}">중지</button>`);
             let updateTime = "";
 
             if (product.productSaleStatus === "판매중지") {
@@ -198,7 +198,7 @@ function updateProductList() {
                 .append($("<td>").addClass("product_Status").text(product.productSaleStatus))
                 .append($("<td>").text(getCategoryName(product.categoryId)))
                 .append($("<td>").text(product.productName))
-                .append($("<td>").text((product.productPrice * (1 - (product.productDiscount / 100))).toLocaleString() + "원"))
+                .append($("<td>").text((product.productPrice * (1 - (product.productDiscount / 100))).toLocaleString("ko-KR", { maximumFractionDigits: 0 }) + "원"))
                 .append($("<td>").text(product.productDiscount > 0 ? `${product.productDiscount}%` : "-"))
                 .append($("<td>").attr("name", "찜수").text("-"))
                 .append($("<td>").attr("name", "결제횟수").text("-"))
