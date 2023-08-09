@@ -1,6 +1,7 @@
 // 상태, 분류, 검색 버튼, 현재 페이지 값 초기 세팅
 let selectedStatus, selectedCategory, selectedSearch;
 let currentPage= 1;
+let pageSize = 5;
 
 // 이전 페이지 버튼
 $(document).on('click', '.prevBtn', () => {
@@ -35,10 +36,10 @@ $(document).on("click", "#allCheck", () => {
     $("input[type='checkbox']").prop("checked", isChecked);
 });
 
-// $개 보기 셀렉트 박스 클릭 이벤트
+// n개 보기 셀렉트 박스 클릭 이벤트
 $(document).on("change", "#pageSizeSelect", () => {
-    const selectedPageSize = $("#pageSizeSelect").val();
-    window.location.search = "pageNum=1" + "&pageSize=" + selectedPageSize;
+    pageSize = $("#pageSizeSelect").val();
+    updateProductList();
 });
 
 // 엑셀 다운로드 버튼 클릭 이벤트
@@ -138,7 +139,8 @@ function updateProductList() {
             status: selectedStatus,
             category: selectedCategory,
             searchCond: selectedSearch,
-            pageNum: currentPage
+            pageNum: currentPage,
+            pageSize: pageSize
         }
     }).then((res) => {
         const products = res.data.pageInfo.list;
