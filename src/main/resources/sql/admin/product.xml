@@ -59,7 +59,7 @@
         SELECT * FROM product
         <where>
             <if test="status == '전체상품'">
-                <!-- status가 '전체상품'인 경우, 다른 조건 무시 -->
+                1 = 1
             </if>
 
             <if test="status != '전체상품' and status != null and status != ''">
@@ -67,7 +67,7 @@
             </if>
 
             <if test="category == '전체카테고리'">
-                <!-- category가 '전체카테고리'인 경우, 다른 조건 무시 -->
+                1 = 1
             </if>
 
             <if test="category != '전체카테고리' and category != null and category != ''">
