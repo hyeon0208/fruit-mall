@@ -46,4 +46,24 @@ public class FireBaseService {
         // 업로드된 파일의 다운로드 URL을 반환
         return blob.getMediaLink();
     }
+
+
+    public void deleteImage(String imageUrl) {
+        Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
+
+        // 이미지 URL에서 버킷 내 경로와 파일 이름을 추출
+        String image = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+
+        // 버킷 내의 image의 BlobId를 추출
+        BlobId blobId = BlobId.of(firebaseBucket, image);
+
+        // 이미지 삭제
+        boolean deleted = bucket.getStorage().delete(blobId);
+
+        if (deleted) {
+            log.info("이미지 삭제 성공: {}", imageUrl);
+        } else {
+            log.error("이미지 삭제 실패: {}", imageUrl);
+        }
+    }
 }
