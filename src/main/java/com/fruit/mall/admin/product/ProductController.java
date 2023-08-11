@@ -1,19 +1,21 @@
 package com.fruit.mall.admin.product;
-
 import com.fruit.mall.admin.category.CategoryService;
 import com.fruit.mall.admin.image.FileInfo;
 import com.fruit.mall.admin.image.Image;
 import com.fruit.mall.admin.image.ImageService;
 import com.fruit.mall.admin.product.dto.ProductRegistrationForm;
 import com.fruit.mall.firebase.FireBaseService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,43 +31,58 @@ public class ProductController {
     @PostMapping("/add/product")
     @ResponseBody
     public String addProduct(@ModelAttribute ProductRegistrationForm form,
-                             @RequestParam("productImage") MultipartFile productImage,
-                             @RequestParam("editorImages") List<MultipartFile> editorImages) throws IOException {
+                             @RequestParam("images") List<MultipartFile> images,
+                             @RequestParam(value = "imageUrls", required = false) List<String> imageUrls) throws IOException {
 
-        List<MultipartFile> files = new ArrayList<>();
-        files.add(productImage);
-        for (MultipartFile editorImage : editorImages) {
-            files.add(editorImage);
+        List<FileInfo> imageInfo = new ArrayList<>();
+        MultipartFile productImage = images.get(0);
+        images.remove(0);
+        String productFileName = productImage.getOriginalFilename();
+        String productFirebaseImageUrl = fireBaseService.uploadFiles(productImage, PATH, productFileName);
+        imageInfo.add(new FileInfo(productFirebaseImageUrl, productFileName));
+
+        String currentDescription = form.getDescription();
+        for (int i = 0; i < images.size(); i++) {
+            MultipartFile file = images.get(i);
+            String editorFileName = images.get(i).getOriginalFilename();
+            String editorFirebaseImageUrl = fireBaseService.uploadFiles(file, PATH, editorFileName);
+            String blobUrl = imageUrls.get(i);
+
+            String patternString = "<img([^>]*)src=[\"']" + Pattern.quote(blobUrl) + "[\"']([^>]*)>";
+
+            Pattern pattern = Pattern.compile(patternString);
+            Matcher matcher = pattern.matcher(currentDescription);
+
+            StringBuffer sb = new StringBuffer();
+            while (matcher.find()) {
+                String remainingAttributes = (matcher.group(1) + matcher.group(2)).replaceAll("(alt=\\\"[^\\\"]*\\\"\\s?)|(width=\\\"[^\\\"]*\\\"\\s?)|(height=\\\"[^\\\"]*\\\"\\s?)", "");
+                matcher.appendReplacement(sb, String.format("<img src=\"%s\"%s", editorFirebaseImageUrl, remainingAttributes));
+            }
+            matcher.appendTail(sb);
+
+            currentDescription = sb.toString();
+            imageInfo.add(new FileInfo(editorFirebaseImageUrl, editorFileName));
         }
 
         Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
-        String updatedDescription = null;
-        List<FileInfo> imageInfo = new ArrayList<>();
-
-        for (MultipartFile file : files) {
-            String firebaseImageUrl = fireBaseService.uploadFiles(file, PATH, file.getOriginalFilename());
-            String fileName = file.getOriginalFilename();
-            updatedDescription = form.getDescription().replaceAll("<img[^>]*src=[\"']([^\"^']*)[\"'][^>]*>", "<img src=\"" + firebaseImageUrl + "\" />");
-            imageInfo.add(new FileInfo(firebaseImageUrl, fileName));
-        }
 
         Product product = Product.builder()
                 .categoryId(categoryId)
                 .productName(form.getProductName())
                 .productPrice(form.getPrice())
                 .productStock(form.getStock())
-                .productDescription(updatedDescription)
+                .productDescription(currentDescription)
                 .productDiscount(form.getDiscount())
                 .productSaleStatus(ON_SALE)
                 .build();
         productService.insertProduct(product);
 
-        for (FileInfo fileInfo : imageInfo) {
+        for (int i = 0; i < imageInfo.size(); i++) {
             Image image = Image.builder()
                     .productId(product.getProductId())
-                    .imageUrl(fileInfo.getFirebaseImageUrl())
+                    .imageUrl(imageInfo.get(i).getFirebaseImageUrl())
                     .path(PATH)
-                    .fileName(fileInfo.getFileName())
+                    .fileName(imageInfo.get(i).getFileName())
                     .build();
             imageService.insertImage(image);
         }

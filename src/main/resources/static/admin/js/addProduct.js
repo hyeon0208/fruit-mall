@@ -1,5 +1,10 @@
+let productImage = [];
 let editorImages = [];
-let formData = new FormData();
+
+// 파일 고유 ID를 생성하는 함수
+function generateFileId() {
+    return Math.random().toString(36).substring(2, 10);
+}
 
 function showModal() {
     $(".txt05").css("display", "block");
@@ -56,6 +61,10 @@ $(() => {
     showErrorMessage("#stock");
     showErrorMessage("#description");
 
+    $("#price").on("focusout", () => {
+        calculateTotal();
+    });
+
     $("#discount").on("focusout", () => {
         let regexDiscount = $("#discount").val().replace(/[^\d]/g, '');
         $("#discount").val(regexDiscount); // 입력값을 숫자만 남긴 값으로 대체
@@ -69,97 +78,175 @@ $(() => {
         } else {
             $("#discount-error").text("");
         }
-
         if (isNaN(discountValue)) {
             $("#discount").val(0)
         }
-
         calculateTotal();
     });
 
-    $("#productPicture").on("change", () => {
-        const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
-        const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
-        if (file) {
-            formData.append("productImage", file);
-            // 이미지 미리보기를 생성하는 로직
-            const reader = new FileReader();
-
-            // 파일 읽기가 완료되면 실행
-            reader.onload = (e) => {
-                $('#previewImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(file); // file을 Data URL로 읽어오고, 읽기가 완료되면 이미지 미리보기로 표시
-        }
-    });
-
-    // TinyMCE 초기화
     tinymce.init({
-        selector: "#description", // TinyMCE를 적용할 textarea 요소의 선택자를 지정
-        plugins: "paste image", // 'paste', 'image', 'imagetools' 플러그인 추가
+        selector: "#description",
+        plugins: "paste image",
         height: 500,
         width: 900,
         toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image", // 'image' 버튼 툴바에 추가
-        paste_data_images: true, // 이미지 붙여넣기 설정 활성화
-        file_picker_types: 'image', // TinyMCE에서 이미지를 선택할 때, 이미지 파일만 선택 (옵션 : media, file 등)
-        images_upload_handler(blobInfo, success) { // 이미지를 업로드하는 핸들러 함수
-            // blobInfo : TinyMCE에서 이미지 업로드 시 사용되는 정보를 담고 있는 객체
-            const file = new File([blobInfo.blob()], blobInfo.filename());
-            const fileName = blobInfo.filename();
+        paste_data_images: true,
+        file_picker_types: 'image',
+        file_picker_callback: function (callback, value, meta) {
+            if (meta.filetype === 'image') {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
 
-            if (fileName.includes("blobid")) {
-                success(URL.createObjectURL(file));
-            } else {
-                editorImages.push(file);
-                success(URL.createObjectURL(file)); // Blob 객체의 임시 URL을 생성해 이미지 미리보기 적용
+                input.onchange = function () {
+                    const file = this.files[0];
+                    const fileId = generateFileId();
+                    file.id = fileId;
+                    editorImages.push(file);
+
+                    const blobUrl = URL.createObjectURL(file);
+                    callback(blobUrl, { alt: fileId });
+                };
+                input.click();
             }
         }
     });
+});
 
-    $("#cancelBtn").on("click", () => {
-        $(".txt05 h5").html('작성중이던 항목이 모두 삭제됩니다. 취소하겠습니까?' + '<br><a href="/admin/product">확인</a>');
-        showModal();
+$(document).on("change", "#productPicture", () => {
+    const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
+    const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
+    if (file) {
+        productImage.push(file);
+
+        // 이미지 미리보기를 생성하는 로직
+        const reader = new FileReader();
+
+        // 파일 읽기가 완료되면 실행
+        reader.onload = (e) => {
+            $('#previewImage').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(file); // file을 Data URL로 읽어오고, 읽기가 완료되면 이미지 미리보기로 표시
+    }
+});
+
+$(document).on("click", "#cancelBtn", () => {
+    $(".txt05 h5").html('작성중이던 항목이 모두 삭제됩니다. 취소하겠습니까?' + '<br><a href="/admin/product">확인</a>');
+    showModal();
+});
+
+// 상품 등록 버튼 클릭
+$(document).on("click", "#addBtn", (e) => {
+    let formData = new FormData();
+    e.preventDefault();
+
+    if (checkErrorAndShowModal("#productName")) return;
+    if (checkErrorAndShowModal("#price")) return;
+    if (checkErrorAndShowModal("#sort")) return;
+    if (checkErrorAndShowModal("#discount")) return;
+    if (checkErrorAndShowModal("#stock")) return;
+    if (checkErrorAndShowModal("#description")) return;
+
+    formData.append("images", productImage.pop());
+
+    tinymce.activeEditor.$('img').each((i, e) => {
+        const fileId = $(e).attr('alt');
+        const file = editorImages.find(f => f.id === fileId);
+        if (file) {
+            const blobUrl = URL.createObjectURL(file);
+            $(e).attr('src', blobUrl);
+            formData.append("images", file);
+            formData.append("imageUrls", blobUrl);
+        }
     });
 
-    $("#addBtn").on("click", (e) => {
-        e.preventDefault();
+    formData.append("productName", $("#productName").val());
+    formData.append("price", parseInt($("#price").val().replace(/,/g, '')));
+    formData.append("sort", $("#sort").val());
+    formData.append("discount", parseInt($("#discount").val()));
+    formData.append("stock", parseInt($("#stock").val()));
+    formData.append("description", tinymce.get("description").getContent());
 
-        if (checkErrorAndShowModal("#productName")) return;
-        if (checkErrorAndShowModal("#price")) return;
-        if (checkErrorAndShowModal("#sort")) return;
-        if (checkErrorAndShowModal("#discount")) return;
-        if (checkErrorAndShowModal("#stock")) return;
-        if (checkErrorAndShowModal("#description")) return;
-
-        formData.append("productName", $("#productName").val());
-        formData.append("price", parseInt($("#price").val().replace(/,/g, '')));
-        formData.append("sort", $("#sort").val());
-        formData.append("discount", parseInt($("#discount").val()));
-        formData.append("stock", parseInt($("#stock").val()));
-        formData.append("description", tinymce.get("description").getContent());
-
-        for (const file of editorImages) {
-            formData.append("editorImages", file);
+    axios({
+        method: "post",
+        url: "/add/product",
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    }).then(res => {
+        productImage = [];
+        editorImages = [];
+        if (res.data === "success") {
+            $(".txt05 h5").html('상품등록이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
+            showModal();
+        } else {
+            $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
+            showModal();
+            $('.txt05 a').click(function () {
+                $('.txt05').hide();
+            });
         }
+    });
+});
 
-        axios({
-            method: "post",
-            url: "/add/product",
-            data: formData,
-            headers: {'Content-Type': 'multipart/form-data'}
-        }).then(res => {
-            if (res.data === "success") {
-                imageFiles = null;
-                formData = null;
-                $(".txt05 h5").html('상품등록이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
-                showModal();
-            } else {
-                $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
-                showModal();
-                $('.txt05 a').click(function () {
-                    $('.txt05').hide();
-                });
-            }
-        });
+// 상품 수정 버튼 클릭
+const productId = $("#editForm").attr("data-productId");
+$(document).on("click", "#editBtn", (e) => {
+    let formData = new FormData();
+    e.preventDefault();
+
+    if (checkErrorAndShowModal("#productName")) return;
+    if (checkErrorAndShowModal("#price")) return;
+    if (checkErrorAndShowModal("#sort")) return;
+    if (checkErrorAndShowModal("#discount")) return;
+    if (checkErrorAndShowModal("#stock")) return;
+    if (checkErrorAndShowModal("#description")) return;
+
+    tinymce.activeEditor.$('img').each((i, e) => {
+        const fileId = $(e).attr('alt');
+        const file = editorImages.find(f => f.id === fileId);
+        if (file) {
+            formData.append("images", file);
+            const blobUrl = URL.createObjectURL(file);
+            $(e).attr('src', blobUrl); // src 속성을 blobUrl로 변경
+            console.log("컨텐츠 = " + tinymce.get("description").getContent());
+            console.log("바꾼 blobUrl = " + blobUrl)
+            formData.append("imageUrls", blobUrl);
+            console.log("일치하는 파일이름 !! : " + file.name);
+        }
+    });
+
+    formData.append("productName", $("#productName").val());
+    formData.append("price", parseInt($("#price").val().replace(/,/g, '')));
+    formData.append("sort", $("#sort").val());
+    formData.append("discount", parseInt($("#discount").val()));
+    formData.append("stock", parseInt($("#stock").val()));
+    formData.append("description", tinymce.get("description").getContent());
+
+    for (const file of editorImages) {
+        formData.append("images", file);
+    }
+
+    for (let key of formData.keys()) {
+        console.log(key, ":", formData.get(key));
+    }
+
+    axios({
+        method: "post",
+        url: `/admin/edit/product/${productId}`,
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    }).then(res => {
+        if (res.data === "success") {
+            productImage = [];
+            editorImages = [];
+            $(".txt05 h5").html('상품등록이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
+            showModal();
+        } else {
+            $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
+            showModal();
+            $('.txt05 a').click(function () {
+                $('.txt05').hide();
+            });
+        }
     });
 });
