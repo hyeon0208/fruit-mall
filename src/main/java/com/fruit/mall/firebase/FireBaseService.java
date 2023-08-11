@@ -1,7 +1,7 @@
 package com.fruit.mall.firebase;
 
+import com.google.api.gax.paging.Page;
 import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Bucket;
 import com.google.firebase.cloud.StorageClient;
@@ -20,12 +20,13 @@ public class FireBaseService {
     @Value("${firebase.bucket}")
     private String firebaseBucket;
 
-    public String uploadFiles(MultipartFile file, String path, String fileName) throws IOException {
+
+    public UploadResult uploadFiles(MultipartFile file, String path, String fileName) throws IOException {
 
         // 업로드 파일 유효성 검사
         if (file.isEmpty()) {
             log.error("File is Empty");
-            return "File is Empty";
+            return new UploadResult();
         }
 
         // Firebase Storage의 버킷을 가져온다.
@@ -65,26 +66,38 @@ public class FireBaseService {
         log.info("이미지 저장 경로 {}", sb);
 
         // 업로드된 파일의 다운로드 URL을 반환
-        return blob.getMediaLink();
+        return new UploadResult(blob.getMediaLink(), newFileName);
+    }
+
+    public boolean isStoredImage(String path, String fileName) {
+        Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
+        Page<Blob> blobs = bucket.list();
+
+        for (Blob blob : blobs.iterateAll()) {
+            if (blob.getName().equals(path + "/" +fileName)) {
+                log.info("저장된 이미지가 있습니다. : {}", blob);
+                return true;
+            }
+        }
+        log.info("저장된 이미지가 없습니다.");
+        return false;
     }
 
 
-    public void deleteImage(String imageUrl) {
+    public void deleteStoredImage(String path, String fileName) {
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
+        Page<Blob> blobs = bucket.list();
 
-        // 이미지 URL에서 버킷 내 경로와 파일 이름을 추출
-        String image = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+        for (Blob blob : blobs.iterateAll()) {
+            if (blob.getName().equals(path + "/" +fileName)) {
+                log.info("삭제할 이미지를 찾았습니다. : {}", blob);
 
-        // 버킷 내의 image의 BlobId를 추출
-        BlobId blobId = BlobId.of(firebaseBucket, image);
-
-        // 이미지 삭제
-        boolean deleted = bucket.getStorage().delete(blobId);
-
-        if (deleted) {
-            log.info("이미지 삭제 성공: {}", imageUrl);
-        } else {
-            log.error("이미지 삭제 실패: {}", imageUrl);
+                boolean deleted = blob.delete();
+                if (deleted) {
+                    log.info("이미지가 성공적으로 삭제되었습니다.");
+                }
+            }
         }
+        log.info("삭제할 이미지가 없습니다.");
     }
 }

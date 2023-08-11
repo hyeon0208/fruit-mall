@@ -21,7 +21,8 @@ public class Product {
     private Timestamp productCreatedAt;
 
     @Builder
-    public Product(Long categoryId, String productName, int productPrice, int productStock, String productDescription, int productDiscount, String productSaleStatus) {
+    public Product(Long productId, Long categoryId, String productName, int productPrice, int productStock, String productDescription, int productDiscount, String productSaleStatus) {
+        this.productId = productId;
         this.categoryId = categoryId;
         this.productName = productName;
         this.productPrice = productPrice;

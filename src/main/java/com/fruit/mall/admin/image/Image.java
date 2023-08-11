@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Getter
+@NoArgsConstructor
 public class Image {
     private Long imageId;
     private Long productId;
@@ -16,11 +17,11 @@ public class Image {
     private Timestamp imageUploadedAt;
 
     @Builder
-    public Image(Long productId, String imageUrl, String path, String fileName, Timestamp imageUploadedAt) {
+    public Image(Long imageId, Long productId, String imageUrl, String path, String fileName) {
+        this.imageId = imageId;
         this.productId = productId;
         this.imageUrl = imageUrl;
         this.path = path;
         this.fileName = fileName;
-        this.imageUploadedAt = imageUploadedAt;
     }
 }

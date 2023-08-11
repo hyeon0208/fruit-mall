@@ -16,11 +16,15 @@ public class ImageService {
         imageRepository.insertImage(image);
     }
 
-    public Image selectAllById(Long id) {
-        return imageRepository.selectAllById(id);
+    public void updateImage(Image image) {
+        imageRepository.updateImage(image);
     }
 
-    public List<String> selectImageUrlByProductId(Long id) {
-        return imageRepository.selectImageUrlByProductId(id);
+    public String selectProductImageUrlByProductId(Long id) {
+        return imageRepository.selectProductImageUrlByProductId(id);
+    }
+
+    public List<Image> selectImagesByProductId(Long id) {
+        return imageRepository.selectImagesByProductId(id);
     }
 }

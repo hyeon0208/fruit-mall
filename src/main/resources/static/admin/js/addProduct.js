@@ -117,6 +117,7 @@ $(document).on("change", "#productPicture", () => {
     const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
     const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
     if (file) {
+        console.log(file.name);
         productImage.push(file);
 
         // 이미지 미리보기를 생성하는 로직
@@ -189,10 +190,11 @@ $(document).on("click", "#addBtn", (e) => {
 });
 
 // 상품 수정 버튼 클릭
-const productId = $("#editForm").attr("data-productId");
 $(document).on("click", "#editBtn", (e) => {
-    let formData = new FormData();
+    const productId = $("#editForm").attr("data-productId");
+
     e.preventDefault();
+    let formData = new FormData();
 
     if (checkErrorAndShowModal("#productName")) return;
     if (checkErrorAndShowModal("#price")) return;
@@ -201,17 +203,18 @@ $(document).on("click", "#editBtn", (e) => {
     if (checkErrorAndShowModal("#stock")) return;
     if (checkErrorAndShowModal("#description")) return;
 
+    formData.append("productImage", productImage.pop());
+
     tinymce.activeEditor.$('img').each((i, e) => {
         const fileId = $(e).attr('alt');
         const file = editorImages.find(f => f.id === fileId);
         if (file) {
-            formData.append("images", file);
             const blobUrl = URL.createObjectURL(file);
-            $(e).attr('src', blobUrl); // src 속성을 blobUrl로 변경
-            console.log("컨텐츠 = " + tinymce.get("description").getContent());
-            console.log("바꾼 blobUrl = " + blobUrl)
+            $(e).attr('src', blobUrl);
+            formData.append("editorImages", file);
             formData.append("imageUrls", blobUrl);
-            console.log("일치하는 파일이름 !! : " + file.name);
+
+            console.log("폼 데이터에 넣을 에디터 이미지 : " + file.name);
         }
     });
 
@@ -222,12 +225,14 @@ $(document).on("click", "#editBtn", (e) => {
     formData.append("stock", parseInt($("#stock").val()));
     formData.append("description", tinymce.get("description").getContent());
 
-    for (const file of editorImages) {
-        formData.append("images", file);
+    for (let key of formData.keys()) {
+        console.log(key, ":", formData.get(key));
     }
 
     for (let key of formData.keys()) {
-        console.log(key, ":", formData.get(key));
+        if (key === "images") {
+            console.log("이미지들  = " + key, ":", formData.get(key));
+        }
     }
 
     axios({
@@ -239,7 +244,7 @@ $(document).on("click", "#editBtn", (e) => {
         if (res.data === "success") {
             productImage = [];
             editorImages = [];
-            $(".txt05 h5").html('상품등록이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
+            $(".txt05 h5").html('상품수정이 완료되었습니다.' + '<br><a href="/admin/product">확인</a>');
             showModal();
         } else {
             $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')

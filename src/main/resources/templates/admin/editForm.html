@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+
+  <section id="admin_product02">
+    <div class="inner">
+      <div class="title">
+        <h2>상품수정</h2>
+      </div>
+      <form id="editForm" th:object="${product}" th:data-productId="${product.productId}">
+        <div class="admin_product02__wrap">
+          <label for="productName" class="productName">
+            <p> <span>*</span> 상품명</p>
+            <input type="text" id="productName" th:value="*{productName}" placeholder="상품명을 입력해주세요.">
+            <div class="error-message" id="productName-error"></div>
+          </label>
+
+          <label for="sort">
+            <p> <span>*</span> 분류</p>
+            <select id="sort">
+              <p>분류</p>
+              <option value="">선택</option>
+              <option value="봄과일"  th:selected="${product.categoryId == 1}">봄과일</option>
+              <option value="여름과일" th:selected="${product.categoryId == 2}">여름과일</option>
+              <option value="가을과일" th:selected="${product.categoryId == 3}">가을과일</option>
+              <option value="겨울과일" th:selected="${product.categoryId == 4}">겨울과일</option>
+            </select>
+            <div class="error-message" id="sort-error"></div>
+          </label>
+
+          <label for="price">
+            <p> <span>*</span> 상품금액</p>
+            <input type="text" class="edit-form-price" id="price" th:value="*{productPrice}" placeholder="0">
+            원
+            <div class="error-message" id="price-error"></div>
+          </label>
+
+          <label for="discount">
+            <p> 상품할인율 </p>
+            <input type="text" id="discount" th:value="*{productDiscount}" placeholder="0" value="0">
+            %
+            <div class="error-message" id="discount-error"></div>
+          </label>
+
+          <label for="totalPrice" class="totalPrice">
+            <p> 할인적용 후 금액 </p>
+            <input type="text" value="0" id="totalPrice" readonly>
+            원
+          </label>
+
+          <label for="stock">
+            <p> <span>*</span> 재고수량 </p>
+            <input type="text" id="stock" th:value="*{productStock}" placeholder="0" >
+            개
+            <div class="error-message" id="stock-error"></div>
+          </label>
+
+          <label for="productPicture" class="productPicture">
+            <p> <span>*</span> 상품이미지 </p>
+            <div>+ 추가</div>
+            <input type="file" name="productPicture" id="productPicture" accept="image/*">
+            <img th:src="${productImage}" id="previewImage" width="110px" height="110px">
+          </label>
+          <div class="error-message" id="image-error"></div>
+
+          <label for="description" class="description">
+            <p> <span>*</span> 상품 상세정보 </p>
+            <input type="text" id="description" th:value="*{productDescription}">
+            <div class="error-message" id="description-error"></div>
+          </label>
+
+        </div>
+      </form>
+
+      <div class="buttons">
+        <button id ="cancelBtn">취소하기</button>
+        <button id ="editBtn">수정하기</button>
+      </div>
+    </div>
+  </section>
+
+  <!--    모달창 -->
+  <div class="txt05" style="display: none;">
+    <div class="inner">
+      <h4>알림</h4>
+      <h5><br>
+      </h5>
+      <a href="/admin/product">확인</a>
+    </div>
+  </div>
+</th:block>
+</html>

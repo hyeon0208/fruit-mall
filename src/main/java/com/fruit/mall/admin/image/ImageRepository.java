@@ -1,6 +1,7 @@
 package com.fruit.mall.admin.image;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,12 +18,17 @@ public class ImageRepository implements ImageMapper {
     }
 
     @Override
-    public Image selectAllById(Long id) {
-        return imageMapper.selectAllById(id);
+    public void updateImage(Image image) {
+        imageMapper.updateImage(image);
     }
 
     @Override
-    public List<String> selectImageUrlByProductId(Long id) {
-        return imageMapper.selectImageUrlByProductId(id);
+    public String selectProductImageUrlByProductId(Long id) {
+        return imageMapper.selectProductImageUrlByProductId(id);
+    }
+
+    @Override
+    public List<Image> selectImagesByProductId(Long id) {
+        return imageMapper.selectImagesByProductId(id);
     }
 }

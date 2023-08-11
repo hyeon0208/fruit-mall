@@ -38,8 +38,8 @@ public class ProductService {
         productRepository.insertProduct(product);
     }
 
-    public void updateProduct(Product product, Long productId) {
-        productRepository.updateProduct(product, productId);
+    public void updateProduct(Product product) {
+        productRepository.updateProduct(product);
     }
 
     public Product selectProductAllById(Long id) {

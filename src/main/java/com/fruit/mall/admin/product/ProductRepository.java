@@ -16,6 +16,11 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
+    public void updateProduct(Product product) {
+        productMapper.updateProduct(product);
+    }
+
+    @Override
     public Product selectProductAllById(Long id) {
         return productMapper.selectProductAllById(id);
     }

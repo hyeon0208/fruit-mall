@@ -24,6 +24,21 @@
                             )
     </insert>
 
+    <update id="updateProduct" parameterType="com.fruit.mall.admin.product.Product">
+        UPDATE product
+        SET
+            CATEGORY_ID = #{categoryId},
+            PRODUCT_NAME = #{productName},
+            PRODUCT_PRICE = #{productPrice},
+            PRODUCT_STOCK = #{productStock},
+            PRODUCT_DESCRIPTION = #{productDescription},
+            PRODUCT_DISCOUNT = #{productDiscount},
+            PRODUCT_SALE_STATUS = #{productSaleStatus}
+        WHERE
+            PRODUCT_ID = #{productId}
+    </update>
+
+
     <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall.admin.product.Product">
         SELECT * FROM product WHERE PRODUCT_ID = #{productId};
     </select>

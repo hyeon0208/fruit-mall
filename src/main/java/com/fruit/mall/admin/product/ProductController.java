@@ -6,6 +6,7 @@ import com.fruit.mall.admin.image.ImageService;
 import com.fruit.mall.admin.product.dto.ProductRegistrationForm;
 import com.fruit.mall.firebase.FireBaseService;
 
+import com.fruit.mall.firebase.UploadResult;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,20 +37,24 @@ public class ProductController {
         MultipartFile productImage = images.get(0);
         images.remove(0);
         String productFileName = productImage.getOriginalFilename();
-        String productFirebaseImageUrl = fireBaseService.uploadFiles(productImage, PATH, productFileName);
-        imageInfo.add(new FileInfo(productFirebaseImageUrl, productFileName));
+        UploadResult productImgResult = fireBaseService.uploadFiles(productImage, PATH, productFileName);
+        imageInfo.add(new FileInfo(productImgResult.getFirebaseImageUrl(), productImgResult.getFileName()));
 
         String description = form.getDescription();
         for (int i = 0; i < images.size(); i++) {
             MultipartFile file = images.get(i);
             String editorFileName = images.get(i).getOriginalFilename();
-            String editorFirebaseImageUrl = fireBaseService.uploadFiles(file, PATH, editorFileName);
+            UploadResult editorImgResult = fireBaseService.uploadFiles(file, PATH, editorFileName);
+
+            // editorFirebaseImageUrl blobUrl을 비교해 같으면 해당 상세내용의 src을 editorFirebaseImageUrl로 변경
+            String editorFirebaseImageUrl = editorImgResult.getFirebaseImageUrl();
             String blobUrl = imageUrls.get(i);
             description = productService.getUpdatedDescription(description, editorFirebaseImageUrl, blobUrl);
-            imageInfo.add(new FileInfo(editorFirebaseImageUrl, editorFileName));
-        }
-        Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
 
+            imageInfo.add(new FileInfo(editorFirebaseImageUrl, editorImgResult.getFileName()));
+        }
+
+        Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
         Product product = Product.builder()
                 .categoryId(categoryId)
                 .productName(form.getProductName())

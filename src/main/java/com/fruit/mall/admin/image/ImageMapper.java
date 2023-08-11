@@ -9,7 +9,9 @@ import java.util.List;
 public interface ImageMapper {
     void insertImage(Image image);
 
-    Image selectAllById(@Param("imageId") Long id);
+    void updateImage(Image image);
 
-    List<String> selectImageUrlByProductId(@Param("productId") Long id);
+    String selectProductImageUrlByProductId(@Param("productId") Long id);
+
+    List<Image> selectImagesByProductId(@Param("productId") Long id);
 }
