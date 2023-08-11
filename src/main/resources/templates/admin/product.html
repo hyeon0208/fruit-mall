@@ -61,8 +61,8 @@
             <div class="box03">
                 <div class="left">
                     <span class="margin">검색결과 <span class="bold" th:text="${pageInfo.total}"></span>건</span>
-                    <button>선택 판매중지</button>
-                    <button>선택삭제</button>
+                    <button class="selectStopSaleBtn">선택 판매중지</button>
+                    <button class="selectDeleteBtn">선택삭제</button>
                 </div>
 
                 <div class="right">
@@ -105,7 +105,7 @@
                     <tbody>
                         <tr th:each="product, productStat : ${pageInfo.list}">
                             <td>
-                                <input type="checkbox">
+                                <input class="pageChk" type="checkbox">
                             </td>
                             <td th:text="${product.productId}"></td>
                             <td class="product_Status" th:text="${product.productSaleStatus}"></td>
@@ -157,5 +157,15 @@
             </div>
         </div>
     </section>
+
+    <!--    모달창 -->
+    <div class="txt05" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5><br>
+            </h5>
+            <a>확인</a>
+        </div>
+    </div>
 </th:block>
 </html>

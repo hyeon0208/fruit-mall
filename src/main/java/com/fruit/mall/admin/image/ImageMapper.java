@@ -11,6 +11,8 @@ public interface ImageMapper {
 
     void updateImage(Image image);
 
+    void deleteImagesByProductId(@Param("productId") Long id);
+
     String selectProductImageUrlByProductId(@Param("productId") Long id);
 
     List<Image> selectImagesByProductId(@Param("productId") Long id);

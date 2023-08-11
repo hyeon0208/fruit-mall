@@ -42,6 +42,10 @@ public class ProductService {
         productRepository.updateProduct(product);
     }
 
+    public void deleteProductById(Long id) {
+        productRepository.deleteProductById(id);
+    }
+
     public Product selectProductAllById(Long id) {
         return productRepository.selectProductAllById(id);
     }

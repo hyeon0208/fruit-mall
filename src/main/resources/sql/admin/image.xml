@@ -46,4 +46,8 @@
         FROM image
         WHERE PRODUCT_ID = #{productId};
     </select>
+
+    <delete id="deleteImagesByProductId">
+        DELETE FROM image WHERE PRODUCT_ID = #{productId};
+    </delete>
 </mapper>

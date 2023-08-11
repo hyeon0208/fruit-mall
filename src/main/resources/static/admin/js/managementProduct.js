@@ -30,10 +30,51 @@ $(document).on("click", ".editBtn", (e) => {
 });
 
 // 모두 체크
-$(document).on("click", "#allCheck", () => {
+$(document).on("click", "#allCheck", (e) => {
     // chk1 체크박스의 체크 여부에 따라 모든 체크박스 상태를 변경
-    const isChecked = $(this).prop("checked");
+    const isChecked = $(e.target).prop("checked");
+    console.log(isChecked);
     $("input[type='checkbox']").prop("checked", isChecked);
+});
+
+// 단일 체크
+$(document).on("click", ".pageChk", (e)=> {
+    const isChecked = $(e.target).prop("checked");
+    const tr = $(e.target).closest("tr");
+    const productId = tr.find("td:eq(1)").text();
+});
+
+// 선택 판매 중지
+$(document).on("click", ".selectStopSaleBtn", () => {
+    const checkedItems = $("input[type='checkbox']:checked");
+
+    checkedItems.each((index, checkbox) => {
+        const tr = $(checkbox).closest("tr");
+        tr.find(".stopSaleBtn").click();
+    });
+});
+
+// 선택 상품 삭제
+$(document).on("click", ".selectDeleteBtn", () => {
+    const checkedItems = $("input[type='checkbox']:checked");
+
+    checkedItems.each((index, checkbox) => {
+        const tr = $(checkbox).closest("tr");
+        const productId = tr.find("td:eq(1)").text();
+
+        axios({
+            method: "delete",
+            url: `/admin/delete/${productId}`
+        }).then(res => {
+            if (res.data === "success") {
+                $(".txt05 h5").html("해당 상품이 정상적으로 삭제되었습니다." + "<br><a href=/admin/product>확인</a>");
+                showModal();
+                $('.txt05 a').click(() => {
+                    $('.txt05').hide();
+                });
+            }
+        })
+    });
 });
 
 // n개 보기 셀렉트 박스 클릭 이벤트

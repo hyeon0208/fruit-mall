@@ -100,4 +100,8 @@
         SET PRODUCT_SALE_STATUS = #{status}
         WHERE PRODUCT_ID = #{productId};
     </update>
+
+    <delete id="deleteProductById">
+        DELETE FROM product WHERE PRODUCT_ID = #{productId};
+    </delete>
 </mapper>

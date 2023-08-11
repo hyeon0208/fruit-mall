@@ -12,6 +12,8 @@ public interface ProductMapper {
 
     void updateProduct(Product product);
 
+    void deleteProductById(@Param("productId") Long id);
+
     Product selectProductAllById(@Param("productId") Long id);
 
     List<Product> selectAll();

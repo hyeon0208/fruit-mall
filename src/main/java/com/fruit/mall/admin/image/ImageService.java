@@ -20,6 +20,10 @@ public class ImageService {
         imageRepository.updateImage(image);
     }
 
+    public void deleteImagesByProductId(Long id) {
+        imageRepository.deleteImagesByProductId(id);
+    }
+
     public String selectProductImageUrlByProductId(Long id) {
         return imageRepository.selectProductImageUrlByProductId(id);
     }

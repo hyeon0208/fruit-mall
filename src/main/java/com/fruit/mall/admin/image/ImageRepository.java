@@ -23,6 +23,11 @@ public class ImageRepository implements ImageMapper {
     }
 
     @Override
+    public void deleteImagesByProductId(Long id) {
+        imageMapper.deleteImagesByProductId(id);
+    }
+
+    @Override
     public String selectProductImageUrlByProductId(Long id) {
         return imageMapper.selectProductImageUrlByProductId(id);
     }

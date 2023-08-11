@@ -107,7 +107,6 @@ public class ProductManagementController {
             fireBaseService.deleteStoredImage(PATH, findImages.get(0).getFileName());
             UploadResult productImgResult = fireBaseService.uploadFiles(productImage, PATH, productImage.getOriginalFilename());
             Long productImgId = findImages.get(0).getImageId();
-            System.out.println("상품이미지 url 반환 됨 ? : " + productImgResult.getFirebaseImageUrl());
             imageInfo.add(new FileInfo(productImgId, productImgResult.getFirebaseImageUrl(), productImgResult.getFileName()));
         }
 
@@ -148,7 +147,6 @@ public class ProductManagementController {
         productService.updateProduct(product);
 
         for (FileInfo fileInfo : imageInfo) {
-            System.out.println("저장 전  : " + fileInfo);
             Image image = Image.builder()
                     .imageId(fileInfo.getImageId())
                     .imageUrl(fileInfo.getFirebaseImageUrl())
@@ -156,10 +154,19 @@ public class ProductManagementController {
                     .fileName(fileInfo.getFileName())
                     .build();
 
-            System.out.println("저장 후  : " + image);
             imageService.updateImage(image);
         }
 
+        return "success";
+    }
+
+    @DeleteMapping("/delete/{productId}")
+    @ResponseBody
+    public String deleteProduct(@PathVariable Long productId) {
+
+        System.out.println("아이디 : " + productId);
+        imageService.deleteImagesByProductId(productId);
+        productService.deleteProductById(productId);
         return "success";
     }
 }

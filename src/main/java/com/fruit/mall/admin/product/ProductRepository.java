@@ -21,6 +21,11 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
+    public void deleteProductById(Long id) {
+        productMapper.deleteProductById(id);
+    }
+
+    @Override
     public Product selectProductAllById(Long id) {
         return productMapper.selectProductAllById(id);
     }
