@@ -41,29 +41,15 @@ public class ProductController {
         String productFirebaseImageUrl = fireBaseService.uploadFiles(productImage, PATH, productFileName);
         imageInfo.add(new FileInfo(productFirebaseImageUrl, productFileName));
 
-        String currentDescription = form.getDescription();
+        String description = form.getDescription();
         for (int i = 0; i < images.size(); i++) {
             MultipartFile file = images.get(i);
             String editorFileName = images.get(i).getOriginalFilename();
             String editorFirebaseImageUrl = fireBaseService.uploadFiles(file, PATH, editorFileName);
             String blobUrl = imageUrls.get(i);
-
-            String patternString = "<img([^>]*)src=[\"']" + Pattern.quote(blobUrl) + "[\"']([^>]*)>";
-
-            Pattern pattern = Pattern.compile(patternString);
-            Matcher matcher = pattern.matcher(currentDescription);
-
-            StringBuffer sb = new StringBuffer();
-            while (matcher.find()) {
-                String remainingAttributes = (matcher.group(1) + matcher.group(2)).replaceAll("(alt=\\\"[^\\\"]*\\\"\\s?)|(width=\\\"[^\\\"]*\\\"\\s?)|(height=\\\"[^\\\"]*\\\"\\s?)", "");
-                matcher.appendReplacement(sb, String.format("<img src=\"%s\"%s", editorFirebaseImageUrl, remainingAttributes));
-            }
-            matcher.appendTail(sb);
-
-            currentDescription = sb.toString();
+            description = productService.getUpdatedDescription(description, editorFirebaseImageUrl, blobUrl);
             imageInfo.add(new FileInfo(editorFirebaseImageUrl, editorFileName));
         }
-
         Long categoryId = categoryService.selectIdByCategoryName(form.getSort());
 
         Product product = Product.builder()
@@ -71,7 +57,7 @@ public class ProductController {
                 .productName(form.getProductName())
                 .productPrice(form.getPrice())
                 .productStock(form.getStock())
-                .productDescription(currentDescription)
+                .productDescription(description)
                 .productDiscount(form.getDiscount())
                 .productSaleStatus(ON_SALE)
                 .build();

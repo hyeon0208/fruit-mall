@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @Transactional
@@ -26,8 +27,19 @@ public class ProductService {
         return new PageInfo<>(products);
     }
 
+    public String getUpdatedDescription(String description, String editorFirebaseImageUrl, String blobUrl) {
+        String patternString = "<img([^>]*)src=[\"']" + Pattern.quote(blobUrl) + "[\"']([^>]*)>";
+        Pattern pattern = Pattern.compile(patternString);
+        String updatedDiscription = pattern.matcher(description).replaceAll(String.format("<img src=\"%s\"$1$2", editorFirebaseImageUrl));
+        return updatedDiscription;
+    }
+
     public void insertProduct(Product product) {
         productRepository.insertProduct(product);
+    }
+
+    public void updateProduct(Product product, Long productId) {
+        productRepository.updateProduct(product, productId);
     }
 
     public Product selectProductAllById(Long id) {
