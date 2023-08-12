@@ -98,6 +98,5 @@ public class FireBaseService {
                 }
             }
         }
-        log.info("삭제할 이미지가 없습니다.");
     }
 }
