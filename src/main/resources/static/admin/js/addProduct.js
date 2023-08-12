@@ -36,9 +36,7 @@ function checkErrorAndShowModal(id) {
             $('.txt05').hide();
         });
         $(id).focus();
-        return true; // 필수 입력 값이 없는 경우 true 반환
     }
-    return false;
 }
 
 function calculateTotal() {
@@ -59,6 +57,7 @@ $(() => {
     showErrorMessage("#sort");
     showErrorMessage("#price");
     showErrorMessage("#stock");
+    showErrorMessage("#productPicture");
     showErrorMessage("#description");
 
     $("#price").on("focusout", () => {
@@ -117,7 +116,6 @@ $(document).on("change", "#productPicture", () => {
     const fileInput  = $("#productPicture")[0]; // 입력 요소를 가져온 시점
     const file = (fileInput && fileInput.files.length > 0) ? fileInput.files[0] : null; // 사용자가 파일을 선택한 시점
     if (file) {
-        console.log(file.name);
         productImage.push(file);
 
         // 이미지 미리보기를 생성하는 로직
@@ -141,14 +139,20 @@ $(document).on("click", "#addBtn", (e) => {
     let formData = new FormData();
     e.preventDefault();
 
-    if (checkErrorAndShowModal("#productName")) return;
-    if (checkErrorAndShowModal("#price")) return;
-    if (checkErrorAndShowModal("#sort")) return;
-    if (checkErrorAndShowModal("#discount")) return;
-    if (checkErrorAndShowModal("#stock")) return;
-    if (checkErrorAndShowModal("#description")) return;
+    checkErrorAndShowModal("#productName");
+    checkErrorAndShowModal("#price");
+    checkErrorAndShowModal("#sort");
+    checkErrorAndShowModal("#discount");
+    checkErrorAndShowModal("#stock");
+    checkErrorAndShowModal("#description");
 
-    formData.append("images", productImage.pop());
+    if (productImage.length === 0) {
+        $("#image-error").text("상품 이미지를 추가해주세요");
+        $("#image-error").show();
+    } else {
+        $("#image-error").hide();
+        formData.append("images", productImage[productImage.length - 1]);
+    }
 
     tinymce.activeEditor.$('img').each((i, e) => {
         const fileId = $(e).attr('alt');
@@ -182,28 +186,33 @@ $(document).on("click", "#addBtn", (e) => {
         } else {
             $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
             showModal();
-            $('.txt05 a').click(function () {
+            $('.txt05 a').click(() => {
                 $('.txt05').hide();
             });
         }
+    }).catch(err => {
+        $(".txt05 h5").html('입력 항목을 다시 확인해주세요.' + '<br><a>확인</a>')
+        showModal();
+        $('.txt05 a').click(() => {
+            $('.txt05').hide();
+        });
     });
 });
 
 // 상품 수정 버튼 클릭
 $(document).on("click", "#editBtn", (e) => {
     const productId = $("#editForm").attr("data-productId");
-
     e.preventDefault();
     let formData = new FormData();
 
-    if (checkErrorAndShowModal("#productName")) return;
-    if (checkErrorAndShowModal("#price")) return;
-    if (checkErrorAndShowModal("#sort")) return;
-    if (checkErrorAndShowModal("#discount")) return;
-    if (checkErrorAndShowModal("#stock")) return;
-    if (checkErrorAndShowModal("#description")) return;
+    checkErrorAndShowModal("#productName");
+    checkErrorAndShowModal("#price");
+    checkErrorAndShowModal("#sort");
+    checkErrorAndShowModal("#discount");
+    checkErrorAndShowModal("#stock");
+    checkErrorAndShowModal("#description");
 
-    formData.append("productImage", productImage.pop());
+    formData.append("productImage",  productImage[productImage.length - 1]);
 
     tinymce.activeEditor.$('img').each((i, e) => {
         const fileId = $(e).attr('alt');
@@ -213,8 +222,6 @@ $(document).on("click", "#editBtn", (e) => {
             $(e).attr('src', blobUrl);
             formData.append("editorImages", file);
             formData.append("imageUrls", blobUrl);
-
-            console.log("폼 데이터에 넣을 에디터 이미지 : " + file.name);
         }
     });
 
@@ -224,16 +231,6 @@ $(document).on("click", "#editBtn", (e) => {
     formData.append("discount", parseInt($("#discount").val()));
     formData.append("stock", parseInt($("#stock").val()));
     formData.append("description", tinymce.get("description").getContent());
-
-    for (let key of formData.keys()) {
-        console.log(key, ":", formData.get(key));
-    }
-
-    for (let key of formData.keys()) {
-        if (key === "images") {
-            console.log("이미지들  = " + key, ":", formData.get(key));
-        }
-    }
 
     axios({
         method: "post",
