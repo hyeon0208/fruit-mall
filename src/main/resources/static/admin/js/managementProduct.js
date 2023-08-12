@@ -96,18 +96,21 @@ $(document).on("click", "#excelDownloadBtn", () => {
 // 게시상태 버튼
 $(document).on("click", ".statusBtn", (e) => {
     selectedStatus =  $(e.currentTarget).val();
+    currentPage= 1;
     updateProductList();
 });
 
 // 카테고리 분류 버튼
 $(document).on("click", ".categoryBtn", (e) => {
     selectedCategory =  $(e.currentTarget).val();
+    currentPage= 1;
     updateProductList();
 });
 
 // 검색어 입력 버튼
 $(document).on("click", "#searchBtn", () => {
     selectedSearch = $("#searchCond").val();
+    currentPage= 1;
     updateProductList();
 });
 
@@ -130,8 +133,14 @@ $(document).on("click", ".stopSaleBtn", (e) => {
         btn.hide();
         const timeSpan = btn.closest('td').find(".updateTime");
         const formattedTime = updatedTime.substring(0, 10).replaceAll('-', '.');
-        timeSpan.text(formattedTime);
-        timeSpan.show();
+
+        if (timeSpan.length === 0) {
+            const newUpdateTime = $(`<span class="updateTime">${formattedTime}</span>`);
+            btn.closest('td').append(newUpdateTime);
+        } else {
+            timeSpan.text(formattedTime);
+            timeSpan.show();
+        }
 
         const productStatus = btn.closest('tr').find('.product_Status');
         productStatus.text("판매중지");
