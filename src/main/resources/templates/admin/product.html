@@ -107,7 +107,7 @@
                             <td>
                                 <input class="pageChk" type="checkbox">
                             </td>
-                            <td th:text="${product.productId}"></td>
+                            <td th:text="${(totalCount - ((pageInfo.pageNum - 1) * pageInfo.pageSize) - (productStat.index))}"></td>
                             <td class="product_Status" th:text="${product.productSaleStatus}"></td>
                             <td>
                                 <span th:switch="${product.categoryId}">
