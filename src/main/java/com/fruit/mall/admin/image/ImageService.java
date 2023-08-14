@@ -28,6 +28,10 @@ public class ImageService {
         return imageRepository.selectProductImageUrlByProductId(id);
     }
 
+    public List<String> selectFileNamesByProductId(Long id) {
+        return imageRepository.selectFileNamesByProductId(id);
+    }
+
     public List<Image> selectImagesByProductId(Long id) {
         return imageRepository.selectImagesByProductId(id);
     }

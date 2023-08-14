@@ -28,6 +28,11 @@ public class ImageRepository implements ImageMapper {
     }
 
     @Override
+    public List<String> selectFileNamesByProductId(Long id) {
+        return imageMapper.selectFileNamesByProductId(id);
+    }
+
+    @Override
     public String selectProductImageUrlByProductId(Long id) {
         return imageMapper.selectProductImageUrlByProductId(id);
     }

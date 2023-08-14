@@ -2,6 +2,7 @@ package com.fruit.mall.admin.image;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public interface ImageMapper {
     void updateImage(Image image);
 
     void deleteImagesByProductId(@Param("productId") Long id);
+
+    List<String> selectFileNamesByProductId(@Param("productId") Long id);
 
     String selectProductImageUrlByProductId(@Param("productId") Long id);
 

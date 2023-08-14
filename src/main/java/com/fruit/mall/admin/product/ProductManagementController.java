@@ -163,8 +163,10 @@ public class ProductManagementController {
     @DeleteMapping("/delete/{productId}")
     @ResponseBody
     public String deleteProduct(@PathVariable Long productId) {
-
-        System.out.println("아이디 : " + productId);
+        List<String> fileNames = imageService.selectFileNamesByProductId(productId);
+        for (String fileName : fileNames) {
+            fireBaseService.deleteStoredImage(PATH, fileName);
+        }
         imageService.deleteImagesByProductId(productId);
         productService.deleteProductById(productId);
         return "success";
