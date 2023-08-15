@@ -10,12 +10,15 @@ import java.io.Serializable;
 public class SessionUser implements Serializable {
     private String name;
     private String id;
+    private String userType;
 
     public SessionUser(User user) {
         this.name = user.getUser_name();
+        this.userType = "loginUser";
     }
 
     public SessionUser(Admin admin) {
         this.id = admin.getId();
+        this.userType = "loginAdmin";
     }
 }

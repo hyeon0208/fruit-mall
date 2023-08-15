@@ -36,15 +36,15 @@
 
         <div class="sub-menu">
             <ul class="menu">
-                    <li th:if="${session.authentic == null}">
+                    <li th:if="${session.loginUser == null}">
                         <a href="/login">Sign In</a>
                     </li>
 
-                    <li th:if="${session.authentic == null}">
+                    <li th:if="${session.loginUser == null}">
                         <a href="/join">Join</a>
                     </li>
 
-                    <li th:unless="${session.authentic == null}">
+                    <li th:unless="${session.loginUser == null}">
                         <form id="logoutForm" method="post" action="/user/logout">
                             <a href="#!">
                                 <button id="logoutBtn">Logout</button>

@@ -1,5 +1,6 @@
 package com.fruit.mall.admin;
 
+import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class AdminLoginController {
     private final AdminService adminService;
-    private final static String LOGIN_USER = "authentic";
+    private final static String LOGIN_ADMIN = "loginAdmin";
 
     @GetMapping("/{pageName}")
     public String goSubPage(@PathVariable String pageName) {
@@ -39,7 +40,7 @@ public class AdminLoginController {
             return "fail";
         }
         HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USER, new SessionUser(loginAdmin));
+        session.setAttribute(LOGIN_ADMIN, new SessionUser(loginAdmin));
         return "success";
     }
 

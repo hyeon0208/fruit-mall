@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  * 사용자의 세션 정보를 컨트롤러 메서드의 파라미터로 전달하기 위해 사용되는 클래스
  */
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
-    public static final String LOGIN_USER = "authentic";
+    public static final String LOGIN_USER = "loginUser";
 
     /**
      * 컨트롤러 메서드의 특정 파라미터를 지원하는지 판단
@@ -22,8 +22,8 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         boolean isLoginUserAnnotation = parameter.getParameterAnnotation(Login.class) != null;
-        boolean isUserClass = SessionUser.class.equals(parameter.getParameterType());
-        return isLoginUserAnnotation && isUserClass;
+        boolean isSessionClass = SessionUser.class.equals(parameter.getParameterType());
+        return isLoginUserAnnotation && isSessionClass;
     }
 
     /**
@@ -35,7 +35,6 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
-        // 이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 null을 돌려준다.
         HttpSession session = request.getSession(false);
 
         if (session == null) {
