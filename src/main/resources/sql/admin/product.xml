@@ -108,6 +108,7 @@
     <select id="selectProductAndImageInfoByStatus" resultType="com.fruit.mall.admin.product.dto.ProductAndImageInfo">
         SELECT
             p.PRODUCT_ID,
+            p.CATEGORY_ID,
             p.PRODUCT_NAME,
             p.PRODUCT_PRICE,
             p.PRODUCT_DISCOUNT,

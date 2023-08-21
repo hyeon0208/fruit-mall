@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductAndImageInfo {
     private Long productId;
+    private Long categoryId;
     private String productName;
     private int productPrice;
     private int productDiscount;

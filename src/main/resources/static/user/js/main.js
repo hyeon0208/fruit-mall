@@ -1,3 +1,17 @@
+$(document).on('click', '#recentProductBtn', (e) => {
+    const productId = $(e.currentTarget).attr("data-userproductId");
+
+    axios({
+        method: "post",
+        url: `/recent-products/${productId}`
+    })
+});
+
+$(document).on('click', '#TopBtn', (e) => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+});
+
 
 new Swiper('.promotion .swiper', {
     slidesPerView: 1, // 한 번에 보여 줄 슬라이드 개수
