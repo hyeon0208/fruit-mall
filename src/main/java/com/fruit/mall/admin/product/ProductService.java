@@ -1,5 +1,6 @@
 package com.fruit.mall.admin.product;
 
+import com.fruit.mall.admin.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class ProductService {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
         List<Product> products = productRepository.selectAllByFilter(status, category, searchCond);
         return new PageInfo<>(products);
+    }
+    public PageInfo<ProductAndImageInfo> getProductAndImageByStatus(int pageNum, int pageSize, String status) {
+        PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
+        List<ProductAndImageInfo> productAndImageInfos = productRepository.selectProductAndImageInfoByStatus(status);
+        return new PageInfo<>(productAndImageInfos);
     }
 
     public String getUpdatedDescription(String description, String editorFirebaseImageUrl, String blobUrl) {

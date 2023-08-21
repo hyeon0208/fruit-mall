@@ -1,5 +1,6 @@
 package com.fruit.mall.admin.product;
 
+import com.fruit.mall.admin.product.dto.ProductAndImageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,6 +16,8 @@ public interface ProductMapper {
     void deleteProductById(@Param("productId") Long id);
 
     Product selectProductAllById(@Param("productId") Long id);
+
+    List<ProductAndImageInfo> selectProductAndImageInfoByStatus(@Param("status") String status);
 
     List<Product> selectAll();
 

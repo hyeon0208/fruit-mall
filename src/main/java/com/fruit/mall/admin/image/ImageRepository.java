@@ -1,7 +1,6 @@
 package com.fruit.mall.admin.image;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

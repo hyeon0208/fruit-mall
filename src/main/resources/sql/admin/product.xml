@@ -104,4 +104,23 @@
     <delete id="deleteProductById">
         DELETE FROM product WHERE PRODUCT_ID = #{productId};
     </delete>
+
+    <select id="selectProductAndImageInfoByStatus" resultType="com.fruit.mall.admin.product.dto.ProductAndImageInfo">
+        SELECT
+            p.PRODUCT_ID,
+            p.PRODUCT_NAME,
+            p.PRODUCT_PRICE,
+            p.PRODUCT_DISCOUNT,
+            i1.IMAGE_URL,
+            i1.IMAGE_ID
+        FROM product p
+                 JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
+        WHERE p.PRODUCT_SALE_STATUS = #{status}
+          AND i1.IMAGE_ID = (
+            SELECT MIN(i3.IMAGE_ID)
+            FROM image i3
+            WHERE i3.PRODUCT_ID = p.PRODUCT_ID
+        )
+        ORDER BY p.PRODUCT_ID DESC;
+    </select>
 </mapper>

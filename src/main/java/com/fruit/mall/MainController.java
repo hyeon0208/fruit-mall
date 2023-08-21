@@ -1,15 +1,13 @@
 package com.fruit.mall;
 
 import com.fruit.mall.admin.image.ImageService;
-import com.fruit.mall.admin.product.Product;
 import com.fruit.mall.admin.product.ProductService;
+import com.fruit.mall.admin.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,14 +27,9 @@ public class MainController {
             Model model,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
-        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, ON_SALE, null, null);
-        List<String> productImages = imageService.selectImageUrlsByStatus(ON_SALE);
 
-        System.out.println("뭐지 = " + productImages);
-        System.out.println("뭐지 = " + productImages.size());
-
-        model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("productImages", productImages);
+        PageInfo<ProductAndImageInfo> products = productService.getProductAndImageByStatus(pageNum, pageSize, ON_SALE);
+        model.addAttribute("pageInfo", products);
 
         return "user/index";
     }
