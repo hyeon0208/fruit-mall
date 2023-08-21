@@ -51,10 +51,11 @@
 
             <!-- 필터 -->
             <div class="buttons">
-                <button>봄과일</button>
-                <button>여름과일</button>
-                <button>가을과일</button>
-                <button>겨울과일</button>
+                <button class="categoryBtn-user" value="전체카테고리">전체카테고리</button>
+                <button class="categoryBtn-user" value="봄과일">봄과일</button>
+                <button class="categoryBtn-user" value="여름과일">여름과일</button>
+                <button class="categoryBtn-user" value="가을과일">가을과일</button>
+                <button class="categoryBtn-user" value="겨울과일">겨울과일</button>
             </div>
 
         </div>
@@ -66,9 +67,14 @@
 
                 <!-- 마이페이지 -->
                 <li>
-                    <a href="#">
+                    <a href="/user/mypage" th:unless="${session.loginUser == null}">
                         <span class="material-symbols-outlined">person</span>
-                        <p>홍길동님</p>
+                        <p th:text="${session.loginUser.getName()} + 님"></p>
+                    </a>
+
+                    <a href="#" th:if="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p>손님</p>
                     </a>
 
                     <div class="line"></div>

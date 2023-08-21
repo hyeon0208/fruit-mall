@@ -1,4 +1,3 @@
-$(document).on('click', '#loginBtn', () => {
-    $("#logoutForm").submit();
-    return false;
+$(document).on('click', '#userLogout', () => {
+    $("#userLogoutForm").submit();
 })

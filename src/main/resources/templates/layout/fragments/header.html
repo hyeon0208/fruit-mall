@@ -45,11 +45,8 @@
                     </li>
 
                     <li th:unless="${session.loginUser == null}">
-                        <form id="logoutForm" method="post" action="/user/logout">
-                            <a href="#!">
-                                <button id="logoutBtn">Logout</button>
-                            </a>
-                        </form>
+                        <a href="#" id="userLogout">Logout</a>
+                        <form id="userLogoutForm" action="/user/logout" method="post" style="display: none;"></form>
                     </li>
 
                 <li>
