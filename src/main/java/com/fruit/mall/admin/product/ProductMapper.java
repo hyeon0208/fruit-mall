@@ -17,7 +17,7 @@ public interface ProductMapper {
 
     Product selectProductAllById(@Param("productId") Long id);
 
-    List<ProductAndImageInfo> selectProductAndImageInfoByStatus(@Param("status") String status);
+    List<ProductAndImageInfo> selectProductAndImageByFilter(@Param("category") String category, @Param("searchCond") String searchCond);
 
     List<Product> selectAll();
 

@@ -2893,6 +2893,12 @@ header .inner .main-menu .item .red .material-icons {
   margin: 0 auto;
   margin-bottom: 100px;
 }
+
+#search .inner .buttons button.active {
+  background-color: #e07b45;
+  color: #fff;
+}
+
 #products .inner ul {
   display: flex;
   align-items: center;
@@ -2979,13 +2985,13 @@ header .inner .main-menu .item .red .material-icons {
   font: bold 14px/1 "Nanum Gothic";
   color: #252525;
 }
-#products .pagination {
+#products .user-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 100px;
 }
-#products .pagination a {
+#products .user-pagination a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2994,24 +3000,32 @@ header .inner .main-menu .item .red .material-icons {
   transition: 0.3s;
   padding: 5px;
 }
-#products .pagination a:hover {
+#products .user-pagination a:hover {
   color: #111;
   font-weight: bold;
 }
-#products .pagination a span {
+#products .user-pagination a span {
   margin: 0 20px;
   background-color: var(--primary-color);
   border-radius: 50%;
   color: #fff;
 }
-#products .pagination a .bold {
+#products .user-pagination a .bold {
   margin: 0px;
   background-color: transparent;
   border-radius: none;
   color: var(--primary-color);
   font: 800 13px/1 "Nanum Gothic";
 }
-#products .pagination .numbers {
+#products .user-pagination .numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+#products .user-pagination .user-numbers {
   display: flex;
   justify-content: center;
   align-items: center;

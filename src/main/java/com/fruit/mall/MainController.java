@@ -2,6 +2,7 @@ package com.fruit.mall;
 
 import com.fruit.mall.admin.image.ImageService;
 import com.fruit.mall.admin.product.ProductService;
+import com.fruit.mall.admin.product.dto.PageResDto;
 import com.fruit.mall.admin.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -33,7 +35,7 @@ public class MainController {
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
 
-        PageInfo<ProductAndImageInfo> products = productService.getProductAndImageByStatus(pageNum, pageSize, ON_SALE);
+        PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null);
         model.addAttribute("pageInfo", products);
 
         if (session.getAttribute("recentProducts") != null) {
@@ -42,6 +44,21 @@ public class MainController {
         }
 
         return "user/index";
+    }
+
+    @GetMapping("/user/searchfilter")
+    @ResponseBody
+    public PageResDto userMainSearchFilter(
+            @RequestParam HashMap<String, String> params,
+            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
+        String category = params.get("category");
+        String searchCond = params.get("searchCond");
+        PageInfo<ProductAndImageInfo> pageInfo = productService.getProductsAndImageByFilter(pageNum, pageSize, category, searchCond);
+
+        PageResDto pageResDto = new PageResDto(pageInfo, category);
+
+        return pageResDto;
     }
 
     @PostMapping("/recent-products/{productId}")

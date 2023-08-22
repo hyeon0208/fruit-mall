@@ -4,18 +4,22 @@ import com.fruit.mall.admin.product.Product;
 import com.github.pagehelper.PageInfo;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
 public class PageResDto {
-    private PageInfo<Product> pageInfo;
+    private PageInfo<Product> productPageInfo;
+    private PageInfo<ProductAndImageInfo> productAndImageInfoPageInfo;
     private String status;
     private String category;
 
-    @Builder
     public PageResDto(PageInfo<Product> pageInfo, String status, String category) {
-        this.pageInfo = pageInfo;
+        this.productPageInfo = pageInfo;
         this.status = status;
+        this.category = category;
+    }
+
+    public PageResDto(PageInfo<ProductAndImageInfo> pageInfo, String category) {
+        this.productAndImageInfoPageInfo = pageInfo;
         this.category = category;
     }
 }

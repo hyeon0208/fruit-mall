@@ -62,11 +62,7 @@ public class ProductManagementController {
         String searchCond = params.get("searchCond");
         PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
 
-        PageResDto pageResDto = PageResDto.builder()
-                .pageInfo(pageInfo)
-                .status(status)
-                .category(category)
-                .build();
+        PageResDto pageResDto = new PageResDto(pageInfo, status, category);
 
         return pageResDto;
     }

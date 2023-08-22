@@ -27,9 +27,10 @@ public class ProductService {
         List<Product> products = productRepository.selectAllByFilter(status, category, searchCond);
         return new PageInfo<>(products);
     }
-    public PageInfo<ProductAndImageInfo> getProductAndImageByStatus(int pageNum, int pageSize, String status) {
+
+    public PageInfo<ProductAndImageInfo> getProductsAndImageByFilter(int pageNum, int pageSize, String category, String searchCond) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<ProductAndImageInfo> productAndImageInfos = productRepository.selectProductAndImageInfoByStatus(status);
+        List<ProductAndImageInfo> productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond);
         return new PageInfo<>(productAndImageInfos);
     }
 

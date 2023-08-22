@@ -44,10 +44,10 @@
         <div class="inner">
 
             <!-- 검색창 -->
-            <input type="text" placeholder="# 검색어를 입력해주세요.">
+            <input id="searchCond-user" type="text" placeholder="# 검색어를 입력해주세요.">
 
             <!-- 돋보기 아이콘 -->
-            <span class="material-icons">search </span>
+            <span id="searchCond-userBtn" class="material-icons">search </span>
 
             <!-- 필터 -->
             <div class="buttons">
@@ -141,7 +141,7 @@
             </ul>
         </div>
 
-        <div class="pagination">
+        <div class="user-pagination">
             <a th:if="${pageInfo.hasPreviousPage}"
                th:href="@{/(pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}" class="prev">
                 <span class="material-symbols-outlined">chevron_left</span>
