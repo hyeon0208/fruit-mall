@@ -1,10 +1,8 @@
 package com.fruit.mall.admin;
 
-import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +21,8 @@ public class AdminLoginController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, HttpServletRequest request) {
-        model.addAttribute("admin", new Admin());
-        HttpSession session = request.getSession(false);
-        if (session != null) {
+    public String login(HttpSession session) {
+        if (session.getAttribute(LOGIN_ADMIN) != null) {
             return "redirect:/admin/dashboard";
         }
         return "admin/index";
