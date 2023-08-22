@@ -1,7 +1,6 @@
 package com.fruit.mall.user;
 
 import com.fruit.mall.config.SessionUser;
-import com.fruit.mall.user.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

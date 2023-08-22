@@ -1,4 +1,4 @@
-package com.fruit.mall.user.dto;
+package com.fruit.mall.user;
 
 import com.fruit.mall.user.Role;
 import lombok.*;

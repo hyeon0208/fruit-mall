@@ -1,7 +1,5 @@
 package com.fruit.mall.user;
 
-import com.fruit.mall.user.dto.Term;
-import com.fruit.mall.user.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

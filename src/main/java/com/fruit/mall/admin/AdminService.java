@@ -1,6 +1,5 @@
 package com.fruit.mall.admin;
 
-import com.fruit.mall.user.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.fruit.mall.config;
 
 import com.fruit.mall.admin.Admin;
-import com.fruit.mall.user.dto.User;
+import com.fruit.mall.user.User;
 import lombok.Getter;
 
 import java.io.Serializable;
