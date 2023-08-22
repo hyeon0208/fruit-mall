@@ -193,8 +193,8 @@ function updateProductList() {
             pageSize: pageSize
         }
     }).then((res) => {
-        const products = res.data.pageInfo.list;
-        const pageInfo = res.data.pageInfo;
+        const products = res.data.productPageInfo.list;
+        const pageInfo = res.data.productPageInfo;
         const status = res.data.status;
         const category = res.data.category;
 
@@ -262,9 +262,8 @@ function updateProductList() {
         $(".product-table tbody").empty().append(tableRows);
 
         // .pagination 클래스 태그 내부 내용 교체
-        const paginationDiv = $('.pagination');
+        const paginationDiv = $('.pagination').empty();
         const numbersDiv = $('<p>').addClass('numbers');
-        paginationDiv.empty();
 
         const totalData = pageInfo.pages; // 총 데이터 수
         const pageNumberList = pageInfo.navigatepageNums; // 페이지 번호들의 순서를 담은 배열
@@ -280,6 +279,7 @@ function updateProductList() {
             paginationDiv.append(prevBtn);
         }
 
+        // 페이지 번호 버튼
         pageNumberList.forEach((pageNumber) => {
             if (pageNumber <= totalData) {
                 const numberBtn = $('<a>')
