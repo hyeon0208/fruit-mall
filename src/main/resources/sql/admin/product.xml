@@ -2,8 +2,8 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.fruit.mall.admin.product.ProductMapper">
-    <insert id="insertProduct" parameterType="com.fruit.mall.admin.product.Product" useGeneratedKeys="true" keyProperty="productId">
+<mapper namespace="com.fruit.mall.product.ProductMapper">
+    <insert id="insertProduct" parameterType="com.fruit.mall.product.Product" useGeneratedKeys="true" keyProperty="productId">
         INSERT INTO product (
                              CATEGORY_ID,
                              PRODUCT_NAME,
@@ -24,7 +24,7 @@
                             )
     </insert>
 
-    <update id="updateProduct" parameterType="com.fruit.mall.admin.product.Product">
+    <update id="updateProduct" parameterType="com.fruit.mall.product.Product">
         UPDATE product
         SET
             CATEGORY_ID = #{categoryId},
@@ -39,7 +39,7 @@
     </update>
 
 
-    <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall.admin.product.Product">
+    <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall.product.Product">
         SELECT * FROM product WHERE PRODUCT_ID = #{productId};
     </select>
 
@@ -66,11 +66,11 @@
         WHERE PRODUCT_SALE_STATUS = '품절';
     </select>
 
-    <select id="selectAll" resultType="com.fruit.mall.admin.product.Product">
+    <select id="selectAll" resultType="com.fruit.mall.product.Product">
         SELECT * FROM product;
     </select>
 
-    <select id="selectAllByFilter" resultType="com.fruit.mall.admin.product.Product">
+    <select id="selectAllByFilter" resultType="com.fruit.mall.product.Product">
         SELECT * FROM product
         <where>
             <if test="status != '전체상태' and status != null and status != ''">
@@ -87,7 +87,7 @@
         </where>
     </select>
 
-    <select id="selectProductAndImageByFilter" resultType="com.fruit.mall.admin.product.dto.ProductAndImageInfo">
+    <select id="selectProductAndImageByFilter" resultType="com.fruit.mall.product.dto.ProductAndImageInfo">
         SELECT
         p.PRODUCT_ID,
         p.CATEGORY_ID,

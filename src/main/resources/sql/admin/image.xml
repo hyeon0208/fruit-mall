@@ -2,8 +2,8 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.fruit.mall.admin.image.ImageMapper">
-    <insert id="insertImage" parameterType="com.fruit.mall.admin.image.Image" keyProperty="imageId">
+<mapper namespace="com.fruit.mall.image.ImageMapper">
+    <insert id="insertImage" parameterType="com.fruit.mall.image.Image" keyProperty="imageId">
     INSERT INTO image (
                        PRODUCT_ID,
                        IMAGE_URL,
@@ -18,7 +18,7 @@
                         )
     </insert>
 
-    <update id="updateImage" parameterType="com.fruit.mall.admin.image.Image">
+    <update id="updateImage" parameterType="com.fruit.mall.image.Image">
         UPDATE image
         SET
             IMAGE_URL = #{imageUrl},
@@ -35,7 +35,7 @@
         LIMIT 1;
     </select>
 
-    <resultMap id="imageResultMap" type="com.fruit.mall.admin.image.Image">
+    <resultMap id="imageResultMap" type="com.fruit.mall.image.Image">
         <result property="imageId" column="IMAGE_ID"/>
         <result property="imageUrl" column="IMAGE_URL"/>
         <result property="fileName" column="IMAGE_FILENAME"/>

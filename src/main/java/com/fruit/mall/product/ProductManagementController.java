@@ -1,12 +1,12 @@
-package com.fruit.mall.admin.product;
+package com.fruit.mall.product;
 
-import com.fruit.mall.admin.category.CategoryService;
-import com.fruit.mall.admin.image.FileInfo;
-import com.fruit.mall.admin.image.Image;
-import com.fruit.mall.admin.image.ImageService;
-import com.fruit.mall.admin.product.dto.PageResDto;
-import com.fruit.mall.admin.product.dto.ProductRegistrationForm;
-import com.fruit.mall.admin.product.dto.SaleStopDto;
+import com.fruit.mall.category.CategoryService;
+import com.fruit.mall.image.dto.FileInfo;
+import com.fruit.mall.image.Image;
+import com.fruit.mall.image.ImageService;
+import com.fruit.mall.product.dto.PageResDto;
+import com.fruit.mall.product.dto.ProductRegistrationForm;
+import com.fruit.mall.product.dto.SaleStopDto;
 import com.fruit.mall.firebase.FireBaseService;
 import com.fruit.mall.firebase.UploadResult;
 import com.github.pagehelper.PageInfo;

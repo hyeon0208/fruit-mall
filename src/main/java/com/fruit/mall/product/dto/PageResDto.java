@@ -1,8 +1,7 @@
-package com.fruit.mall.admin.product.dto;
+package com.fruit.mall.product.dto;
 
-import com.fruit.mall.admin.product.Product;
+import com.fruit.mall.product.Product;
 import com.github.pagehelper.PageInfo;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter

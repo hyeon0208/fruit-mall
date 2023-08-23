@@ -1,4 +1,4 @@
-package com.fruit.mall.admin.category;
+package com.fruit.mall.category;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

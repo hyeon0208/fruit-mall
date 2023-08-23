@@ -1,4 +1,4 @@
-package com.fruit.mall.admin.product;
+package com.fruit.mall.product;
 
 import lombok.Builder;
 import lombok.Getter;

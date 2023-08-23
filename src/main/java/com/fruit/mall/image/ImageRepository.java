@@ -1,4 +1,4 @@
-package com.fruit.mall.admin.image;
+package com.fruit.mall.image;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

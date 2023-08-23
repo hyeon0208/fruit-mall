@@ -1,4 +1,4 @@
-package com.fruit.mall.user;
+package com.fruit.mall.term;
 
 import lombok.*;
 

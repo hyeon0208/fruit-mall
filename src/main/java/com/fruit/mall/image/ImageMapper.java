@@ -1,4 +1,4 @@
-package com.fruit.mall.admin.image;
+package com.fruit.mall.image;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

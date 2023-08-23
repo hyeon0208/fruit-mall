@@ -1,6 +1,6 @@
-package com.fruit.mall.admin.product;
+package com.fruit.mall.product;
 
-import com.fruit.mall.admin.product.dto.ProductAndImageInfo;
+import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;

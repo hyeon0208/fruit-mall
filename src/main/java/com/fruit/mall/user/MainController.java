@@ -1,9 +1,9 @@
-package com.fruit.mall;
+package com.fruit.mall.user;
 
-import com.fruit.mall.admin.image.ImageService;
-import com.fruit.mall.admin.product.ProductService;
-import com.fruit.mall.admin.product.dto.PageResDto;
-import com.fruit.mall.admin.product.dto.ProductAndImageInfo;
+import com.fruit.mall.image.ImageService;
+import com.fruit.mall.product.ProductService;
+import com.fruit.mall.product.dto.PageResDto;
+import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,6 @@ public class MainController {
     private final ProductService productService;
     private final ImageService imageService;
     List<String> recentProducts = new ArrayList<>();
-    private final static String ON_SALE = "판매중";
 
     @GetMapping("favicon.ico")
     @ResponseBody

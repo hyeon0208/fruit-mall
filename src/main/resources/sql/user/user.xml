@@ -8,7 +8,7 @@
         VALUES (#{user_email}, #{user_name}, #{user_pwd}, #{user_status})
     </insert>
 
-    <insert id="insertTerm" parameterType="com.fruit.mall.user.Term">
+    <insert id="insertTerm" parameterType="com.fruit.mall.term.Term">
         INSERT INTO term (USER_ID_NO, TERM_NAME, TERM_FLAG)
         VALUES (#{user_id_no}, #{term_name}, #{term_flag})
     </insert>

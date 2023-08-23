@@ -1,4 +1,4 @@
-package com.fruit.mall.admin.interceptor;
+package com.fruit.mall.config.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
