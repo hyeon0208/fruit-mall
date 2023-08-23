@@ -1,6 +1,7 @@
 package com.fruit.mall.product;
 
 import com.fruit.mall.product.dto.ProductAndImageInfo;
+import com.fruit.mall.product.dto.ProductDetailForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +45,11 @@ public class ProductRepository implements ProductMapper {
     @Override
     public List<ProductAndImageInfo> selectProductAndImageByFilter(String category, String searchCond) {
         return productMapper.selectProductAndImageByFilter(category, searchCond);
+    }
+
+    @Override
+    public ProductDetailForm selectProductDetailByProductId(Long id) {
+        return productMapper.selectProductDetailByProductId(id);
     }
 
     @Override

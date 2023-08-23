@@ -686,8 +686,8 @@
   width: 50%;
 }
 #detail .detail__inner .box01 .left img {
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 500px;
   border-radius: 20px;
 }
 #detail .detail__inner .box01 .right {
@@ -903,6 +903,16 @@
 }
 #detail .detail__inner .box02 a .question {
   margin-right: 0px;
+}
+
+#detail .detail__inner .box03 div {
+  text-align: center;
+}
+
+#detail .detail__inner .box03 img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #review {
@@ -1417,6 +1427,7 @@
 #review .detail__inner .write .review__confirm__modal .inner .confirm__modal__wrap .review__buttons .review__confirm a {
   color: #fff;
 }
+
 #review .detail__inner .box03 ul li {
   border: 2px solid #b3b3b3;
   border-radius: 10px;

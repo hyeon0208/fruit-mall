@@ -1,6 +1,7 @@
 package com.fruit.mall.product;
 
 import com.fruit.mall.product.dto.ProductAndImageInfo;
+import com.fruit.mall.product.dto.ProductDetailForm;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +73,10 @@ public class ProductService {
 
     public int countSoldOutProducts() {
         return productRepository.countSoldOutProducts();
+    }
+
+    public ProductDetailForm selectProductDetailByProductId(Long id) {
+        return productRepository.selectProductDetailByProductId(id);
     }
 
     public void updateProductStatus(Long productId, String status) {

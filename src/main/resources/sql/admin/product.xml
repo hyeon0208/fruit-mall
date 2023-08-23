@@ -110,12 +110,33 @@
             AND p.PRODUCT_SALE_STATUS = '판매중'
 
             AND i1.IMAGE_ID = (
-            SELECT MIN(i3.IMAGE_ID)
-            FROM image i3
-            WHERE i3.PRODUCT_ID = p.PRODUCT_ID
+            SELECT MIN(i2.IMAGE_ID)
+            FROM image i2
+            WHERE i2.PRODUCT_ID = p.PRODUCT_ID
             )
         </where>
         ORDER BY p.PRODUCT_ID DESC;
+    </select>
+
+    <select id="selectProductDetailByProductId" resultType="com.fruit.mall.product.dto.ProductDetailForm">
+        SELECT
+        p.PRODUCT_NAME,
+        p.PRODUCT_PRICE,
+        p.PRODUCT_DISCOUNT,
+        p.PRODUCT_DESCRIPTION,
+        p.PRODUCT_STOCK,
+        i1.IMAGE_URL,
+        i1.IMAGE_ID
+        FROM product p
+        JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
+        WHERE
+            p.PRODUCT_ID = #{productId}
+            AND
+            i1.IMAGE_ID = (
+            SELECT MIN(i2.IMAGE_ID)
+            FROM image i2
+            WHERE i2.PRODUCT_ID = p.PRODUCT_ID
+            )
     </select>
 
     <update id="updateProductStatus" >

@@ -1,6 +1,7 @@
 package com.fruit.mall.product;
 
 import com.fruit.mall.product.dto.ProductAndImageInfo;
+import com.fruit.mall.product.dto.ProductDetailForm;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,6 +15,8 @@ public interface ProductMapper {
     void updateProduct(Product product);
 
     void deleteProductById(@Param("productId") Long id);
+
+    ProductDetailForm selectProductDetailByProductId(@Param("productId") Long id);
 
     Product selectProductAllById(@Param("productId") Long id);
 
