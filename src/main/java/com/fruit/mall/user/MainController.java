@@ -10,8 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,15 +37,28 @@ public class MainController {
     @GetMapping("/")
     public String home(
             Model model,
-            HttpSession session,
+            HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
+            @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
 
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null);
         model.addAttribute("pageInfo", products);
 
-        if (session.getAttribute("recentProducts") != null) {
-            recentProducts = (List<String>) session.getAttribute("recentProducts");
+        Cookie[] cookies = request.getCookies();
+        String recentProductsCookie = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("recentProducts")) {
+                    recentProductsCookie = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        if (recentProductsCookie != null) {
+            String decodedRecentProductImages = URLDecoder.decode(recentProductsCookie, StandardCharsets.UTF_8.toString());
+            recentProducts = new ArrayList<>(Arrays.asList(decodedRecentProductImages.split(",")));
             model.addAttribute("recentProducts", recentProducts);
         }
 
@@ -62,14 +82,18 @@ public class MainController {
 
     @PostMapping("/recent-products/{productId}")
     @ResponseBody
-    public String addRecentProduct(@PathVariable("productId") Long productId, HttpSession session) {
+    public String addRecentProduct(@PathVariable("productId") Long productId, HttpServletResponse response) throws UnsupportedEncodingException {
         String recentImage = imageService.selectProductImageUrlByProductId(productId);
         if (!recentProducts.contains(recentImage)) {
             recentProducts.add(0, recentImage);
             if (recentProducts.size() > 3) {
                 recentProducts.remove(recentProducts.size() - 1);
             }
-            session.setAttribute("recentProducts", recentProducts);
+            String recentProductsCookie = URLEncoder.encode(String.join(",", recentProducts), StandardCharsets.UTF_8.toString());
+            Cookie cookie = new Cookie("recentProducts", recentProductsCookie);
+            cookie.setPath("/");
+            cookie.setMaxAge(24 * 60 * 60); // Cookie 유효기간 1일로 설정
+            response.addCookie(cookie);
         }
         return "success";
     }
