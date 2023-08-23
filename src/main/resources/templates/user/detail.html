@@ -80,12 +80,10 @@
                                         <span class="material-symbols-outlined">person</span>
                                         <p th:text="${session.loginUser.getName()} + 님"></p>
                                     </a>
-
                                     <a href="#" th:if="${session.loginUser == null}">
                                         <span class="material-symbols-outlined">person</span>
                                         <p>손님</p>
                                     </a>
-
                                     <div class="line"></div>
                                 </li>
 
@@ -105,7 +103,6 @@
                                         <p>찜</p>
                                         <div class="favorite__count">3</div>
                                     </a>
-
                                     <div class="line"></div>
                                 </li>
 
@@ -113,10 +110,12 @@
                                 <li class="last">
                                     <a href="#">
                                         <p>최근 본 상품</p>
-                                        <tr th:each="imageUrl : ${recentProducts}">
-                                            <td><img th:src="${imageUrl}"/></td>
+                                        <tr th:each="product : ${recentProducts}">
+                                            <a th:href="@{/user/detail/{id}(id=${product.getProductId()})}">
+                                                <td><img th:src="${product.getImageUrl()}"/></td>
+                                            </a>
                                         </tr>
-                                        <p id="TopBtn">맨위로</p>
+                                        <p id="TopBtn" style="text-align: center">맨위로</p>
                                     </a>
                                 </li>
                             </ul>
