@@ -1,7 +1,9 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.image.ImageService;
+import com.fruit.mall.like.LikeService;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.PageResDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -32,6 +35,7 @@ import static com.fruit.mall.config.LoginUserArgumentResolver.LOGIN_USER;
 public class MainController {
     private final ProductService productService;
     private final ImageService imageService;
+    private final LikeService likeService;
     public static List<RecentProduct> recentProducts = new ArrayList<>();
 
     @GetMapping("favicon.ico")
@@ -42,12 +46,18 @@ public class MainController {
     @GetMapping("/")
     public String home(
             Model model,
+            @Login SessionUser sessionUser,
             HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
 
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null);
         model.addAttribute("pageInfo", products);
+
+        if (sessionUser != null) {
+            int likesCount = likeService.countLikesByUserId(sessionUser.getUserIdNo());
+            model.addAttribute("likesCount", likesCount);
+        }
 
         Cookie[] cookies = request.getCookies();
         String recentProductsCookie = null;

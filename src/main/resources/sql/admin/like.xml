@@ -17,4 +17,10 @@
     <delete id="deleteLike">
         DELETE FROM likes WHERE PRODUCT_ID = #{productId};
     </delete>
+
+    <select id="countLikesByUserId" resultType="int">
+        SELECT COUNT(*)
+        FROM likes
+        WHERE USER_ID_NO = #{userIdNo}
+    </select>
 </mapper>

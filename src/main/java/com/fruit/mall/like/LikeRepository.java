@@ -3,8 +3,6 @@ package com.fruit.mall.like;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 @RequiredArgsConstructor
 public class LikeRepository implements LikeMapper {
@@ -18,5 +16,10 @@ public class LikeRepository implements LikeMapper {
     @Override
     public void deleteLike(Long id) {
         likeMapper.deleteLike(id);
+    }
+
+    @Override
+    public int countLikesByUserId(Long id) {
+        return likeMapper.countLikesByUserId(id);
     }
 }
