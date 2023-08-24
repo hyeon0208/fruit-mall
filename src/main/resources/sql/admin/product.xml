@@ -96,7 +96,11 @@
         p.PRODUCT_DISCOUNT,
         i1.IMAGE_URL,
         i1.IMAGE_ID,
-        IF(l.LIKE_ID IS NOT NULL, 1, 0) AS liked
+        IFNULL((
+        SELECT
+        IF(l.LIKE_ID IS NOT NULL, 1, 0)
+        FROM likes l
+        WHERE l.PRODUCT_ID = p.PRODUCT_ID AND l.USER_ID_NO = #{userIdNo}), 0) AS liked
         FROM product p
         JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
         LEFT JOIN likes l ON l.PRODUCT_ID = p.PRODUCT_ID

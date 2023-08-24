@@ -51,13 +51,13 @@ public class MainController {
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
 
-        PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null);
-        model.addAttribute("pageInfo", products);
+        PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null, sessionUser);
 
         if (sessionUser != null) {
             int likesCount = likeService.countLikesByUserId(sessionUser.getUserIdNo());
             model.addAttribute("likesCount", likesCount);
         }
+        model.addAttribute("pageInfo", products);
 
         Cookie[] cookies = request.getCookies();
         String recentProductsCookie = null;
@@ -96,7 +96,7 @@ public class MainController {
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
         String category = params.get("category");
         String searchCond = params.get("searchCond");
-        PageInfo<ProductAndImageInfo> pageInfo = productService.getProductsAndImageByFilter(pageNum, pageSize, category, searchCond);
+        PageInfo<ProductAndImageInfo> pageInfo = productService.getProductsAndImageByFilter(pageNum, pageSize, category, searchCond, sessionUser);
 
         if (sessionUser != null) {
             return new PageResDto(pageInfo, category, sessionUser);

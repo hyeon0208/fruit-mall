@@ -43,8 +43,8 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
-    public List<ProductAndImageInfo> selectProductAndImageByFilter(String category, String searchCond) {
-        return productMapper.selectProductAndImageByFilter(category, searchCond);
+    public List<ProductAndImageInfo> selectProductAndImageByFilter(String category, String searchCond, Long id) {
+        return productMapper.selectProductAndImageByFilter(category, searchCond, id);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.fruit.mall.product;
 
+import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
 import com.github.pagehelper.PageHelper;
@@ -29,9 +30,15 @@ public class ProductService {
         return new PageInfo<>(products);
     }
 
-    public PageInfo<ProductAndImageInfo> getProductsAndImageByFilter(int pageNum, int pageSize, String category, String searchCond) {
+    public PageInfo<ProductAndImageInfo> getProductsAndImageByFilter(int pageNum, int pageSize, String category, String searchCond, SessionUser sessionUser) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<ProductAndImageInfo> productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond);
+        List<ProductAndImageInfo> productAndImageInfos = null;
+        if (sessionUser != null) {
+            productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond, sessionUser.getUserIdNo());
+        }
+        if (sessionUser == null) {
+            productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond, null);
+        }
         return new PageInfo<>(productAndImageInfos);
     }
 

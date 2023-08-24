@@ -20,7 +20,7 @@ public interface ProductMapper {
 
     Product selectProductAllById(@Param("productId") Long id);
 
-    List<ProductAndImageInfo> selectProductAndImageByFilter(@Param("category") String category, @Param("searchCond") String searchCond);
+    List<ProductAndImageInfo> selectProductAndImageByFilter(@Param("category") String category, @Param("searchCond") String searchCond, @Param("userIdNo") Long userIdNo);
 
     List<Product> selectAll();
 
