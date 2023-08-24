@@ -90,18 +90,16 @@ public class MainController {
     @GetMapping("/user/searchfilter")
     @ResponseBody
     public PageResDto userMainSearchFilter(
+            @Login SessionUser sessionUser,
             @RequestParam HashMap<String, String> params,
-            HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
         String category = params.get("category");
         String searchCond = params.get("searchCond");
         PageInfo<ProductAndImageInfo> pageInfo = productService.getProductsAndImageByFilter(pageNum, pageSize, category, searchCond);
 
-        SessionUser loginUser = (SessionUser) request.getSession().getAttribute(LOGIN_USER);
-
-        if (loginUser != null) {
-            return new PageResDto(pageInfo, category, loginUser);
+        if (sessionUser != null) {
+            return new PageResDto(pageInfo, category, sessionUser);
         } else {
             return new PageResDto(pageInfo, category, null);
         }
