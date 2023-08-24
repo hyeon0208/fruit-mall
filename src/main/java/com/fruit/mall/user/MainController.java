@@ -1,9 +1,11 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.image.ImageService;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.PageResDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
+import com.fruit.mall.product.dto.RecentProduct;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,13 +23,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.fruit.mall.config.LoginUserArgumentResolver.LOGIN_USER;
 
 @Controller
 @RequiredArgsConstructor
 public class MainController {
     private final ProductService productService;
     private final ImageService imageService;
-    List<String> recentProducts = new ArrayList<>();
+    public static List<RecentProduct> recentProducts = new ArrayList<>();
 
     @GetMapping("favicon.ico")
     @ResponseBody
@@ -58,7 +63,14 @@ public class MainController {
 
         if (recentProductsCookie != null) {
             String decodedRecentProductImages = URLDecoder.decode(recentProductsCookie, StandardCharsets.UTF_8.toString());
-            recentProducts = new ArrayList<>(Arrays.asList(decodedRecentProductImages.split(",")));
+            recentProducts = Arrays.stream(decodedRecentProductImages.split(","))
+                    .map(s -> {
+                        int lastColon = s.lastIndexOf(":");
+                        String imageUrl = s.substring(0, lastColon);
+                        Long productId = Long.valueOf(s.substring(lastColon + 1));
+                        return new RecentProduct(imageUrl, productId);
+                    })
+                    .collect(Collectors.toList());
             model.addAttribute("recentProducts", recentProducts);
         }
 
@@ -69,15 +81,20 @@ public class MainController {
     @ResponseBody
     public PageResDto userMainSearchFilter(
             @RequestParam HashMap<String, String> params,
+            HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
         String category = params.get("category");
         String searchCond = params.get("searchCond");
         PageInfo<ProductAndImageInfo> pageInfo = productService.getProductsAndImageByFilter(pageNum, pageSize, category, searchCond);
 
-        PageResDto pageResDto = new PageResDto(pageInfo, category);
+        SessionUser loginUser = (SessionUser) request.getSession().getAttribute(LOGIN_USER);
 
-        return pageResDto;
+        if (loginUser != null) {
+            return new PageResDto(pageInfo, category, loginUser);
+        } else {
+            return new PageResDto(pageInfo, category, null);
+        }
     }
 
     @PostMapping("/recent-products/{productId}")
@@ -85,11 +102,16 @@ public class MainController {
     public String addRecentProduct(@PathVariable("productId") Long productId, HttpServletResponse response) throws UnsupportedEncodingException {
         String recentImage = imageService.selectProductImageUrlByProductId(productId);
         if (!recentProducts.contains(recentImage)) {
-            recentProducts.add(0, recentImage);
+            recentProducts.add(0, new RecentProduct(recentImage, productId));
             if (recentProducts.size() > 3) {
                 recentProducts.remove(recentProducts.size() - 1);
             }
-            String recentProductsCookie = URLEncoder.encode(String.join(",", recentProducts), StandardCharsets.UTF_8.toString());
+            String recentProductsCookie = URLEncoder.encode(
+                    recentProducts.stream()
+                            .map(product -> product.getImageUrl() + ":" + product.getProductId())
+                            .collect(Collectors.joining(",")),
+                    StandardCharsets.UTF_8.toString()
+            );
             Cookie cookie = new Cookie("recentProducts", recentProductsCookie);
             cookie.setPath("/");
             cookie.setMaxAge(24 * 60 * 60); // Cookie 유효기간 1일로 설정
