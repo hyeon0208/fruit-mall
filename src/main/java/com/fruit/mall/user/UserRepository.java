@@ -15,20 +15,12 @@ public class UserRepository implements UserMapper {
     }
 
     @Override
-    public User selectUserByUserEmail(String loginUserEmail) {
-
-        return userMapper.selectUserByUserEmail(loginUserEmail);
-    }
-
-    @Override
-    public Long selectOnlyUserIdNo(String email) {
-        return userMapper.selectOnlyUserIdNo(email);
+    public User selectUserByUserEmail(String user_email) {
+        return userMapper.selectUserByUserEmail(user_email);
     }
 
     @Override
     public void insertTerm(Term term) {
-
-
         userMapper.insertTerm(term);
     }
 

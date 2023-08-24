@@ -14,17 +14,14 @@
     </insert>
 
     <resultMap id="UserResultMap" type="com.fruit.mall.user.User">
+        <result property="user_id_no" column="user_id_no"/>
         <result property="user_email" column="user_email" />
         <result property="user_name" column="user_name" />
         <result property="user_pwd" column="user_pwd" />
         <result property="user_status" column="user_status" typeHandler="com.fruit.mall.user.RoleTypeHandler" />
     </resultMap>
 
-    <select id="selectOnlyUserIdNo" parameterType="String" resultType="Long">
-        SELECT USER_ID_NO FROM user WHERE USER_EMAIL = #{user_email}
-    </select>
-
-    <select id="selectUserByUserEmail" parameterType="String" resultMap="UserResultMap">
+    <select id="selectUserByUserEmail" resultMap="UserResultMap">
         SELECT * FROM user WHERE USER_EMAIL = #{user_email}
     </select>
 

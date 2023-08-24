@@ -26,18 +26,11 @@ public class UserService {
         userRepository.insertUser(user);
     }
 
-    public User selectUserByUserEmail(String loginUserEmail) {
-
-        return userRepository.selectUserByUserEmail(loginUserEmail);
-    }
-
-    public Long selectOnlyUserIdNo(String email) {
-        return userRepository.selectOnlyUserIdNo(email);
+    public User selectUserByUserEmail(String user_email) {
+        return userRepository.selectUserByUserEmail(user_email);
     }
 
     public void insertTerm(Term term) {
-
-
         userRepository.insertTerm(term);
     }
 

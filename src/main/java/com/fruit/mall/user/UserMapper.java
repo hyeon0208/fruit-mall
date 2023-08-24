@@ -9,9 +9,7 @@ public interface UserMapper {
 
     void insertUser(User user);
 
-    User selectUserByUserEmail(String userEmail);
-
-    Long selectOnlyUserIdNo(String email);
+    User selectUserByUserEmail(@Param("user_email") String user_email);
 
     void insertTerm(Term term);
 
