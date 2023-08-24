@@ -3,7 +3,6 @@ package com.fruit.mall.product.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 @Getter
 @NoArgsConstructor
 public class ProductAndImageInfo {
@@ -14,4 +13,5 @@ public class ProductAndImageInfo {
     private int productDiscount;
     private String imageUrl;
     private Long imageId;
+    private Boolean liked;
 }

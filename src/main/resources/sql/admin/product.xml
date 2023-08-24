@@ -95,9 +95,11 @@
         p.PRODUCT_PRICE,
         p.PRODUCT_DISCOUNT,
         i1.IMAGE_URL,
-        i1.IMAGE_ID
+        i1.IMAGE_ID,
+        IF(l.LIKE_ID IS NOT NULL, 1, 0) AS liked
         FROM product p
         JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
+        LEFT JOIN likes l ON l.PRODUCT_ID = p.PRODUCT_ID
         <where>
             <if test="category != '전체카테고리' and category != null and category != ''">
                 AND p.CATEGORY_ID = (SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{category})

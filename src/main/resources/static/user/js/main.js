@@ -3,7 +3,7 @@ let userCurrentPage= 1;
 let userPageSize = 9;
 
 $(document).on('click', '#recentProductBtn', (e) => {
-    const productId = $(e.currentTarget).attr("data-userproductId");
+    const productId = $(e.currentTarget).data('user-product-id');
 
     axios({
         method: "post",
@@ -63,7 +63,7 @@ function showMainProductList() {
         const products = res.data.productAndImageInfoPageInfo.list;
         const pageInfo = res.data.productAndImageInfoPageInfo;
         const category = res.data.category;
-
+        const loginUser = res.data.loginUser;
 
         $('.categoryBtn-user').each((i, e) => {
             const btn = $(e);
@@ -84,6 +84,26 @@ function showMainProductList() {
 
         // #products 내부의 .inner ul 내부 내용 교체
         const productList = products.map((product) => {
+            let favoriteButton;
+
+            if (loginUser != null) {
+                favoriteButton = $("<button>")
+                    .addClass("material-icons red__heart")
+                    .attr('value', product.liked ? '1' : '0')
+                    .attr('data-user-id', loginUser.userIdNo) // Assuming 'loginUser' has a 'userIdNo' property
+                    .text("favorite");
+
+                // If 'liked' property is true, add 'filled' class
+                if (product.liked) {
+                    favoriteButton.addClass("filled");
+                }
+            } else {
+                favoriteButton = $("<button>")
+                    .addClass("material-icons red__heart")
+                    .attr('disabled', true)
+                    .text("favorite");
+            }
+
             return $("<li>")
                 .append(
                     $("<a>")
@@ -91,12 +111,6 @@ function showMainProductList() {
                         .attr("data-userproductId", product.productId)
                         .attr("href", `/user/detail/${product.productId}`)
                         .append($("<img>").attr("src", product.imageUrl))
-                        .append(
-                            $("<div>")
-                                .addClass("icons")
-                                .append($("<span>").addClass("material-icons red__heart").text("favorite"))
-                                .append($("<span>").addClass("material-symbols-outlined").text("shopping_cart"))
-                        )
                         .append(
                             $("<div>")
                                 .addClass("txt")
@@ -114,7 +128,11 @@ function showMainProductList() {
                                                 })}원`
                                         )
                                 )
-                        )
+                        ),
+                    $("<div>")
+                        .addClass('icons')
+                        .append(favoriteButton)
+                        .append('<button class="material-symbols-outlined" value="0">shopping_cart</button>')
                 );
         });
         $("#products .inner ul").empty().append(productList);
@@ -163,7 +181,7 @@ function showMainProductList() {
                 .html('<span class="material-symbols-outlined">chevron_right</span>');
             paginationDiv.append(userNextBtn);
         }
-    })
+    });
 }
 
 

@@ -71,16 +71,12 @@
                         <span class="material-symbols-outlined">person</span>
                         <p th:text="${session.loginUser.getName()} + 님"></p>
                     </a>
-
                     <a href="#" th:if="${session.loginUser == null}">
                         <span class="material-symbols-outlined">person</span>
                         <p>손님</p>
                     </a>
-
                     <div class="line"></div>
                 </li>
-
-
 
                 <!-- 장바구니 -->
                 <li class="right__cart">
@@ -98,7 +94,6 @@
                         <p>찜</p>
                         <div class="favorite__count">3</div>
                     </a>
-
                     <div class="line"></div>
                 </li>
 
@@ -106,10 +101,12 @@
                 <li class="last">
                     <a href="#">
                         <p>최근 본 상품</p>
-                        <tr th:each="imageUrl : ${recentProducts}">
-                            <td><img th:src="${imageUrl}"/></td>
+                        <tr th:each="product : ${recentProducts}">
+                            <a th:href="@{/user/detail/{id}(id=${product.getProductId()})}">
+                                <td><img th:src="${product.getImageUrl()}"/></td>
+                            </a>
                         </tr>
-                        <p id="TopBtn">맨위로</p>
+                        <p id="TopBtn" style="text-align: center">맨위로</p>
                     </a>
                 </li>
             </ul>
@@ -123,12 +120,8 @@
                 <!-- 상품 리스트 동적 생성 -->
                 <th:block th:each="product, productStat : ${pageInfo.list}">
                     <li>
-                        <a id="recentProductBtn" th:data-userproductId="${product.productId}" th:href="@{'/user/detail/' + ${product.productId}}">
+                        <a id="recentProductBtn" th:data-user-product-id="${product.productId}" th:href="@{/user/detail/{id}(id=${product.productId})}">
                             <img th:src="${product.imageUrl}">
-                            <div class="icons">
-                                <span class="material-icons red__heart">favorite</span>
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                            </div>
                             <div class="txt">
                                 <div class="title">
                                     <span th:text="${product.productName}">상품명</span>
@@ -136,6 +129,14 @@
                                 <div class="price" th:text="|${#numbers.formatInteger((product.productPrice * (1 - (product.productDiscount / 100.0))), 3, 'COMMA')}원|"></div>
                             </div>
                         </a>
+                        <div class="icons">
+                            <button th:if="${session.loginUser == null}" class="material-icons red__heart" disabled>favorite</button>
+                            <button th:if="${session.loginUser != null}"
+                                    th:classappend="${product.liked} ? 'filled' : ''"
+                                    th:data-user-id="${session.loginUser.userIdNo}" class="material-icons red__heart"
+                                    th:value="${product.liked} ? '1' : '0'">favorite</button>
+                            <button class="material-symbols-outlined" value="0">shopping_cart</button>
+                        </div>
                     </li>
                 </th:block>
             </ul>

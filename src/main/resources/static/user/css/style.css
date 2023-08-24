@@ -4,6 +4,14 @@
   color: red;
 }
 
+
+#products .inner ul li .icons button.material-icons.red__heart,
+#products .inner ul li .icons button.material-symbols-outlined {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
 #join {
   margin-top: 500px;
   margin: 120px auto;
@@ -2931,23 +2939,31 @@ header .inner .main-menu .item .red .material-icons {
 }
 #products .inner ul li .icons {
   position: relative;
-  top: -210px;
+  top: -256px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px 0px;
 }
 #products .inner ul li .icons .red__heart {
+  color: #00000069;
+}
+
+#products .inner ul li .icons .red__heart.filled {
   color: red;
 }
+
+
 #products .inner ul li .txt {
   margin-top: -15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 20px;
+  padding: 20px 20px;
   font: 600 16px/1 "Nanum Gothic";
 }
+
+
 #products .inner ul li .txt .price {
   font: 800 16px/1 "Nanum Gothic";
 }
@@ -3112,7 +3128,7 @@ header .inner .main-menu .item .red .material-icons {
   margin-bottom: -10px;
 }
 #aside .sidebar ul .last a {
-  padding: 20px 10px;
+  padding: 7px 10px;
 }
 #aside .sidebar ul .last a span {
   margin: 10px 0px 0px;
