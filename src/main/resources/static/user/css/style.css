@@ -4,9 +4,9 @@
   color: red;
 }
 
-
 #products .inner ul li .icons button.material-icons.red__heart,
-#products .inner ul li .icons button.material-symbols-outlined {
+#products .inner ul li .icons button.material-symbols-outlined,
+#detail .red__heart {
   border: none;
   background-color: transparent;
   padding: 0;
@@ -711,10 +711,14 @@
 #detail .detail__inner .box01 .right .right__txt01 h2 {
   font: 800 25px/1 "Nanum Gothic";
 }
-#detail .detail__inner .box01 .right .right__txt01 span {
-  color: red;
-  font-size: 30px;
+#detail .detail__inner .box01 .right .right__txt01 .red__heart {
+  color: #00000069;
 }
+
+#detail .detail__inner .box01 .right .right__txt01 .red__heart.filled {
+  color: red;
+}
+
 #detail .detail__inner .box01 .right .right__txt02 {
   margin-top: 50px;
 }
