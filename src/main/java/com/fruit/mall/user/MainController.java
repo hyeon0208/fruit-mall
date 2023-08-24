@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.fruit.mall.config.LoginUserArgumentResolver.LOGIN_USER;
+import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
 
 @Controller
 @RequiredArgsConstructor

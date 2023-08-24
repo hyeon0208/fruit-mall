@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class UserLoginController {
 
     private final UserService userService;
-    private final static String LOGIN_USER = "loginUser";
+    public final static String LOGIN_USER = "loginUser";
 
     @PostMapping("/user/login")
     @ResponseBody
