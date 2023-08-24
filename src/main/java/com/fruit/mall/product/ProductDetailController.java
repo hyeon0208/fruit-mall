@@ -21,7 +21,6 @@ public class ProductDetailController {
     @GetMapping("/user/detail/{productId}")
     public String showDetail(@Login SessionUser sessionUser, @PathVariable("productId") Long productId, Model model) {
         ProductDetailForm productDetailForm = productService.selectProductDetailByProductId(productId, sessionUser);
-        System.out.println("productDetailForm = " + productDetailForm);
         model.addAttribute("productDetailForm", productDetailForm);
         model.addAttribute("recentProducts", recentProducts);
         model.addAttribute("productId", productId);
