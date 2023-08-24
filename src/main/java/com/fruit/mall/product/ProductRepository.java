@@ -48,8 +48,8 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
-    public ProductDetailForm selectProductDetailByProductId(Long id) {
-        return productMapper.selectProductDetailByProductId(id);
+    public ProductDetailForm selectProductDetailByProductId(Long id, Long userIdNo) {
+        return productMapper.selectProductDetailByProductId(id, userIdNo);
     }
 
     @Override

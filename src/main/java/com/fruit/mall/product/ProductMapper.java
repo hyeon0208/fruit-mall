@@ -16,7 +16,7 @@ public interface ProductMapper {
 
     void deleteProductById(@Param("productId") Long id);
 
-    ProductDetailForm selectProductDetailByProductId(@Param("productId") Long id);
+    ProductDetailForm selectProductDetailByProductId(@Param("productId") Long id, @Param("userIdNo") Long userIdNo);
 
     Product selectProductAllById(@Param("productId") Long id);
 

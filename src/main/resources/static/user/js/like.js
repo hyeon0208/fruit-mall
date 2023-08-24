@@ -1,6 +1,6 @@
 $(document).on('click', '.red__heart', (e) => {
     let heart = $(e.currentTarget);
-    const productId = heart.closest('li').find('#recentProductBtn').data('user-product-id');
+    const productId = heart.data("product-id");
     const userIdNo = heart.data("user-id");
 
     if(heart.val() == '0') {
@@ -10,9 +10,6 @@ $(document).on('click', '.red__heart', (e) => {
         heart.val(0);
         heart.removeClass('filled'); // filled 클래스 제거
     }
-    console.log(heart.val());
-    console.log(productId)
-    console.log(userIdNo)
 
     // 좋아요 취소
     if (heart.val() == 0) {

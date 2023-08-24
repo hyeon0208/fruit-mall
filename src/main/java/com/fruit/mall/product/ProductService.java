@@ -82,8 +82,11 @@ public class ProductService {
         return productRepository.countSoldOutProducts();
     }
 
-    public ProductDetailForm selectProductDetailByProductId(Long id) {
-        return productRepository.selectProductDetailByProductId(id);
+    public ProductDetailForm selectProductDetailByProductId(Long id, SessionUser sessionUser) {
+        if (sessionUser != null) {
+            return productRepository.selectProductDetailByProductId(id, sessionUser.getUserIdNo());
+        }
+        return productRepository.selectProductDetailByProductId(id, null);
     }
 
     public void updateProductStatus(Long productId, String status) {

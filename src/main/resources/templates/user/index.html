@@ -121,7 +121,7 @@
                 <!-- 상품 리스트 동적 생성 -->
                 <th:block th:each="product, productStat : ${pageInfo.list}">
                     <li>
-                        <a id="recentProductBtn" th:data-user-product-id="${product.productId}" th:href="@{/user/detail/{id}(id=${product.productId})}">
+                        <a id="recentProductBtn" th:href="@{/user/detail/{id}(id=${product.productId})}">
                             <img th:src="${product.imageUrl}">
                             <div class="txt">
                                 <div class="title">
@@ -134,6 +134,7 @@
                             <button th:if="${session.loginUser == null}" class="material-icons red__heart" disabled>favorite</button>
                             <button th:if="${session.loginUser != null}"
                                     th:classappend="${product.liked} ? 'filled' : ''"
+                                    th:data-product-id="${productId}"
                                     th:data-user-id="${session.loginUser.userIdNo}" class="material-icons red__heart"
                                     th:value="${product.liked} ? '1' : '0'">favorite</button>
                             <button class="material-symbols-outlined" value="0">shopping_cart</button>

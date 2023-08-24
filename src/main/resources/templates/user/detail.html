@@ -11,10 +11,14 @@
                 </div>
 
                 <div class="right">
-
                     <div class="right__txt01">
                         <h2 th:text="*{productName}"></h2>
-                        <span class="material-icons red__heart">favorite</span>
+                        <button th:if="${session.loginUser == null}" class="material-icons red__heart" disabled>favorite</button>
+                        <button th:if="${session.loginUser != null}"
+                                th:classappend="*{liked} ? 'filled' : ''"
+                                th:data-product-id="${productId}"
+                                th:data-user-id="${session.loginUser.userIdNo}" class="material-icons red__heart"
+                                th:value="*{liked} ? '1' : '0'">favorite</button>
                     </div>
 
                     <div class="right__txt02">

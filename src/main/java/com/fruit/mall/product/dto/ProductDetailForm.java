@@ -2,10 +2,13 @@ package com.fruit.mall.product.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
+@ToString
 @NoArgsConstructor
 public class ProductDetailForm {
+    private Long productId;
     private String productName;
     private int productPrice;
     private int productDiscount;
@@ -13,4 +16,5 @@ public class ProductDetailForm {
     private String productDescription;
     private String imageUrl;
     private Long imageId;
+    private Boolean liked;
 }
