@@ -3,7 +3,7 @@ let userCurrentPage= 1;
 let userPageSize = 9;
 
 $(document).on('click', '#recentProductBtn', (e) => {
-    const productId = $(e.currentTarget).data('user-product-id');
+    const productId = $(e.currentTarget).data('product-id');
 
     axios({
         method: "post",
