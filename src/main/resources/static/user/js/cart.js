@@ -5,8 +5,6 @@ $(document).on("click", ".addCartBtn", (e) => {
 
     if(cart.attr("data-btn-status") == 0) {
         cart.attr("data-btn-status", 1);
-    } else {
-        cart.attr("data-btn-status", 0);
     }
 
     console.log(productId);
@@ -15,23 +13,24 @@ $(document).on("click", ".addCartBtn", (e) => {
 
     // 로그인 시
     if (userIdNo != 0) {
-        // 장바구니 취소
-        if (cart.attr("data-btn-status") == 0) {
-            axios({
-                method: "post",
-                url: "/main/cart/remove",
-                data: {
-                    productId: productId,
-                    userIdNo: userIdNo
-                },
-                dataType: "json",
-                headers: {'Content-Type': 'application/json'}
-            });
-        }
+        // // 장바구니 취소
+        // if (cart.attr("data-btn-status") == 0) {
+        //     axios({
+        //         method: "post",
+        //         url: "/main/cart/remove",
+        //         data: {
+        //             productId: productId,
+        //             userIdNo: userIdNo
+        //         },
+        //         dataType: "json",
+        //         headers: {'Content-Type': 'application/json'}
+        //     });
+        // }
 
         // 장바구니 담기
         if (cart.attr("data-btn-status") == 1) {
             let localCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+            console.log(localCart);
             axios({
                 method: "post",
                 url: "/main/cart/add",
@@ -44,22 +43,38 @@ $(document).on("click", ".addCartBtn", (e) => {
                 headers: {'Content-Type': 'application/json'}
             }).then((res) =>{
                 showCartModal();
+                localStorage.removeItem('cart');
             })
         }
     }
 
     // 비로그인 시
     if (userIdNo == 0) {
-        addToLocalStorageCart(productId, 1);
-        console.log(localStorage.getItem('cart'));
-        showCartModal();
+        const cartItem = localStorage.getItem('cart');
+        let cond = null;
+
+        if (cartItem !== null) {
+            cond = JSON.parse(cartItem).find(product => product.productId === productId);
+        }
+
+        if (cond) {
+            $('.txt04.right__modal.exist__cart').show();
+            $('#existCartModalClose').click(() => {
+                $('.txt04.right__modal.exist__cart').hide();
+            });
+        }
+
+        if (cart.attr("data-btn-status") == 1 && !cond) {
+            addToLocalStorageCart(productId, 0);
+            showCartModal();
+        }
     }
 })
 
 function showCartModal() {
-    $('.txt04.right__modal').show();
+    $('.txt04.right__modal.add__cart').show();
     $('#closeCartModal').click(() => {
-        $('.txt04.right__modal').hide();
+        $('.txt04.right__modal.add__cart').hide();
     });
 }
 

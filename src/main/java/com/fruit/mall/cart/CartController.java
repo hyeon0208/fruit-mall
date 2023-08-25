@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,32 +17,35 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/main/cart/add")
-    public List<Cart> addProductToCart(@Login SessionUser sessionUser, @RequestBody CartAddReqDto cartAddReqDto) {
-        List<Cart> carts = new ArrayList<>();
-        if (!cartAddReqDto.getLocalCart().isEmpty()) {
-            List<Cart> localCarts = cartAddReqDto.getLocalCart();
-            for (Cart localCart : localCarts) {
-                Cart lcart = Cart.builder()
-                        .userIdNo(sessionUser.getUserIdNo())
-                        .productId(localCart.getProductId())
-                        .build();
-                Cart savedLCart = cartService.addProductToCart(lcart);
-                carts.add(savedLCart);
-            }
-        }
-
+    public Cart addProductToCart(@RequestBody CartAddReqDto cartAddReqDto) {
         Cart cart = Cart.builder()
                 .userIdNo(cartAddReqDto.getUserIdNo())
                 .productId(cartAddReqDto.getProductId())
                 .build();
 
-        carts.add(cart);
-        return carts;
+        Cart savedCart = cartService.addProductToCart(cart);
+        return savedCart;
     }
 
     @PostMapping("/main/cart/remove")
     public String removeProductToCart(@RequestBody Cart cart) {
 
+        return "success";
+    }
+
+    @PostMapping("/user/update-cart")
+    public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody Map<String, Object> localStorage) {
+        List<Map<String, Object>> localCarts = (List<Map<String, Object>>) localStorage.get("localCart");
+        if (!localCarts.isEmpty()) {
+            for (Map<String, Object> localCart : localCarts) {
+                Long productId = Long.valueOf((Integer) localCart.get("productId"));
+                Cart lcart = Cart.builder()
+                        .userIdNo(sessionUser.getUserIdNo())
+                        .productId(productId)
+                        .build();
+                cartService.addProductToCart(lcart);
+            }
+        }
         return "success";
     }
 }
