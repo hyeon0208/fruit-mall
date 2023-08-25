@@ -4,6 +4,10 @@
   color: red;
 }
 
+.buttons.cart-modal {
+  display: flex;
+}
+
 #products .inner ul li .icons button.material-icons.red__heart,
 #products .inner ul li .icons button.material-symbols-outlined,
 #detail .red__heart {

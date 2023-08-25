@@ -121,7 +121,7 @@
                 <!-- 상품 리스트 동적 생성 -->
                 <th:block th:each="product, productStat : ${pageInfo.list}">
                     <li>
-                        <a id="recentProductBtn" th:href="@{/user/detail/{id}(id=${product.productId})}">
+                        <a id="recentProductBtn" th:data-product-id="${product.productId}" th:href="@{/user/detail/{id}(id=${product.productId})}">
                             <img th:src="${product.imageUrl}">
                             <div class="txt">
                                 <div class="title">
@@ -134,10 +134,13 @@
                             <button th:if="${session.loginUser == null}" class="material-icons red__heart" disabled>favorite</button>
                             <button th:if="${session.loginUser != null}"
                                     th:classappend="${product.liked} ? 'filled' : ''"
-                                    th:data-product-id="${productId}"
+                                    th:data-product-id="${product.productId}"
                                     th:data-user-id="${session.loginUser.userIdNo}" class="material-icons red__heart"
                                     th:value="${product.liked} ? '1' : '0'">favorite</button>
-                            <button class="material-symbols-outlined" value="0">shopping_cart</button>
+                            <a class="material-symbols-outlined addCartBtn"
+                               data-btn-status="0"
+                               th:data-product-id="${product.productId}"
+                               th:data-user-id="${session.loginUser != null ? session.loginUser.userIdNo : 0}">shopping_cart</a>
                         </div>
                     </li>
                 </th:block>
@@ -161,6 +164,24 @@
                th:href="@{/(pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
                 <span class="material-symbols-outlined">chevron_right</span>
             </a>
+        </div>
+
+        <!-- 장바구니에 담겼습니다. 모달 창 -->
+        <div class="txt04 right__modal" style="display: none;">
+            <div class="inner">
+                <h4>알림</h4>
+                <h5>
+                    <span>장바구니에 담겼습니다.</span>
+                    <div class="buttons cart-modal">
+                        <a id="closeCartModal">
+                            닫기
+                        </a>
+                        <a href="/user/cart">
+                            장바구니로 이동
+                        </a>
+                    </div>
+                </h5>
+            </div>
         </div>
     </section>
 </th:block>

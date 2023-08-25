@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+    <div id="cart">
+        <div class="inner">
+
+            <h2> 장바구니 </h2>
+
+            <div class="txt">
+                <div class="left">
+                    <span>전체 <span class="orange">5</span>개</span>
+                </div>
+
+                <div class="right">
+                    <p>01 장바구니</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <p>02 주문/결제</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <p>03 결제완료</p>
+                </div>
+            </div>
+
+            <table>
+                <tr class="title">
+                    <th>
+                        <input type="checkbox" checked>
+                    </th>
+                    <th scope="col">상품정보</th>
+                    <th scope="col">상품금액</th>
+                    <th scope="col">상품별 할인</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>
+                        <div class="td_wrap">
+                            <img src="../../../../../../consulting-shoppingmall-Taeeun_publisher/img/마이페이지-망고스틴.png" alt="망고스틴">
+
+                            <div class="txt">
+                                <span>열대과일 생과 망고스틴 5kg</span>
+                                <span>
+                                    <button>+</button>
+                                    <button>2</button>
+                                    <button>-</button>
+                                </span>
+                            </div>
+
+                            <div class="price">
+                                <span>50,000원</span>
+                                <button>x</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>100,000원</td>
+                    <td>10%</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>
+                        <div class="td_wrap">
+                            <img src="../../../../../../consulting-shoppingmall-Taeeun_publisher/img/마이페이지-망고스틴.png" alt="망고스틴">
+
+                            <div class="txt">
+                                <span>열대과일 생과 망고스틴 5kg</span>
+                                <span>
+                                    <button>+</button>
+                                    <button>2</button>
+                                    <button>-</button>
+                                </span>
+                            </div>
+
+                            <div class="price">
+                                <span>50,000원</span>
+                                <button>x</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>100,000원</td>
+                    <td>10%</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>
+                        <div class="td_wrap">
+                            <img src="../../../../../../consulting-shoppingmall-Taeeun_publisher/img/마이페이지-망고스틴.png" alt="망고스틴">
+
+                            <div class="txt">
+                                <span>열대과일 생과 망고스틴 5kg</span>
+                                <span>
+                                    <button>+</button>
+                                    <button>2</button>
+                                    <button>-</button>
+                                </span>
+                            </div>
+
+                            <div class="price">
+                                <span>50,000원</span>
+                                <button>x</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>100,000원</td>
+                    <td>10%</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>
+                        <div class="td_wrap">
+                            <img src="../../../../../../consulting-shoppingmall-Taeeun_publisher/img/마이페이지-망고스틴.png" alt="망고스틴">
+
+                            <div class="txt">
+                                <span>열대과일 생과 망고스틴 5kg</span>
+                                <span>
+                                    <button>+</button>
+                                    <button>2</button>
+                                    <button>-</button>
+                                </span>
+                            </div>
+
+                            <div class="price">
+                                <span>50,000원</span>
+                                <button>x</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>100,000원</td>
+                    <td>10%</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>
+                        <div class="td_wrap">
+                            <img src="../../../../../../consulting-shoppingmall-Taeeun_publisher/img/마이페이지-망고스틴.png" alt="망고스틴">
+
+                            <div class="txt">
+                                <span>열대과일 생과 망고스틴 5kg</span>
+                                <span>
+                                    <button>+</button>
+                                    <button>2</button>
+                                    <button>-</button>
+                                </span>
+                            </div>
+
+                            <div class="price">
+                                <span>50,000원</span>
+                                <button>x</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>100,000원</td>
+                    <td>10%</td>
+                </tr>
+
+                <tr class="lastTr">
+                    <td scope="col" colspan="4" class="lastTrTd">
+                        장바구니에 담긴 상품은 최대 15일까지 보관되며 종료되거나 매진될 경우 자동으로 삭제됩니다. <br>
+                        적립예정금액은 결제 시 타 쿠폰을 적용하거나 추가 할인을 받을 경우 실제 적립 받는 금액과 달라질 수 있습니다.
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td colspan="2" rowspan="3">
+                        <span class="total">총 주문 금액</span>
+                    </td>
+
+                    <td>
+                        <span class="total02">총 상품금액</span>
+                    </td>
+
+                    <td>
+                        <span>160,000원</span>
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td>
+                        <span class="total02">즉시 할인 금액</span>
+                    </td>
+
+                    <td>
+                        <span>-4,500원</span>
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td class="br">
+                        <span class="total02">배송비</span>
+                        <br>
+                        <span class="small">(50,000원 이상 무료배송)</span>
+                    </td>
+
+                    <td>
+                        <span>무료</span>
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td colspan="2" class="lastTotalPrice">
+                        <span class="total">결제 예상 금액</span>
+                    </td>
+
+                    <td class="lastTotalPrice">
+
+                    </td>
+
+                    <td class="lastTotalPrice">
+                        <span class="orange">115,500원</span>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="buttons">
+                <button>쇼핑계속하기</button>
+                <button>구매하기</button>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

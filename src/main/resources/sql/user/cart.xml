@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fruit.mall.cart.CartMapper">
+    <insert id="addProductToCart" parameterType="com.fruit.mall.cart.Cart" useGeneratedKeys="true" keyProperty="cartId">
+        INSERT INTO
+            cart(USER_ID_NO, PRODUCT_ID, PRODUCT_COUNT, PRODUCT_PRICE, PRODUCT_DISCOUNT, PRODUCT_SALE_STATUS)
+        VALUES
+            (#{userIdNo}, #{productId}, #{productCount}, #{productPrice}, #{productDiscount}, #{productSaleStatus})
+    </insert>
+
+    <select id="selectByUserIdAndProductId" resultType="com.fruit.mall.cart.Cart">
+        SELECT * FROM cart WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId}
+    </select>
+
+    <select id="selectByCartId" resultType="com.fruit.mall.cart.Cart">
+        SELECT * FROM cart WHERE CART_ID = #{cartId}
+    </select>
+
+    <delete id="deleteProductToCart">
+        DELETE FROM cart WHERE PRODUCT_ID = #{productId};
+    </delete>
+</mapper>
