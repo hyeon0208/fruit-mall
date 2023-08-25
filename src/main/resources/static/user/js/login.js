@@ -43,6 +43,7 @@ $(document).ready(() => {
                     headers: {'Content-Type': 'application/json'}
                 }).then(() => {
                     window.location.replace("/");
+                    localStorage.removeItem('cart');
                 });
             } else {
                 const errorElement = $('#id-error').text().length > 0 ? $('#id') : $('#pw');
