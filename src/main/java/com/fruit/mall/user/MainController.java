@@ -1,5 +1,6 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.cart.CartService;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.image.ImageService;
@@ -33,6 +34,7 @@ public class MainController {
     private final ProductService productService;
     private final ImageService imageService;
     private final LikeService likeService;
+    private final CartService cartService;
     public static List<RecentProduct> recentProducts = new ArrayList<>();
 
     @GetMapping("favicon.ico")
@@ -53,6 +55,9 @@ public class MainController {
         if (sessionUser != null) {
             int likesCount = likeService.countLikesByUserId(sessionUser.getUserIdNo());
             model.addAttribute("likesCount", likesCount);
+
+            int userCartsCount = cartService.countCartByUserId(sessionUser.getUserIdNo());
+            model.addAttribute("userCartsCount", userCartsCount);
         }
         model.addAttribute("pageInfo", products);
 

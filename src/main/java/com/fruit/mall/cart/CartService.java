@@ -47,4 +47,8 @@ public class CartService {
     public void deleteProductToCart(Long productId) {
         cartRepository.deleteProductToCart(productId);
     }
+
+    public int countCartByUserId(Long userIdNo) {
+        return cartRepository.countCartByUserId(userIdNo);
+    }
 }

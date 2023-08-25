@@ -21,4 +21,10 @@
     <delete id="deleteProductToCart">
         DELETE FROM cart WHERE PRODUCT_ID = #{productId};
     </delete>
+
+    <select id="countCartByUserId" resultType="int">
+        SELECT COUNT(*)
+        FROM cart
+        WHERE USER_ID_NO = #{userIdNo}
+    </select>
 </mapper>

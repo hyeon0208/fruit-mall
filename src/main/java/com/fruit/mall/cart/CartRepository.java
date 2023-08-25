@@ -29,4 +29,9 @@ public class CartRepository implements CartMapper {
     public void deleteProductToCart(Long productId) {
         cartMapper.deleteProductToCart(productId);
     }
+
+    @Override
+    public int countCartByUserId(Long userIdNo) {
+        return cartMapper.countCartByUserId(userIdNo);
+    }
 }

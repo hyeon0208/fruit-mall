@@ -15,4 +15,6 @@ public interface CartMapper {
 
     void deleteProductToCart(@Param("productId") Long productId);
 
+    int countCartByUserId(@Param("userIdNo") Long userIdNo);
+
 }

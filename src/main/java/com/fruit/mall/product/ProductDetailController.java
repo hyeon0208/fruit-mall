@@ -1,5 +1,6 @@
 package com.fruit.mall.product;
 
+import com.fruit.mall.cart.CartService;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.like.LikeService;
@@ -17,6 +18,7 @@ import static com.fruit.mall.user.MainController.recentProducts;
 public class ProductDetailController {
     private final ProductService productService;
     private final LikeService likeService;
+    private final CartService cartService;
 
     @GetMapping("/user/detail/{productId}")
     public String showDetail(@Login SessionUser sessionUser, @PathVariable("productId") Long productId, Model model) {
@@ -28,6 +30,9 @@ public class ProductDetailController {
         if (sessionUser != null) {
             int likesCount = likeService.countLikesByUserId(sessionUser.getUserIdNo());
             model.addAttribute("likesCount", likesCount);
+
+            int userCartsCount = cartService.countCartByUserId(sessionUser.getUserIdNo());
+            model.addAttribute("userCartsCount", userCartsCount);
         }
 
         return "user/detail";

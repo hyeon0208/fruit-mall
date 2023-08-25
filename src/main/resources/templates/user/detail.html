@@ -93,10 +93,11 @@
 
                                 <!-- 장바구니 -->
                                 <li class="right__cart">
-                                    <a href="#">
+                                    <a href="/user/cart">
                                         <span class="material-symbols-outlined">shopping_cart</span>
                                         <p>장바구니</p>
-                                        <div class="cart__count">5</div>
+                                        <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
+                                        <div th:if="${session.loginUser == null}" class="cart__count"></div>
                                     </a>
                                 </li>
 
