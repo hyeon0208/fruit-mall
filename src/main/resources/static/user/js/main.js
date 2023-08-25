@@ -104,6 +104,13 @@ function showMainProductList() {
                     .text("favorite");
             }
 
+            const cartButton = $("<button>")
+                .addClass("material-symbols-outlined addCartBtn")
+                .attr('data-btn-status', '0')
+                .attr('data-product-id', product.productId)
+                .attr('data-user-id', loginUser ? loginUser.userIdNo : 0)
+                .text("shopping_cart");
+
             return $("<li>")
                 .append(
                     $("<a>")
@@ -132,7 +139,7 @@ function showMainProductList() {
                     $("<div>")
                         .addClass('icons')
                         .append(favoriteButton)
-                        .append('<button class="material-symbols-outlined" value="0">shopping_cart</button>')
+                        .append(cartButton)
                 );
         });
         $("#products .inner ul").empty().append(productList);
