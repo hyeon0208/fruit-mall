@@ -1,3 +1,11 @@
+$(() => {
+    // 세션 정보가 없으면 로컬 스토리지에 담긴 cart의 수를 표시
+    if (!$('#localCartCount').data('login-user')) {
+        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        $('#localCartCount').text(cart.length);
+    }
+})
+
 $(document).on("click", ".addCartBtn", (e) => {
     let cart = $(e.currentTarget);
     const productId = cart.data("product-id");
@@ -10,6 +18,8 @@ $(document).on("click", ".addCartBtn", (e) => {
     console.log(productId);
     console.log(userIdNo);
     console.log(cart.attr("data-btn-status"))
+    console.log(localStorage.getItem('cart'));
+
 
     // 로그인 시
     if (userIdNo != 0) {
@@ -42,8 +52,7 @@ $(document).on("click", ".addCartBtn", (e) => {
                 dataType: "json",
                 headers: {'Content-Type': 'application/json'}
             }).then((res) =>{
-                showCartModal();
-                localStorage.removeItem('cart');
+                $('.txt04.right__modal.add__cart').show();
             })
         }
     }
@@ -66,17 +75,10 @@ $(document).on("click", ".addCartBtn", (e) => {
 
         if (cart.attr("data-btn-status") == 1 && !cond) {
             addToLocalStorageCart(productId, 0);
-            showCartModal();
+            $('.txt04.right__modal.add__cart').show();
         }
     }
 })
-
-function showCartModal() {
-    $('.txt04.right__modal.add__cart').show();
-    $('#closeCartModal').click(() => {
-        $('.txt04.right__modal.add__cart').hide();
-    });
-}
 
 function addToLocalStorageCart(productId, quantity) {
     const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];

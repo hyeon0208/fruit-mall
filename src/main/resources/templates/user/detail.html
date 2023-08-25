@@ -97,7 +97,7 @@
                                         <span class="material-symbols-outlined">shopping_cart</span>
                                         <p>장바구니</p>
                                         <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
-                                        <div th:if="${session.loginUser == null}" class="cart__count"></div>
+                                        <div th:if="${session.loginUser == null}" id="localCartCount" th:data-login-user="${session.loginUser}" class="cart__count"></div>
                                     </a>
                                 </li>
 
@@ -129,26 +129,20 @@
                     </div>
 
                     <!-- 장바구니에 담겼습니다. 모달 창 -->
-                    <div class="txt04 right__modal" style="display: none;">
+                    <div class="txt04 right__modal add__cart" style="display: none;">
                         <div class="inner">
-
                             <h4>알림</h4>
-
                             <h5>
                                 <span>장바구니에 담겼습니다.</span>
-
-                                <div class="buttons">
-                                    <a href="./detail.html">
-                                        <button>계속 쇼핑하기</button>
+                                <div class="buttons cart-modal">
+                                    <a href="./">
+                                        계속 쇼핑하기
                                     </a>
-
-                                    <a href="#">
-                                        <button>장바구니로 이동</button>
+                                    <a href="/user/cart">
+                                        장바구니로 이동
                                     </a>
                                 </div>
-
                             </h5>
-
                         </div>
                     </div>
 
