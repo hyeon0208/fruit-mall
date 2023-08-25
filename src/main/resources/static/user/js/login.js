@@ -34,11 +34,10 @@ $(document).ready(() => {
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
             if (res.data === "success") {
-                // Update the cart on the server side
                 let localCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
                 axios({
                     method: "post",
-                    url: "/user/update-cart",  // You need to create this endpoint on your server
+                    url: "/user/update-cart",
                     data: { localCart },
                     headers: {'Content-Type': 'application/json'}
                 }).then(() => {
