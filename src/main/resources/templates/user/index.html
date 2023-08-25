@@ -80,7 +80,7 @@
 
                 <!-- 장바구니 -->
                 <li class="right__cart">
-                    <a href="#">
+                    <a href="/user/cart">
                         <span class="material-symbols-outlined">shopping_cart</span>
                         <p>장바구니</p>
                         <div class="cart__count">5</div>
@@ -167,13 +167,31 @@
         </div>
 
         <!-- 장바구니에 담겼습니다. 모달 창 -->
-        <div class="txt04 right__modal" style="display: none;">
+        <div class="txt04 right__modal add__cart" style="display: none;">
             <div class="inner">
                 <h4>알림</h4>
                 <h5>
                     <span>장바구니에 담겼습니다.</span>
                     <div class="buttons cart-modal">
                         <a id="closeCartModal">
+                            닫기
+                        </a>
+                        <a href="/user/cart">
+                            장바구니로 이동
+                        </a>
+                    </div>
+                </h5>
+            </div>
+        </div>
+
+        <!-- 장바구니에서 제거 되었습니다. 모달 창 -->
+        <div class="txt04 right__modal exist__cart" style="display: none;">
+            <div class="inner">
+                <h4>알림</h4>
+                <h5>
+                    <span>이미 장바구니에 담았습니다.</span>
+                    <div class="buttons cart-modal">
+                        <a id="existCartModalClose">
                             닫기
                         </a>
                         <a href="/user/cart">
