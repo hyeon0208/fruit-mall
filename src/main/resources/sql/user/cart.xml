@@ -27,4 +27,29 @@
         FROM cart
         WHERE USER_ID_NO = #{userIdNo}
     </select>
+
+    <select id="selectCartAndImageByUserId" resultType="com.fruit.mall.cart.dto.CartAndImageDto">
+        SELECT
+            c.CART_ID,
+            c.USER_ID_NO,
+            c.PRODUCT_ID,
+            p.PRODUCT_NAME,
+            c.PRODUCT_COUNT,
+            c.PRODUCT_PRICE,
+            c.PRODUCT_DISCOUNT,
+            c.PRODUCT_SALE_STATUS,
+            i1.IMAGE_URL,
+            i1.IMAGE_ID
+        FROM cart c
+        JOIN product p ON p.PRODUCT_ID = c.PRODUCT_ID
+        JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
+        WHERE
+            c.USER_ID_NO = #{userIdNo}
+          AND
+            i1.IMAGE_ID = (
+            SELECT MIN(i2.IMAGE_ID)
+            FROM image i2
+            WHERE i2.PRODUCT_ID = p.PRODUCT_ID
+            )
+    </select>
 </mapper>

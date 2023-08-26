@@ -1,11 +1,13 @@
 package com.fruit.mall.cart;
 
+import com.fruit.mall.cart.dto.CartAndImageDto;
 import com.fruit.mall.product.Product;
 import com.fruit.mall.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,6 +48,10 @@ public class CartService {
 
     public void deleteProductToCart(Long productId) {
         cartRepository.deleteProductToCart(productId);
+    }
+
+    public List<CartAndImageDto> selectCartAndImageByUserId(Long userIdNo) {
+        return cartRepository.selectCartAndImageByUserId(userIdNo);
     }
 
     public int countCartByUserId(Long userIdNo) {
