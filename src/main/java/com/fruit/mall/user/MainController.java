@@ -135,12 +135,6 @@ public class MainController {
         return "user/mypage";
     }
 
-    @GetMapping("/user/cart")
-    public String cart() {
-        return "user/cart";
-    }
-
-
     @GetMapping("/{pageName}")
     public String goSubPage(@PathVariable String pageName) {
         return "user/" + pageName;
