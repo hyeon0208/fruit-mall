@@ -4,7 +4,70 @@ $(() => {
         const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
         $('#localCartCount').text(cart.length);
     }
+
+    // console.log($(".td_wrap").attr("data-session"))
+    //
+    // if ($(".td_wrap").attr("data-session") == null) { // loginUser is undefined or null
+    //     let cartItems = JSON.parse(localStorage.getItem('cart')); // Get items from localStorage
+    //
+    //     // Check if there are items in the cart
+    //     if (cartItems && cartItems.length > 0) {
+    //         let $tableBody = $('#cart tbody'); // Select table body with jQuery
+    //
+    //         // Clear existing rows
+    //         $tableBody.empty();
+    //
+    //         $.each(cartItems, function(index, item) {
+    //             let row = `
+    //                 <tr>
+    //                     <td><input type="checkbox"></td>
+    //                     <td>
+    //                         <div class="td_wrap">
+    //                             <img src="${item.imageUrl}" alt="${item.productName}">
+    //                             <div class="txt">
+    //                                 <span>${item.productName}</span>
+    //                                 <span>
+    //                                     <button>+</button>
+    //                                     <!-- assuming quantity is stored as item.quantity -->
+    //                                     <!-- need to handle this in backend as well-->
+    //                                     <button>${item.quantity}</button>
+    //                                     <!--<button>-</button>-->
+    //                                 </span>
+    //
+    //                             </div>
+    //
+    //                             <!-- assuming price is stored as item.price -->
+    //                             <!-- we add '원' after the price-->
+    //                             <!--<div class="price"> -->
+    //                                 <!--<span>${#numbers.formatDecimal(item.price, 0, 'COMMA')}원</span>-->
+    //                                 <!--<button>x</button>-->
+    //                             <!--</div>-->
+    //
+    //                         </div>
+    //
+    //                     </td>
+    //
+    //                     <!-- total price for each product (price * quantity) goes here. Assuming we have such a field or calculation method-->
+    //                     <!--<td></tr>-->
+    //
+    //                     <!-- discount for each product goes here. Assuming we have such a field or calculation method-->
+    //                     <!--<td></tr>-->
+    //                 </tr>`;
+    //
+    //             $tableBody.append(row);
+    //         });
+    //     }
+    // }
 })
+
+$(document).on("click", "#goHomeBtn", () => {
+    window.location.replace("/");
+});
+
+$(document).on("click", "#goPaymentBtn", () => {
+    window.location.replace("/user/payment");
+});
+
 
 $(document).on("click", ".addCartBtn", (e) => {
     let cart = $(e.currentTarget);
@@ -18,8 +81,6 @@ $(document).on("click", ".addCartBtn", (e) => {
     console.log(productId);
     console.log(userIdNo);
     console.log(cart.attr("data-btn-status"))
-    console.log(localStorage.getItem('cart'));
-
 
     // 로그인 시
     if (userIdNo != 0) {
@@ -59,34 +120,44 @@ $(document).on("click", ".addCartBtn", (e) => {
 
     // 비로그인 시
     if (userIdNo == 0) {
-        const cartItem = localStorage.getItem('cart');
-        let cond = null;
+        axios({
+            method: "get",
+            url: `/local/cart/${productId}`,
+            params: {
+                productId: productId
+            },
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        }).then((res) =>{
+            const product = res.data
+            console.log(product)
 
-        if (cartItem !== null) {
-            cond = JSON.parse(cartItem).find(product => product.productId === productId);
-        }
+            const cartItem = localStorage.getItem('cart');
+            let exist = false;
 
-        if (cond) {
-            $('.txt04.right__modal.exist__cart').show();
-            $('#existCartModalClose').click(() => {
-                $('.txt04.right__modal.exist__cart').hide();
-            });
-        }
+            if (cartItem !== null) {
+                exist = JSON.parse(cartItem).find(p => p.product.productId === product.productId);
+            }
 
-        if (cart.attr("data-btn-status") == 1 && !cond) {
-            addToLocalStorageCart(productId, 0);
-            $('.txt04.right__modal.add__cart').show();
-        }
+            if (exist) {
+                $('.txt04.right__modal.exist__cart').show();
+                $('#existCartModalClose').click(() => {
+                    $('.txt04.right__modal.exist__cart').hide();
+                });
+            } else {
+                addToLocalStorageCart(product, 1);
+                $('.txt04.right__modal.add__cart').show();
+                console.log(localStorage.getItem('cart'));
+            }
+        })
     }
 })
 
-function addToLocalStorageCart(productId, quantity) {
+function addToLocalStorageCart(product, quantity) {
     const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-    const existingProduct = cart.find(product => product.productId === productId);
-    if (existingProduct) {
-        existingProduct.quantity += quantity;
-    } else {
-        cart.push({ productId, quantity });
+    const existingProduct = cart.find(p => p.product.productId === product.productId);
+    if (!existingProduct) {
+        cart.push({ product, quantity });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
 }
