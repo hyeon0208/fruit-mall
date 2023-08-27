@@ -17,14 +17,17 @@ import java.util.Map;
 public class CartController {
     private final CartService cartService;
 
-    @GetMapping("/user/cart")
-    public String cart(Model model) {
-        List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(22L);
+    @GetMapping("/user/cart/{userIdNo}")
+    public String loginUserCart(@PathVariable Long userIdNo, Model model) {
+        List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(userIdNo);
         model.addAttribute("cartAndImages", cartAndImages);
-
         return "user/cart";
     }
 
+    @GetMapping("/user/cart")
+    public String cart() {
+        return "user/cart";
+    }
 
     @PostMapping("/main/cart/add")
     @ResponseBody
