@@ -1,5 +1,6 @@
 package com.fruit.mall.product;
 
+import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +20,8 @@ public interface ProductMapper {
     ProductDetailForm selectProductDetailByProductId(@Param("productId") Long id, @Param("userIdNo") Long userIdNo);
 
     Product selectProductAllById(@Param("productId") Long id);
+
+    AddedProductToCartByNoLoginDto selectAddedProductByProductId(@Param("productId") Long id);
 
     List<ProductAndImageInfo> selectProductAndImageByFilter(@Param("category") String category, @Param("searchCond") String searchCond, @Param("userIdNo") Long userIdNo);
 

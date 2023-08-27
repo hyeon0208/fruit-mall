@@ -1,6 +1,7 @@
 package com.fruit.mall.product;
 
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
 import com.github.pagehelper.PageHelper;
@@ -87,6 +88,10 @@ public class ProductService {
             return productRepository.selectProductDetailByProductId(id, sessionUser.getUserIdNo());
         }
         return productRepository.selectProductDetailByProductId(id, null);
+    }
+
+    public AddedProductToCartByNoLoginDto selectAddedProductByProductId(Long id) {
+        return productRepository.selectAddedProductByProductId(id);
     }
 
     public void updateProductStatus(Long productId, String status) {

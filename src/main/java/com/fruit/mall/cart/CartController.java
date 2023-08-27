@@ -4,6 +4,8 @@ import com.fruit.mall.cart.dto.CartAddReqDto;
 import com.fruit.mall.cart.dto.CartAndImageDto;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.product.ProductService;
+import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CartController {
     private final CartService cartService;
+    private final ProductService productService;
 
     @GetMapping("/user/cart/{userIdNo}")
     public String loginUserCart(@PathVariable Long userIdNo, Model model) {
@@ -39,6 +42,14 @@ public class CartController {
 
         Cart savedCart = cartService.addProductToCart(cart);
         return savedCart;
+    }
+
+    @GetMapping("/local/cart/{productId}")
+    @ResponseBody
+    public AddedProductToCartByNoLoginDto getProductInfo(@PathVariable Long productId) {
+        AddedProductToCartByNoLoginDto product = productService.selectAddedProductByProductId(productId);
+        product.setProductCount(1);
+        return product;
     }
 
     @PostMapping("/main/cart/remove")

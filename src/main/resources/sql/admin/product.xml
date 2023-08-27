@@ -125,6 +125,27 @@
         ORDER BY p.PRODUCT_ID DESC;
     </select>
 
+    <select id="selectAddedProductByProductId" resultType="com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto">
+        SELECT
+        p.PRODUCT_ID,
+        p.PRODUCT_NAME,
+        1,
+        p.PRODUCT_PRICE,
+        p.PRODUCT_DISCOUNT,
+        p.PRODUCT_SALE_STATUS,
+        i1.IMAGE_URL,
+        i1.IMAGE_ID
+        FROM product p
+        JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
+        WHERE p.PRODUCT_SALE_STATUS = '판매중'
+            AND i1.IMAGE_ID = (
+            SELECT MIN(i2.IMAGE_ID)
+            FROM image i2
+            WHERE i2.PRODUCT_ID = p.PRODUCT_ID
+            )
+            AND p.PRODUCT_ID = #{productId}
+    </select>
+
     <select id="selectProductDetailByProductId" resultType="com.fruit.mall.product.dto.ProductDetailForm">
         SELECT
         p.PRODUCT_NAME,

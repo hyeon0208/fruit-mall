@@ -1,5 +1,6 @@
 package com.fruit.mall.product;
 
+import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,11 @@ public class ProductRepository implements ProductMapper {
     @Override
     public ProductDetailForm selectProductDetailByProductId(Long id, Long userIdNo) {
         return productMapper.selectProductDetailByProductId(id, userIdNo);
+    }
+
+    @Override
+    public AddedProductToCartByNoLoginDto selectAddedProductByProductId(Long id) {
+        return productMapper.selectAddedProductByProductId(id);
     }
 
     @Override
