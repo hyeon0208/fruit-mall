@@ -33,7 +33,7 @@ $(() => {
                                 </span>
                             </div>
 
-                            <div class="price">
+                            <div class="price" data-status="${product.productSaleStatus}">
                                 <span>${product.productPrice.toLocaleString()}원</span>
                                 <button class="delCartProduct">x</button>
                             </div>
@@ -106,6 +106,7 @@ $(document).on("click", "#goPaymentBtn", () => {
         const productRow = $(checkbox).closest("tr");
         const productStatus = productRow.find(".price").data("status");
 
+        console.log(productStatus);
         if (productStatus === "품절") {
             soldOutProducts.push(i);
         }
