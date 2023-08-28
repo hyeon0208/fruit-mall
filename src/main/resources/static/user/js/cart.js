@@ -10,37 +10,40 @@ $(() => {
         const cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
         const cartList = cartItems.map((cart) => {
             const product = cart.product;
-                return `<tr>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        
-                        <td>
-                            <div class="td_wrap">
-                                <img src="${product.imageUrl}" alt="${product.productName}">
-                                
-                                <div class="txt">
-                                    <span>${product.productName}</span>
-                                    <span>
-                                        <button>+</button>
-                                        <button>${cart.quantity}</button>
-                                        <button>-</button>
-                                    </span>
-                                </div>
-                                
-                                <div class="price">
-                                    <span>${product.productPrice.toLocaleString()}원</span>
-                                    <button>x</button>
-                                </div>
+            const productCount = product.productCount
+            const discountStyle = product.productDiscount > 0 ? product.productDiscount + "%" : "";
+            return `<tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    
+                    <td>
+                        <div class="td_wrap">
+                            <img src="${product.imageUrl}" alt="${product.productName}">
+                            
+                            <div class="txt">
+                                <span>${product.productName}</span>
+                                <span>
+                                    <button class="increaseProductCnt">+</button>
+                                    <button class="productCnt" data-product-id="${product.productId}" value="${productCount}">${productCount}</button>
+                                    <button class="decreaseProductCnt" ${productCount}>-</button>
+                                </span>
                             </div>
-                        </td> 
-                        
-                        <td>${(product.productPrice * cart.quantity).toLocaleString()}원</td>
-                        <td>${product.productDiscount}%</td>
-                        </tr>`;
-            });
 
-            $('#showCart').empty().append(cartList);
+                            <div class="price">
+                                <span>${product.productPrice.toLocaleString()}원</span>
+                                <button class="delCartProduct">x</button>
+                            </div>
+                        </div>
+                    </td> 
+                    
+                    <td class="sumPrice" data-cart-price="${product.productPrice}">${(product.productPrice * productCount).toLocaleString()}원</td>
+                    <td class="discountRate">${discountStyle}</td>
+                </tr>`;
+        });
+
+
+        $('#showCart').empty().append(cartList);
     }
 
 
@@ -66,6 +69,10 @@ $(document).on("click", "#goPaymentBtn", () => {
     window.location.replace("/user/payment");
 });
 
+$(document).on("click", "#redirectLoginBtn", () => {
+    window.location.replace("/login");
+});
+
 $(document).on("click", ".increaseProductCnt", (e) => {
     let cnt = $(e.currentTarget).siblings(".productCnt");
     let decreaseBtn = $(e.currentTarget).siblings(".decreaseProductCnt");
@@ -77,16 +84,27 @@ $(document).on("click", ".increaseProductCnt", (e) => {
         decreaseBtn.show();
     }
 
-    axios({
-        method: "post",
-        url: "/cart/increaseProductCnt",
-        data: {
-            productCount: cnt.val(),
-            cartId: cnt.attr("data-cart-id")
-        },
-        dataType: "json",
-        headers: {'Content-Type': 'application/json'}
-    });
+    if ($('#cart').data('session')) { // 회원일 경우
+        axios({
+            method: "post",
+            url: "/cart/increaseProductCnt",
+            data: {
+                productCount: cnt.val(),
+                cartId: cnt.attr("data-cart-id")
+            },
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        });
+    }
+
+    if (!$('#cart').data('session')) {  // 비회원인 경우 로컬 스토리지 데이터 수정
+        const cartItems = JSON.parse(localStorage.getItem('cart'));
+        const cart = cartItems.find(cart => cart.product.productId == cnt.attr("data-product-id"));
+        if (cart) {
+            cart.product.productCount++;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        }
+    }
 
     const sumPrice = $(e.currentTarget).closest('tr').find(".sumPrice");
     sumPrice.text((parseInt(sumPrice.data("cart-price")) * cnt.val()).toLocaleString() + "원");
@@ -108,16 +126,27 @@ $(document).on("click", ".decreaseProductCnt", (e) => {
         }
     }
 
-    axios({
-        method: "post",
-        url: "/cart/decreaseProductCnt",
-        data: {
-            productCount: cnt.val(),
-            cartId: cnt.attr("data-cart-id")
-        },
-        dataType: "json",
-        headers: {'Content-Type': 'application/json'}
-    });
+    if ($('#cart').data('session')) { // 회원일 경우
+        axios({
+            method: "post",
+            url: "/cart/decreaseProductCnt",
+            data: {
+                productCount: cnt.val(),
+                cartId: cnt.attr("data-cart-id")
+            },
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        });
+    }
+
+    if (!$('#cart').data('session')) {  // 비회원인 경우 로컬 스토리지 데이터 수정
+        const cartItems = JSON.parse(localStorage.getItem('cart'));
+        const cart = cartItems.find(cart => cart.product.productId == cnt.attr("data-product-id"));
+        if (cart) {
+            cart.product.productCount--;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        }
+    }
 
     const sumPrice = $(e.currentTarget).closest('tr').find(".sumPrice");
     sumPrice.text((parseInt(sumPrice.data("cart-price")) * cnt.val()).toLocaleString() + "원");
@@ -193,7 +222,7 @@ $(document).on("click", ".addCartBtn", (e) => {
                     $('.txt04.right__modal.exist__cart').hide();
                 });
             } else {
-                addToLocalStorageCart(product, 1);
+                addToLocalStorageCart(product);
                 $('.txt04.right__modal.add__cart').show();
                 $('#closeCartModal').click(() => {
                     $('.txt04.right__modal.add__cart').hide();
@@ -204,22 +233,34 @@ $(document).on("click", ".addCartBtn", (e) => {
 });
 
 $(document).on("click", ".delCartProduct", (e) => {
-    const cartId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-cart-id")
-    axios({
-        method: "delete",
-        url: `/cart/delete/${cartId}`
-    }).then(res => {
-        window.location.href = res.data;
-    });
+    if ($('#cart').data('session')) {  // 회원일 경우
+        const cartId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-cart-id")
+
+        axios({
+            method: "delete",
+            url: `/cart/delete/${cartId}`
+        }).then(res => {
+            window.location.href = res.data;
+        });
+    }
+
+    if (!$('#cart').data('session')) { // 비회원일 경우
+        const cartItems = JSON.parse(localStorage.getItem('cart'));
+        const productId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-product-id");
+        const newCartItems = cartItems.filter(cart => cart.product.productId != productId);
+        localStorage.setItem('cart', JSON.stringify(newCartItems));
+        $(e.currentTarget).closest('tr').remove();
+    }
 });
 
-function addToLocalStorageCart(product, quantity) {
+function addToLocalStorageCart(product) {
     const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     const existingProduct = cart.find(p => p.product.productId === product.productId);
     if (!existingProduct) {
-        cart.push({ product, quantity });
+        cart.push({ product });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(localStorage.getItem('cart'));
 }
 
 function updateTotalOrderPriceArea() {
@@ -242,7 +283,10 @@ function updateCartTotalDiscount() {
     let totalDiscount = 0;
     $(".discountRate").each((i, e) => {
         const price = parseInt( $(e).siblings(".sumPrice").text().replace(/[^0-9]/g, ''));
-        const discountRate = parseInt($(e).text().replace(/[^0-9]/g, ''));
+        let discountRate = parseInt($(e).text().replace(/[^0-9]/g, ''));
+        if (!discountRate) {
+            discountRate = 0
+        }
         totalDiscount += (price * (discountRate / 100));
     });
     $("#cartTotalDiscount").text("-" + totalDiscount.toLocaleString() + "원");

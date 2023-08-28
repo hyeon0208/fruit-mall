@@ -126,7 +126,8 @@
 
             <div class="buttons">
                 <button id="goHomeBtn">쇼핑계속하기</button>
-                <button id="goPaymentBtn">구매하기</button>
+                <button th:if="${session.loginUser != null}" id="goPaymentBtn">구매하기</button>
+                <button th:if="${session.loginUser == null}"id="redirectLoginBtn">구매하기</button>
             </div>
         </div>
     </div>
