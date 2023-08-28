@@ -163,10 +163,6 @@ $(document).on("click", ".addCartBtn", (e) => {
         cart.attr("data-btn-status", 1);
     }
 
-    console.log(productId);
-    console.log(userIdNo);
-    console.log(cart.attr("data-btn-status"))
-
     // 로그인 시
     if (userIdNo != 0) {
         // 장바구니 담기
