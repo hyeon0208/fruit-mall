@@ -97,6 +97,9 @@ $(document).on("click", ".addCartBtn", (e) => {
                 headers: {'Content-Type': 'application/json'}
             }).then((res) =>{
                 $('.txt04.right__modal.add__cart').show();
+                $('#closeCartModal').click(() => {
+                    $('.txt04.right__modal.add__cart').hide();
+                });
             })
         }
     }
