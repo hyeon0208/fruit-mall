@@ -21,6 +21,7 @@ public class CartService {
         Optional<Cart> findCart = cartRepository.selectByUserIdAndProductId(cart.getUserIdNo(), cart.getProductId());
 
         if (findCart.isPresent()) {
+            cartRepository.updateProductCnt(cart.getProductCount(), findCart.get().getCartId());
             return findCart.get();
         }
 

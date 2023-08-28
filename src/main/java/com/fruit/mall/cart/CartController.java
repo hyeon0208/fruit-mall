@@ -72,7 +72,7 @@ public class CartController {
             for (Map<String, Object> localCart : localCarts) {
                 Map<String, Object> productMap = (Map<String, Object>) localCart.get("product");
                 Long productId = Long.valueOf((Integer) productMap.get("productId"));
-                int productCount = (int) localCart.get("quantity");
+                int productCount = (int) productMap.get("productCount");
                 Cart lcart = Cart.builder()
                         .userIdNo(sessionUser.getUserIdNo())
                         .productId(productId)
