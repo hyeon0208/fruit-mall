@@ -251,7 +251,8 @@ function updateCartTotalDiscount() {
 function updateDeliveryFee() {
     const deliveryFee = 3000;
     const totalPrice = parseInt($("#cartTotalPrice").text().replace(/[^0-9]/g, ''));
-    if (totalPrice >= 50000) {
+    const totalDiscount = parseInt($("#cartTotalDiscount").text().replace(/[^0-9]/g, ''));
+    if (totalPrice - totalDiscount >= 50000) {
         $("#deliveryFee").text("무료");
     } else {
         $("#deliveryFee").text(deliveryFee + "원");
