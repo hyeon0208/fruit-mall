@@ -52,7 +52,7 @@
                                     </span>
                                 </div>
 
-                                <div class="price">
+                                <div class="price" th:data-status="${product.productSaleStatus}">
                                     <span th:if="${product.productSaleStatus != '품절'}" th:text="|${#numbers.formatInteger((product.productPrice), 0, 'COMMA')}원|"></span>
                                     <span th:if="${product.productSaleStatus == '품절'}" text="품절" style="color: red"></span>
                                     <button class="delCartProduct">x</button>
