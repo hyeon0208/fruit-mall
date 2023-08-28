@@ -10,7 +10,7 @@
             <div class="txt">
                 <div class="left">
                     <span>전체
-                        <span th:if="${session.loginUser != null}" class="orange" th:text="${cartAndImages.size()}"></span>
+                        <span th:if="${session.loginUser != null}" class="orange" id="cartCount" th:text="${cartAndImages.size()}"></span>
                         <span th:if="${session.loginUser == null}" id="localCartCount" class="orange"></span>
                         개</span>
                 </div>
@@ -27,7 +27,7 @@
             <table>
                 <tr class="title">
                     <th>
-                        <input type="checkbox" checked>
+                        <input type="checkbox" id="cartAllChk" checked>
                     </th>
                     <th scope="col">상품정보</th>
                     <th scope="col">상품금액</th>
@@ -37,7 +37,7 @@
                 <tbody id="showCart">
                     <tr th:each="product : ${cartAndImages}">
                         <td>
-                            <input type="checkbox">
+                            <input type="checkbox" class="cartChk">
                         </td>
                         <td>
                             <div class="td_wrap">

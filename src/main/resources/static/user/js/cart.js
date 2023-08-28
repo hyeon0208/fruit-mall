@@ -1,4 +1,7 @@
 $(() => {
+    const isChecked = $("#cartAllChk").prop("checked");
+    $("input[type='checkbox']").prop("checked", isChecked);
+
     // 세션 정보가 없으면 로컬 스토리지에 담긴 cart의 수를 표시
     if (!$('#localCartCount').data('login-user')) {
         const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
@@ -14,7 +17,7 @@ $(() => {
             const discountStyle = product.productDiscount > 0 ? product.productDiscount + "%" : "";
             return `<tr>
                     <td>
-                        <input type="checkbox">
+                        <input type="checkbox" class="cartChk">
                     </td>
                     
                     <td>
@@ -41,9 +44,10 @@ $(() => {
                     <td class="discountRate">${discountStyle}</td>
                 </tr>`;
         });
-
-
         $('#showCart').empty().append(cartList);
+
+        const isChecked = $("#cartAllChk").prop("checked");
+        $("input[type='checkbox']").prop("checked", isChecked);
     }
 
 
@@ -60,6 +64,36 @@ $(() => {
 
     updateTotalOrderPriceArea();
 });
+
+// 모두 체크
+$(document).on("click", "#cartAllChk", (e) => {
+    const isChecked = $(e.target).prop("checked");
+    $("input[type='checkbox']").prop("checked", isChecked);
+
+    let count = 0;
+    $("input[type='checkbox']:not(#cartAllChk)").each((i, e) => {
+        if ($(e).prop("checked")) {
+            count++;
+        }
+    });
+    $("#localCartCount").text(count);
+    $("#cartCount").text(count)
+});
+
+// 단일 체크
+$(document).on("click", ".cartChk", (e)=> {
+    const isChecked = $(e.target).prop("checked");
+
+    let count = 0;
+    $("input[type='checkbox']:not(#cartAllChk)").each((i, e) => {
+        if ($(e).prop("checked")) {
+            count++;
+        }
+    });
+    $('#localCartCount').text(count);
+    $("#cartCount").text(count)
+});
+
 
 $(document).on("click", "#goHomeBtn", () => {
     window.location.replace("/");
