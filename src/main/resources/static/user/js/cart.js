@@ -5,60 +5,44 @@ $(() => {
         $('#localCartCount').text(cart.length);
     }
 
-    // console.log($(".td_wrap").attr("data-session"))
-    //
-    // if ($(".td_wrap").attr("data-session") == null) { // loginUser is undefined or null
-    //     let cartItems = JSON.parse(localStorage.getItem('cart')); // Get items from localStorage
-    //
-    //     // Check if there are items in the cart
-    //     if (cartItems && cartItems.length > 0) {
-    //         let $tableBody = $('#cart tbody'); // Select table body with jQuery
-    //
-    //         // Clear existing rows
-    //         $tableBody.empty();
-    //
-    //         $.each(cartItems, function(index, item) {
-    //             let row = `
-    //                 <tr>
-    //                     <td><input type="checkbox"></td>
-    //                     <td>
-    //                         <div class="td_wrap">
-    //                             <img src="${item.imageUrl}" alt="${item.productName}">
-    //                             <div class="txt">
-    //                                 <span>${item.productName}</span>
-    //                                 <span>
-    //                                     <button>+</button>
-    //                                     <!-- assuming quantity is stored as item.quantity -->
-    //                                     <!-- need to handle this in backend as well-->
-    //                                     <button>${item.quantity}</button>
-    //                                     <!--<button>-</button>-->
-    //                                 </span>
-    //
-    //                             </div>
-    //
-    //                             <!-- assuming price is stored as item.price -->
-    //                             <!-- we add '원' after the price-->
-    //                             <!--<div class="price"> -->
-    //                                 <!--<span>${#numbers.formatDecimal(item.price, 0, 'COMMA')}원</span>-->
-    //                                 <!--<button>x</button>-->
-    //                             <!--</div>-->
-    //
-    //                         </div>
-    //
-    //                     </td>
-    //
-    //                     <!-- total price for each product (price * quantity) goes here. Assuming we have such a field or calculation method-->
-    //                     <!--<td></tr>-->
-    //
-    //                     <!-- discount for each product goes here. Assuming we have such a field or calculation method-->
-    //                     <!--<td></tr>-->
-    //                 </tr>`;
-    //
-    //             $tableBody.append(row);
-    //         });
-    //     }
-    // }
-})
+    // 세션 정보가 없으면 로컬 스토리지에 담긴 cart를 cart.html에 표시
+    if (!$('#cart').data('session')) {
+        const cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        const cartList = cartItems.map((cart) => {
+            const product = cart.product;
+                return `<tr>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        
+                        <td>
+                            <div class="td_wrap">
+                                <img src="${product.imageUrl}" alt="${product.productName}">
+                                
+                                <div class="txt">
+                                    <span>${product.productName}</span>
+                                    <span>
+                                        <button>+</button>
+                                        <button>${cart.quantity}</button>
+                                        <button>-</button>
+                                    </span>
+                                </div>
+                                
+                                <div class="price">
+                                    <span>${product.productPrice.toLocaleString()}원</span>
+                                    <button>x</button>
+                                </div>
+                            </div>
+                        </td> 
+                        
+                        <td>${(product.productPrice * cart.quantity).toLocaleString()}원</td>
+                        <td>${product.productDiscount}%</td>
+                        </tr>`;
+            });
+
+            $('#showCart').empty().append(cartList);
+    }
+});
 
 $(document).on("click", "#goHomeBtn", () => {
     window.location.replace("/");
@@ -101,7 +85,6 @@ $(document).on("click", ".addCartBtn", (e) => {
         // 장바구니 담기
         if (cart.attr("data-btn-status") == 1) {
             let localCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-            console.log(localCart);
             axios({
                 method: "post",
                 url: "/main/cart/add",
@@ -130,7 +113,6 @@ $(document).on("click", ".addCartBtn", (e) => {
             headers: {'Content-Type': 'application/json'}
         }).then((res) =>{
             const product = res.data
-            console.log(product)
 
             const cartItem = localStorage.getItem('cart');
             let exist = false;
@@ -147,7 +129,6 @@ $(document).on("click", ".addCartBtn", (e) => {
             } else {
                 addToLocalStorageCart(product, 1);
                 $('.txt04.right__modal.add__cart').show();
-                console.log(localStorage.getItem('cart'));
             }
         })
     }
