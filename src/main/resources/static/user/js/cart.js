@@ -55,8 +55,7 @@ $(() => {
         }
     });
 
-    updateCartTotalPrice();
-    updateCartTotalDiscount();
+    updateTotalOrderPriceArea();
 });
 
 $(document).on("click", "#goHomeBtn", () => {
@@ -92,8 +91,7 @@ $(document).on("click", ".increaseProductCnt", (e) => {
     const sumPrice = $(e.currentTarget).closest('tr').find(".sumPrice");
     sumPrice.text((parseInt(sumPrice.data("cart-price")) * cnt.val()).toLocaleString() + "원");
 
-    updateCartTotalPrice();
-    updateCartTotalDiscount();
+    updateTotalOrderPriceArea();
 });
 
 $(document).on("click", ".decreaseProductCnt", (e) => {
@@ -124,8 +122,7 @@ $(document).on("click", ".decreaseProductCnt", (e) => {
     const sumPrice = $(e.currentTarget).closest('tr').find(".sumPrice");
     sumPrice.text((parseInt(sumPrice.data("cart-price")) * cnt.val()).toLocaleString() + "원");
 
-    updateCartTotalPrice();
-    updateCartTotalDiscount();
+    updateTotalOrderPriceArea();
 });
 
 $(document).on("click", ".addCartBtn", (e) => {
@@ -198,6 +195,9 @@ $(document).on("click", ".addCartBtn", (e) => {
             } else {
                 addToLocalStorageCart(product, 1);
                 $('.txt04.right__modal.add__cart').show();
+                $('#closeCartModal').click(() => {
+                    $('.txt04.right__modal.add__cart').hide();
+                });
             }
         })
     }
@@ -210,6 +210,13 @@ function addToLocalStorageCart(product, quantity) {
         cart.push({ product, quantity });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateTotalOrderPriceArea() {
+    updateCartTotalPrice();
+    updateCartTotalDiscount();
+    updateDeliveryFee();
+    updatePayPrice();
 }
 
 function updateCartTotalPrice() {
@@ -229,4 +236,27 @@ function updateCartTotalDiscount() {
         totalDiscount += (price * (discountRate / 100));
     });
     $("#cartTotalDiscount").text("-" + totalDiscount.toLocaleString() + "원");
+}
+
+function updateDeliveryFee() {
+    const deliveryFee = 3000;
+    const totalPrice = parseInt($("#cartTotalPrice").text().replace(/[^0-9]/g, ''));
+    if (totalPrice >= 50000) {
+        $("#deliveryFee").text("무료");
+    } else {
+        $("#deliveryFee").text(deliveryFee + "원");
+    }
+}
+
+function updatePayPrice() {
+    const totalPrice = parseInt($("#cartTotalPrice").text().replace(/[^0-9]/g, ''));
+    const totalDiscount = parseInt($("#cartTotalDiscount").text().replace(/[^0-9]/g, ''));
+    let deliveryFee = $("#deliveryFee").text();
+    if (deliveryFee === "무료") {
+        deliveryFee = 0;
+    } else {
+        deliveryFee = parseInt(deliveryFee.replace(/[^0-9]/g, ''));
+    }
+    const payPrice = totalPrice - totalDiscount + deliveryFee;
+    $("#payPrice").text(payPrice.toLocaleString() + "원");
 }
