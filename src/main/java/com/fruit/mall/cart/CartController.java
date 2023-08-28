@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,6 +33,12 @@ public class CartController {
     @PostMapping("/main/cart/add")
     @ResponseBody
     public Cart addProductToCart(@RequestBody CartAddReqDto cartAddReqDto) {
+        Optional<Cart> findCart = cartService.selectByUserIdAndProductId(cartAddReqDto.getUserIdNo(), cartAddReqDto.getProductId());
+
+        if (findCart.isPresent()) {
+            throw new IllegalArgumentException("이미 장바구니에 있는 상품입니다.");
+        }
+
         Cart cart = Cart.builder()
                 .userIdNo(cartAddReqDto.getUserIdNo())
                 .productId(cartAddReqDto.getProductId())

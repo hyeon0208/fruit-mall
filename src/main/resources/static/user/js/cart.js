@@ -100,7 +100,12 @@ $(document).on("click", ".addCartBtn", (e) => {
                 $('#closeCartModal').click(() => {
                     $('.txt04.right__modal.add__cart').hide();
                 });
-            })
+            }).catch((res) => {
+                $('.txt04.right__modal.exist__cart').show();
+                $('#existCartModalClose').click(() => {
+                    $('.txt04.right__modal.exist__cart').hide();
+                });
+            });
         }
     }
 
