@@ -93,7 +93,7 @@
 
                                 <!-- 장바구니 -->
                                 <li class="right__cart">
-                                    <a th:href="${session.loginUser == null} ? '/user/cart' : '/user/cart/' + ${session.loginUser.userIdNo}">
+                                    <a href="/user/cart">
                                         <span class="material-symbols-outlined">shopping_cart</span>
                                         <p>장바구니</p>
                                         <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
