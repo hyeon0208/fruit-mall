@@ -52,4 +52,10 @@
             WHERE i2.PRODUCT_ID = p.PRODUCT_ID
             )
     </select>
+
+    <update id="updateProductCnt">
+        UPDATE cart
+        SET PRODUCT_COUNT = #{productCount}
+        WHERE CART_ID = #{cartId};
+    </update>
 </mapper>

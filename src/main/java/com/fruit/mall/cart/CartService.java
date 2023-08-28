@@ -28,11 +28,11 @@ public class CartService {
         Cart insertCart = Cart.builder()
                 .userIdNo(cart.getUserIdNo())
                 .productId(cart.getProductId())
-                .productCount(1)
+                .productCount(cart.getProductCount())
                 .productPrice(product.getProductPrice())
                 .productDiscount(product.getProductDiscount())
                 .productSaleStatus(product.getProductSaleStatus())
-        .build();
+                .build();
 
         Long cartId = cartRepository.addProductToCart(insertCart);
         return cartRepository.selectByCartId(cartId);
@@ -52,6 +52,10 @@ public class CartService {
 
     public List<CartAndImageDto> selectCartAndImageByUserId(Long userIdNo) {
         return cartRepository.selectCartAndImageByUserId(userIdNo);
+    }
+
+    public void updateProductCnt(int productCount, Long cartId) {
+        cartRepository.updateProductCnt(productCount, cartId);
     }
 
     public int countCartByUserId(Long userIdNo) {

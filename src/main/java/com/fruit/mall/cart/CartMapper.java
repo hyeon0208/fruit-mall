@@ -21,4 +21,6 @@ public interface CartMapper {
 
     int countCartByUserId(@Param("userIdNo") Long userIdNo);
 
+    void updateProductCnt(@Param("productCount") int productCount, @Param("cartId") Long cartId);
+
 }

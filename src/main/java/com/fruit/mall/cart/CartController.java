@@ -2,6 +2,7 @@ package com.fruit.mall.cart;
 
 import com.fruit.mall.cart.dto.CartAddReqDto;
 import com.fruit.mall.cart.dto.CartAndImageDto;
+import com.fruit.mall.cart.dto.CartCntUpdateDto;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
@@ -69,15 +70,31 @@ public class CartController {
         List<Map<String, Object>> localCarts = (List<Map<String, Object>>) localStorage.get("localCart");
         if (!localCarts.isEmpty()) {
             for (Map<String, Object> localCart : localCarts) {
-                Map<String,Object> productMap = (Map<String,Object>) localCart.get("product");
+                Map<String, Object> productMap = (Map<String, Object>) localCart.get("product");
                 Long productId = Long.valueOf((Integer) productMap.get("productId"));
+                int productCount = (int) localCart.get("quantity");
                 Cart lcart = Cart.builder()
                         .userIdNo(sessionUser.getUserIdNo())
                         .productId(productId)
+                        .productCount(productCount)
                         .build();
                 cartService.addProductToCart(lcart);
             }
         }
+        return "success";
+    }
+
+    @PostMapping("/cart/increaseProductCnt")
+    @ResponseBody
+    public String increaseProductToCart(@RequestBody CartCntUpdateDto cartCntUpdateDto) {
+        cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
+        return "success";
+    }
+
+    @PostMapping("/cart/decreaseProductCnt")
+    @ResponseBody
+    public String decreaseProductToCart(@RequestBody CartCntUpdateDto cartCntUpdateDto) {
+        cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
         return "success";
     }
 }

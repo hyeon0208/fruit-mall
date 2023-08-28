@@ -46,21 +46,21 @@
                                 <div class="txt">
                                     <span th:text="${product.productName}">상품이름</span>
                                     <span>
-                                        <button>+</button>
-                                        <button th:text="${product.productCount}" th:value="${product.productCount}">상품수량</button>
-                                        <button>-</button>
+                                        <button class="increaseProductCnt">+</button>
+                                        <button class="productCnt" th:data-cart-id="${product.cartId}" th:text="${product.productCount}" th:value="${product.productCount}">상품수량</button>
+                                        <button class="decreaseProductCnt" style="display: none;">-</button>
                                     </span>
                                 </div>
 
                                 <div class="price">
                                     <span th:if="${product.productSaleStatus != '품절'}" th:text="|${#numbers.formatInteger((product.productPrice), 0, 'COMMA')}원|"></span>
                                     <span th:if="${product.productSaleStatus == '품절'}" text="품절" style="color: red"></span>
-                                    <button>x</button>
+                                    <button class="delCartProduct">x</button>
                                 </div>
                             </div>
                         </td>
 
-                        <td th:text="|${#numbers.formatInteger((product.productPrice * product.productCount), 0, 'COMMA')}원|">상품금액</td>
+                        <td class="sumPrice" th:data-cart-price="${product.productPrice}" th:text="|${#numbers.formatInteger((product.productPrice * product.productCount), 0, 'COMMA')}원|">상품금액</td>
                         <td th:text="|${product.productDiscount}%|">할인율</td>
                     </tr>
                 </tbody>
@@ -82,7 +82,7 @@
                     </td>
 
                     <td>
-                        <span>160,000원</span>
+                        <span id="cartTotalPrice">160,000원</span>
                     </td>
                 </tr>
 
@@ -92,7 +92,7 @@
                     </td>
 
                     <td>
-                        <span>-4,500원</span>
+                        <span id="cartTotalDiscount">-4,500원</span>
                     </td>
                 </tr>
 
