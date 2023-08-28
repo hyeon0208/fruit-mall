@@ -97,4 +97,11 @@ public class CartController {
         cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
         return "success";
     }
+
+    @DeleteMapping("/cart/delete/{cartId}")
+    @ResponseBody
+    public String deleteCart(@PathVariable Long cartId) {
+        cartService.deleteProductToCart(cartId);
+        return "/user/cart";
+    }
 }

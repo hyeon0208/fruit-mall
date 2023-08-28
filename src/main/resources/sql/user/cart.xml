@@ -19,7 +19,7 @@
     </select>
 
     <delete id="deleteProductToCart">
-        DELETE FROM cart WHERE PRODUCT_ID = #{productId};
+        DELETE FROM cart WHERE CART_ID = #{cartId};
     </delete>
 
     <select id="countCartByUserId" resultType="int">

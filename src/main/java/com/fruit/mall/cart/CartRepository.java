@@ -28,8 +28,8 @@ public class CartRepository implements CartMapper {
     }
 
     @Override
-    public void deleteProductToCart(Long productId) {
-        cartMapper.deleteProductToCart(productId);
+    public void deleteProductToCart(Long cartId) {
+        cartMapper.deleteProductToCart(cartId);
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface CartMapper {
 
     Cart selectByCartId(@Param("cartId") Long cartId);
 
-    void deleteProductToCart(@Param("productId") Long productId);
+    void deleteProductToCart(@Param("cartId") Long cartId);
 
     List<CartAndImageDto> selectCartAndImageByUserId(@Param("userIdNo") Long userIdNo);
 

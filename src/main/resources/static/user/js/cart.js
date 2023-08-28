@@ -201,7 +201,17 @@ $(document).on("click", ".addCartBtn", (e) => {
             }
         })
     }
-})
+});
+
+$(document).on("click", ".delCartProduct", (e) => {
+    const cartId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-cart-id")
+    axios({
+        method: "delete",
+        url: `/cart/delete/${cartId}`
+    }).then(res => {
+        window.location.href = res.data;
+    });
+});
 
 function addToLocalStorageCart(product, quantity) {
     const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
