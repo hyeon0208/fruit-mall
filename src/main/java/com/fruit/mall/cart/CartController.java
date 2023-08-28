@@ -20,15 +20,12 @@ public class CartController {
     private final CartService cartService;
     private final ProductService productService;
 
-    @GetMapping("/user/cart/{userIdNo}")
-    public String loginUserCart(@PathVariable Long userIdNo, Model model) {
-        List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(userIdNo);
-        model.addAttribute("cartAndImages", cartAndImages);
-        return "user/cart";
-    }
-
     @GetMapping("/user/cart")
-    public String cart() {
+    public String loginUserCart(@Login SessionUser sessionUser, Model model) {
+        if (sessionUser != null) {
+            List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(sessionUser.getUserIdNo());
+            model.addAttribute("cartAndImages", cartAndImages);
+        }
         return "user/cart";
     }
 
@@ -65,7 +62,8 @@ public class CartController {
         List<Map<String, Object>> localCarts = (List<Map<String, Object>>) localStorage.get("localCart");
         if (!localCarts.isEmpty()) {
             for (Map<String, Object> localCart : localCarts) {
-                Long productId = Long.valueOf((Integer) localCart.get("productId"));
+                Map<String,Object> productMap = (Map<String,Object>) localCart.get("product");
+                Long productId = Long.valueOf((Integer) productMap.get("productId"));
                 Cart lcart = Cart.builder()
                         .userIdNo(sessionUser.getUserIdNo())
                         .productId(productId)
