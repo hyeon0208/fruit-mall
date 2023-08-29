@@ -22,13 +22,16 @@ import static com.fruit.mall.user.MainController.recentProducts;
 public class RecentProductController {
     private final ImageService imageService;
 
+    public static final String RECENT_PRODUCTS = "recentProducts";
+    private static final int MAX_RECENT_PRODUCTS_SIZE = 3;
+
     @PostMapping("/recent-products/{productId}")
     @ResponseBody
     public String addRecentProduct(@PathVariable("productId") Long productId, HttpServletResponse response) throws UnsupportedEncodingException {
         String recentImage = imageService.selectProductImageUrlByProductId(productId);
         if (!recentProducts.contains(recentImage)) {
             recentProducts.add(0, new RecentProduct(recentImage, productId));
-            if (recentProducts.size() > 3) {
+            if (recentProducts.size() > MAX_RECENT_PRODUCTS_SIZE) {
                 recentProducts.remove(recentProducts.size() - 1);
             }
             String recentProductsCookie = URLEncoder.encode(
@@ -37,7 +40,7 @@ public class RecentProductController {
                             .collect(Collectors.joining(",")),
                     StandardCharsets.UTF_8.toString()
             );
-            Cookie cookie = new Cookie("recentProducts", recentProductsCookie);
+            Cookie cookie = new Cookie(RECENT_PRODUCTS, recentProductsCookie);
             cookie.setPath("/");
             cookie.setMaxAge(24 * 60 * 60); // Cookie 유효기간 1일로 설정
             response.addCookie(cookie);

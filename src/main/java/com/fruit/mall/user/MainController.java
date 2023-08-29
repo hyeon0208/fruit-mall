@@ -3,7 +3,6 @@ package com.fruit.mall.user;
 import com.fruit.mall.cart.CartService;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
-import com.fruit.mall.image.ImageService;
 import com.fruit.mall.like.LikeService;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.PageResDto;
@@ -17,10 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +25,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.fruit.mall.product.RecentProductController.RECENT_PRODUCTS;
+
 @Controller
 @RequiredArgsConstructor
 public class MainController {
     private final ProductService productService;
-    private final ImageService imageService;
     private final LikeService likeService;
     private final CartService cartService;
     public static List<RecentProduct> recentProducts = new ArrayList<>();
@@ -66,7 +64,7 @@ public class MainController {
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("recentProducts")) {
+                if (cookie.getName().equals(RECENT_PRODUCTS)) {
                     recentProductsCookie = cookie.getValue();
                     break;
                 }
@@ -83,7 +81,7 @@ public class MainController {
                         return new RecentProduct(imageUrl, productId);
                     })
                     .collect(Collectors.toList());
-            model.addAttribute("recentProducts", recentProducts);
+            model.addAttribute(RECENT_PRODUCTS, recentProducts);
         }
 
         return "user/index";
