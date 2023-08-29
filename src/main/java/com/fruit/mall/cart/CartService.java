@@ -19,9 +19,10 @@ public class CartService {
 
     public Cart addProductToCart(Cart cart) {
         Optional<Cart> findCart = cartRepository.selectByUserIdAndProductId(cart.getUserIdNo(), cart.getProductId());
-
         if (findCart.isPresent()) {
-            cartRepository.updateProductCnt(cart.getProductCount(), findCart.get().getCartId());
+            if (findCart.get().getProductCount() != cart.getProductCount()) {
+                cartRepository.updateProductCnt(cart.getProductCount(), findCart.get().getCartId());
+            }
             return findCart.get();
         }
 

@@ -9,5 +9,6 @@ import java.util.List;
 public class CartAddReqDto {
     private Long productId;
     private Long userIdNo;
+    private int productCount;
     private List<Cart> localCart;
 }

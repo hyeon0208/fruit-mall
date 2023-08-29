@@ -66,7 +66,10 @@
                 </div>
 
                 <div class="right__buttons">
-                    <button>장바구니</button>
+                    <button id="addDetailToCartBtn"
+                            data-btn-status="0"
+                            th:data-cart-product-id="${productId}"
+                            th:data-user-id="${session.loginUser != null ? session.loginUser.userIdNo : 0}">장바구니</button>
                     <button>바로구매</button>
                 </div>
 
@@ -133,7 +136,7 @@
                         <h5>
                             <span>장바구니에 담겼습니다.</span>
                             <div class="buttons cart-modal">
-                                <a href="./">
+                                <a th:href="@{/user/detail/{id}(id=${productId})}">
                                     계속 쇼핑하기
                                 </a>
                                 <a href="/user/cart">
@@ -173,6 +176,42 @@
         <div class="box03">
             <br>
             <div th:utext="${productDetailForm.productDescription}"></div>
+        </div>
+    </div>
+
+    <!-- 장바구니에 담겼습니다. 모달 창 -->
+    <div class="txt04 right__modal add__detail_cart" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5>
+                <span>장바구니에 담겼습니다.</span>
+                <div class="buttons cart-modal">
+                    <a id="detailCartModalClose">
+                        닫기
+                    </a>
+                    <a href="/user/cart">
+                        장바구니로 이동
+                    </a>
+                </div>
+            </h5>
+        </div>
+    </div>
+
+    <!-- 이미 장바구니에 있는 상품입니다. 모달 창 -->
+    <div class="txt04 right__modal exist__detail__cart" style="display: none;">
+        <div class="inner">
+            <h4>알림</h4>
+            <h5>
+                <span>이미 장바구니에 있는 상품입니다.</span>
+                <div class="buttons cart-modal">
+                    <a id="existDetailCartModalClose">
+                        닫기
+                    </a>
+                    <a href="/user/cart">
+                        장바구니로 이동
+                    </a>
+                </div>
+            </h5>
         </div>
     </div>
 </section>

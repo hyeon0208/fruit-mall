@@ -35,14 +35,19 @@ public class CartController {
     @ResponseBody
     public Cart addProductToCart(@RequestBody CartAddReqDto cartAddReqDto) {
         Optional<Cart> findCart = cartService.selectByUserIdAndProductId(cartAddReqDto.getUserIdNo(), cartAddReqDto.getProductId());
-
         if (findCart.isPresent()) {
-            throw new IllegalArgumentException("이미 장바구니에 있는 상품입니다.");
-        }
+            if (findCart.get().getProductCount() != cartAddReqDto.getProductCount()) {
+                cartService.updateProductCnt(cartAddReqDto.getProductCount(), findCart.get().getCartId());
+                return findCart.get();
+            } else {
+                throw new IllegalArgumentException("이미 장바구니에 있는 상품입니다.");
 
+            }
+        }
         Cart cart = Cart.builder()
                 .userIdNo(cartAddReqDto.getUserIdNo())
                 .productId(cartAddReqDto.getProductId())
+                .productCount(cartAddReqDto.getProductCount())
                 .build();
 
         Cart savedCart = cartService.addProductToCart(cart);
@@ -55,13 +60,6 @@ public class CartController {
         AddedProductToCartByNoLoginDto product = productService.selectAddedProductByProductId(productId);
         product.setProductCount(1);
         return product;
-    }
-
-    @PostMapping("/main/cart/remove")
-    @ResponseBody
-    public String removeProductToCart(@RequestBody Cart cart) {
-
-        return "success";
     }
 
     @PostMapping("/user/update-cart")

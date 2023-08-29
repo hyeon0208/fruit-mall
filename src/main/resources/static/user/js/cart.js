@@ -224,6 +224,7 @@ $(document).on("click", ".addCartBtn", (e) => {
                 data: {
                     productId: productId,
                     userIdNo: userIdNo,
+                    productCount: 1,
                     localCart: localCart
                 },
                 dataType: "json",
