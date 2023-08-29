@@ -344,7 +344,7 @@ function updateDeliveryFee() {
     if (totalPrice - totalDiscount >= 50000) {
         $("#deliveryFee").text("무료");
     } else {
-        $("#deliveryFee").text(deliveryFee + "원");
+        $("#deliveryFee").text(deliveryFee.toLocaleString() + "원");
     }
 }
 
