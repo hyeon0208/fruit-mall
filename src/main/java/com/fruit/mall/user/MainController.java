@@ -1,9 +1,7 @@
 package com.fruit.mall.user;
 
-import com.fruit.mall.cart.CartService;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
-import com.fruit.mall.like.LikeService;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.PageResDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
@@ -39,12 +37,9 @@ public class MainController {
             HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
-
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null, sessionUser);
         model.addAttribute("pageInfo", products);
-
         recentProducts = cookieService.getRecentProductsFromCookies(request.getCookies());
-
         return "user/index";
     }
 
