@@ -12,7 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
-import static com.fruit.mall.product.RecentProductController.RECENT_PRODUCTS;
+import static com.fruit.mall.product.RecentProductService.RECENT_PRODUCTS;
 import static com.fruit.mall.user.MainController.recentProducts;
 
 @Aspect
@@ -32,8 +32,9 @@ public class SidebarAspect {
             int userCartsCount = cartService.countCartByUserId(sessionUser.getUserIdNo());
             model.addAttribute("userCartsCount", userCartsCount);
         }
-
-        model.addAttribute(RECENT_PRODUCTS, recentProducts);
+        if (recentProducts != null) {
+            model.addAttribute(RECENT_PRODUCTS, recentProducts);
+        }
 
         log.info("Sidebar Aspect 적용 메서드 정보 : {}", joinPoint.getSignature());
         return joinPoint.proceed();

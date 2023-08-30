@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.fruit.mall.product.RecentProductController.RECENT_PRODUCTS;
-
 @Controller
 @RequiredArgsConstructor
 public class MainController {
@@ -43,13 +41,9 @@ public class MainController {
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
 
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null, sessionUser);
-
         model.addAttribute("pageInfo", products);
 
-        List<RecentProduct> recentProducts = cookieService.getRecentProductsFromCookies(request.getCookies());
-        if (recentProducts != null) {
-            model.addAttribute(RECENT_PRODUCTS, recentProducts);
-        }
+        recentProducts = cookieService.getRecentProductsFromCookies(request.getCookies());
 
         return "user/index";
     }
