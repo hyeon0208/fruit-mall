@@ -293,6 +293,60 @@
                 <button>결제하기</button>
             </div>
 
+            <div id="aside">
+                <div class="sidebar">
+                    <ul>
+
+                        <!-- 마이페이지 -->
+                        <li>
+                            <a href="/user/mypage" th:unless="${session.loginUser == null}">
+                                <span class="material-symbols-outlined">person</span>
+                                <p th:text="${session.loginUser.getName()} + 님"></p>
+                            </a>
+                            <a href="#" th:if="${session.loginUser == null}">
+                                <span class="material-symbols-outlined">person</span>
+                                <p>손님</p>
+                            </a>
+                            <div class="line"></div>
+                        </li>
+
+                        <!-- 장바구니 -->
+                        <li class="right__cart">
+                            <a href="/user/cart">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <p>장바구니</p>
+                                <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
+                                <div th:if="${session.loginUser == null}" id="localCartCount" th:data-login-user="${session.loginUser}" class="cart__count"></div>
+                            </a>
+                        </li>
+
+                        <!-- 찜 -->
+                        <li class="right__favorite">
+                            <a href="#">
+                                <span class="material-icons">favorite</span>
+                                <p>찜</p>
+                                <div th:unless="${session.loginUser == null}" class="favorite__count" th:text="${likesCount}"></div>
+                                <div th:if="${session.loginUser == null}"></div>
+                            </a>
+                            <div class="line"></div>
+                        </li>
+
+                        <!-- 최근 본 상품 -->
+                        <li class="last">
+                            <a href="#">
+                                <p>최근 본 상품</p>
+                                <tr th:each="product : ${recentProducts}">
+                                    <a th:href="@{/user/detail/{id}(id=${product.productId})}">
+                                        <td><img th:src="${product.imageUrl}"/></td>
+                                    </a>
+                                </tr>
+                                <p id="TopBtn" style="text-align: center">맨위로</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
 
             <!-- 결제취소. 모달 창 -->
             <div class="payment__cancel" style="display: none;">
