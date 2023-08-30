@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    public List<OrderReqDto> selectOneOrderInfoByProductId(Long productId) {
-        return orderRepository.selectOneOrderInfoByProductId(productId);
+    public List<OrderReqDto> selectOneOrderInfoByProductId(Long productId, int productCount) {
+        return orderRepository.selectOneOrderInfoByProductId(productId, productCount);
     }
 }

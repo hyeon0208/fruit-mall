@@ -7,12 +7,33 @@
         SELECT
             p.PRODUCT_NAME,
             p.PRODUCT_PRICE,
+            #{productCount} as PRODUCT_COUNT,
             p.PRODUCT_DISCOUNT,
             i1.IMAGE_URL
         FROM product p
                  JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
         WHERE
             p.PRODUCT_ID = #{productId}
+          AND
+                i1.IMAGE_ID = (
+                SELECT MIN(i2.IMAGE_ID)
+                FROM image i2
+                WHERE i2.PRODUCT_ID = p.PRODUCT_ID
+            )
+    </select>
+
+    <select id="selectOrderInfosByUserId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
+        SELECT
+            p.PRODUCT_NAME,
+            c.PRODUCT_PRICE,
+            c.PRODUCT_COUNT,
+            c.PRODUCT_DISCOUNT,
+            i1.IMAGE_URL
+        FROM cart c
+                 JOIN product p ON p.PRODUCT_ID = c.PRODUCT_ID
+                 JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
+        WHERE
+            c.USER_ID_NO = #{userIdNo}
           AND
                 i1.IMAGE_ID = (
                 SELECT MIN(i2.IMAGE_ID)

@@ -16,15 +16,17 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
+    @GetMapping("/user/order")
+    public String orderProducts(@Login SessionUser sessionUser) {
+
+        return "user/payment";
+    }
+
     @GetMapping("/user/order/one/{productId}/{productCount}")
     public String orderOneProduct(@Login SessionUser sessionUser, @PathVariable Long productId, @PathVariable int productCount, Model model) {
-        List<OrderReqDto> orderReqDtos = orderService.selectOneOrderInfoByProductId(productId);
-        OrderReqDto orderReqDto = orderReqDtos.get(0);
-        orderReqDto.setProductCount(productCount);
-
+        List<OrderReqDto> orderReqDtos = orderService.selectOneOrderInfoByProductId(productId, productCount);
         model.addAttribute("products", orderReqDtos);
         model.addAttribute("totalSize", orderReqDtos.size());
-
         return "user/payment";
     }
 }
