@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<div id="payment">
+        <div class="inner">
+
+            <h2> 주문결제 </h2>
+
+            <div class="txt">
+                <div class="left">
+                    <span>전체 <span th:text="${totalSize}" class="orange"></span>개</span>
+                </div>
+
+                <div class="right">
+                    <p>01 장바구니</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <p>02 주문/결제</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <p>03 결제완료</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <img th:src="${products.get(0).imageUrl}" th:alt="${products.get(0).productName}">
+                <span th:if="${totalSize > 1}" th:text="|${products.get(0).productName}외 ${totalSize - 1}개의 상품을 주문합니다.|"></span>
+                <span th:if="${totalSize == 1}" th:text="|${products.get(0).productName} 상품을 주문합니다.|"></span>
+            </div>
+
+            <p class="title">배송정보</p>
+
+            <div class="input">
+                <label for="where">
+                    <p>배송지 선택</p>
+                    <select name="where" id="where">
+                        <option value="우리집(기본배송지)">우리집(기본배송지)</option>
+                    </select>
+                    <button>+ 신규배송지</button>
+                </label>
+
+                <label for="name">
+                    <p>이름</p>
+                    <input type="textbox" name="name" id="name">
+                </label>
+
+                <label for="phone" class="phone">
+                    <p>연락처</p>
+                    <input type="textbox" name="phone1" id="phone1">
+                </label>
+
+                <label for="add" class="add">
+                    <p>주소</p>
+                    <input type="textbox" name="add" id="add" class="postalCode">
+                    <input type="textbox" name="add2" id="add2" class="postalCode2">
+                </label>
+
+                <label for="ask">
+                    <p>배송 요청 사항</p>
+                    <select name="ask" id="ask">
+                        <option value="배송 시 요청사항 선택">배송 시 요청사항 선택</option>
+                        <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다.</option>
+                        <option value="택배함에 넣어주세요">택배함에 넣어주세요.</option>
+                        <option value="문 앞에 놔주세요">문 앞에 놔주세요.</option>
+                        <option value="직접 수령하곘습니다">직접 수령하곘습니다.</option>
+                        <option value="직접입력">직접입력</option>
+                    </select>
+                </label>
+            </div>
+
+            <!-- 배송지추가 모달 창 -->
+            <div class="delivery__add" style="display: none;">
+                <div class="delivery__add__inner">
+
+                    <div class="top">
+                        <span>배송지추가</span>
+                    </div>
+
+                    <div class="bottom">
+                        <label for="title">
+                            <p>배송지명</p>
+                            <input type="textbox" name="title" id="title">
+                        </label>
+
+                        <label for="name">
+                            <p>이름</p>
+                            <input type="textbox" name="name" id="name">
+                        </label>
+
+                        <label for="phone" class="phone">
+                            <p>연락처</p>
+                            <input type="textbox" name="phone1" id="phone1">
+                            <input type="textbox" name="phone2" id="phone2">
+                        </label>
+
+                        <label for="add" class="add">
+                            <p>주소</p>
+                            <button>우편번호</button>
+                            <input type="textbox" name="add" id="add" class="postalCode">
+                            <input type="textbox" name="add2" id="add2" class="postalCode2">
+                            <input type="textbox" name="add3" id="add3" class="postalCode2">
+                        </label>
+
+
+                        <div class="delivery__add__buttons">
+                            <button class="delivery__add__cancel">
+                                작성취소
+                            </button>
+
+                            <button class="delivery__add__confirm">
+                                배송지추가
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <table>
+                <tr class="title">
+                    <th scope="col">상품정보</th>
+                    <th scope="col">할인율</th>
+                    <th scope="col">할인금액</th>
+                    <th scope="col">상품금액</th>
+                </tr>
+
+                <th:block th:each="product : ${products}">
+                <tr>
+                    <td>
+                        <div class="td_wrap">
+                            <img th:src="${product.imageUrl}" th:alt="${product.productName}">
+
+                            <div class="txt">
+                                <span th:text="${product.productName}"></span>
+                                <span class="orderProductPrice" th:text="|${#numbers.formatInteger((product.productPrice), 3, 'COMMA')}원|"></span>
+                            </div>
+
+                            <div class="price">
+                                <span class="orderProductCount" th:text="|구매수량 ${product.productCount}개|"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td th:if="${product.productDiscount > 0}" class="orderProductDiscount" th:text="|${product.productDiscount}%|">할인율</td>
+                    <td th:if="${product.productDiscount == 0}" class="orderProductDiscount"></td>
+                    <td th:if="${product.productDiscount == 0}" class="orderDiscountAppliedPrice">0 원</td>
+                    <td th:if="${product.productDiscount > 0}" class="orderDiscountAppliedPrice" th:text="|${#numbers.formatInteger(((product.productPrice * (product.productDiscount / 100.0)) * product.productCount), 3, 'COMMA')} 원|">할인금액</td>
+                    <td class="orderProductPrice" th:text="|${#numbers.formatInteger((product.productPrice * product.productCount), 3, 'COMMA')} 원|">상품금액</td>
+                </tr>
+                </th:block>
+
+                <tr class="totalPrice border">
+                    <td colspan="2" rowspan="3">
+                        <span class="total">총 주문 금액</span>
+                    </td>
+
+                    <td>
+                        <span class="total02">총 상품금액</span>
+                    </td>
+
+                    <td>
+                        <span id="orderTotalPrice"></span>
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td>
+                        <span class="total02">즉시 할인 금액</span>
+                    </td>
+
+                    <td>
+                        <span id="orderTotalDiscount"></span>
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td class="br">
+                        <span class="total02">배송비</span>
+                        <br>
+                        <span class="small">(50,000원 이상 무료배송)</span>
+                    </td>
+
+                    <td>
+                        <span id="orderDeliveryFee"></span>
+                    </td>
+                </tr>
+
+                <tr class="totalPrice">
+                    <td colspan="2" class="lastTotalPrice">
+                        <span class="total">결제 예상 금액</span>
+                    </td>
+
+                    <td class="lastTotalPrice">
+
+                    </td>
+
+                    <td class="lastTotalPrice">
+                        <span class="orange" id="paymentPrice"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <p class="title">결제수단</p>
+
+            <div class="paymentWrap">
+                <p>일반결제
+                    <span>115,500원</span>
+                </p>
+
+                <div class="paymentButtons">
+                    <button>신용카드</button>
+                    <button>휴대폰 결제</button>
+                    <button>실시간 계좌이체</button>
+                </div>
+
+                <div class="paymentBackground">
+                    <div class="box1">
+                        <span>카드 구분</span>
+
+                        <input type="radio" id="개인카드" name="개인카드" value="개인카드">
+                        <label for="개인카드">개인카드</label>
+
+                        <input type="radio" id="법인카드" name="법인카드" value="법인카드">
+                        <label for="법인카드">법인카드</label>
+                    </div>
+
+                    <div class="box2">
+                        <span>카드 선택</span>
+
+                        <select name="card" id="card">
+                            <option value="국민카드">국민카드</option>
+                            <option value="삼성카드">삼성카드</option>
+                            <option value="하나카드">하나카드</option>
+                            <option value="신한카드">신한카드</option>
+                            <option value="현대카드">현대카드</option>
+                        </select>
+                    </div>
+
+                    <div class="box3">
+                        <span>할부 기간</span>
+
+                        <select name="howlong" id="howlong">
+                            <option value="일시불">일시불</option>
+                            <option value="2개월">2개월(무이자)</option>
+                            <option value="3개월">3개월(무이자)</option>
+                            <option value="4개월">4개월</option>
+                            <option value="5개월">5개월</option>
+                            <option value="6개월">6개월</option>
+                            <option value="7개월">7개월</option>
+                            <option value="8개월">8개월</option>
+                            <option value="9개월">9개월</option>
+                            <option value="10개월">10개월</option>
+                            <option value="11개월">11개월</option>
+                            <option value="12개월">12개월</option>
+
+                        </select>
+                    </div>
+
+                    <div class="box4">
+                        <span class="hidden">hidden</span>
+
+                        <input type="checkbox" checked>
+                        <span>선택한 결제방법을 다음에도 사용</span>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <p class="title">약관동의</p>
+
+            <div class="terms">
+                <input type="checkbox" id="전체동의" name="전체동의" value="전체동의">
+                <label for="전체동의">전체 동의하기</label>
+            </div>
+
+            <div class="terms2">
+                <div class="terms2__1">
+                    <input type="checkbox" id="1번" name="1번" value="1번">
+                    <label for="1번">개인정보 제 3자 제공에 동의합니다.</label>
+                    <p>상세보기</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+
+                <div class="terms2__2">
+                    <input type="checkbox" id="2번" name="2번" value="2번">
+                    <label for="2번">주문할 상품 설명에 명시된 내용과 사용 조건을 확인하였으며, 취소/환불 규정에 동의합니다.</label>
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+                <button>결제취소</button>
+                <button>결제하기</button>
+            </div>
+
+
+            <!-- 결제취소. 모달 창 -->
+            <div class="payment__cancel" style="display: none;">
+                <div class="payment__cancel__inner">
+
+                    <div class="top">
+                        <span>알림</span>
+                    </div>
+
+                    <div class="bottom">
+                        <span>변경중이던 사항이 초기화됩니다. <br>
+                            취소 하시겠습니까? </span>
+
+
+                        <div class="payment__cancel__buttons">
+                            <button>취소하기</button>
+                            <button>계속작성</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 결제가 취소되었습니다. 모달 창 -->
+            <div class="payment__cancel__confirm" style="display: none;">
+                <div class="payment__cancel__confirm__inner">
+
+                    <div class="top">
+                        <span>알림</span>
+                    </div>
+
+                    <div class="bottom">
+                        <span>결제가 취소되었습니다.</span>
+
+
+                        <div class="payment__cancel__confirm__buttons">
+                            <button>확인</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>
