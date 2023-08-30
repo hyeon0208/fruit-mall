@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.fruit.mall.product.RecentProductController.RECENT_PRODUCTS;
+import static com.fruit.mall.product.RecentProductService.RECENT_PRODUCTS;
 
 @Service
 public class CookieService {
@@ -24,7 +24,6 @@ public class CookieService {
                     .map(this::createRecentProduct)
                     .collect(Collectors.toList());
         }
-
         return null;
     }
 
