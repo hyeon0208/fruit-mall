@@ -115,7 +115,7 @@ function showMainProductList() {
                 .append(
                     $("<a>")
                         .attr("id", "recentProductBtn")
-                        .attr("data-userproductId", product.productId)
+                        .attr("data-product-Id", product.productId)
                         .attr("href", `/user/detail/${product.productId}`)
                         .append($("<img>").attr("src", product.imageUrl))
                         .append(
