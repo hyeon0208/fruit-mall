@@ -5,25 +5,19 @@ import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.PageResDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
-import com.fruit.mall.product.dto.RecentProduct;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MainController {
     private final ProductService productService;
-    private final CookieService cookieService;
-    public static List<RecentProduct> recentProducts = new ArrayList<>();
 
     @GetMapping("favicon.ico")
     @ResponseBody
@@ -34,12 +28,10 @@ public class MainController {
     public String home(
             @Login SessionUser sessionUser,
             Model model,
-            HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
+            @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws IOException {
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null, sessionUser);
         model.addAttribute("pageInfo", products);
-        recentProducts = cookieService.getRecentProductsFromCookies(request.getCookies());
         return "user/index";
     }
 

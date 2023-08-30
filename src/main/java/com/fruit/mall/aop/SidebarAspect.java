@@ -4,6 +4,8 @@ import com.fruit.mall.cart.CartService;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.like.LikeService;
+import com.fruit.mall.product.RecentProductService;
+import com.fruit.mall.product.dto.RecentProduct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,9 +13,14 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import static com.fruit.mall.product.RecentProductService.RECENT_PRODUCTS;
-import static com.fruit.mall.user.MainController.recentProducts;
 
 @Aspect
 @Component
@@ -22,6 +29,7 @@ import static com.fruit.mall.user.MainController.recentProducts;
 public class SidebarAspect {
     private final LikeService likeService;
     private final CartService cartService;
+    private final RecentProductService recentProductService;
 
     @Around("execution(* com.fruit.mall..*Controller.*(..)) && args(sessionUser,model,..)")
     public Object addSidebar(ProceedingJoinPoint joinPoint, @Login SessionUser sessionUser, Model model) throws Throwable {
@@ -32,6 +40,10 @@ public class SidebarAspect {
             int userCartsCount = cartService.countCartByUserId(sessionUser.getUserIdNo());
             model.addAttribute("userCartsCount", userCartsCount);
         }
+
+        HttpServletRequest request =
+                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        List<RecentProduct> recentProducts = recentProductService.getRecentProductsFromCookie(request);
         if (recentProducts != null) {
             model.addAttribute(RECENT_PRODUCTS, recentProducts);
         }
