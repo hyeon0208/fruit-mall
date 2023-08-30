@@ -3,9 +3,10 @@ $(() => {
     $("input[type='checkbox']").prop("checked", isChecked);
 
     // 세션 정보가 없으면 로컬 스토리지에 담긴 cart의 수를 표시
-    if (!$('#localCartCount').data('login-user')) {
+    if (!$('#localSideBarCartCount').data('login-user')) {
         const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
         $('#localCartCount').text(cart.length);
+        $('#localSideBarCartCount').text(cart.length);
     }
 
     // 세션 정보가 없으면 로컬 스토리지에 담긴 cart를 cart.html에 표시
