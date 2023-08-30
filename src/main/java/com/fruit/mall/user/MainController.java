@@ -14,16 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.fruit.mall.product.RecentProductController.RECENT_PRODUCTS;
 
@@ -31,8 +26,7 @@ import static com.fruit.mall.product.RecentProductController.RECENT_PRODUCTS;
 @RequiredArgsConstructor
 public class MainController {
     private final ProductService productService;
-    private final LikeService likeService;
-    private final CartService cartService;
+    private final CookieService cookieService;
     public static List<RecentProduct> recentProducts = new ArrayList<>();
 
     @GetMapping("favicon.ico")
@@ -42,45 +36,18 @@ public class MainController {
 
     @GetMapping("/")
     public String home(
-            Model model,
             @Login SessionUser sessionUser,
+            Model model,
             HttpServletRequest request,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) throws UnsupportedEncodingException {
 
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null, sessionUser);
 
-        if (sessionUser != null) {
-            int likesCount = likeService.countLikesByUserId(sessionUser.getUserIdNo());
-            model.addAttribute("likesCount", likesCount);
-
-            int userCartsCount = cartService.countCartByUserId(sessionUser.getUserIdNo());
-            model.addAttribute("userCartsCount", userCartsCount);
-        }
         model.addAttribute("pageInfo", products);
 
-        Cookie[] cookies = request.getCookies();
-        String recentProductsCookie = null;
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(RECENT_PRODUCTS)) {
-                    recentProductsCookie = cookie.getValue();
-                    break;
-                }
-            }
-        }
-
-        if (recentProductsCookie != null) {
-            String decodedRecentProductImages = URLDecoder.decode(recentProductsCookie, StandardCharsets.UTF_8.toString());
-            recentProducts = Arrays.stream(decodedRecentProductImages.split(","))
-                    .map(s -> {
-                        int lastColon = s.lastIndexOf(":");
-                        String imageUrl = s.substring(0, lastColon);
-                        Long productId = Long.valueOf(s.substring(lastColon + 1));
-                        return new RecentProduct(imageUrl, productId);
-                    })
-                    .collect(Collectors.toList());
+        List<RecentProduct> recentProducts = cookieService.getRecentProductsFromCookies(request.getCookies());
+        if (recentProducts != null) {
             model.addAttribute(RECENT_PRODUCTS, recentProducts);
         }
 
