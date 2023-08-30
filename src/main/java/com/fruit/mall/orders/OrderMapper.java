@@ -9,5 +9,7 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    List<OrderReqDto> selectOneOrderInfoByProductId(@Param("productId") Long productId, @Param("productCount") int productCount);
+    OrderReqDto selectOneOrderInfoByProductId(@Param("productId") Long productId, @Param("productCount") int productCount);
+
+    OrderReqDto selectOrderInfosByProductId(@Param("productId") Long productId);
 }

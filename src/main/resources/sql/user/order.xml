@@ -22,7 +22,7 @@
             )
     </select>
 
-    <select id="selectOrderInfosByUserId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
+    <select id="selectOrderInfosByProductId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
         SELECT
             p.PRODUCT_NAME,
             c.PRODUCT_PRICE,
@@ -33,7 +33,7 @@
                  JOIN product p ON p.PRODUCT_ID = c.PRODUCT_ID
                  JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
         WHERE
-            c.USER_ID_NO = #{userIdNo}
+            p.PRODUCT_ID = #{productId}
           AND
                 i1.IMAGE_ID = (
                 SELECT MIN(i2.IMAGE_ID)

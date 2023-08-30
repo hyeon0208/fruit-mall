@@ -101,15 +101,17 @@ $(document).on("click", "#goHomeBtn", () => {
 });
 
 $(document).on("click", "#goPaymentBtn", () => {
-    // 체크박스로 선택된 상품들 중 "품절"인 상품이 있는지 확인
     const soldOutProducts = [];
+    const selectedProducts = [];
     $("input[type='checkbox']:checked:not(#cartAllChk)").each((i, checkbox) => {
         const productRow = $(checkbox).closest("tr");
         const productStatus = productRow.find(".price").data("status");
 
-        console.log(productStatus);
         if (productStatus === "품절") {
             soldOutProducts.push(i);
+        } else {
+            const productId = $(checkbox).data("product-id");
+            selectedProducts.push(productId);
         }
     });
 
@@ -117,7 +119,8 @@ $(document).on("click", "#goPaymentBtn", () => {
         alert("품절상품은 구매 불가능합니다.");
         return;
     }
-    window.location.replace("/user/order");
+
+    window.location.href = "/user/order?products=" + encodeURIComponent(JSON.stringify(selectedProducts));
 });
 
 $(document).on("click", "#redirectLoginBtn", () => {

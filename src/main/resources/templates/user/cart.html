@@ -37,7 +37,7 @@
                 <tbody id="showCart">
                     <tr th:each="product : ${cartAndImages}">
                         <td>
-                            <input type="checkbox" class="cartChk">
+                            <input type="checkbox" class="cartChk" th:data-product-id="${product.productId}">
                         </td>
                         <td>
                             <div class="td_wrap">

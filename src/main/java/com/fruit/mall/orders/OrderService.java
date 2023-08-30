@@ -13,7 +13,11 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    public List<OrderReqDto> selectOneOrderInfoByProductId(Long productId, int productCount) {
+    public OrderReqDto selectOneOrderInfoByProductId(Long productId, int productCount) {
         return orderRepository.selectOneOrderInfoByProductId(productId, productCount);
+    }
+
+    public OrderReqDto selectOrderInfosByProductId(Long productId) {
+        return orderRepository.selectOrderInfosByProductId(productId);
     }
 }

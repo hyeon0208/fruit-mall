@@ -12,7 +12,12 @@ public class OrderRepository implements OrderMapper {
     private final OrderMapper orderMapper;
 
     @Override
-    public List<OrderReqDto> selectOneOrderInfoByProductId(Long productId, int productCount) {
+    public OrderReqDto selectOneOrderInfoByProductId(Long productId, int productCount) {
         return orderMapper.selectOneOrderInfoByProductId(productId, productCount);
+    }
+
+    @Override
+    public OrderReqDto selectOrderInfosByProductId(Long productId) {
+        return orderMapper.selectOrderInfosByProductId(productId);
     }
 }
