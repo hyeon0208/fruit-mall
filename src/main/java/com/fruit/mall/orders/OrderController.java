@@ -7,7 +7,6 @@ import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.orders.dto.OrderReqDto;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
