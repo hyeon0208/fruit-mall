@@ -23,7 +23,6 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.json:json:20210307' // json 객체 다루기
 	implementation 'org.springframework.boot:spring-boot-starter-security' // bcrypt 포함
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
