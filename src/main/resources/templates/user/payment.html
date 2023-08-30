@@ -143,7 +143,7 @@
                     <td th:if="${product.productDiscount == 0}" class="orderProductDiscount"></td>
                     <td th:if="${product.productDiscount == 0}" class="orderDiscountAppliedPrice">0 원</td>
                     <td th:if="${product.productDiscount > 0}" class="orderDiscountAppliedPrice" th:text="|${#numbers.formatInteger(((product.productPrice * (product.productDiscount / 100.0)) * product.productCount), 3, 'COMMA')} 원|">할인금액</td>
-                    <td class="orderProductPrice" th:text="|${#numbers.formatInteger((product.productPrice * product.productCount), 3, 'COMMA')} 원|">상품금액</td>
+                    <td class="orderMultipliedProductPrice" th:text="|${#numbers.formatInteger((product.productPrice * product.productCount), 3, 'COMMA')} 원|">상품금액</td>
                 </tr>
                 </th:block>
 
@@ -193,7 +193,7 @@
                     </td>
 
                     <td class="lastTotalPrice">
-                        <span class="orange" id="paymentPrice"></span>
+                        <span class="orange" id="paymentExpectedPrice"></span>
                     </td>
                 </tr>
             </table>
@@ -202,7 +202,7 @@
 
             <div class="paymentWrap">
                 <p>일반결제
-                    <span>115,500원</span>
+                    <span id="paymentPrice"></span>
                 </p>
 
                 <div class="paymentButtons">

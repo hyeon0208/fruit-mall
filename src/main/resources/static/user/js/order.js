@@ -1,7 +1,8 @@
 $(() => {
     let totalPrice = 0;
-    $(".orderProductPrice").each((i, e) => {
+    $(".orderMultipliedProductPrice").each((i, e) => {
         const price = parseInt($(e).text().replace(/[^0-9]/g, ''));
+        console.log(price);
         totalPrice += price;
     });
     $("#orderTotalPrice").text(totalPrice.toLocaleString() + "원");
@@ -25,5 +26,6 @@ $(() => {
     } else {
         orderDeliveryFee = 3000;
     }
+    $("#paymentExpectedPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
     $("#paymentPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
 });
