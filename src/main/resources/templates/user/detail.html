@@ -70,7 +70,8 @@
                             data-btn-status="0"
                             th:data-cart-product-id="${productId}"
                             th:data-user-id="${session.loginUser != null ? session.loginUser.userIdNo : 0}">장바구니</button>
-                    <button>바로구매</button>
+                    <button th:if="${session.loginUser != null}" id="goPaymentOneBtn">구매하기</button>
+                    <button th:if="${session.loginUser == null}"id="redirectLoginBtn">구매하기</button>
                 </div>
 
                 <br>

@@ -113,6 +113,12 @@ $(document).on("click", "#addDetailToCartBtn", () => {
     }
 });
 
+$(document).on("click", "#goPaymentOneBtn", () => {
+    const productId = $("#addDetailToCartBtn").data("cart-product-id");
+    const productCount = parseInt($("#detailProductCnt").val());
+    window.location.replace(`/user/order/one/${productId}/${productCount}`);
+});
+
 function updateDetailTotalPrice() {
     const discount = $("#detailDiscount").attr("data-detail-discount");
     let price = 0;
