@@ -29,3 +29,8 @@ $(() => {
     $("#paymentExpectedPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
     $("#paymentPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
 });
+
+$(document).on("click", "#전체동의", () => {
+    const isChecked = $("#전체동의").prop("checked");
+    $("input[type='checkbox']:not(#paymentMethodChk)").prop("checked", isChecked);
+});
