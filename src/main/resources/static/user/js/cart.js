@@ -116,10 +116,25 @@ $(document).on("click", "#goPaymentBtn", () => {
         alert("품절상품은 구매 불가능합니다.");
         return;
     }
-    window.location.replace("/user/payment");
+    window.location.replace("/user/order");
 });
 
 $(document).on("click", "#redirectLoginBtn", () => {
+    const product = $("#addDetailToCartBtn");
+    const productId = product.data("cart-product-id");
+    axios({
+        method: "get",
+        url: `/local/cart/${productId}`,
+        params: {
+            productId: productId
+        },
+        dataType: "json",
+        headers: {'Content-Type': 'application/json'}
+    }).then((res) =>{
+        const product = res.data;
+        product.productCount = parseInt($("#detailProductCnt").val());
+        addToLocalStorageCart(res.data);
+    })
     window.location.replace("/login");
 });
 
