@@ -1,10 +1,8 @@
 package com.fruit.mall.product;
 
-import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
-import com.fruit.mall.user.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-    private final UserService userService;
 
     public PageInfo<Product> getProducts(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");

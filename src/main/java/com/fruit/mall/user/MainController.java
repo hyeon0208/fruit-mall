@@ -17,7 +17,6 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class MainController {
     private final ProductService productService;
-    private final UserService userService;
 
     @GetMapping("favicon.ico")
     @ResponseBody
@@ -30,7 +29,7 @@ public class MainController {
             Model model,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
-        Long userId = userService.getUserIdFromSession(sessionUser);
+        Long userId = sessionUser != null ? sessionUser.getUserIdNo() : null;
         PageInfo<ProductAndImageInfo> products = productService.getProductsAndImageByFilter(pageNum, pageSize, null, null, userId);
         model.addAttribute("pageInfo", products);
         return "user/index";
@@ -45,7 +44,7 @@ public class MainController {
             @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize) {
         String category = params.get("category");
         String searchCond = params.get("searchCond");
-        Long userId = userService.getUserIdFromSession(sessionUser);
+        Long userId = sessionUser != null ? sessionUser.getUserIdNo() : null;
         PageInfo<ProductAndImageInfo> pageInfo = productService.getProductsAndImageByFilter(pageNum, pageSize, category, searchCond, userId);
         return new PageResDto(pageInfo, category, userId);
     }

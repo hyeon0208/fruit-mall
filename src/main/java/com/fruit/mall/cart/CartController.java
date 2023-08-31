@@ -7,7 +7,6 @@ import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
-import com.fruit.mall.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +21,11 @@ import java.util.Optional;
 public class CartController {
     private final CartService cartService;
     private final ProductService productService;
-    private final UserService userService;
 
     @GetMapping("/user/cart")
     public String loginUserCart(@Login SessionUser sessionUser, Model model) {
         if (sessionUser != null) {
-            Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
-            List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(userId);
+            List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(sessionUser.getUserIdNo());
             model.addAttribute("cartAndImages", cartAndImages);
         }
         return "user/cart";
@@ -69,7 +66,7 @@ public class CartController {
     @ResponseBody
     public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody Map<String, Object> localStorage) {
         List<Map<String, Object>> localCarts = (List<Map<String, Object>>) localStorage.get("localCart");
-        Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
+        Long userId = sessionUser.getUserIdNo();
         if (!localCarts.isEmpty()) {
             for (Map<String, Object> localCart : localCarts) {
                 Map<String, Object> productMap = (Map<String, Object>) localCart.get("product");

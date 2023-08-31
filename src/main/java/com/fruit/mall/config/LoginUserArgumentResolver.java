@@ -31,16 +31,16 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
      * 여기선 세션에서 객체를 가져온다.
      */
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+    public SessionUser resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
         HttpSession session = request.getSession(false);
 
         if (session == null) {
-            return null;
+            return new SessionUser();
         }
 
-        return session.getAttribute(LOGIN_USER);
+        return (SessionUser) session.getAttribute(LOGIN_USER);
     }
 }

@@ -33,11 +33,6 @@
         SELECT USER_NAME FROM user WHERE USER_NAME = #{user_name}
     </select>
 
-    <select id="selectUserIdNByEmail" resultType="Long">
-        SELECT USER_ID_NO FROM user WHERE USER_EMAIL = #{user_email}
-    </select>
-
-
     <update id="updateNewPassword" parameterType="String">
         UPDATE user SET USER_PWD = #{user_pwd} WHERE USER_EMAIL = #{user_email}
     </update>

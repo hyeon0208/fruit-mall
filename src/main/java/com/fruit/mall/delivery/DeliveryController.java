@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class DeliveryController {
     private final DeliveryService deliveryService;
-    private final UserService userService;
 
     @PostMapping("/delivery/add")
     @ResponseBody
     public String insertDelivery(@Login SessionUser sessionUser, @RequestBody Delivery delivery) {
-        Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
-        deliveryService.insertDelivery(userId, delivery);
+        deliveryService.insertDelivery(sessionUser.getUserIdNo(), delivery);
         return "success";
     }
 }
