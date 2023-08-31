@@ -14,6 +14,12 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
     public void insertDelivery(Long userId, Delivery delivery) {
+        DeliveryResDto findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, delivery.getDeliveryName());
+        String findName = findDelivery.getDeliveryName();
+        if (findName.equals(delivery.getDeliveryName())) {
+            throw new RuntimeException("배송지 이름은 중복될수 없습니다.");
+        }
+
         Delivery newDelivery = Delivery.builder()
                 .userIdNo(userId)
                 .deliveryName(delivery.getDeliveryName())

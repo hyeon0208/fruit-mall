@@ -83,7 +83,7 @@ function clickDeliveryModal() {
                 alert(res.data)
             }
         }).catch(error => {
-            alert("배송지 저장에 실패 했습니다");
+            alert(error.response.data.message);
         });
     });
 

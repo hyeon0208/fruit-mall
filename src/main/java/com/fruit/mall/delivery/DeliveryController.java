@@ -3,7 +3,6 @@ package com.fruit.mall.delivery;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.delivery.dto.DeliveryResDto;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,7 +17,6 @@ public class DeliveryController {
     @PostMapping("/delivery/add")
     @ResponseBody
     public String insertDelivery(@Login SessionUser sessionUser, @Validated @RequestBody Delivery delivery, BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return bindingResult.getFieldError().getDefaultMessage();
         }
