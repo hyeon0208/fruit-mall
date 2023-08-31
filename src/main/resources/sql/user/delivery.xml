@@ -6,4 +6,10 @@
         INSERT INTO delivery (USER_ID_NO, DELIVERY_NAME, USER_NAME, PHONE_NUMBER, ZIPCODE, ADDRESS)
         VALUES (#{userIdNo}, #{deliveryName}, #{userName}, #{phoneNumber}, #{zipcode}, #{address})
     </insert>
+
+    <select id="deliveryAllByUserId" resultType="com.fruit.mall.delivery.dto.DeliveryResDto">
+        SELECT *
+        FROM delivery
+        WHERE USER_ID_NO = #{userIdNo};
+    </select>
 </mapper>

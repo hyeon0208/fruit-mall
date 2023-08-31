@@ -1,8 +1,11 @@
 package com.fruit.mall.delivery;
 
+import com.fruit.mall.delivery.dto.DeliveryResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +23,9 @@ public class DeliveryService {
                 .address(delivery.getAddress())
                 .build();
         deliveryRepository.insertDelivery(newDelivery);
+    }
+
+    public List<DeliveryResDto> deliveryAllByUserId(Long userIdNo) {
+        return deliveryRepository.deliveryAllByUserId(userIdNo);
     }
 }

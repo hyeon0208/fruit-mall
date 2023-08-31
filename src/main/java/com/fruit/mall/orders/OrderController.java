@@ -5,7 +5,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.delivery.DeliveryService;
+import com.fruit.mall.delivery.dto.DeliveryResDto;
 import com.fruit.mall.orders.dto.OrderReqDto;
+import com.fruit.mall.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +24,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
+    private final DeliveryService deliveryService;
 
     @GetMapping("/user/order")
     public String orderProducts(@Login SessionUser sessionUser, Model model, @RequestParam String products) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
+        Long userId = sessionUser.getUserIdNo();
+        List<DeliveryResDto> deliveries = deliveryService.deliveryAllByUserId(userId);
+        model.addAttribute("deliveries", deliveries);
+
         List<Long> productIds = objectMapper.readValue(products, new TypeReference<List<Long>>(){});
 
         List<OrderReqDto> orderReqDtos = productIds.stream()
