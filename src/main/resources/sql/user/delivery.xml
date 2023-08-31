@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fruit.mall.delivery.DeliveryMapper">
+    <insert id="insertDelivery" parameterType="com.fruit.mall.delivery.Delivery" useGeneratedKeys="true" keyProperty="deliveryId">
+        INSERT INTO delivery (USER_ID_NO, DELIVERY_NAME, USER_NAME, PHONE_NUMBER, ZIPCODE, ADDRESS)
+        VALUES (#{userIdNo}, #{deliveryName}, #{userName}, #{phoneNumber}, #{zipcode}, #{address})
+    </insert>
+</mapper>

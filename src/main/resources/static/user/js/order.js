@@ -2,7 +2,6 @@ $(() => {
     let totalPrice = 0;
     $(".orderMultipliedProductPrice").each((i, e) => {
         const price = parseInt($(e).text().replace(/[^0-9]/g, ''));
-        console.log(price);
         totalPrice += price;
     });
     $("#orderTotalPrice").text(totalPrice.toLocaleString() + "원");
@@ -28,9 +27,58 @@ $(() => {
     }
     $("#paymentExpectedPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
     $("#paymentPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
+
+    clickDeliveryModal();
 });
+
 
 $(document).on("click", "#전체동의", () => {
     const isChecked = $("#전체동의").prop("checked");
     $("input[type='checkbox']:not(#paymentMethodChk)").prop("checked", isChecked);
 });
+
+function clickDeliveryModal() {
+    $(document).on("click", "#newDelivery", () => {
+        $(".delivery__add").show();
+    });
+
+    $(document).on("click", "#delivery-add-cancel-btn", () => {
+        $('.delivery__add').hide();
+    });
+
+    $(document).on("click", "#delivery_add_btn", () => {
+        axios({
+            url: "/delivery/add/",
+            method: "post",
+            data: {
+                deliveryName: $("#title").val(),
+                userName: $("#addname").val(),
+                phoneNumber: $("#addphone1").val() + $("#addphone2").val(),
+                zipcode: $("#zipcode").val(),
+                address: $("#addaddress").val() + " " + $("#detailAddaddress").val()
+            },
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            $('.delivery__add').hide();
+            alert("배송지 저장이 완료되었습니다.")
+        }).catch(res => {
+            $('.delivery__add').hide();
+            alert("배송지 저장에 실패했습니다.")
+        });
+    });
+
+    $(document).on("click", "#daumPostcode", () => {
+        new daum.Postcode({
+            oncomplete: (res) => {
+                // 검색 결과에서 우편번호와 주소 정보를 가져옵니다.
+                const zonecode = res.zonecode;
+                const address = res.address;
+
+                // 주소 정보를 해당 필드에 넣습니다.
+                document.getElementById('zipcode').value = zonecode; // 우편번호 필드
+                document.getElementById('addaddress').value = address; // 주소 필드
+            }
+        }).open();
+    });
+}

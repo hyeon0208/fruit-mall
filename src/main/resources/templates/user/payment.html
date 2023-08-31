@@ -35,7 +35,7 @@
                     <select name="where" id="where">
                         <option value="우리집(기본배송지)">우리집(기본배송지)</option>
                     </select>
-                    <button>+ 신규배송지</button>
+                    <button id="newDelivery">+ 신규배송지</button>
                 </label>
 
                 <label for="name">
@@ -83,30 +83,30 @@
 
                         <label for="name">
                             <p>이름</p>
-                            <input type="textbox" name="name" id="name">
+                            <input type="textbox" name="name" id="addname">
                         </label>
 
                         <label for="phone" class="phone">
                             <p>연락처</p>
-                            <input type="textbox" name="phone1" id="phone1">
-                            <input type="textbox" name="phone2" id="phone2">
+                            <input type="textbox" name="phone1" id="addphone1">
+                            <input type="textbox" name="phone2" id="addphone2">
                         </label>
 
                         <label for="add" class="add">
                             <p>주소</p>
-                            <button>우편번호</button>
-                            <input type="textbox" name="add" id="add" class="postalCode">
-                            <input type="textbox" name="add2" id="add2" class="postalCode2">
-                            <input type="textbox" name="add3" id="add3" class="postalCode2">
+                            <button id="daumPostcode">우편번호</button>
+                            <input type="textbox" name="add" id="zipcode" class="postalCode">
+                            <input type="textbox" name="add2" id="addaddress" class="postalCode2">
+                            <input type="textbox" name="add3" id="detailAddaddress" class="postalCode2">
                         </label>
 
 
                         <div class="delivery__add__buttons">
-                            <button class="delivery__add__cancel">
+                            <button class="delivery__add__cancel" id="delivery-add-cancel-btn">
                                 작성취소
                             </button>
 
-                            <button class="delivery__add__confirm">
+                            <button class="delivery__add__confirm" id="delivery_add_btn">
                                 배송지추가
                             </button>
                         </div>
