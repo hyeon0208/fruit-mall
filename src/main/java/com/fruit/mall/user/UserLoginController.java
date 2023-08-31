@@ -1,5 +1,6 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -29,10 +30,10 @@ public class UserLoginController {
     }
 
     @PostMapping("/user/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout(@Login SessionUser sessionUser, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
+        if (sessionUser != null) {
+            session.removeAttribute(LOGIN_USER);
         }
         return "redirect:/";
     }
