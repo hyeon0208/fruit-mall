@@ -6,6 +6,7 @@ import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.like.LikeService;
 import com.fruit.mall.product.RecentProductService;
 import com.fruit.mall.product.dto.RecentProduct;
+import com.fruit.mall.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -29,20 +30,22 @@ import static com.fruit.mall.product.RecentProductService.RECENT_PRODUCTS;
 public class SidebarAspect {
     private final LikeService likeService;
     private final CartService cartService;
+    private final UserService userService;
     private final RecentProductService recentProductService;
 
     @Around("execution(* com.fruit.mall..*Controller.*(..)) && args(sessionUser,model,..)")
     public Object addSidebar(ProceedingJoinPoint joinPoint, @Login SessionUser sessionUser, Model model) throws Throwable {
         if (sessionUser != null) {
-            int likesCount = likeService.countLikesByUserId(sessionUser.getUserIdNo());
-            model.addAttribute("likesCount", likesCount);
+            Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
+            int likesCount = likeService.countLikesByUserId(userId);
+            int userCartsCount = cartService.countCartByUserId(userId);
 
-            int userCartsCount = cartService.countCartByUserId(sessionUser.getUserIdNo());
+            model.addAttribute("userId", userId);
+            model.addAttribute("likesCount", likesCount);
             model.addAttribute("userCartsCount", userCartsCount);
         }
 
-        HttpServletRequest request =
-                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         List<RecentProduct> recentProducts = recentProductService.getRecentProductsFromCookie(request);
         if (recentProducts != null) {
             model.addAttribute(RECENT_PRODUCTS, recentProducts);

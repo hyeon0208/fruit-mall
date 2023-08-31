@@ -17,5 +17,7 @@ public interface UserMapper {
 
     String selectUserNameByUserName(String user_name);
 
+    Long selectUserIdNByEmail(@Param("user_email") String user_email);
+
     void updateNewPassword(@Param("user_email")String user_email, @Param("user_pwd")String user_pwd);
 }

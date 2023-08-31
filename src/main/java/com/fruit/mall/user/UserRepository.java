@@ -35,6 +35,11 @@ public class UserRepository implements UserMapper {
     }
 
     @Override
+    public Long selectUserIdNByEmail(String user_email) {
+        return userMapper.selectUserIdNByEmail(user_email);
+    }
+
+    @Override
     public void updateNewPassword(String user_email, String user_pwd) {
         userMapper.updateNewPassword(user_email, user_pwd);
     }

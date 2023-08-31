@@ -136,12 +136,12 @@
                             <button th:if="${session.loginUser != null}"
                                     th:classappend="${product.liked} ? 'filled' : ''"
                                     th:data-product-id="${product.productId}"
-                                    th:data-user-id="${session.loginUser.userIdNo}" class="material-icons red__heart"
+                                    th:data-user-id="${userId}" class="material-icons red__heart"
                                     th:value="${product.liked} ? '1' : '0'">favorite</button>
                             <a class="material-symbols-outlined addCartBtn"
                                data-btn-status="0"
                                th:data-product-id="${product.productId}"
-                               th:data-user-id="${session.loginUser != null ? session.loginUser.userIdNo : 0}">shopping_cart</a>
+                               th:data-user-id="${session.loginUser != null ? userId : 0}">shopping_cart</a>
                         </div>
                     </li>
                 </th:block>

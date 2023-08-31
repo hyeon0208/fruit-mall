@@ -16,7 +16,7 @@
                     <button th:if="${session.loginUser != null}"
                             th:classappend="${productDetailForm.liked} ? 'filled' : ''"
                             th:data-product-id="${productId}"
-                            th:data-user-id="${session.loginUser.userIdNo}" class="material-icons red__heart"
+                            th:data-user-id="${userId}" class="material-icons red__heart"
                             th:value="${productDetailForm.liked} ? '1' : '0'">favorite</button>
                 </div>
 
@@ -69,7 +69,7 @@
                     <button id="addDetailToCartBtn"
                             data-btn-status="0"
                             th:data-cart-product-id="${productId}"
-                            th:data-user-id="${session.loginUser != null ? session.loginUser.userIdNo : 0}">장바구니</button>
+                            th:data-user-id="${session.loginUser != null ? userId : 0}">장바구니</button>
                     <button th:if="${session.loginUser != null}" id="goPaymentOneBtn">구매하기</button>
                     <button th:if="${session.loginUser == null}"id="redirectLoginBtn">구매하기</button>
                 </div>

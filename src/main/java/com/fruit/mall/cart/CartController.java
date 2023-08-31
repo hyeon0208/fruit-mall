@@ -7,6 +7,7 @@ import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
+import com.fruit.mall.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,13 @@ import java.util.Optional;
 public class CartController {
     private final CartService cartService;
     private final ProductService productService;
+    private final UserService userService;
 
     @GetMapping("/user/cart")
     public String loginUserCart(@Login SessionUser sessionUser, Model model) {
         if (sessionUser != null) {
-            List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(sessionUser.getUserIdNo());
+            Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
+            List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(userId);
             model.addAttribute("cartAndImages", cartAndImages);
         }
         return "user/cart";
@@ -66,13 +69,14 @@ public class CartController {
     @ResponseBody
     public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody Map<String, Object> localStorage) {
         List<Map<String, Object>> localCarts = (List<Map<String, Object>>) localStorage.get("localCart");
+        Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
         if (!localCarts.isEmpty()) {
             for (Map<String, Object> localCart : localCarts) {
                 Map<String, Object> productMap = (Map<String, Object>) localCart.get("product");
                 Long productId = Long.valueOf((Integer) productMap.get("productId"));
                 int productCount = (int) productMap.get("productCount");
                 Cart lcart = Cart.builder()
-                        .userIdNo(sessionUser.getUserIdNo())
+                        .userIdNo(userId)
                         .productId(productId)
                         .productCount(productCount)
                         .build();

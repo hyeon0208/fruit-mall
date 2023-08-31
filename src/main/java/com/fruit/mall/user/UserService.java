@@ -42,6 +42,10 @@ public class UserService {
         return userRepository.selectUserNameByUserName(user_name);
     }
 
+    public Long selectUserIdNByEmail(String email) {
+        return userRepository.selectUserIdNByEmail(email);
+    }
+
     public void updateNewPassword(String user_email, String user_pwd) {
         userRepository.updateNewPassword(user_email, passwordEncoder.encode(user_pwd));
     }
