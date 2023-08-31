@@ -44,6 +44,14 @@ $(() => {
         });
     });
 
+    $('#ask').change((e) => {
+        if ($(e.currentTarget).val() == "직접입력") {
+            $('#customAsk').show();
+        } else {
+            $('#customAsk').hide();
+        }
+    });
+
     clickDeliveryModal();
 });
 
