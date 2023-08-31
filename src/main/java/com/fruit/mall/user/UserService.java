@@ -1,5 +1,6 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.term.Term;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +21,13 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+    public Long getUserIdFromSession(SessionUser sessionUser) {
+        if (sessionUser != null) {
+            return userRepository.selectUserIdNByEmail(sessionUser.getEmail());
+        }
+        return null;
     }
 
     public void insertUser(User user) {

@@ -4,6 +4,7 @@ import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
+import com.fruit.mall.user.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final UserService userService;
 
     public PageInfo<Product> getProducts(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
@@ -31,17 +33,12 @@ public class ProductService {
         return new PageInfo<>(products);
     }
 
-    public PageInfo<ProductAndImageInfo> getProductsAndImageByFilter(int pageNum, int pageSize, String category, String searchCond, SessionUser sessionUser) {
+    public PageInfo<ProductAndImageInfo> getProductsAndImageByFilter(int pageNum, int pageSize, String category, String searchCond, Long userId) {
         PageHelper.startPage(pageNum, pageSize, "PRODUCT_ID DESC");
-        List<ProductAndImageInfo> productAndImageInfos = null;
-        if (sessionUser != null) {
-            productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond, sessionUser.getUserIdNo());
-        }
-        if (sessionUser == null) {
-            productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond, null);
-        }
+        List<ProductAndImageInfo> productAndImageInfos = productRepository.selectProductAndImageByFilter(category, searchCond, userId);
         return new PageInfo<>(productAndImageInfos);
     }
+
 
     public String getUpdatedDescription(String description, String editorFirebaseImageUrl, String blobUrl) {
         String patternString = "<img([^>]*)src=[\"']" + Pattern.quote(blobUrl) + "[\"']([^>]*)>";
@@ -83,11 +80,8 @@ public class ProductService {
         return productRepository.countSoldOutProducts();
     }
 
-    public ProductDetailForm selectProductDetailByProductId(Long id, SessionUser sessionUser) {
-        if (sessionUser != null) {
-            return productRepository.selectProductDetailByProductId(id, sessionUser.getUserIdNo());
-        }
-        return productRepository.selectProductDetailByProductId(id, null);
+    public ProductDetailForm selectProductDetailByProductId(Long productId, Long userId) {
+        return productRepository.selectProductDetailByProductId(productId, userId);
     }
 
     public AddedProductToCartByNoLoginDto selectAddedProductByProductId(Long id) {

@@ -63,7 +63,7 @@ function showMainProductList() {
         const products = res.data.productAndImageInfoPageInfo.list;
         const pageInfo = res.data.productAndImageInfoPageInfo;
         const category = res.data.category;
-        const loginUser = res.data.loginUser;
+        const loginUser = res.data.userId;
 
         $('.categoryBtn-user').each((i, e) => {
             const btn = $(e);
@@ -90,7 +90,7 @@ function showMainProductList() {
                 favoriteButton = $("<button>")
                     .addClass("material-icons red__heart")
                     .attr('value', product.liked ? '1' : '0')
-                    .attr('data-user-id', loginUser.userIdNo) // Assuming 'loginUser' has a 'userIdNo' property
+                    .attr('data-user-id', loginUser) // Assuming 'loginUser' has a 'userIdNo' property
                     .text("favorite");
 
                 // If 'liked' property is true, add 'filled' class
@@ -108,7 +108,7 @@ function showMainProductList() {
                 .addClass("material-symbols-outlined addCartBtn")
                 .attr('data-btn-status', '0')
                 .attr('data-product-id', product.productId)
-                .attr('data-user-id', loginUser ? loginUser.userIdNo : 0)
+                .attr('data-user-id', loginUser ? loginUser : 0)
                 .text("shopping_cart");
 
             return $("<li>")

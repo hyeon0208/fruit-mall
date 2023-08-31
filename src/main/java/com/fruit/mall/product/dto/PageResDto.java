@@ -11,7 +11,7 @@ public class PageResDto {
     private PageInfo<ProductAndImageInfo> productAndImageInfoPageInfo;
     private String status;
     private String category;
-    private SessionUser loginUser;
+    private Long userId;
 
     public PageResDto(PageInfo<Product> pageInfo, String status, String category) {
         this.productPageInfo = pageInfo;
@@ -19,9 +19,9 @@ public class PageResDto {
         this.category = category;
     }
 
-    public PageResDto(PageInfo<ProductAndImageInfo> pageInfo, String category, SessionUser loginUser) {
+    public PageResDto(PageInfo<ProductAndImageInfo> pageInfo, String category, Long userId) {
         this.productAndImageInfoPageInfo = pageInfo;
         this.category = category;
-        this.loginUser = loginUser;
+        this.userId = userId;
     }
 }
