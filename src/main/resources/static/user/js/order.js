@@ -28,6 +28,22 @@ $(() => {
     $("#paymentExpectedPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
     $("#paymentPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
 
+    $('#where').change((e) => {
+        const selectedDeliveryName = $(e.currentTarget).val();
+        console.log(selectedDeliveryName)
+
+        axios({
+            method: "get",
+            url: `/delivery/get/${encodeURIComponent(selectedDeliveryName)}`
+        }).then(res => {
+            const delivery = res.data;
+            $('#name').val(delivery.userName);
+            $('#phone1').val(delivery.phoneNumber);
+            $('#add').val(delivery.zipcode);
+            $('#add2').val(delivery.address);
+        });
+    });
+
     clickDeliveryModal();
 });
 

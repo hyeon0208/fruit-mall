@@ -11,4 +11,6 @@ public interface DeliveryMapper {
     void insertDelivery(Delivery delivery);
 
     List<DeliveryResDto> deliveryAllByUserId(@Param("userIdNo") Long userIdNo);
+
+    DeliveryResDto selectOneByUserIdAndDeliveryName(@Param("userIdNo") Long userIdNo, @Param("deliveryName") String deliveryName);
 }

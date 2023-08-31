@@ -12,4 +12,10 @@
         FROM delivery
         WHERE USER_ID_NO = #{userIdNo};
     </select>
+
+    <select id="selectOneByUserIdAndDeliveryName" resultType="com.fruit.mall.delivery.dto.DeliveryResDto">
+        SELECT *
+        FROM delivery
+        WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_NAME = #{deliveryName};
+    </select>
 </mapper>

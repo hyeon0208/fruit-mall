@@ -28,4 +28,8 @@ public class DeliveryService {
     public List<DeliveryResDto> deliveryAllByUserId(Long userIdNo) {
         return deliveryRepository.deliveryAllByUserId(userIdNo);
     }
+
+    public DeliveryResDto selectOneByUserIdAndDeliveryName(Long userIdNo, String deliveryName) {
+        return deliveryRepository.selectOneByUserIdAndDeliveryName(userIdNo, deliveryName);
+    }
 }

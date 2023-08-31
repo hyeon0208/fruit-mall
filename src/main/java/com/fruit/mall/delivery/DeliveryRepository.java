@@ -20,4 +20,9 @@ public class DeliveryRepository implements DeliveryMapper {
     public List<DeliveryResDto> deliveryAllByUserId(Long userIdNo) {
         return deliveryMapper.deliveryAllByUserId(userIdNo);
     }
+
+    @Override
+    public DeliveryResDto selectOneByUserIdAndDeliveryName(Long userIdNo, String deliveryName) {
+        return deliveryMapper.selectOneByUserIdAndDeliveryName(userIdNo, deliveryName);
+    }
 }
