@@ -60,14 +60,11 @@ function clickDeliveryModal() {
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
-            if (res.data == "success") {
-                $('.delivery__add').hide();
-                alert("배송지 저장이 완료되었습니다.");
-            } else {
-                alert(res.data)
-            }
-        }).catch(error => {
-            alert("배송지 저장에 실패 했습니다");
+            $('.delivery__add').hide();
+            alert("배송지 저장이 완료되었습니다.")
+        }).catch(res => {
+            $('.delivery__add').hide();
+            alert("배송지 저장에 실패했습니다.")
         });
     });
 

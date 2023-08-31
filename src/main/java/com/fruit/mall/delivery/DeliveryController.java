@@ -5,8 +5,6 @@ import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,12 +17,7 @@ public class DeliveryController {
 
     @PostMapping("/delivery/add")
     @ResponseBody
-    public String insertDelivery(@Login SessionUser sessionUser, @Validated @RequestBody Delivery delivery, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return bindingResult.getFieldError().getDefaultMessage();
-        }
-
+    public String insertDelivery(@Login SessionUser sessionUser, @RequestBody Delivery delivery) {
         Long userId = userService.selectUserIdNByEmail(sessionUser.getEmail());
         deliveryService.insertDelivery(userId, delivery);
         return "success";
