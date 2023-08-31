@@ -1,5 +1,6 @@
 package com.fruit.mall.admin;
 
+import com.fruit.mall.config.SessionAdmin;
 import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -36,15 +37,15 @@ public class AdminLoginController {
             return "fail";
         }
         HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_ADMIN, new SessionUser(loginAdmin));
+        session.setAttribute(LOGIN_ADMIN, new SessionAdmin(loginAdmin));
         return "success";
     }
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
+        if (session.getAttribute(LOGIN_ADMIN) != null) {
+            session.removeAttribute(LOGIN_ADMIN);
         }
         return "redirect:/admin/login";
     }
