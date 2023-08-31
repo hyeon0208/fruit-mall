@@ -83,7 +83,7 @@ function clickDeliveryModal() {
                 alert(res.data)
             }
         }).catch(error => {
-            alert(error.response.data.message);
+            alert(JSON.stringify(error.response.data));
         });
     });
 

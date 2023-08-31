@@ -17,7 +17,7 @@ public class DeliveryService {
         DeliveryResDto findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, delivery.getDeliveryName());
         String findName = findDelivery.getDeliveryName();
         if (findName.equals(delivery.getDeliveryName())) {
-            throw new RuntimeException("배송지 이름은 중복될수 없습니다.");
+            throw new IllegalArgumentException("배송지 이름은 중복될수 없습니다.");
         }
 
         Delivery newDelivery = Delivery.builder()
