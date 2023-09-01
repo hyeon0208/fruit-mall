@@ -52,6 +52,10 @@ public class CartService {
         cartRepository.deleteProductToCart(cartId);
     }
 
+    public void deleteCartByUserId(Long userIdNo) {
+        cartRepository.deleteCartByUserId(userIdNo);
+    }
+
     public List<CartAndImageDto> selectCartAndImageByUserId(Long userIdNo) {
         return cartRepository.selectCartAndImageByUserId(userIdNo);
     }

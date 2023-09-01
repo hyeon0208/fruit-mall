@@ -33,6 +33,11 @@ public class CartRepository implements CartMapper {
     }
 
     @Override
+    public void deleteCartByUserId(Long userIdNo) {
+        cartMapper.deleteCartByUserId(userIdNo);
+    }
+
+    @Override
     public List<CartAndImageDto> selectCartAndImageByUserId(Long userIdNo) {
         return cartMapper.selectCartAndImageByUserId(userIdNo);
     }

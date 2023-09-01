@@ -97,4 +97,11 @@ public class CartController {
         cartService.deleteProductToCart(cartId);
         return "/user/cart";
     }
+
+    @DeleteMapping("/cart/delete/pay/success/{userIdNo}")
+    @ResponseBody
+    public String deleteCartByUserId(@PathVariable Long userIdNo) {
+        cartService.deleteCartByUserId(userIdNo);
+        return "success";
+    }
 }

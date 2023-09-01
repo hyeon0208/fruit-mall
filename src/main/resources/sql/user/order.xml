@@ -3,8 +3,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fruit.mall.orders.OrderMapper">
+    <insert id="insertOrder" parameterType="com.fruit.mall.orders.Orders" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO orders (USER_ID_NO, PAYMENT_METHOD, ORDER_PRICE, ORDER_COUNT, RECEIVER_NAME, PHONE_NUMBER, ZIPCODE,
+                            ADDRESS, ORDER_REQUIRED, ORDER_STATUS)
+        VALUES (
+                #{userIdNo},
+                #{paymentMethod},
+                #{orderPrice},
+                #{orderCount},
+                #{receiverName},
+                #{phoneNumber},
+                #{zipcode},
+                #{address},
+                #{orderRequired},
+                #{orderStatus}
+               );
+    </insert>
+
     <select id="selectOneOrderInfoByProductId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
         SELECT
+            p.PRODUCT_ID,
             p.PRODUCT_NAME,
             p.PRODUCT_PRICE,
             #{productCount} as PRODUCT_COUNT,
@@ -24,6 +42,7 @@
 
     <select id="selectOrderInfosByProductId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
         SELECT
+            p.PRODUCT_ID,
             p.PRODUCT_NAME,
             c.PRODUCT_PRICE,
             c.PRODUCT_COUNT,

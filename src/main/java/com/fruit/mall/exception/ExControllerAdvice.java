@@ -17,6 +17,6 @@ public class ExControllerAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler
     public ErrorResult globalError(Exception e) {
-        return new ErrorResult("SERVER_EXCEPTION", e.getMessage());
+        return new ErrorResult("SERVER_EXCEPTION", "내부 오류 발생");
     }
 }

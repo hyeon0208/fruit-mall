@@ -26,11 +26,11 @@ $(() => {
         orderDeliveryFee = 3000;
     }
     $("#paymentExpectedPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
+    $("#paymentPrice").val(totalPrice - totalDiscount + orderDeliveryFee);
     $("#paymentPrice").text((totalPrice - totalDiscount + orderDeliveryFee).toLocaleString() + "원");
 
     $('#where').change((e) => {
         const selectedDeliveryName = $(e.currentTarget).val();
-        console.log(selectedDeliveryName)
 
         axios({
             method: "get",
@@ -54,7 +54,6 @@ $(() => {
 
     clickDeliveryModal();
 });
-
 
 $(document).on("click", "#전체동의", () => {
     const isChecked = $("#전체동의").prop("checked");

@@ -3790,10 +3790,7 @@ header .inner .main-menu .item .red .material-icons {
   padding: 8px 30px;
   cursor: pointer;
 }
-#payment .inner .paymentWrap .paymentButtons button:first-child {
-  background-color: #333;
-  color: #fff;
-}
+
 #payment .inner .paymentWrap .paymentBackground {
   margin-top: 50px;
   background-color: #f0f0f0;

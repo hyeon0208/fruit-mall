@@ -23,8 +23,8 @@
 
             <div class="box">
                 <img th:src="${products.get(0).imageUrl}" th:alt="${products.get(0).productName}">
-                <span th:if="${totalSize > 1}" th:text="|${products.get(0).productName}외 ${totalSize - 1}개의 상품을 주문합니다.|"></span>
-                <span th:if="${totalSize == 1}" th:text="|${products.get(0).productName} 상품을 주문합니다.|"></span>
+                <span id="orderProductNames" th:if="${totalSize > 1}" th:text="|${products.get(0).productName}외 ${totalSize - 1}개의 상품을 주문합니다.|"></span>
+                <span id="orderProductName" th:if="${totalSize == 1}" th:text="|${products.get(0).productName} 상품을 주문합니다.|"></span>
             </div>
 
             <p class="title">배송정보</p>
@@ -127,7 +127,7 @@
                 <th:block th:each="product : ${products}">
                 <tr>
                     <td>
-                        <div class="td_wrap">
+                        <div class="td_wrap" th:data-order-product-id="${product.productId}">
                             <img th:src="${product.imageUrl}" th:alt="${product.productName}">
 
                             <div class="txt">
@@ -207,63 +207,63 @@
                 </p>
 
                 <div class="paymentButtons">
-                    <button>신용카드</button>
-                    <button>휴대폰 결제</button>
-                    <button>실시간 계좌이체</button>
+                    <button id="cartPay">신용카드</button>
+                    <button id="phonePay">휴대폰 결제</button>
+                    <button id="kakaoPay">카카오페이</button>
                 </div>
 
-                <div class="paymentBackground">
-                    <div class="box1">
-                        <span>카드 구분</span>
+<!--                <div class="paymentBackground">-->
+<!--                    <div class="box1">-->
+<!--                        <span>카드 구분</span>-->
 
-                        <input type="radio" id="개인카드" name="개인카드" value="개인카드">
-                        <label for="개인카드">개인카드</label>
+<!--                        <input type="radio" id="개인카드" name="개인카드" value="개인카드">-->
+<!--                        <label for="개인카드">개인카드</label>-->
 
-                        <input type="radio" id="법인카드" name="법인카드" value="법인카드">
-                        <label for="법인카드">법인카드</label>
-                    </div>
+<!--                        <input type="radio" id="법인카드" name="법인카드" value="법인카드">-->
+<!--                        <label for="법인카드">법인카드</label>-->
+<!--                    </div>-->
 
-                    <div class="box2">
-                        <span>카드 선택</span>
+<!--                    <div class="box2">-->
+<!--                        <span>카드 선택</span>-->
 
-                        <select name="card" id="card">
-                            <option value="국민카드">국민카드</option>
-                            <option value="삼성카드">삼성카드</option>
-                            <option value="하나카드">하나카드</option>
-                            <option value="신한카드">신한카드</option>
-                            <option value="현대카드">현대카드</option>
-                        </select>
-                    </div>
+<!--                        <select name="card" id="card">-->
+<!--                            <option value="국민카드">국민카드</option>-->
+<!--                            <option value="삼성카드">삼성카드</option>-->
+<!--                            <option value="하나카드">하나카드</option>-->
+<!--                            <option value="신한카드">신한카드</option>-->
+<!--                            <option value="현대카드">현대카드</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
 
-                    <div class="box3">
-                        <span>할부 기간</span>
+<!--                    <div class="box3">-->
+<!--                        <span>할부 기간</span>-->
 
-                        <select name="howlong" id="howlong">
-                            <option value="일시불">일시불</option>
-                            <option value="2개월">2개월(무이자)</option>
-                            <option value="3개월">3개월(무이자)</option>
-                            <option value="4개월">4개월</option>
-                            <option value="5개월">5개월</option>
-                            <option value="6개월">6개월</option>
-                            <option value="7개월">7개월</option>
-                            <option value="8개월">8개월</option>
-                            <option value="9개월">9개월</option>
-                            <option value="10개월">10개월</option>
-                            <option value="11개월">11개월</option>
-                            <option value="12개월">12개월</option>
+<!--                        <select name="howlong" id="howlong">-->
+<!--                            <option value="일시불">일시불</option>-->
+<!--                            <option value="2개월">2개월(무이자)</option>-->
+<!--                            <option value="3개월">3개월(무이자)</option>-->
+<!--                            <option value="4개월">4개월</option>-->
+<!--                            <option value="5개월">5개월</option>-->
+<!--                            <option value="6개월">6개월</option>-->
+<!--                            <option value="7개월">7개월</option>-->
+<!--                            <option value="8개월">8개월</option>-->
+<!--                            <option value="9개월">9개월</option>-->
+<!--                            <option value="10개월">10개월</option>-->
+<!--                            <option value="11개월">11개월</option>-->
+<!--                            <option value="12개월">12개월</option>-->
 
-                        </select>
-                    </div>
+<!--                        </select>-->
+<!--                    </div>-->
 
-                    <div class="box4">
-                        <span class="hidden">hidden</span>
+<!--                    <div class="box4">-->
+<!--                        <span class="hidden">hidden</span>-->
 
-                        <input id="paymentMethodChk" type="checkbox" checked>
-                        <span>선택한 결제방법을 다음에도 사용</span>
-                    </div>
+<!--                        <input id="paymentMethodChk" type="checkbox" checked>-->
+<!--                        <span>선택한 결제방법을 다음에도 사용</span>-->
+<!--                    </div>-->
 
 
-                </div>
+<!--                </div>-->
             </div>
 
             <p class="title">약관동의</p>
@@ -285,13 +285,12 @@
                     <input type="checkbox" id="2번" name="2번" value="2번">
                     <label for="2번">주문할 상품 설명에 명시된 내용과 사용 조건을 확인하였으며, 취소/환불 규정에 동의합니다.</label>
                 </div>
-
             </div>
 
 
             <div class="buttons">
-                <button>결제취소</button>
-                <button>결제하기</button>
+                <button id="pay__cancel">결제취소</button>
+                <button id="pay__do">결제하기</button>
             </div>
 
             <div id="aside">

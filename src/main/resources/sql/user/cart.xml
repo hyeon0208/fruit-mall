@@ -22,6 +22,10 @@
         DELETE FROM cart WHERE CART_ID = #{cartId};
     </delete>
 
+    <delete id="deleteCartByUserId">
+        DELETE FROM cart WHERE USER_ID_NO = #{userIdNo};
+    </delete>
+
     <select id="countCartByUserId" resultType="int">
         SELECT COUNT(*)
         FROM cart

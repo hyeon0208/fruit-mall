@@ -9,20 +9,29 @@ import java.sql.Timestamp;
 public class Orders {
     private Long orderId;
     private Long userIdNo;
-    private Long deliveryId;
-    private String paymentMethod;
     private int orderPrice;
+    private int orderCount;
+    private String receiverName;
+    private String phoneNumber;
+    private int zipcode;
+    private String address;
     private String orderRequired;
     private String orderStatus;
+    private String paymentMethod;
     private Timestamp orderDate;
 
     @Builder
-    public Orders(Long userIdNo, Long deliveryId, String paymentMethod, int orderPrice, String orderRequired, String orderStatus) {
+    public Orders(Long userIdNo, int orderPrice, int orderCount, String receiverName, String phoneNumber, int zipcode, String address, String orderRequired, String orderStatus, String paymentMethod, Timestamp orderDate) {
         this.userIdNo = userIdNo;
-        this.deliveryId = deliveryId;
-        this.paymentMethod = paymentMethod;
         this.orderPrice = orderPrice;
+        this.orderCount = orderCount;
+        this.receiverName = receiverName;
+        this.phoneNumber = phoneNumber;
+        this.zipcode = zipcode;
+        this.address = address;
         this.orderRequired = orderRequired;
         this.orderStatus = orderStatus;
+        this.paymentMethod = paymentMethod;
+        this.orderDate = orderDate;
     }
 }
