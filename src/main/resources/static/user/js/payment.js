@@ -130,6 +130,23 @@ $(document).on("click", ".paymentButtons button", (e) => {
     });
 });
 
+$(document).on("click", "#pay__cancel", () => {
+    $(".payment__cancel").show();
+
+    $('.payment__cancel #paypage-cancel').click(() => {
+        $('.payment__cancel').hide();
+        $(".payment__cancel__confirm").show()
+        $('.payment__cancel__confirm button').click(() => {
+            $('.payment__cancel__confirm').hide();
+            window.location.href = "/";
+        });
+    });
+
+    $('.payment__cancel #paypage-continue').click(() => {
+        $('.payment__cancel').hide();
+    });
+});
+
 
 function createOrderNum() {
     const date = new Date();
