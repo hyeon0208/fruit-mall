@@ -98,10 +98,10 @@ public class CartController {
         return "/user/cart";
     }
 
-    @DeleteMapping("/cart/delete/pay/success/{userIdNo}")
+    @PostMapping("/cart/delete/pay/success")
     @ResponseBody
-    public String deleteCartByUserId(@PathVariable Long userIdNo) {
-        cartService.deleteCartByUserId(userIdNo);
+    public String deleteCartByUserId(@RequestBody PaymentProductDto paymentProductDto) {
+        cartService.deleteCartByUserIdAndProductId(paymentProductDto.getUserIdNo(), paymentProductDto.getProductIds());
         return "success";
     }
 }

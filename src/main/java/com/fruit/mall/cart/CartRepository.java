@@ -2,6 +2,7 @@ package com.fruit.mall.cart;
 
 import com.fruit.mall.cart.dto.CartAndImageDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class CartRepository implements CartMapper {
     }
 
     @Override
-    public void deleteCartByUserId(Long userIdNo) {
-        cartMapper.deleteCartByUserId(userIdNo);
+    public void deleteCartByUserIdAndProductId(Long userIdNo, Long productId) {
+        cartMapper.deleteCartByUserIdAndProductId(userIdNo, productId);
     }
 
     @Override

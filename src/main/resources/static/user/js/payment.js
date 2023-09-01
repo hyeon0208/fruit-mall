@@ -88,9 +88,14 @@ $(() =>{
                             dataType: "json",
                             headers: {'Content-Type': 'application/json'}
                         }).then(res => {
+                            let productIds = orders.map(order => order.productId);
                             axios({
-                                url: `/cart/delete/pay/success/${res.data}`,
-                                method: "delete"
+                                url: `/cart/delete/pay/success`,
+                                method: "post",
+                                data: {
+                                    userIdNo: res.data,
+                                    productIds: productIds
+                                }
                             })
                             let msg = '결제가 완료되었습니다.';
                             msg += '고유ID : ' + rsp.imp_uid;
