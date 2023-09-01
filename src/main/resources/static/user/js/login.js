@@ -34,11 +34,11 @@ $(document).ready(() => {
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
             if (res.data === "success") {
-                let localCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+                let localCarts = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
                 axios({
                     method: "post",
                     url: "/user/update-cart",
-                    data: { localCart },
+                    data: { localCarts },
                     headers: {'Content-Type': 'application/json'}
                 }).then(() => {
                     window.location.replace("/");

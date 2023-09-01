@@ -1,8 +1,6 @@
 package com.fruit.mall.cart;
 
-import com.fruit.mall.cart.dto.CartAddReqDto;
-import com.fruit.mall.cart.dto.CartAndImageDto;
-import com.fruit.mall.cart.dto.CartCntUpdateDto;
+import com.fruit.mall.cart.dto.*;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
@@ -64,18 +62,14 @@ public class CartController {
 
     @PostMapping("/user/update-cart")
     @ResponseBody
-    public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody Map<String, Object> localStorage) {
-        List<Map<String, Object>> localCarts = (List<Map<String, Object>>) localStorage.get("localCart");
-        Long userId = sessionUser.getUserIdNo();
-        if (!localCarts.isEmpty()) {
-            for (Map<String, Object> localCart : localCarts) {
-                Map<String, Object> productMap = (Map<String, Object>) localCart.get("product");
-                Long productId = Long.valueOf((Integer) productMap.get("productId"));
-                int productCount = (int) productMap.get("productCount");
+    public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody LocalStorageDto localStorageDto) {
+        if (localStorageDto.getLocalCarts() != null) {
+            for (LocalCart localCart : localStorageDto.getLocalCarts()) {
+                System.out.println("localCart = " + localCart);
                 Cart lcart = Cart.builder()
-                        .userIdNo(userId)
-                        .productId(productId)
-                        .productCount(productCount)
+                        .userIdNo(sessionUser.getUserIdNo())
+                        .productId(localCart.getProduct().getProductId())
+                        .productCount(localCart.getProduct().getProductCount())
                         .build();
                 cartService.addProductToCart(lcart);
             }
