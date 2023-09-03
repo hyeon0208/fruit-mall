@@ -100,8 +100,8 @@ public class CartController {
 
     @PostMapping("/cart/delete/pay/success")
     @ResponseBody
-    public String deleteCartByUserId(@RequestBody PaymentProductDto paymentProductDto) {
-        cartService.deleteCartByUserIdAndProductId(paymentProductDto.getUserIdNo(), paymentProductDto.getProductIds());
+    public String deleteCartByUserId(@Login SessionUser sessionUser, @RequestBody List<Long> productIds) {
+        cartService.deleteCartByUserIdAndProductId(sessionUser.getUserIdNo(), productIds);
         return "success";
     }
 }

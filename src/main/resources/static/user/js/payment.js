@@ -89,20 +89,18 @@ $(() =>{
                             headers: {'Content-Type': 'application/json'}
                         }).then(res => {
                             let productIds = orders.map(order => order.productId);
-                            axios({
-                                url: `/cart/delete/pay/success`,
+                            return axios({
+                                url: "/cart/delete/pay/success",
                                 method: "post",
-                                data: {
-                                    userIdNo: res.data,
-                                    productIds: productIds
-                                }
+                                data: productIds
+                            }).then(res => {  // 새로운 then 추가
+                                let msg = '결제가 완료되었습니다.';
+                                msg += '고유ID : ' + rsp.imp_uid;
+                                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                                msg += '결제 금액 : ' + rsp.paid_amount;
+                                msg += '카드 승인번호 : ' + rsp.apply_num;
+                                alert(msg)
                             })
-                            let msg = '결제가 완료되었습니다.';
-                            msg += '고유ID : ' + rsp.imp_uid;
-                            msg += '상점 거래ID : ' + rsp.merchant_uid;
-                            msg += '결제 금액 : ' + rsp.paid_amount;
-                            msg += '카드 승인번호 : ' + rsp.apply_num;
-                            alert(msg)
                         }).catch(error => {
                             alert("주문정보 저장을 실패 했습니다.")
                         });
