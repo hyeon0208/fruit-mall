@@ -46,7 +46,6 @@ public class OrderController {
     @PostMapping("/user/order/add")
     @ResponseBody
     public Long addOrder(@Login SessionUser sessionUser, @RequestBody List<OrderSaveDto> orderSaveDtos) {
-        System.out.println("orderSaveDtos = " + orderSaveDtos);
         Long userId = sessionUser.getUserIdNo();
         List<Long> orderIds = orderService.insertOrder(userId, orderSaveDtos);
         orderProductService.insertOrderProduct(orderIds, orderSaveDtos);
