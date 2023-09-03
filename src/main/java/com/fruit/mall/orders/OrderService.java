@@ -1,5 +1,7 @@
 package com.fruit.mall.orders;
 
+import com.fruit.mall.orderProduct.OrderProduct;
+import com.fruit.mall.orderProduct.OrderProductRepository;
 import com.fruit.mall.orders.dto.OrderReqDto;
 import com.fruit.mall.orders.dto.OrderSaveDto;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final OrderProductRepository orderProductRepository;
 
-    public List<Long> insertOrder(Long userId, List<OrderSaveDto> orderSaveDtos) {
-        List<Long> orderIds = new ArrayList<>();
+    public void insertOrder(Long userId, List<OrderSaveDto> orderSaveDtos) {
         for (OrderSaveDto orderSaveDto : orderSaveDtos) {
             Orders orders = Orders.builder()
                     .userIdNo(userId)
@@ -30,11 +32,18 @@ public class OrderService {
                     .orderStatus(orderSaveDto.getOrderStatus())
                     .paymentMethod(orderSaveDto.getPaymentMethod())
                     .build();
-
             orderRepository.insertOrder(orders);
-            orderIds.add(orders.getOrderId());
+
+            OrderProduct orderProduct = OrderProduct.builder()
+                    .orderId(orders.getOrderId())
+                    .productId(orderSaveDto.getProductId())
+                    .orderNumber(orderSaveDto.getOrderNumber())
+                    .orderCount(orderSaveDto.getOrderCount())
+                    .orderPrice(orderSaveDto.getOrderPrice())
+                    .build();
+
+            orderProductRepository.insertOrderProduct(orderProduct);
         }
-        return orderIds;
     }
 
     public OrderReqDto selectOneOrderInfoByProductId(Long productId, int productCount) {

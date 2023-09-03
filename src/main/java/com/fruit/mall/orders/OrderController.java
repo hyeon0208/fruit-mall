@@ -45,11 +45,10 @@ public class OrderController {
 
     @PostMapping("/user/order/add")
     @ResponseBody
-    public Long addOrder(@Login SessionUser sessionUser, @RequestBody List<OrderSaveDto> orderSaveDtos) {
+    public String addOrder(@Login SessionUser sessionUser, @RequestBody List<OrderSaveDto> orderSaveDtos) {
         Long userId = sessionUser.getUserIdNo();
-        List<Long> orderIds = orderService.insertOrder(userId, orderSaveDtos);
-        orderProductService.insertOrderProduct(orderIds, orderSaveDtos);
-        return userId;
+        orderService.insertOrder(userId, orderSaveDtos);
+        return "success";
     }
 
     @PostMapping("/user/order/verify_iamport/{imp_uid}")
