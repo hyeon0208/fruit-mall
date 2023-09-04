@@ -11,4 +11,14 @@
         SELECT REVIEW_ID FROM review
         WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId}
     </select>
+
+    <select id="selectReviewsByProductId" resultType="com.fruit.mall.review.dto.ReviewResDto">
+        SELECT r.REVIEW_ID,
+               u.USER_NAME,
+               r.REVIEW_CONTENTS,
+               r.REVIEW_CREATED_AT
+        FROM review r
+        JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
+        WHERE PRODUCT_ID = #{productId}
+    </select>
 </mapper>

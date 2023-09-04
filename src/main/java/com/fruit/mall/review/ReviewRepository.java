@@ -1,7 +1,10 @@
 package com.fruit.mall.review;
 
+import com.fruit.mall.review.dto.ReviewResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -16,5 +19,10 @@ public class ReviewRepository implements ReviewMapper {
     @Override
     public Long selectReviewIdByUserIdAndProductId(Long userIdNo, Long productId) {
         return reviewMapper.selectReviewIdByUserIdAndProductId(userIdNo, productId);
+    }
+
+    @Override
+    public List<ReviewResDto> selectReviewsByProductId(Long productId) {
+        return reviewMapper.selectReviewsByProductId(productId);
     }
 }

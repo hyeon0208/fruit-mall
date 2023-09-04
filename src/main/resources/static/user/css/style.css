@@ -10,7 +10,8 @@
 
 #products .inner ul li .icons button.material-icons.red__heart,
 #products .inner ul li .icons button.material-symbols-outlined,
-#detail .red__heart {
+#detail .red__heart,
+#review .red__heart {
   border: none;
   background-color: transparent;
   padding: 0;
@@ -715,11 +716,13 @@
 #detail .detail__inner .box01 .right .right__txt01 h2 {
   font: 800 25px/1 "Nanum Gothic";
 }
-#detail .detail__inner .box01 .right .right__txt01 .red__heart {
+#detail .detail__inner .box01 .right .right__txt01 .red__heart,
+#review .detail__inner .box01 .right .right__txt01 .red__heart {
   color: #00000069;
 }
 
-#detail .detail__inner .box01 .right .right__txt01 .red__heart.filled {
+#detail .detail__inner .box01 .right .right__txt01 .red__heart.filled,
+#review .detail__inner .box01 .right .right__txt01 .red__heart.filled {
   color: red;
 }
 

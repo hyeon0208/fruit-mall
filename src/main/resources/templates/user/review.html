@@ -245,88 +245,32 @@
 
             <div class="box03">
                 <ul>
-                    <li>
-                        <span class="id">Chan****</span>
-                        <span class="date">2023. 07. 17</span>
+                    <li th:each="review : ${pageInfo.list}">
+                        <span class="id" th:text="${review.userName}"></span>
+                        <span class="date" th:text="${#dates.format(review.reviewCreatedAt,'yyyy.MM.dd')}"></span>
 
-                        <p>
-                            배송빨라서 좋았어요! <br>
-                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
-                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
-
-                            <button>답글달기</button>
-                        </p>
-                    </li>
-                    <li class="seller">
-                        <span class="id">판매자</span>
-                        <span class="date">2023. 07. 17</span>
-
-                        <p>
-                            고객님 소중한 리뷰 작성 감사합니다^^ <br>
-                            앞으로도 더 좋은 품질의 상품들로 찾아뵙겠습니다! <br>
-                            다음에도 또 이용해주세요~!
-
-                        </p>
-                    </li>
-                    <li>
-                        <span class="id">Chan****</span>
-                        <span class="date">2023. 07. 17</span>
-
-                        <p>
-                            배송빨라서 좋았어요! <br>
-                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
-                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
-
-                            <button>답글달기</button>
-                        </p>
-                    </li>
-                    <li>
-                        <span class="id">Chan****</span>
-                        <span class="date">2023. 07. 17</span>
-
-                        <p>
-                            배송빨라서 좋았어요! <br>
-                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
-                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
-
-                            <button>답글달기</button>
-                        </p>
-                    </li>
-                    <li>
-                        <span class="id">Chan****</span>
-                        <span class="date">2023. 07. 17</span>
-
-                        <p>
-                            배송빨라서 좋았어요! <br>
-                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
-                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
-
+                        <p th:text="${review.reviewContents}">
                             <button>답글달기</button>
                         </p>
                     </li>
                 </ul>
 
                 <div class="pagination">
-                    <a href="#" class="prev">
-                        <span class="material-symbols-outlined">
-                            chevron_left
-                        </span>
+                    <a th:if="${pageInfo.hasPreviousPage}"
+                       th:href="@{'/user/review/' + ${productId} + '?pageNum=' + ${pageInfo.prePage} + '&pageSize=' + ${pageInfo.pageSize}}" class="prev">
+                        <span class="material-symbols-outlined">chevron_left</span>
                     </a>
 
                     <p class="numbers">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">
-                            <span class="bold">4</span>
-                        </a>
-                        <a href="#">5</a>
+                        <th:block th:each="i : ${pageInfo.navigatepageNums}">
+                            <a th:href="@{'/user/review/' + ${productId} + '?pageNum=' + ${i}+ '&pageSize=' + ${pageInfo.pageSize}}"
+                               th:text="${i}" th:style="${i == pageInfo.pageNum} ? 'font-weight: bold; font-size: 16px;' : ''"></a>
+                        </th:block>
                     </p>
 
-                    <a href="#" class="next">
-                        <span class="material-symbols-outlined">
-                            chevron_right
-                        </span>
+                    <a th:if="${pageInfo.hasNextPage}"
+                       th:href="@{'/user/review/' + ${productId}+ '?pageNum=' +${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}" class="next">
+                        <span class="material-symbols-outlined">chevron_right</span>
                     </a>
                 </div>
             </div>
