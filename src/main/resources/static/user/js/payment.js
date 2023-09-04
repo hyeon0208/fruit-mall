@@ -93,13 +93,6 @@ $(() =>{
                                 url: "/cart/delete/pay/success",
                                 method: "post",
                                 data: productIds
-                            }).then(res => {  // 새로운 then 추가
-                                let msg = '결제가 완료되었습니다.';
-                                msg += '고유ID : ' + rsp.imp_uid;
-                                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                                msg += '결제 금액 : ' + rsp.paid_amount;
-                                msg += '카드 승인번호 : ' + rsp.apply_num;
-                                alert(msg)
                             })
                         }).catch(error => {
                             alert("주문정보 저장을 실패 했습니다.")
@@ -108,6 +101,25 @@ $(() =>{
                 }).catch(error => {
                     alert('결제에 실패하였습니다. ' + rsp.error_msg);
                 });
+                const quota = rsp.card_quota;
+                let quotaInfo;
+                const merchantUid = rsp.merchant_uid
+                const payMethod = getPayMethod(rsp.pay_method);
+                const payPrice = rsp.paid_amount;
+                if (quota === 0) {
+                    quotaInfo = "일시불"
+                } else {
+                    quotaInfo = quota + "개월"
+                }
+
+                let msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + merchantUid;
+                msg += '결제 금액 : ' + payPrice;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                alert(msg)
+
+                window.location.href=`/confirm/payment?quotaInfo=${quotaInfo}&merchantUid=${merchantUid}&payMethod=${payMethod}&payPrice=${payPrice}`;
             } else {
                 alert(rsp.error_msg);
             }
@@ -145,6 +157,15 @@ $(document).on("click", "#pay__cancel", () => {
     });
 });
 
+function getPayMethod(payMethod) {
+    if (payMethod == "point") {
+        return "포인트결제"
+    }
+    if (payMethod == "phone") {
+        return "휴대폰결제"
+    }
+    return "신용카드";
+}
 
 function createOrderNum() {
     const date = new Date();

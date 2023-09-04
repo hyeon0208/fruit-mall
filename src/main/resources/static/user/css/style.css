@@ -4011,4 +4011,101 @@ header .inner .main-menu .item .red .material-icons {
   color: #fff;
 }
 
+#payment_success {
+  margin-top: 120px;
+}
+#payment_success .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 147px;
+}
+#payment_success .inner h2 {
+  font: 700 30px/1 "Noto Sans";
+  margin-bottom: 52px;
+}
+#payment_success .inner .txt {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  font: 400 16px/1 "Noto Sans";
+  padding: 10px 0px;
+}
+#payment_success .inner .txt .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#payment_success .inner .txt .right p {
+  color: #a7a7a7;
+  font: 800 16px/1 "Noto Sans";
+}
+#payment_success .inner .txt .right p:nth-of-type(3) {
+  color: #333;
+}
+#payment_success .inner table {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 100px;
+}
+#payment_success .inner table tr {
+  border-bottom: 1px solid #a7a7a7;
+  height: 50px;
+}
+#payment_success .inner table tr:first-child {
+  border-top: 2px solid #333;
+}
+#payment_success .inner table tr:first-child td {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 40px 0px;
+}
+#payment_success .inner table tr:nth-of-type(3) td:nth-of-type(2) {
+  color: #ff7d04;
+}
+#payment_success .inner table tr:last-child {
+  border-bottom: 2px solid #333;
+}
+#payment_success .inner table tr td {
+  font-size: 16px;
+  vertical-align: top; /* 위 */
+  vertical-align: bottom; /* 아래 */
+  vertical-align: middle; /* 가운데 */
+  padding: 20px 0px;
+  font-weight: bold;
+}
+#payment_success .inner table tr td:nth-of-type(1) {
+  border-right: 1px solid #a7a7a7;
+}
+#payment_success .inner table tr:first-child td:first-child {
+  border-right: none;
+}
+#payment_success .inner table tr:last-child td:first-child {
+  border-right: none;
+}
+#payment_success .inner .success_button {
+  margin-bottom: 100px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+#payment_success .inner .success_button a button {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 50px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+}
+#payment_success .inner .success_button a:nth-of-type(2) button {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 50px;
+  cursor: pointer;
+  border: 1px solid #ff7d04;
+  background-color: #ff7d04;
+}
+
 /*# sourceMappingURL=style.css.map */

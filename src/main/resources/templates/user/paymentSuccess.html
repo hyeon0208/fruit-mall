@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+    <div id="payment_success">
+        <div class="inner">
+
+            <h2> 주문결제 </h2>
+
+            <div class="txt">
+                <div class="right">
+                    <p>01 장바구니</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <p>02 주문/결제</p>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                    <p>03 결제완료</p>
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <td colspan="2">주문 결제가 정상적으로 완료되었습니다.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>주문번호</td>
+                    <td>총 결제금액</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" th:text="${paymentInfoDto.merchantUid}">주문번호</td>
+                    <td th:text="|${#numbers.formatInteger(paymentInfoDto.payPrice, 3, 'COMMA')}원|">주문가격</td>
+                </tr>
+                <tr>
+                    <td th:if="${paymentInfoDto.payMethod == '신용카드'}" th:text="|${paymentInfoDto.payMethod} - ${paymentInfoDto.quotaInfo}|">신용카드 | 일시불</td>
+                    <td th:if="${paymentInfoDto.payMethod != '신용카드'}" th:text="${paymentInfoDto.payMethod}">결제방법</td>
+                </tr>
+            </table>
+
+            <div class="success_button">
+                <a href="/">
+                    <button>계속 쇼핑하기</button>
+                </a>
+
+                <a href="/user/mypage">
+                    <button>구매내역 보기</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="aside">
+        <div class="sidebar">
+            <ul>
+
+                <!-- 마이페이지 -->
+                <li>
+                    <a href="/user/mypage" th:unless="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p th:text="${session.loginUser.getName()} + 님"></p>
+                    </a>
+                    <a href="#" th:if="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p>손님</p>
+                    </a>
+                    <div class="line"></div>
+                </li>
+
+                <!-- 장바구니 -->
+                <li class="right__cart">
+                    <a href="/user/cart">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <p>장바구니</p>
+                        <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
+                        <div th:if="${session.loginUser == null}" id="localSideBarCartCount" th:data-login-user="${session.loginUser}" class="cart__count"></div>
+                    </a>
+                </li>
+
+                <!-- 찜 -->
+                <li class="right__favorite">
+                    <a href="#">
+                        <span class="material-icons">favorite</span>
+                        <p>찜</p>
+                        <div th:unless="${session.loginUser == null}" class="favorite__count" th:text="${likesCount}"></div>
+                        <div th:if="${session.loginUser == null}"></div>
+                    </a>
+                    <div class="line"></div>
+                </li>
+
+                <!-- 최근 본 상품 -->
+                <li class="last">
+                    <a href="#">
+                        <p>최근 본 상품</p>
+                        <tr th:each="product : ${recentProducts}">
+                            <a th:href="@{/user/detail/{id}(id=${product.productId})}">
+                                <td><img th:src="${product.imageUrl}"/></td>
+                            </a>
+                        </tr>
+                        <p id="TopBtn" style="text-align: center">맨위로</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</th:block>
+</html>
