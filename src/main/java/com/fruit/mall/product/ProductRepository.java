@@ -24,6 +24,16 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
+    public void updateProductStock(Long id, int orderCount) {
+        productMapper.updateProductStock(id, orderCount);
+    }
+
+    @Override
+    public int selectProductStock(Long id) {
+        return productMapper.selectProductStock(id);
+    }
+
+    @Override
     public void deleteProductById(Long id) {
         productMapper.deleteProductById(id);
     }

@@ -93,33 +93,34 @@ $(() =>{
                                 url: "/cart/delete/pay/success",
                                 method: "post",
                                 data: productIds
-                            })
+                            }).then(res => {
+                                const quota = rsp.card_quota;
+                                let quotaInfo;
+                                const merchantUid = rsp.merchant_uid
+                                const payMethod = getPayMethod(rsp.pay_method);
+                                const payPrice = rsp.paid_amount;
+
+                                if (quota === 0) {
+                                    quotaInfo = "일시불"
+                                } else {
+                                    quotaInfo = quota + "개월"
+                                }
+
+                                let msg = '결제가 완료되었습니다.';
+                                msg += '고유ID : ' + rsp.imp_uid;
+                                msg += '상점 거래ID : ' + merchantUid;
+                                msg += '결제 금액 : ' + payPrice;
+                                msg += '카드 승인번호 : ' + rsp.apply_num;
+                                alert(msg)
+                                window.location.href=`/confirm/payment?quotaInfo=${quotaInfo}&merchantUid=${merchantUid}&payMethod=${payMethod}&payPrice=${payPrice}`;
+                            });
                         }).catch(error => {
-                            alert("주문정보 저장을 실패 했습니다.")
+                            alert(JSON.stringify(error.response.data))
                         });
                     }
                 }).catch(error => {
                     alert('결제에 실패하였습니다. ' + rsp.error_msg);
                 });
-                const quota = rsp.card_quota;
-                let quotaInfo;
-                const merchantUid = rsp.merchant_uid
-                const payMethod = getPayMethod(rsp.pay_method);
-                const payPrice = rsp.paid_amount;
-                if (quota === 0) {
-                    quotaInfo = "일시불"
-                } else {
-                    quotaInfo = quota + "개월"
-                }
-
-                let msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + merchantUid;
-                msg += '결제 금액 : ' + payPrice;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-                alert(msg)
-
-                window.location.href=`/confirm/payment?quotaInfo=${quotaInfo}&merchantUid=${merchantUid}&payMethod=${payMethod}&payPrice=${payPrice}`;
             } else {
                 alert(rsp.error_msg);
             }

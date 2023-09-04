@@ -44,6 +44,10 @@ public class ProductService {
         return updatedDiscription;
     }
 
+    public int selectProductStock(Long id) {
+        return productRepository.selectProductStock(id);
+    }
+
     public void insertProduct(Product product) {
         productRepository.insertProduct(product);
     }

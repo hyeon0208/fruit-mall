@@ -4,11 +4,11 @@ import com.fruit.mall.orderProduct.OrderProduct;
 import com.fruit.mall.orderProduct.OrderProductRepository;
 import com.fruit.mall.orders.dto.OrderReqDto;
 import com.fruit.mall.orders.dto.OrderSaveDto;
+import com.fruit.mall.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +17,7 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderProductRepository orderProductRepository;
+    private final ProductRepository productRepository;
 
     public void insertOrder(Long userId, List<OrderSaveDto> orderSaveDtos) {
         for (OrderSaveDto orderSaveDto : orderSaveDtos) {
@@ -41,8 +42,8 @@ public class OrderService {
                     .orderCount(orderSaveDto.getOrderCount())
                     .orderPrice(orderSaveDto.getOrderPrice())
                     .build();
-
             orderProductRepository.insertOrderProduct(orderProduct);
+            productRepository.updateProductStock(orderSaveDto.getProductId(), orderSaveDto.getOrderCount());
         }
     }
 

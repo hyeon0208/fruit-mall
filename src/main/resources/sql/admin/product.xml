@@ -38,6 +38,18 @@
             PRODUCT_ID = #{productId}
     </update>
 
+    <update id="updateProductStock" parameterType="com.fruit.mall.product.Product">
+        UPDATE product
+        SET
+            PRODUCT_STOCK = GREATEST(0, PRODUCT_STOCK - #{orderCount}),
+            PRODUCT_SALE_STATUS = IF(GREATEST(0, PRODUCT_STOCK - #{orderCount}) = 0, '품절', PRODUCT_SALE_STATUS)
+        WHERE
+            PRODUCT_ID = #{productId}
+    </update>
+
+    <select id="selectProductStock" resultType="int">
+        SELECT PRODUCT_STOCK FROM product WHERE PRODUCT_ID = #{productId};
+    </select>
 
     <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall.product.Product">
         SELECT * FROM product WHERE PRODUCT_ID = #{productId};

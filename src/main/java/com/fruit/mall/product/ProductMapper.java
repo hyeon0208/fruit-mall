@@ -15,6 +15,10 @@ public interface ProductMapper {
 
     void updateProduct(Product product);
 
+    void updateProductStock(@Param("productId") Long id, @Param("orderCount") int orderCount);
+
+    int selectProductStock(@Param("productId") Long id);
+
     void deleteProductById(@Param("productId") Long id);
 
     ProductDetailForm selectProductDetailByProductId(@Param("productId") Long id, @Param("userIdNo") Long userIdNo);
