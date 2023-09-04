@@ -42,6 +42,11 @@ $(document).on("click", "#addDetailToCartBtn", () => {
     let product = $("#addDetailToCartBtn");
     const productId = product.data("cart-product-id");
     const userIdNo = product.data("user-id");
+    const curStock = $("#productStock").text().replace(/[^0-9]/g, '');
+    const productCount = parseInt($("#detailProductCnt").val());
+    if (curStock < productCount) {
+        return alert("재고 수량이 부족합니다.");
+    }
 
     if(product.attr("data-btn-status") == 0) {
         product.attr("data-btn-status", 1);
@@ -114,8 +119,12 @@ $(document).on("click", "#addDetailToCartBtn", () => {
 });
 
 $(document).on("click", "#goPaymentOneBtn", () => {
+    const curStock = $("#productStock").text().replace(/[^0-9]/g, '');
     const productId = $("#addDetailToCartBtn").data("cart-product-id");
     const productCount = parseInt($("#detailProductCnt").val());
+    if (curStock < productCount) {
+        return alert("재고 수량이 부족합니다.");
+    }
     window.location.replace(`/user/order/one/${productId}/${productCount}`);
 });
 
