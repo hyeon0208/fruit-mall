@@ -107,7 +107,7 @@ $(document).on("click", "#goPaymentBtn", () => {
         const productRow = $(checkbox).closest("tr");
         const productStatus = productRow.find(".price").data("status");
 
-        if (productStatus === "품절") {
+        if (productStatus === "품절" || $("#cartSoldOut").is(':visible')) {
             soldOutProducts.push(i);
         } else {
             const productId = $(checkbox).data("product-id");
@@ -115,7 +115,7 @@ $(document).on("click", "#goPaymentBtn", () => {
         }
     });
 
-    if (soldOutProducts.length > 0) {
+    if (soldOutProducts.length > 0 || !$("#cartSoldOut").is(':visible')) {
         alert("품절상품은 구매 불가능합니다.");
         return;
     }
@@ -159,10 +159,19 @@ $(document).on("click", ".increaseProductCnt", (e) => {
             url: "/cart/increaseProductCnt",
             data: {
                 productCount: cnt.val(),
+                productId: cnt.data("update-product-id"),
                 cartId: cnt.attr("data-cart-id")
             },
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            if (res.data == "재고부족") {
+                $("#cartPrice").hide();
+                $("#cartSoldOut").show();
+            } else {
+                $("#cartPrice").show();
+                $("#cartSoldOut").hide();
+            }
         });
     }
 
@@ -201,10 +210,19 @@ $(document).on("click", ".decreaseProductCnt", (e) => {
             url: "/cart/decreaseProductCnt",
             data: {
                 productCount: cnt.val(),
+                productId: cnt.data("update-product-id"),
                 cartId: cnt.attr("data-cart-id")
             },
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            if (res.data == "재고부족") {
+                $("#cartPrice").hide();
+                $("#cartSoldOut").show();
+            } else {
+                $("#cartPrice").show();
+                $("#cartSoldOut").hide();
+            }
         });
     }
 

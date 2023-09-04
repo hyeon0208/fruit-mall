@@ -47,13 +47,14 @@
                                     <span th:text="${product.productName}">상품이름</span>
                                     <span>
                                         <button class="increaseProductCnt">+</button>
-                                        <button class="productCnt" th:data-cart-id="${product.cartId}" th:text="${product.productCount}" th:value="${product.productCount}">상품수량</button>
+                                        <button class="productCnt" th:data-cart-id="${product.cartId}" th:data-update-product-id="${product.productId}" th:text="${product.productCount}" th:value="${product.productCount}">상품수량</button>
                                         <button class="decreaseProductCnt" style="display: none;">-</button>
                                     </span>
                                 </div>
 
                                 <div class="price" th:data-status="${product.productSaleStatus}">
-                                    <span th:if="${product.productSaleStatus != '품절'}" th:text="|${#numbers.formatInteger((product.productPrice), 0, 'COMMA')}원|"></span>
+                                    <span id="cartPrice" th:if="${product.productSaleStatus != '품절'}" th:text="|${#numbers.formatInteger((product.productPrice), 0, 'COMMA')}원|"></span>
+                                    <span id="cartSoldOut" style="color: red; display: none;">재고수량이 부족합니다.</span>
                                     <span th:if="${product.productSaleStatus == '품절'}" text="품절" style="color: red"></span>
                                     <button class="delCartProduct">x</button>
                                 </div>

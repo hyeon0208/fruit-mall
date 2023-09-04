@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -39,7 +38,6 @@ public class CartController {
                 return findCart.get();
             } else {
                 throw new IllegalArgumentException("이미 장바구니에 있는 상품입니다.");
-
             }
         }
         Cart cart = Cart.builder()
@@ -65,7 +63,6 @@ public class CartController {
     public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody LocalStorageDto localStorageDto) {
         if (localStorageDto.getLocalCarts() != null) {
             for (LocalCart localCart : localStorageDto.getLocalCarts()) {
-                System.out.println("localCart = " + localCart);
                 Cart lcart = Cart.builder()
                         .userIdNo(sessionUser.getUserIdNo())
                         .productId(localCart.getProduct().getProductId())
@@ -80,14 +77,26 @@ public class CartController {
     @PostMapping("/cart/increaseProductCnt")
     @ResponseBody
     public String increaseProductToCart(@RequestBody CartCntUpdateDto cartCntUpdateDto) {
+        int updateStock = cartCntUpdateDto.getProductCount();
+        int curStock = productService.selectProductStock(cartCntUpdateDto.getProductId());
         cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
+
+        if ((curStock - updateStock) < 0) {
+            return "재고부족";
+        }
         return "success";
     }
 
     @PostMapping("/cart/decreaseProductCnt")
     @ResponseBody
     public String decreaseProductToCart(@RequestBody CartCntUpdateDto cartCntUpdateDto) {
+        int curStock = productService.selectProductStock(cartCntUpdateDto.getProductId());
+        int updateStock = cartCntUpdateDto.getProductCount();
         cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
+
+        if ((curStock - updateStock) < 0) {
+            return "재고부족";
+        }
         return "success";
     }
 
