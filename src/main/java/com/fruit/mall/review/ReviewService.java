@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -14,5 +16,13 @@ public class ReviewService {
     public void insertReview(ReviewSaveReqDto reviewSaveReqDto) {
         Review review = reviewSaveReqDto.toEntity(reviewSaveReqDto);
         reviewRepository.insertReview(review);
+    }
+
+    public Boolean existsOrderProductByUser(Long userIdNo, Long productId) {
+        List<Long> orderProductId = reviewRepository.selectOPIdByOrderIdAndProductId(userIdNo, productId);
+        if (orderProductId.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }

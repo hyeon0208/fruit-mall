@@ -20,6 +20,10 @@ public class ReviewController {
     public String goReview(@Login SessionUser sessionUser, Model model, @PathVariable("productId") Long productId) {
         Long userId = sessionUser != null ? sessionUser.getUserIdNo() : null;
         ProductDetailForm productDetailForm = productService.selectProductDetailByProductId(productId, userId);
+        if (userId != null) {
+            Boolean isOrder = reviewService.existsOrderProductByUser(userId, productId);
+            model.addAttribute("isOrder", isOrder);
+        }
         model.addAttribute("productDetailForm", productDetailForm);
         model.addAttribute("productId", productId);
         return "user/review";
