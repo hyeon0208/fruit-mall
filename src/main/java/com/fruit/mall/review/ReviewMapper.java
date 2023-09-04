@@ -13,4 +13,6 @@ public interface ReviewMapper {
     Long selectReviewIdByUserIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
 
     List<ReviewResDto> selectReviewsByProductId(@Param("productId") Long productId);
+
+    void updateReviewByUserId(@Param("updateContents") String updateContents, @Param("userIdNo") Long userIdNo);
 }

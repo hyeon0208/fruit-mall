@@ -1475,6 +1475,17 @@
   color: #fff;
   border-radius: 5px;
 }
+
+#review .detail__inner .box03 ul li div button {
+  position: relative;
+  right: -39rem;
+  padding: 4px 14px;
+  cursor: pointer;
+  font: 400 14px/1 "Nanum Gothic";
+  background-color: #252525;
+  color: #fff;
+  border-radius: 5px;
+}
 #review .detail__inner .box03 ul .seller {
   background-color: #f2f2f2;
   position: relative;

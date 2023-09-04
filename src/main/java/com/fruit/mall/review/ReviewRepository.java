@@ -25,4 +25,9 @@ public class ReviewRepository implements ReviewMapper {
     public List<ReviewResDto> selectReviewsByProductId(Long productId) {
         return reviewMapper.selectReviewsByProductId(productId);
     }
+
+    @Override
+    public void updateReviewByUserId(String updateContents, Long userIdNo) {
+        reviewMapper.updateReviewByUserId(updateContents, userIdNo);
+    }
 }

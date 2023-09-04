@@ -21,4 +21,8 @@
         JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
         WHERE PRODUCT_ID = #{productId}
     </select>
+
+    <update id="updateReviewByUserId">
+        UPDATE review SET REVIEW_CONTENTS = #{updateContents} WHERE USER_ID_NO = #{userIdNo}
+    </update>
 </mapper>

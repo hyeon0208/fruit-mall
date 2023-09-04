@@ -195,7 +195,6 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -231,7 +230,6 @@
                         <div class="confirm__modal__wrap">
                             <h5>리뷰 작성이 완료 되었습니다.</h5>
 
-
                             <div class="review__buttons">
                                 <button class="review__confirm">
                                     <a th:href="@{/user/review/{productId}(productId=${productId})}">확인</a>
@@ -239,6 +237,30 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+
+                <!-- 리뷰수정 모달 창 -->
+                <div class="review__modal update_review" style="display: none;">
+                    <div class="inner">
+                        <h4>알림</h4>
+
+                        <div class="modal__wrap">
+                            <h5>수정하실 리뷰를 작성해주세요.</h5>
+
+                            <input id="update_content" type="text" placeholder="10자 이상 500자 미만으로 작성해주세요.">
+                            <span class="count">0/500</span>
+
+                            <div class="review__buttons">
+                                <button class="review__cancel">
+                                    <a href="#">작성취소</a>
+                                </button>
+
+                                <button class="review__confirm">
+                                    <a href="#">리뷰수정</a>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -249,9 +271,11 @@
                         <span class="id" th:text="${review.userName}"></span>
                         <span class="date" th:text="${#dates.format(review.reviewCreatedAt,'yyyy.MM.dd')}"></span>
 
-                        <p th:text="${review.reviewContents}">
-                            <button>답글달기</button>
-                        </p>
+                        <p id="review_contents" th:utext="${review.reviewContents}"></p>
+                        <div class="review-button-group">
+                            <button id="update_review" th:if="${session.loginUser.name == review.userName}">수정하기</button>
+                            <button>답글보기</button>
+                        </div>
                     </li>
                 </ul>
 

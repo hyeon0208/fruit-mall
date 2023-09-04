@@ -34,4 +34,8 @@ public class ReviewService {
         }
         return true;
     }
+
+    public void updateReviewByUserId(String updateContents, Long userIdNo) {
+        reviewRepository.updateReviewByUserId(updateContents, userIdNo);
+    }
 }

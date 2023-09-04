@@ -40,11 +40,19 @@ public class ReviewController {
         return "user/review";
     }
 
-    @PostMapping("/add/review")
+    @PostMapping("/review/add")
     @ResponseBody
     public String addReview(@Login SessionUser sessionUser, @RequestBody ReviewSaveReqDto reviewSaveReqDto) {
         reviewSaveReqDto.setUserIdNo(sessionUser.getUserIdNo());
         reviewService.insertReview(reviewSaveReqDto);
+        return "success";
+    }
+
+    @PostMapping("/review/update")
+    @ResponseBody
+    public String updateReview(@Login SessionUser sessionUser, @RequestBody String updateContents) {
+        updateContents = updateContents.substring(1, updateContents.length() - 1);
+        reviewService.updateReviewByUserId(updateContents, sessionUser.getUserIdNo());
         return "success";
     }
 }
