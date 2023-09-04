@@ -51,7 +51,6 @@ public class ReviewController {
     @PostMapping("/review/update")
     @ResponseBody
     public String updateReview(@Login SessionUser sessionUser, @RequestBody String updateContents) {
-        updateContents = updateContents.substring(1, updateContents.length() - 1);
         reviewService.updateReviewByUserId(updateContents, sessionUser.getUserIdNo());
         return "success";
     }

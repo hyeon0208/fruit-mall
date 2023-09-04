@@ -36,6 +36,7 @@ public class ReviewService {
     }
 
     public void updateReviewByUserId(String updateContents, Long userIdNo) {
+        updateContents = updateContents.substring(1, updateContents.length() - 1);
         reviewRepository.updateReviewByUserId(updateContents, userIdNo);
     }
 }
