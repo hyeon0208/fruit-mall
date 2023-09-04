@@ -273,7 +273,7 @@
 
                         <p id="review_contents" th:utext="${review.reviewContents}"></p>
                         <div class="review-button-group">
-                            <button id="update_review" th:if="${session.loginUser.name == review.userName}">수정하기</button>
+                            <button id="update_review" th:if="${session.loginUser != null && session.loginUser.name == review.userName}">수정하기</button>
                             <button>답글보기</button>
                         </div>
                     </li>
