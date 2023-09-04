@@ -1,4 +1,4 @@
-package com.fruit.mall.exception;
+package com.fruit.mall.controlleradvice;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

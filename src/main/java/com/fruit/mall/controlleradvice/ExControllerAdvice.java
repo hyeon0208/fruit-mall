@@ -1,4 +1,4 @@
-package com.fruit.mall.exception;
+package com.fruit.mall.controlleradvice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
