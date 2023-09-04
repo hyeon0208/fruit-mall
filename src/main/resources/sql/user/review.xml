@@ -7,13 +7,6 @@
         VALUES (#{productId}, #{userIdNo}, #{reviewContents})
     </insert>
 
-    <select id="selectOPIdByOrderIdAndProductId" resultType="Long">
-        SELECT op.ORDER_PRODUCT_ID
-        FROM order_product op
-                 JOIN orders o ON op.ORDER_ID = o.ORDER_ID
-        WHERE o.USER_ID_NO = #{userIdNo} AND op.PRODUCT_ID = #{productId}
-    </select>
-
     <select id="selectReviewIdByUserIdAndProductId" resultType="Long">
         SELECT REVIEW_ID FROM review
         WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId}

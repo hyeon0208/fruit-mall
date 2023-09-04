@@ -2,6 +2,7 @@ package com.fruit.mall.review;
 
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.orderProduct.OrderProductService;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.ProductDetailForm;
 import com.fruit.mall.review.dto.ReviewSaveReqDto;
@@ -15,13 +16,14 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewController {
     private final ProductService productService;
     private final ReviewService reviewService;
+    private final OrderProductService orderProductService;
 
     @GetMapping("/user/review/{productId}")
     public String goReview(@Login SessionUser sessionUser, Model model, @PathVariable("productId") Long productId) {
         Long userId = sessionUser != null ? sessionUser.getUserIdNo() : null;
         ProductDetailForm productDetailForm = productService.selectProductDetailByProductId(productId, userId);
         if (userId != null) {
-            Boolean isOrder = reviewService.existsOrderProductByUser(userId, productId);
+            Boolean isOrder = orderProductService.existsOrderProductByUser(userId, productId);
             Boolean isWrite = reviewService.isWriteReview(userId, productId);
             model.addAttribute("isOrder", isOrder);
             model.addAttribute("isWrite", isWrite);

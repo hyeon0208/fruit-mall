@@ -25,4 +25,12 @@ public class OrderProductService {
             orderProductRepository.insertOrderProduct(orderProduct);
         }
     }
+
+    public Boolean existsOrderProductByUser(Long userIdNo, Long productId) {
+        List<Long> orderProductId = orderProductRepository.selectOPIdByOrderIdAndProductId(userIdNo, productId);
+        if (orderProductId.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 }
