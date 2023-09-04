@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<section id="review">
+        <div class="inner detail__inner">
+
+            <div class="box01">
+                <div class="left">
+                    <img th:src="${productDetailForm.imageUrl}">
+                </div>
+
+                <div class="right">
+                    <div class="right__txt01" th:data-product-id="${productId}">
+                        <h2 th:text="${productDetailForm.productName}"></h2>
+                        <button th:if="${session.loginUser == null}" class="material-icons red__heart" disabled>favorite</button>
+                        <button th:if="${session.loginUser != null}"
+                                th:classappend="${productDetailForm.liked} ? 'filled' : ''"
+                                th:data-product-id="${productId}"
+                                th:data-user-id="${userId}" class="material-icons red__heart"
+                                th:value="${productDetailForm.liked} ? '1' : '0'">favorite</button>
+                    </div>
+
+                    <div class="right__txt02">
+                        <div class="right__txt02__01">
+                            <span id="detailDiscount" th:if="${productDetailForm.productDiscount > 0}" th:data-detail-discount="${productDetailForm.productDiscount}" th:text="|${productDetailForm.productDiscount}%|"></span>
+                            <span th:if="${productDetailForm.productDiscount == 0}" text="-"></span>
+
+                            <p th:if="${productDetailForm.productDiscount > 0}">
+                                <span th:text="|${productDetailForm.productPrice}원|">상품가격</span>
+                                <span id="DiscountAppliedPrice" th:text="|${#numbers.formatInteger((productDetailForm.productPrice * (1 - (productDetailForm.productDiscount / 100.0))), 3, 'COMMA')}원|">할인 적용 가격</span>
+                            </p>
+
+                            <p th:if="${productDetailForm.productDiscount == 0}">
+                                <span text="-" hidden="hidden">상품가격</span>
+                                <span id="NotDiscountAppliedPrice" th:text="|${#numbers.formatInteger((productDetailForm.productPrice), 3, 'COMMA')}원|">할인 적용 가격</span>
+                            </p>
+                        </div>
+
+                        <div class="right__txt02__02">
+                            <p>배송비 3,000원
+                                <span class="free">(50,000원이상 결제시 무료배송)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="right__txt03">
+                        <!-- 장바구니 클릭 시 수량 증감버튼 -->
+                        <div class="cart">
+                            <div class="inner">
+                                <button id="decreaseDetailProductCnt" style="display: none;">-</button>
+                                <input id="detailProductCnt" type="text" value="1">
+                                <button id="increaseDetailProductCnt">+</button>
+                            </div>
+                            <span id="productStock" th:text="|남은수량 ${productDetailForm.productStock}개|">재고</span>
+                        </div>
+
+                        <div class="right__txt03__01">
+                            <span>총 상품 금액</span>
+                            <span id="detailTotalPrice" th:text="|${#numbers.formatInteger((productDetailForm.productPrice), 3, 'COMMA')}원|"></span>
+                        </div>
+
+                        <div class="right__txt03__02">
+                            <span>배송비</span>
+                            <span id="detailDeliveryFee"></span>
+                        </div>
+                    </div>
+
+                    <div class="right__buttons">
+                        <button id="addDetailToCartBtn"
+                                data-btn-status="0"
+                                th:data-cart-product-id="${productId}"
+                                th:data-user-id="${session.loginUser != null ? userId : 0}">장바구니</button>
+                        <button th:if="${session.loginUser != null}" id="goPaymentOneBtn">구매하기</button>
+                        <button th:if="${session.loginUser == null}"id="redirectLoginBtn">구매하기</button>
+                    </div>
+
+                    <br>
+
+                    <div id="aside">
+                        <div class="sidebar">
+                            <ul>
+
+                                <!-- 마이페이지 -->
+                                <li>
+                                    <a href="/user/mypage" th:unless="${session.loginUser == null}">
+                                        <span class="material-symbols-outlined">person</span>
+                                        <p th:text="${session.loginUser.getName()} + 님"></p>
+                                    </a>
+                                    <a href="#" th:if="${session.loginUser == null}">
+                                        <span class="material-symbols-outlined">person</span>
+                                        <p>손님</p>
+                                    </a>
+                                    <div class="line"></div>
+                                </li>
+
+                                <!-- 장바구니 -->
+                                <li class="right__cart">
+                                    <a href="/user/cart">
+                                        <span class="material-symbols-outlined">shopping_cart</span>
+                                        <p>장바구니</p>
+                                        <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
+                                        <div th:if="${session.loginUser == null}" id="localSideBarCartCount" th:data-login-user="${session.loginUser}" class="cart__count"></div>
+                                    </a>
+                                </li>
+
+                                <!-- 찜 -->
+                                <li class="right__favorite">
+                                    <a href="#">
+                                        <span class="material-icons">favorite</span>
+                                        <p>찜</p>
+                                        <div th:unless="${session.loginUser == null}" class="favorite__count" th:text="${likesCount}"></div>
+                                        <div th:if="${session.loginUser == null}"></div>
+                                    </a>
+                                    <div class="line"></div>
+                                </li>
+
+                                <!-- 최근 본 상품 -->
+                                <li class="last">
+                                    <a href="#">
+                                        <p>최근 본 상품</p>
+                                        <tr th:each="product : ${recentProducts}">
+                                            <a th:href="@{/user/detail/{id}(id=${product.getProductId()})}">
+                                                <td><img th:src="${product.getImageUrl()}"/></td>
+                                            </a>
+                                        </tr>
+                                        <p id="TopBtn" style="text-align: center">맨위로</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 장바구니에 담겼습니다. 모달 창 -->
+                    <div class="txt04 right__modal add__cart" style="display: none;">
+                        <div class="inner">
+                            <h4>알림</h4>
+                            <h5>
+                                <span>장바구니에 담겼습니다.</span>
+                                <div class="buttons cart-modal">
+                                    <a th:href="@{/user/detail/{id}(id=${productId})}">
+                                        계속 쇼핑하기
+                                    </a>
+                                    <a href="/user/cart">
+                                        장바구니로 이동
+                                    </a>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box02">
+                <a th:href="@{/user/detail/{id}(id=${productId})}">
+                    <div class="detailed__info">
+                        <p>상세정보</p>
+                    </div>
+                </a>
+
+
+                <a href="#">
+                    <div class="review">
+                        <p>상품리뷰</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="write">
+                <button id="writeReview" th:if="${session.loginUser != null}">
+                    <span class="material-symbols-outlined">rate_review</span>
+                    <span>리뷰작성하기</span>
+                </button>
+
+
+                <!-- 리뷰작성 모달 창 -->
+                <div class="review__modal" style="display: none;">
+                    <div class="inner">
+                        <h4>알림</h4>
+
+                        <div class="modal__wrap">
+                            <h5>상품에 대한 리뷰를 남겨주세요.</h5>
+
+                            <input id="reviewContent" type="text" placeholder="10자 이상 500자 미만으로 작성해주세요.">
+                            <span class="count">0/500</span>
+
+                            <div class="review__buttons">
+                                <button class="review__cancel">
+                                    <a href="#">작성취소</a>
+                                </button>
+
+                                <button class="review__confirm">
+                                    <a href="#">리뷰등록</a>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 리뷰작성 취소 모달 창 -->
+                <div class="review__cancel__modal" style="display: none;">
+                    <div class="inner">
+                        <h4>알림</h4>
+
+                        <div class="cancel__modal__wrap">
+                            <h5>작성중인 내용이 모두 삭제됩니다. <br>
+                                취소 하시겠습니까?</h5>
+
+
+                            <div class="review__buttons">
+                                <button class="review__cancel">
+                                    <a href="#">취소하기</a>
+                                </button>
+
+                                <button class="review__confirm">
+                                    <a href="#">계속작성</a>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 리뷰작성 완료 모달 창 -->
+                <div class="review__confirm__modal" style="display: none;">
+                    <div class="inner">
+                        <h4>알림</h4>
+
+                        <div class="confirm__modal__wrap">
+                            <h5>리뷰 작성이 완료 되었습니다.</h5>
+
+
+                            <div class="review__buttons">
+                                <button class="review__confirm">
+                                    <a th:href="@{/user/review/{productId}(productId=${productId})}">확인</a>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="box03">
+                <ul>
+                    <li>
+                        <span class="id">Chan****</span>
+                        <span class="date">2023. 07. 17</span>
+
+                        <p>
+                            배송빨라서 좋았어요! <br>
+                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
+                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
+
+                            <button>답글달기</button>
+                        </p>
+                    </li>
+                    <li class="seller">
+                        <span class="id">판매자</span>
+                        <span class="date">2023. 07. 17</span>
+
+                        <p>
+                            고객님 소중한 리뷰 작성 감사합니다^^ <br>
+                            앞으로도 더 좋은 품질의 상품들로 찾아뵙겠습니다! <br>
+                            다음에도 또 이용해주세요~!
+
+                        </p>
+                    </li>
+                    <li>
+                        <span class="id">Chan****</span>
+                        <span class="date">2023. 07. 17</span>
+
+                        <p>
+                            배송빨라서 좋았어요! <br>
+                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
+                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
+
+                            <button>답글달기</button>
+                        </p>
+                    </li>
+                    <li>
+                        <span class="id">Chan****</span>
+                        <span class="date">2023. 07. 17</span>
+
+                        <p>
+                            배송빨라서 좋았어요! <br>
+                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
+                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
+
+                            <button>답글달기</button>
+                        </p>
+                    </li>
+                    <li>
+                        <span class="id">Chan****</span>
+                        <span class="date">2023. 07. 17</span>
+
+                        <p>
+                            배송빨라서 좋았어요! <br>
+                            몇개는 상했고 대부분 괜찮았어요 ㅎㅎ <br>
+                            베트남에서 너무 맛있어서 사봤는데 역시 맛있네요.
+
+                            <button>답글달기</button>
+                        </p>
+                    </li>
+                </ul>
+
+                <div class="pagination">
+                    <a href="#" class="prev">
+                        <span class="material-symbols-outlined">
+                            chevron_left
+                        </span>
+                    </a>
+
+                    <p class="numbers">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">
+                            <span class="bold">4</span>
+                        </a>
+                        <a href="#">5</a>
+                    </p>
+
+                    <a href="#" class="next">
+                        <span class="material-symbols-outlined">
+                            chevron_right
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</th:block>
+</html>

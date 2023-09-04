@@ -147,31 +147,22 @@
                         </h5>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <div class="box02">
-            <a href="./detail.html">
+            <a href="#">
                 <div class="detailed__info">
                     <p>상세정보</p>
                 </div>
             </a>
 
 
-            <a href="./review.html">
+            <a th:href="@{/user/review/{productId}(productId=${productId})}">
                 <div class="review">
                     <p>상품리뷰</p>
                 </div>
             </a>
-
-
-            <a href="#">
-                <div class="question">
-                    <p>상품문의</p>
-                </div>
-            </a>
-
         </div>
 
         <div class="box03">
