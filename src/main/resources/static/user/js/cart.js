@@ -115,7 +115,7 @@ $(document).on("click", "#goPaymentBtn", () => {
         }
     });
 
-    if (soldOutProducts.length > 0 || !$("#cartSoldOut").is(':visible')) {
+    if (soldOutProducts.length > 0 || $("#cartSoldOut").is(':visible')) {
         alert("품절상품은 구매 불가능합니다.");
         return;
     }
