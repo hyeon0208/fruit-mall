@@ -22,7 +22,9 @@ public class ReviewController {
         ProductDetailForm productDetailForm = productService.selectProductDetailByProductId(productId, userId);
         if (userId != null) {
             Boolean isOrder = reviewService.existsOrderProductByUser(userId, productId);
+            Boolean isWrite = reviewService.isWriteReview(userId, productId);
             model.addAttribute("isOrder", isOrder);
+            model.addAttribute("isWrite", isWrite);
         }
         model.addAttribute("productDetailForm", productDetailForm);
         model.addAttribute("productId", productId);

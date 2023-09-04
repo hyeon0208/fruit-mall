@@ -25,4 +25,12 @@ public class ReviewService {
         }
         return true;
     }
+
+    public Boolean isWriteReview(Long userIdNo, Long productId) {
+        Long reviewId = reviewRepository.selectReviewIdByUserIdAndProductId(userIdNo, productId);
+        if (reviewId == null) {
+            return false;
+        }
+        return true;
+    }
 }

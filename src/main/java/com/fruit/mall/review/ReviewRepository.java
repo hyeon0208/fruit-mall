@@ -19,4 +19,9 @@ public class ReviewRepository implements ReviewMapper {
     public List<Long> selectOPIdByOrderIdAndProductId(Long userIdNo, Long productId) {
         return reviewMapper.selectOPIdByOrderIdAndProductId(userIdNo, productId);
     }
+
+    @Override
+    public Long selectReviewIdByUserIdAndProductId(Long userIdNo, Long productId) {
+        return reviewMapper.selectReviewIdByUserIdAndProductId(userIdNo, productId);
+    }
 }

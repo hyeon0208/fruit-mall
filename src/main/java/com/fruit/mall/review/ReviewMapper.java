@@ -10,4 +10,6 @@ public interface ReviewMapper {
     void insertReview(Review review);
 
     List<Long> selectOPIdByOrderIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
+
+    Long selectReviewIdByUserIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
 }

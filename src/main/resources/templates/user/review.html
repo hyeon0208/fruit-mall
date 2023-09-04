@@ -168,7 +168,7 @@
             </div>
 
             <div class="write">
-                <button id="writeReview" th:if="${session.loginUser != null && isOrder} ">
+                <button id="writeReview" th:if="${session.loginUser != null && isOrder && !isWrite} ">
                     <span class="material-symbols-outlined">rate_review</span>
                     <span>리뷰작성하기</span>
                 </button>
