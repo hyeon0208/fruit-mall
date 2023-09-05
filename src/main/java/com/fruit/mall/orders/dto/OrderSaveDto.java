@@ -16,6 +16,5 @@ public class OrderSaveDto {
     private Long orderNumber;
     private String address;
     private String orderRequired;
-    private String orderStatus;
     private String paymentMethod;
 }
