@@ -58,7 +58,6 @@ $(() =>{
             order.zipcode = parseInt($("#add").val());
             order.address = $("#add2").val();
             order.orderRequired = $("#ask").val();
-            order.orderStatus = "결제완료";
             order.paymentMethod = payMethod;
             orders.push(order);
         });
@@ -78,11 +77,11 @@ $(() =>{
             if (rsp.success) {
                 axios({
                     method: "post",
-                    url: `/user/order/verify_iamport/${rsp.imp_uid}`
+                    url: `/payment/validation/${rsp.imp_uid}`
                 }).then(res => {
                     if ($("#paymentPrice").val() == res.data.response.amount) {
                         axios({
-                            url: "/user/order/add",
+                            url: "/order/payment",
                             method: "post",
                             data: orders,
                             dataType: "json",
