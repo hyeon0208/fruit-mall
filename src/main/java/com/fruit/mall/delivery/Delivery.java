@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @NoArgsConstructor
@@ -20,6 +21,7 @@ public class Delivery {
     private String userName;
 
     @NotEmpty(message = "휴대폰 번호를 입력하지 않았습니다.")
+    @Pattern(regexp = "^\\d+$", message = "휴대폰 번호는 숫자만 입력해야 합니다.")
     private String phoneNumber;
 
     @NotNull(message = "우편번호를 입력하지 않았습니다.")
