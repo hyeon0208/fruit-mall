@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fruit.mall.mypage.MyPageMapper">
+    <select id="selectOrderDetailsByUserId" resultType="com.fruit.mall.mypage.dto.OrderDetail">
+        SELECT op.ORDER_NUMBER,
+               p.PRODUCT_ID,
+               p.PRODUCT_NAME,
+               op.ORDER_PRICE,
+               op.ORDER_COUNT,
+               o.RECEIVER_NAME,
+               o.PHONE_NUMBER,
+               o.ADDRESS,
+               i.IMAGE_URL,
+               IFNULL((SELECT IF(r.REVIEW_ID IS NOT NULL, 1, 0)
+                       FROM review r
+                       WHERE r.PRODUCT_ID = p.PRODUCT_ID
+                         AND r.USER_ID_NO = #{userIdNo}), 0) AS IS_WRITE,
+               o.ORDER_DATE
+        FROM order_product op
+                 JOIN product p ON op.PRODUCT_ID = p.PRODUCT_ID
+                 JOIN orders o ON op.ORDER_ID = o.ORDER_ID
+                 JOIN image i ON i.PRODUCT_ID = p.PRODUCT_ID
+                 LEFT JOIN review r ON (r.PRODUCT_ID = p.PRODUCT_ID AND r.USER_ID_NO = #{userIdNo})
+        WHERE o.USER_ID_NO = #{userIdNo}
+          AND i.IMAGE_ID = (SELECT MIN(i2.IMAGE_ID) FROM image i2 WHERE i2.PRODUCT_ID = p.PRODUCT_ID)
+    </select>
+</mapper>

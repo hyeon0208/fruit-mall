@@ -1,306 +1,255 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 <th:block layout:fragment="content">
+    <div id="mypage">
+        <div class="inner">
+            <h2> 마이페이지 </h2>
 
-
-<div id="mypage">
-    <div class="inner">
-
-        <h2> 마이페이지 </h2>
-
-        <div class="tab__menu">
-            <a href="#">
-                <div class="history">
-                    <p>구매내역</p>
-                </div>
-            </a>
-
-
-            <a href="#">
-                <div class="delivery">
-                    <p>배송지관리</p>
-                </div>
-            </a>
-
-
-            <a href="#">
-                <div class="memberInfo">
-                    <p>회원정보</p>
-                </div>
-            </a>
-
-        </div>
-
-        <div class="search__box">
-            <div class="first">
-                <span>기간검색</span>
-
-                <div class="search__box__buttons">
-                    <button>1개월</button>
-                    <button>3개월</button>
-                    <button>6개월</button>
-                    <button>1년</button>
-                    <button>3년</button>
-                </div>
-
-                <div class="date">
-                    <label for="date1">
-                        <input type="date" id="date1" value="2023-07-19">
-                    </label>
-
-                    <span>~</span>
-
-                    <label for="date2">
-                        <input type="date" id="date2" value="2023-07-19">
-                    </label>
-                </div>
-            </div>
-
-            <div class="second">
-                <select name="products" id="products">
-                    <option value="상품명">상품명</option>
-                    <option value="상품명">주문번호</option>
-                    <option value="상품명">상품번호</option>
-                    <option value="상품명">기간</option>
-                </select>
-
-                <label for="search">
-                    <input type="text">
-                </label>
-
-                <button>초기화</button>
-
-                <button>검색</button>
-            </div>
-        </div>
-
-
-        <div class="history2">
-            <h4>상품구매 내역</h4>
-
-            <div class="history__line"></div>
-
-            <div class="history__contents">
-                <div class="first">
-                    <ul>
-                        <li>
-                            <span>2023. 07. 01</span>
-                            <br>
-                            <span>(13:11:10)</span>
-                        </li>
-                        <li>
-                            <span class="orderNo">주문번호</span>
-                            <br>
-                            <span class="orderNo">23659831</span>
-                        </li>
-                        <li>
-                            <button>리뷰작성</button>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="second">
-                    <p>[주문상품]</p>
-
-                    <ul>
-                        <li>
-                            <img src="./img/마이페이지-수박.png" alt="">
-                            <span class="product__name">프리미엄 고당도 꿀수박 4kg <br>
-                                <span>50,000원</span>
-                            </span>
-
-                            <span class="quant">구매수량 1개</span>
-                        </li>
-                        <li>
-                            <img src="./img/마이페이지-망고스틴.png" alt="">
-                            <span class="product__name">프리미엄 고당도 꿀수박 4kg <br>
-                                <span>50,000원</span>
-                            </span>
-
-                            <span class="quant">구매수량 1개</span>
-                        </li>
-                        <li>
-                            <img src="./img/마이페이지-파인애플.png" alt="">
-                            <span class="product__name">프리미엄 고당도 꿀수박 4kg <br>
-                                <span>50,000원</span>
-                            </span>
-
-                            <span class="quant">구매수량 1개</span>
-                        </li>
-                    </ul>
-
-                    <div class="delivery__info">
-                        <p>[배송정보]</p>
-                        <ul>
-                            <li>
-                                <span class="delivery__add">배송지</span>
-                                <span class="delivery__name">홍길동
-                                    <span>010-1234-5678</span>
-                                    <br>
-                                    <span>서울시 강남구 강남로123 강남빌딩 1층</span>
-                                </span>
-
-                            </li>
-                            <li>
-                                <span class="delivery__note">배송메모</span>
-                                <span>문 앞에 놔주세요.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="third">
-                    <p>[결제정보]</p>
-
-                    <ul>
-                        <li>
-                            <span>상품금액
-                                <span>300,000원</span>
-                            </span>
-
-
-                            <span>할인금액
-                                <span>-30,000원</span>
-                            </span>
-
-
-                            <span>배송비
-                                <span>무료</span>
-                            </span>
-
-                        </li>
-                    </ul>
-
-                    <div class="total">
-                        <span class="total__price">총 결제금액</span>
-                        <span>270,000원</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="history__contents">
-                <div class="first">
-                    <ul>
-                        <li>
-                            <span>2023. 07. 01</span>
-                            <br>
-                            <span>(13:11:10)</span>
-                        </li>
-                        <li>
-                            <span class="orderNo">주문번호</span>
-                            <br>
-                            <span class="orderNo">23659831</span>
-                        </li>
-                        <li>
-                            <button>리뷰작성</button>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="second">
-                    <p>[주문상품]</p>
-
-                    <ul>
-                        <li>
-                            <img src="./img/마이페이지-수박.png" alt="">
-                            <span class="product__name">프리미엄 고당도 꿀수박 4kg <br>
-                                <span>50,000원</span>
-                            </span>
-
-                            <span class="quant">구매수량 1개</span>
-                        </li>
-                        <li>
-                            <img src="./img/마이페이지-망고스틴.png" alt="">
-                            <span class="product__name">프리미엄 고당도 꿀수박 4kg <br>
-                                <span>50,000원</span>
-                            </span>
-
-                            <span class="quant">구매수량 1개</span>
-                        </li>
-                        <li>
-                            <img src="./img/마이페이지-파인애플.png" alt="">
-                            <span class="product__name">프리미엄 고당도 꿀수박 4kg <br>
-                                <span>50,000원</span>
-                            </span>
-
-                            <span class="quant">구매수량 1개</span>
-                        </li>
-                    </ul>
-
-                    <div class="delivery__info">
-                        <p>[배송정보]</p>
-                        <ul>
-                            <li>
-                                <span class="delivery__add">배송지</span>
-                                <span class="delivery__name">홍길동
-                                    <span>010-1234-5678</span>
-                                    <br>
-                                    <span>서울시 강남구 강남로123 강남빌딩 1층</span>
-                                </span>
-
-                            </li>
-                            <li>
-                                <span class="delivery__note">배송메모</span>
-                                <span>문 앞에 놔주세요.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="third">
-                    <p>[결제정보]</p>
-
-                    <ul>
-                        <li>
-                            <span>상품금액
-                                <span>300,000원</span>
-                            </span>
-
-
-                            <span>할인금액
-                                <span>-30,000원</span>
-                            </span>
-
-
-                            <span>배송비
-                                <span>무료</span>
-                            </span>
-
-                        </li>
-                    </ul>
-
-                    <div class="total">
-                        <span class="total__price">총 결제금액</span>
-                        <span>270,000원</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pagination">
-            <a href="#" class="prev">
-                <span class="material-symbols-outlined">
-                    chevron_left
-                </span>
-            </a>
-
-            <p class="numbers">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
+            <div class="tab__menu">
                 <a href="#">
-                    <span class="bold">4</span>
+                    <div class="history">
+                        <p>구매내역</p>
+                    </div>
                 </a>
-                <a href="#">5</a>
-            </p>
 
-            <a href="#" class="next">
-                <span class="material-symbols-outlined">
-                    chevron_right
-                </span>
-            </a>
+                <a href="/user/mypage/delivery">
+                    <div class="delivery">
+                        <p>배송지관리</p>
+                    </div>
+                </a>
+
+                <a href="/user/mypage/userinfo">
+                    <div class="memberInfo">
+                        <p>회원정보</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="search__box">
+                <div class="first">
+                    <span>기간검색</span>
+
+                    <div class="search__box__buttons">
+                        <button>1개월</button>
+                        <button>3개월</button>
+                        <button>6개월</button>
+                        <button>1년</button>
+                        <button>3년</button>
+                    </div>
+
+                    <div class="date">
+                        <label for="date1">
+                            <input type="date" id="date1" value="2023-07-19">
+                        </label>
+
+                        <span>~</span>
+
+                        <label for="date2">
+                            <input type="date" id="date2" value="2023-07-19">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="second">
+                    <select name="products" id="products">
+                        <option value="상품명">상품명</option>
+                        <option value="상품명">주문번호</option>
+                        <option value="상품명">상품번호</option>
+                        <option value="상품명">기간</option>
+                    </select>
+
+                    <label for="search">
+                        <input type="text">
+                    </label>
+
+                    <button>초기화</button>
+
+                    <button>검색</button>
+                </div>
+            </div>
+
+
+            <div class="history2">
+                <h4>상품구매 내역</h4>
+
+                <div class="history__line"></div>
+
+                <div class="historyContents">
+                    <ul>
+                        <li th:each="orderDetail : ${orderDetails.list}">
+                            <div class="txt">
+                                <span th:text="${orderDetail.orderNumber}">주문번호</span>
+                                <span th:text="${#dates.format(orderDetail.orderDate, 'yyyy.MM.dd')}">주문날짜</span>
+                            </div>
+
+                            <div class="img">
+                                <img th:src="${orderDetail.imageUrl}" th:alt="${orderDetail.productName}">
+                                <div class="img__txt">
+                                    <p th:text="${orderDetail.productName}">상품명</p>
+
+                                    <div class="group">
+                                        <span class="orange" th:text="|${#numbers.formatInteger(orderDetail.orderPrice, 3, 'COMMA')}원|">상품가격</span>
+                                        <span th:text="|구매수량 ${orderDetail.orderCount}개|">구매수량</span>
+                                    </div>
+
+                                    <div class="group2">
+                                        <p>배송지 확인
+                                            <span class="material-symbols-outlined">double_arrow</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="buttons">
+                                <button id="reAddToCartBtn">재구매</button>
+                                <button th:if="${!orderDetail.isWrite}" id="writeReview">리뷰작성</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <a th:if="${orderDetails.hasPreviousPage}"
+                   th:href="@{/user/mypage/(pageNum=${orderDetails.prePage}, pageSize=${orderDetails.pageSize})}" class="prev">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </a>
+
+                <p class="numbers">
+                    <th:block th:each="i : ${orderDetails.navigatepageNums}">
+                        <a th:href="@{/user/mypage/(pageNum=${i}, pageSize=${orderDetails.pageSize})}"
+                           th:text="${i}" th:style="${i == orderDetails.pageNum} ? 'font-weight: bold; font-size: 16px;' : ''"></a>
+                    </th:block>
+                </p>
+
+                <a th:if="${orderDetails.hasNextPage}"
+                   th:href="@{/user/mypage/(pageNum=${orderDetails.nextPage}, pageSize=${orderDetails.pageSize})}" class="next">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+            </div>
+
+            <!-- 장바구니에 담겼습니다. 모달 창 -->
+            <div class="txt04" style="display: none;">
+                <div class="inner">
+
+                    <h4>알림</h4>
+
+                    <h5>장바구니에 담겼습니다.</h5>
+
+                    <div class="buttons">
+                        <button>닫기</button>
+                        <button>장바구니로 이동</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 리뷰작성 모달 창 -->
+            <div class="txt05" style="display: none;">
+                <div class="inner">
+
+                    <h4>알림</h4>
+
+                    <h5>상품에 대한 리뷰를 남겨주세요.</h5>
+
+                    <div class="input">
+                        <input type="text" placeholder="10자이상 500자 미만으로 작성해주세요.">
+                        <span>15/500</span>
+                    </div>
+
+                    <div class="buttons">
+                        <button>작성취소</button>
+                        <button>리뷰등록</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 리뷰작성 취소. 모달 창 -->
+            <div class="txt06" style="display: none;">
+                <div class="inner">
+
+                    <h4>알림</h4>
+
+                    <h5>작성중인 내용이 모두 삭제됩니다. <br>
+                        취소 하시겠습니까?
+                    </h5>
+
+                    <div class="buttons">
+                        <button>취소하기</button>
+                        <button>계속작성</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 리뷰작성 완료. 모달 창 -->
+            <div class="txt07" style="display: none;">
+                <div class="inner">
+
+                    <h4>알림</h4>
+
+                    <h5>리뷰 작성이 완료 되었습니다.</h5>
+
+                    <div class="buttons">
+                        <button>확인</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</th:block>
+
+    <div id="aside">
+        <div class="sidebar">
+            <ul>
+
+                <!-- 마이페이지 -->
+                <li>
+                    <a href="/user/mypage" th:unless="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p th:text="${session.loginUser.getName()} + 님"></p>
+                    </a>
+                    <a href="#" th:if="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p>손님</p>
+                    </a>
+                    <div class="line"></div>
+                </li>
+
+                <!-- 장바구니 -->
+                <li class="right__cart">
+                    <a href="/user/cart">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <p>장바구니</p>
+                        <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
+                        <div th:if="${session.loginUser == null}" id="localSideBarCartCount" th:data-login-user="${session.loginUser}" class="cart__count"></div>
+                    </a>
+                </li>
+
+                <!-- 찜 -->
+                <li class="right__favorite">
+                    <a href="#">
+                        <span class="material-icons">favorite</span>
+                        <p>찜</p>
+                        <div th:unless="${session.loginUser == null}" class="favorite__count" th:text="${likesCount}"></div>
+                        <div th:if="${session.loginUser == null}"></div>
+                    </a>
+                    <div class="line"></div>
+                </li>
+
+                <!-- 최근 본 상품 -->
+                <li class="last">
+                    <a href="#">
+                        <p>최근 본 상품</p>
+                        <tr th:each="product : ${recentProducts}">
+                            <a th:href="@{/user/detail/{id}(id=${product.getProductId()})}">
+                                <td><img th:src="${product.getImageUrl()}"/></td>
+                            </a>
+                        </tr>
+                        <p id="TopBtn" style="text-align: center">맨위로</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </th:block>
 </html>

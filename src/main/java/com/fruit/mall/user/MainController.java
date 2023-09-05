@@ -49,11 +49,6 @@ public class MainController {
         return new PageResDto(pageInfo, category, userId);
     }
 
-    @GetMapping("/user/mypage")
-    public String mypage() {
-        return "user/mypage";
-    }
-
     @GetMapping("/{pageName}")
     public String goSubPage(@PathVariable String pageName) {
         return "user/" + pageName;
