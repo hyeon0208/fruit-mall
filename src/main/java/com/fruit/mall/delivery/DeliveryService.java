@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,10 +15,13 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
     public void insertDelivery(Long userId, Delivery delivery) {
-        DeliveryResDto findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, delivery.getDeliveryName());
-        String findName = findDelivery.getDeliveryName();
-        if (findName.equals(delivery.getDeliveryName())) {
-            throw new IllegalArgumentException("배송지 이름은 중복될수 없습니다.");
+        Optional<DeliveryResDto> findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, delivery.getDeliveryName());
+
+        if (findDelivery.isPresent()) {
+            String findName = findDelivery.get().getDeliveryName();
+            if (findName.equals(delivery.getDeliveryName())) {
+                throw new IllegalArgumentException("배송지 이름은 중복될수 없습니다.");
+            }
         }
 
         Delivery newDelivery = Delivery.builder()
@@ -36,6 +40,6 @@ public class DeliveryService {
     }
 
     public DeliveryResDto selectOneByUserIdAndDeliveryName(Long userIdNo, String deliveryName) {
-        return deliveryRepository.selectOneByUserIdAndDeliveryName(userIdNo, deliveryName);
+        return deliveryRepository.selectOneByUserIdAndDeliveryName(userIdNo, deliveryName).get();
     }
 }

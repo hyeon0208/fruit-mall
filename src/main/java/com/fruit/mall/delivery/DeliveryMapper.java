@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface DeliveryMapper {
@@ -12,5 +13,5 @@ public interface DeliveryMapper {
 
     List<DeliveryResDto> deliveryAllByUserId(@Param("userIdNo") Long userIdNo);
 
-    DeliveryResDto selectOneByUserIdAndDeliveryName(@Param("userIdNo") Long userIdNo, @Param("deliveryName") String deliveryName);
+    Optional<DeliveryResDto> selectOneByUserIdAndDeliveryName(@Param("userIdNo") Long userIdNo, @Param("deliveryName") String deliveryName);
 }
