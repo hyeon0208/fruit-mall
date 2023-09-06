@@ -51,7 +51,6 @@ public class ReviewController {
     @PostMapping("/mypage/review/add")
     @ResponseBody
     public String mypageReviewAdd(@Login SessionUser sessionUser, @RequestBody MyPageReviewReqDto dto) {
-        System.out.println("MyPageReviewReqDto" + dto);
         reviewService.insertMypageReview(sessionUser.getUserIdNo(), dto);
         return "success";
     }
