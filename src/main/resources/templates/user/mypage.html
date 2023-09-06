@@ -112,7 +112,7 @@
 
                             <div class="buttons">
                                 <button class="reAddToCartBtn" th:data-count="${orderDetail.orderCount}" th:data-product-id="${orderDetail.productId}">재구매</button>
-                                <button th:if="${!orderDetail.isWrite}" class="writeReview">리뷰작성</button>
+                                <button th:if="${!orderDetail.isWrite}" class="writeReviewAtMyPage">리뷰작성</button>
                                 <button th:if="${orderDetail.isWrite}" class="showReview" style="background-color: #f1dacb; color: #c56206">리뷰보기</button>
                             </div>
                         </li>
@@ -185,14 +185,13 @@
             <!-- 리뷰작성 모달 창 -->
             <div class="txt05" style="display: none;">
                 <div class="inner">
-
                     <h4>알림</h4>
 
                     <h5>상품에 대한 리뷰를 남겨주세요.</h5>
 
                     <div class="input">
-                        <input type="text" placeholder="10자이상 500자 미만으로 작성해주세요.">
-                        <span>15/500</span>
+                        <input id="mypageReviewContent" type="text" placeholder="10자이상 500자 미만으로 작성해주세요.">
+                        <span class="mypage__content__count">0/500</span>
                     </div>
 
                     <div class="buttons">
@@ -205,7 +204,6 @@
             <!-- 리뷰작성 취소. 모달 창 -->
             <div class="txt06" style="display: none;">
                 <div class="inner">
-
                     <h4>알림</h4>
 
                     <h5>작성중인 내용이 모두 삭제됩니다. <br>
@@ -222,7 +220,6 @@
             <!-- 리뷰작성 완료. 모달 창 -->
             <div class="txt07" style="display: none;">
                 <div class="inner">
-
                     <h4>알림</h4>
 
                     <h5>리뷰 작성이 완료 되었습니다.</h5>
