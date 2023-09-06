@@ -1,5 +1,6 @@
 package com.fruit.mall.review;
 
+import com.fruit.mall.review.dto.MyPageReviewReqDto;
 import com.fruit.mall.review.dto.ReviewResDto;
 import com.fruit.mall.review.dto.ReviewSaveReqDto;
 import com.github.pagehelper.PageHelper;
@@ -16,9 +17,16 @@ import java.util.List;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
 
-    public void insertReview(ReviewSaveReqDto reviewSaveReqDto) {
+    public void insertReview(Long userId, ReviewSaveReqDto reviewSaveReqDto) {
+        reviewSaveReqDto.setUserIdNo(userId);
         Review review = reviewSaveReqDto.toEntity(reviewSaveReqDto);
         reviewRepository.insertReview(review);
+    }
+
+    public void insertMypageReview(Long userId, MyPageReviewReqDto dto) {
+        dto.setUserIdNo(userId);
+        Review review = dto.toEntity(dto);
+        reviewRepository.insertMypageReview(review, dto.getOrderNumber());
     }
 
     public PageInfo<ReviewResDto> getReviewsByProductId(Long productId, int pageNum, int pageSize) {

@@ -29,16 +29,19 @@ $(document).on("click", ".writeReviewAtMyPage", (e) => {
     $(".txt05 .buttons button:eq(1)").on("click", () => {
         const mypageReviewContent = $("#mypageReviewContent").val();
         const productId = $(e.currentTarget).siblings(".reAddToCartBtn").data("product-id");
+        const orderNumber = $(e.currentTarget).siblings(".reAddToCartBtn").data("order-number");
 
         if (mypageReviewContent.length > 500 || mypageReviewContent.length < 10) {
             return alert("10자 이상 500자 미만으로 작성해주세요.");
         }
 
+        // 주문번호도 넘겨서 리뷰 저장하도록 수정 ()
         axios({
             method: "post",
-            url: "/review/add",
+            url: "/mypage/review/add",
             data: {
                 productId: productId,
+                orderNumber: orderNumber,
                 reviewContents: mypageReviewContent
             },
             dataType: "json",
@@ -47,7 +50,7 @@ $(document).on("click", ".writeReviewAtMyPage", (e) => {
             $(".txt07").css("z-index", 10).show();
             $(".txt07 .buttons button").on("click", () => {
                 $(".txt07, .txt05").hide();
-                window.location.reload();
+                window.location.href="/user/mypage";
             });
         }).catch(err => {
             alert("리뷰작성에 실패했습니다.")

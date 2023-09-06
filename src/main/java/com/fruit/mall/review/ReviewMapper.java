@@ -10,6 +10,8 @@ import java.util.List;
 public interface ReviewMapper {
     void insertReview(Review review);
 
+    void insertMypageReview(@Param("review") Review review, @Param("orderNumber") Long orderNumber);
+
     List<ReviewResDto> selectReviewsByProductId(@Param("productId") Long productId);
 
     void updateReviewByUserId(@Param("updateContents") String updateContents, @Param("userIdNo") Long userIdNo);

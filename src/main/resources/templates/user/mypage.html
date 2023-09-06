@@ -111,7 +111,10 @@
                             </div>
 
                             <div class="buttons">
-                                <button class="reAddToCartBtn" th:data-count="${orderDetail.orderCount}" th:data-product-id="${orderDetail.productId}">재구매</button>
+                                <button class="reAddToCartBtn"
+                                        th:data-count="${orderDetail.orderCount}"
+                                        th:data-product-id="${orderDetail.productId}"
+                                        th:data-order-number="${orderDetail.orderNumber}">재구매</button>
                                 <button th:if="${!orderDetail.isWrite}" class="writeReviewAtMyPage">리뷰작성</button>
                                 <button th:if="${orderDetail.isWrite}" class="showReview" style="background-color: #f1dacb; color: #c56206">리뷰보기</button>
                             </div>

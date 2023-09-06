@@ -15,6 +15,17 @@
                  ORDER BY o.ORDER_DATE DESC LIMIT 1), #{reviewContents} )
     </insert>
 
+    <insert id="insertMypageReview" parameterType="map" useGeneratedKeys="true" keyProperty="review.reviewId">
+        INSERT INTO review (PRODUCT_ID, USER_ID_NO, ORDER_ID, REVIEW_CONTENTS)
+        VALUES (#{review.productId},
+                #{review.userIdNo},
+                (select o.ORDER_ID
+                 from orders o
+                          JOIN order_product op on o.ORDER_ID = op.ORDER_ID
+                 WHERE ORDER_NUMBER = #{orderNumber} AND op.PRODUCT_ID = #{review.productId}),
+                #{review.reviewContents})
+    </insert>
+
     <select id="selectReviewsByProductId" resultType="com.fruit.mall.review.dto.ReviewResDto">
         SELECT r.REVIEW_ID,
                u.USER_NAME,

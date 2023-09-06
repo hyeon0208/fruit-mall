@@ -17,6 +17,11 @@ public class ReviewRepository implements ReviewMapper {
     }
 
     @Override
+    public void insertMypageReview(Review review, Long orderNumber) {
+        reviewMapper.insertMypageReview(review, orderNumber);
+    }
+
+    @Override
     public List<ReviewResDto> selectReviewsByProductId(Long productId) {
         return reviewMapper.selectReviewsByProductId(productId);
     }
