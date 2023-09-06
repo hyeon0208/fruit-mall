@@ -4,18 +4,15 @@
 <mapper namespace="com.fruit.mall.review.ReviewMapper">
     <insert id="insertReview" parameterType="com.fruit.mall.review.Review" useGeneratedKeys="true" keyProperty="reviewId">
         INSERT INTO review (PRODUCT_ID, USER_ID_NO, ORDER_ID, REVIEW_CONTENTS)
-        VALUES (
-               #{productId},
-               #{userIdNo},
-               (
-                   SELECT o.ORDER_ID
-                   FROM orders o
-                   JOIN order_product op ON o.ORDER_ID = op.ORDER_ID
-                   WHERE o.USER_ID_NO = #{userIdNo} AND op.PRODUCT_ID = #{productId}
-                   ORDER BY o.ORDER_DATE DESC LIMIT 1
-               ),
-               #{reviewContents}
-            )
+        VALUES (#{productId},
+                #{userIdNo},
+                (SELECT o.ORDER_ID
+                 FROM orders o
+                          JOIN order_product op ON o.ORDER_ID = op.ORDER_ID
+                 WHERE o.USER_ID_NO = #{userIdNo}
+                   AND op.PRODUCT_ID = #{productId}
+                   AND NOT EXISTS (SELECT 1 FROM review r WHERE r.ORDER_ID = o.ORDER_ID)
+                 ORDER BY o.ORDER_DATE DESC LIMIT 1), #{reviewContents} )
     </insert>
 
     <select id="selectReviewsByProductId" resultType="com.fruit.mall.review.dto.ReviewResDto">
