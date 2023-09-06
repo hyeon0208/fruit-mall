@@ -1,7 +1,6 @@
 package com.fruit.mall.mypage;
 
 import com.fruit.mall.mypage.dto.OrderDetail;
-import com.fruit.mall.review.dto.ReviewResDto;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ public class MyPageService {
     private final MyPageRepository myPageRepository;
 
     public PageInfo<OrderDetail> getOrderDetailsByUserID(Long userId, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize, "ORDER_DATE DESC");
         List<OrderDetail> orderDetails = myPageRepository.selectOrderDetailsByUserId(userId);
         return new PageInfo<>(orderDetails);
     }
