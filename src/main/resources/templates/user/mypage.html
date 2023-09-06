@@ -102,8 +102,9 @@
                             </div>
 
                             <div class="buttons">
-                                <button id="reAddToCartBtn">재구매</button>
-                                <button th:if="${!orderDetail.isWrite}" id="writeReview">리뷰작성</button>
+                                <button class="reAddToCartBtn" th:data-count="${orderDetail.orderCount}" th:data-product-id="${orderDetail.productId}">재구매</button>
+                                <button th:if="${!orderDetail.isWrite}" class="writeReview">리뷰작성</button>
+                                <button th:if="${orderDetail.isWrite}" class="showReview" style="background-color: #f1dacb; color: #c56206">리뷰보기</button>
                             </div>
                         </li>
                     </ul>
@@ -130,17 +131,38 @@
             </div>
 
             <!-- 장바구니에 담겼습니다. 모달 창 -->
-            <div class="txt04" style="display: none;">
+            <div class="txt04 right__modal add__cart" style="display: none;">
                 <div class="inner">
-
                     <h4>알림</h4>
+                    <h5>
+                        <span>장바구니에 담겼습니다.</span>
+                        <div class="buttons cart-modal">
+                            <a id="closeCartModal">
+                                닫기
+                            </a>
+                            <a href="/user/cart">
+                                장바구니로 이동
+                            </a>
+                        </div>
+                    </h5>
+                </div>
+            </div>
 
-                    <h5>장바구니에 담겼습니다.</h5>
-
-                    <div class="buttons">
-                        <button>닫기</button>
-                        <button>장바구니로 이동</button>
-                    </div>
+            <!-- 이미 장바구니에 있는 상품입니다. 모달 창 -->
+            <div class="txt04 exist__mypage__cart" style="display: none;">
+                <div class="inner">
+                    <h4>알림</h4>
+                    <h5>
+                        <span>이미 장바구니에 있는 상품입니다.</span>
+                        <div class="buttons cart-modal">
+                            <a id="existCartModalClose">
+                                닫기
+                            </a>
+                            <a href="/user/cart">
+                                장바구니로 이동
+                            </a>
+                        </div>
+                    </h5>
                 </div>
             </div>
 
