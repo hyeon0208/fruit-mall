@@ -17,11 +17,6 @@ public class ReviewRepository implements ReviewMapper {
     }
 
     @Override
-    public Long selectReviewIdByUserIdAndProductId(Long userIdNo, Long productId) {
-        return reviewMapper.selectReviewIdByUserIdAndProductId(userIdNo, productId);
-    }
-
-    @Override
     public List<ReviewResDto> selectReviewsByProductId(Long productId) {
         return reviewMapper.selectReviewsByProductId(productId);
     }
@@ -29,5 +24,15 @@ public class ReviewRepository implements ReviewMapper {
     @Override
     public void updateReviewByUserId(String updateContents, Long userIdNo) {
         reviewMapper.updateReviewByUserId(updateContents, userIdNo);
+    }
+
+    @Override
+    public int selectOrderCountByUserIdAndProductId(Long userIdNo, Long productId) {
+        return reviewMapper.selectOrderCountByUserIdAndProductId(userIdNo, productId);
+    }
+
+    @Override
+    public int selectReviewCountByUserIdAndProductId(Long userIdNo, Long productId) {
+        return reviewMapper.selectReviewCountByUserIdAndProductId(userIdNo, productId);
     }
 }

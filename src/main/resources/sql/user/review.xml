@@ -3,14 +3,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fruit.mall.review.ReviewMapper">
     <insert id="insertReview" parameterType="com.fruit.mall.review.Review" useGeneratedKeys="true" keyProperty="reviewId">
-        INSERT INTO review (PRODUCT_ID, USER_ID_NO, REVIEW_CONTENTS)
-        VALUES (#{productId}, #{userIdNo}, #{reviewContents})
+        INSERT INTO review (PRODUCT_ID, USER_ID_NO, ORDER_ID, REVIEW_CONTENTS)
+        VALUES (
+               #{productId},
+               #{userIdNo},
+               (
+                   SELECT o.ORDER_ID
+                   FROM orders o
+                   JOIN order_product op ON o.ORDER_ID = op.ORDER_ID
+                   WHERE o.USER_ID_NO = #{userIdNo} AND op.PRODUCT_ID = #{productId}
+                   ORDER BY o.ORDER_DATE DESC LIMIT 1
+               ),
+               #{reviewContents}
+            )
     </insert>
-
-    <select id="selectReviewIdByUserIdAndProductId" resultType="Long">
-        SELECT REVIEW_ID FROM review
-        WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId}
-    </select>
 
     <select id="selectReviewsByProductId" resultType="com.fruit.mall.review.dto.ReviewResDto">
         SELECT r.REVIEW_ID,
@@ -20,6 +26,20 @@
         FROM review r
         JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
         WHERE PRODUCT_ID = #{productId}
+    </select>
+
+    <select id="selectOrderCountByUserIdAndProductId" resultType="int">
+        SELECT COUNT(*)
+        FROM orders o
+                 JOIN order_product op ON o.ORDER_ID = op.ORDER_ID AND op.PRODUCT_ID = #{productId}
+                 LEFT JOIN review r ON (r.PRODUCT_ID = op.PRODUCT_ID AND r.ORDER_ID = o.ORDER_ID)
+        WHERE o.USER_ID_NO = #{userIdNo};
+    </select>
+
+    <select id="selectReviewCountByUserIdAndProductId" resultType="int">
+        SELECT COUNT(*)
+        FROM review r
+        WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId};
     </select>
 
     <update id="updateReviewByUserId">

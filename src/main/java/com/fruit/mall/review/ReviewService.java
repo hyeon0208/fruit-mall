@@ -22,14 +22,15 @@ public class ReviewService {
     }
 
     public PageInfo<ReviewResDto> getReviewsByProductId(Long productId, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize, "REVIEW_CREATED_AT DESC");
         List<ReviewResDto> reviews = reviewRepository.selectReviewsByProductId(productId);
         return new PageInfo<>(reviews);
     }
 
     public Boolean isWriteReview(Long userIdNo, Long productId) {
-        Long reviewId = reviewRepository.selectReviewIdByUserIdAndProductId(userIdNo, productId);
-        if (reviewId == null) {
+        int orderCount = reviewRepository.selectOrderCountByUserIdAndProductId(userIdNo, productId);
+        int writeReviewCount = reviewRepository.selectReviewCountByUserIdAndProductId(userIdNo, productId);
+        if (orderCount != writeReviewCount) {
             return false;
         }
         return true;

@@ -10,12 +10,12 @@ $(() => {
     });
 
     $("#writeReview").on("click", () => {
-        $(".review__modal").show();
+        $(".review__modal.write__review").show();
 
         // 작성취소
         $(".review__modal .review__cancel a").on("click", (e) => {
             e.preventDefault();
-            $(".review__cancel__modal").show();
+            $(".review__cancel__modal").css("z-index", 10).show();
         });
 
         $(".review__cancel__modal .review__cancel a").on("click", (e) => {
@@ -47,7 +47,7 @@ $(() => {
                 dataType: "json",
                 headers: {'Content-Type': 'application/json'}
             }).then(res => {
-                $(".review__confirm__modal").show();
+                $(".review__confirm__modal").css("z-index", 10).show();
                 $(".review__confirm__modal .review__confirm a").on("click", () => {
                     $(".review__confirm__modal, .review__modal").hide();
                 });

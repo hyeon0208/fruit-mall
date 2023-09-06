@@ -10,9 +10,11 @@ import java.util.List;
 public interface ReviewMapper {
     void insertReview(Review review);
 
-    Long selectReviewIdByUserIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
-
     List<ReviewResDto> selectReviewsByProductId(@Param("productId") Long productId);
 
     void updateReviewByUserId(@Param("updateContents") String updateContents, @Param("userIdNo") Long userIdNo);
+
+    int selectOrderCountByUserIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
+
+    int selectReviewCountByUserIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
 }
