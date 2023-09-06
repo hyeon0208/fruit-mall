@@ -3,6 +3,11 @@ $(document).on("click", ".showReview", (e) => {
     window.location.href=`/user/review/${productId}`
 });
 
+
+$(document).on("click", ".group2", (e) => {
+    $(e.currentTarget).next(".deliveryInfo").slideToggle();
+});
+
 $(document).on("click", ".reAddToCartBtn", (e) => {
     const btn = $(e.currentTarget);
     const productId = btn.data("product-id");

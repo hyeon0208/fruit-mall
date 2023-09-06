@@ -74,7 +74,7 @@
 
                 <div class="history__line"></div>
 
-                <div class="historyContents">
+                <div class="historyContents" th:if="${orderDetails.size != 0}">
                     <ul>
                         <li th:each="orderDetail : ${orderDetails.list}">
                             <div class="txt">
@@ -98,6 +98,15 @@
                                         </p>
                                     </div>
 
+                                    <div class="deliveryInfo" style="display: none;">
+                                        <br>
+                                        <div style="border: 1px #000000 solid;background: #f7f5eb;padding: 8px;">
+                                            <p th:text="|주문자 : ${orderDetail.receiverName}|"></p>
+                                            <p th:text="|연락처 : ${#strings.substring(orderDetail.phoneNumber, 0, 3)}-${#strings.substring(orderDetail.phoneNumber, 3, 7)}-${#strings.substring(orderDetail.phoneNumber, 7)}|"></p>
+                                            <p th:text="|주소 : ${orderDetail.address}|"></p>
+                                            <p th:text="|배송요청사항 : ${orderDetail.orderRequired}|"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -108,6 +117,12 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+
+                <div class="historyContents" th:if="${orderDetails.size == 0}">
+                    <div class="txt" style="text-align: center">
+                        <span style="font-size: 20px">최근 주문/배송 조회 내역이 없습니다.</span>
+                    </div>
                 </div>
             </div>
 
