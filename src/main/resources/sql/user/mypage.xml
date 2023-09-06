@@ -12,6 +12,7 @@
                o.RECEIVER_NAME,
                o.PHONE_NUMBER,
                o.ADDRESS,
+               o.ORDER_REQUIRED,
                i.IMAGE_URL,
                IFNULL((SELECT IF(r.REVIEW_ID IS NOT NULL, 1, 0)
                        FROM review r
