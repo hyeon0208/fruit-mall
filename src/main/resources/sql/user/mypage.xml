@@ -15,14 +15,12 @@
                i.IMAGE_URL,
                IFNULL((SELECT IF(r.REVIEW_ID IS NOT NULL, 1, 0)
                        FROM review r
-                       WHERE r.PRODUCT_ID = p.PRODUCT_ID
-                         AND r.USER_ID_NO = #{userIdNo}), 0) AS IS_WRITE,
+                       WHERE r.ORDER_ID = o.ORDER_ID), 0) AS IS_WRITE,
                o.ORDER_DATE
         FROM order_product op
                  JOIN product p ON op.PRODUCT_ID = p.PRODUCT_ID
                  JOIN orders o ON op.ORDER_ID = o.ORDER_ID
                  JOIN image i ON i.PRODUCT_ID = p.PRODUCT_ID
-                 LEFT JOIN review r ON (r.PRODUCT_ID = p.PRODUCT_ID AND r.USER_ID_NO = #{userIdNo})
         WHERE o.USER_ID_NO = #{userIdNo}
           AND i.IMAGE_ID = (SELECT MIN(i2.IMAGE_ID) FROM image i2 WHERE i2.PRODUCT_ID = p.PRODUCT_ID)
     </select>
