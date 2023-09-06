@@ -30,8 +30,9 @@ public class CartController {
 
     @PostMapping("/main/cart/add")
     @ResponseBody
-    public Cart addProductToCart(@RequestBody CartAddReqDto cartAddReqDto) {
-        Optional<Cart> findCart = cartService.selectByUserIdAndProductId(cartAddReqDto.getUserIdNo(), cartAddReqDto.getProductId());
+    public Cart addProductToCart(@Login SessionUser sessionUser, @RequestBody CartAddReqDto cartAddReqDto) {
+        Long userId = sessionUser.getUserIdNo();
+        Optional<Cart> findCart = cartService.selectByUserIdAndProductId(userId, cartAddReqDto.getProductId());
         if (findCart.isPresent()) {
             if (findCart.get().getProductCount() != cartAddReqDto.getProductCount()) {
                 cartService.updateProductCnt(cartAddReqDto.getProductCount(), findCart.get().getCartId());
@@ -41,7 +42,7 @@ public class CartController {
             }
         }
         Cart cart = Cart.builder()
-                .userIdNo(cartAddReqDto.getUserIdNo())
+                .userIdNo(userId)
                 .productId(cartAddReqDto.getProductId())
                 .productCount(cartAddReqDto.getProductCount())
                 .build();

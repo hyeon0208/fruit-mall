@@ -260,7 +260,6 @@ $(document).on("click", ".addCartBtn", (e) => {
                 url: "/main/cart/add",
                 data: {
                     productId: productId,
-                    userIdNo: userIdNo,
                     productCount: 1,
                     localCart: localCart
                 },

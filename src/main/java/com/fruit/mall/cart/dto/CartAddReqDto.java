@@ -8,7 +8,6 @@ import java.util.List;
 @Getter
 public class CartAddReqDto {
     private Long productId;
-    private Long userIdNo;
     private int productCount;
     private List<Cart> localCart;
 }
