@@ -43,7 +43,7 @@ public class PaymentController {
 
     @PostMapping("/order/payment")
     public ResponseEntity<String> paymentComplete(@Login SessionUser sessionUser, @RequestBody List<OrderSaveDto> orderSaveDtos) throws IOException {
-        String orderNumber = String.valueOf(orderSaveDtos.get(0).getOrderNumber());
+        String orderNumber =orderSaveDtos.get(0).getOrderNumber();
         try {
             Long userId = sessionUser.getUserIdNo();
             paymentService.saveOrder(userId, orderSaveDtos);

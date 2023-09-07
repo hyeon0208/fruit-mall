@@ -17,7 +17,7 @@ public class ReviewRepository implements ReviewMapper {
     }
 
     @Override
-    public void insertMypageReview(Review review, Long orderNumber) {
+    public void insertMypageReview(Review review, String orderNumber) {
         reviewMapper.insertMypageReview(review, orderNumber);
     }
 

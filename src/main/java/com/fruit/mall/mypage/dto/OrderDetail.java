@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Getter
 @ToString
 public class OrderDetail {
-    private Long orderNumber;
+    private String orderNumber;
     private Long productId;
     private String productName;
     private int orderPrice;

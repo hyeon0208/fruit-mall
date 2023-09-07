@@ -13,7 +13,7 @@ public class OrderSaveDto {
     private String receiverName;
     private String phoneNumber;
     private int zipcode;
-    private Long orderNumber;
+    private String orderNumber;
     private String address;
     private String orderRequired;
     private String paymentMethod;
