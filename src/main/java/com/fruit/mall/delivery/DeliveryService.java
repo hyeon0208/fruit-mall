@@ -42,4 +42,8 @@ public class DeliveryService {
     public DeliveryResDto selectOneByUserIdAndDeliveryName(Long userIdNo, String deliveryName) {
         return deliveryRepository.selectOneByUserIdAndDeliveryName(userIdNo, deliveryName).get();
     }
+
+    public void deleteDelivery(String deliveryName, Long userIdNo) {
+        deliveryRepository.deleteDelivery(deliveryName, userIdNo);
+    }
 }

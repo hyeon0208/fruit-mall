@@ -18,4 +18,8 @@
         FROM delivery
         WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_NAME = #{deliveryName};
     </select>
+
+    <delete id="deleteDelivery">
+        DELETE FROM delivery WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_NAME = #{deliveryName};
+    </delete>
 </mapper>

@@ -26,4 +26,9 @@ public class DeliveryRepository implements DeliveryMapper {
     public Optional<DeliveryResDto> selectOneByUserIdAndDeliveryName(Long userIdNo, String deliveryName) {
         return deliveryMapper.selectOneByUserIdAndDeliveryName(userIdNo, deliveryName);
     }
+
+    @Override
+    public void deleteDelivery(String deliveryName, Long userIdNo) {
+        deliveryMapper.deleteDelivery(deliveryName, userIdNo);
+    }
 }

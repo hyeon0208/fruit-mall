@@ -23,6 +23,14 @@ public class DeliveryController {
         return "success";
     }
 
+    @PostMapping("/delete/delivery")
+    @ResponseBody
+    public String deleteDelivery(@Login SessionUser sessionUser, @RequestBody String deliveryName) {
+        System.out.println("deliveryName = " + deliveryName);
+        deliveryService.deleteDelivery(deliveryName, sessionUser.getUserIdNo());
+        return "success";
+    }
+
     @GetMapping("/delivery/get/{deliveryName}")
     public DeliveryResDto getDelivery(@Login SessionUser sessionUser, @PathVariable String deliveryName) {
         return deliveryService.selectOneByUserIdAndDeliveryName(sessionUser.getUserIdNo(), deliveryName);

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<div id="mypage_delivery">
+        <div class="inner">
+            <h2> 마이페이지 </h2>
+
+            <div class="tab__menu">
+                <a href="/user/mypage">
+                    <div class="history">
+                        <p>구매내역</p>
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="delivery">
+                        <p>배송지관리</p>
+                    </div>
+                </a>
+
+                <a href="/user/mypage/userinfo">
+                    <div class="memberInfo">
+                        <p>회원정보</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="txt__box">
+                <p>나의 배송지 목록 <br>
+                    <span>* 배송지는 3개까지만 저장됩니다.</span>
+                </p>
+                <button>+ 배송지추가</button>
+            </div>
+
+            <div class="delivery__wrap" th:each="delivery : ${deliveries}" th:data-delivery-size="${deliveries.size()}">
+                <div class="buttons">
+                    <button>수정</button>
+                    <button class="deleteDeliveryBtn" th:data-delivery-name="${delivery.deliveryName}">삭제</button>
+                </div>
+
+                <ul>
+                    <li>
+                        <span class="li__title">배송지명</span>
+                        <span th:text="${delivery.deliveryName}"></span>
+                    </li>
+                    <li>
+                        <span class="li__title">수령인</span>
+                        <span th:text="${delivery.userName}"></span>
+                    </li>
+                    <li>
+                        <span class="li__title">연락처</span>
+                        <span th:text="${delivery.phoneNumber}"></span>
+                    </li>
+                    <li>
+                        <span class="li__title">배송주소</span>
+                        <span th:text="${delivery.zipcode + ' ' + delivery.address}"></span>
+                    </li>
+                </ul>
+            </div>
+
+        <!-- 배송지추가 모달 창 -->
+        <div class="delivery__add" style="display: none;">
+            <div class="delivery__add__inner">
+
+                <div class="top">
+                    <span>배송지추가</span>
+                </div>
+
+                <div class="bottom">
+                    <label for="title">
+                        <p>배송지명</p>
+                        <input type="textbox" name="title" id="title">
+                    </label>
+
+                    <label for="name">
+                        <p>이름</p>
+                        <input type="textbox" name="name" id="name">
+                    </label>
+
+                    <label for="phone" class="phone">
+                        <p>연락처</p>
+                        <input type="textbox" name="phone1" id="phone1">
+                        <input type="textbox" name="phone2" id="phone2">
+                    </label>
+
+                    <label for="add" class="add">
+                        <p>주소</p>
+                        <button>우편번호</button>
+                        <input type="textbox" name="add" id="add" class="postalCode">
+                        <input type="textbox" name="add2" id="add2" class="postalCode2">
+                        <input type="textbox" name="add3" id="add3" class="postalCode2">
+                    </label>
+
+
+                    <div class="delivery__add__buttons">
+                        <button class="delivery__add__cancel">
+                            작성취소
+                        </button>
+
+                        <button class="delivery__add__confirm">
+                            저장하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 배송지저장이 완료되었습니다. 모달 창 -->
+        <div class="delivery__add__confirm" style="display: none;">
+            <div class="delivery__add__confirm__inner">
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="bottom">
+                    <span>배송지 저장이 완료되었습니다.</span>
+
+                    <div class="delivery__add__confirm__buttons">
+                        <button>확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 배송지저장 작성취소 모달 창 -->
+        <div class="delivery__add__calcel" style="display: none;">
+            <div class="delivery__add__calcel__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="bottom">
+                    <span>작성중인 내용이 모두 삭제됩니다. <br>
+                        취소 하시겠습니까?</span>
+
+                    <div class="delivery__add__calcel__buttons">
+                        <button>
+                            취소하기
+                        </button>
+
+                        <button>
+                            계속작성
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 배송지관리 삭제 모달 창 -->
+        <div class="delivery__delete" style="display: none;">
+            <div class="delivery__delete__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="bottom">
+                    <span>기존 배송지를 삭제하시겠습니까?</span>
+
+                    <div class="delivery__delete__buttons">
+                        <button>
+                            취소하기
+                        </button>
+
+                        <button>
+                            삭제하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 배송지관리 수정 모달 창 -->
+        <div class="delivery__edit" style="display: none;">
+            <div class="delivery__edit__inner">
+                <div class="top">
+                    <span>배송지추가</span>
+                </div>
+
+                <div class="bottom">
+                    <label for="title">
+                        <p>배송지명</p>
+                        <input type="textbox" name="title" id="title">
+                    </label>
+
+                    <label for="name">
+                        <p>이름</p>
+                        <input type="textbox" name="name" id="name">
+                    </label>
+
+                    <label for="phone" class="phone">
+                        <p>연락처</p>
+                        <input type="textbox" name="phone1" id="phone1">
+                        <input type="textbox" name="phone2" id="phone2">
+                    </label>
+
+                    <label for="add" class="add">
+                        <p>주소</p>
+                        <button>우편번호</button>
+                        <input type="textbox" name="add" id="add" class="postalCode">
+                        <input type="textbox" name="add2" id="add2" class="postalCode2">
+                        <input type="textbox" name="add3" id="add3" class="postalCode2">
+                    </label>
+
+                    <div class="delivery__edit__buttons">
+                        <button class="delivery__edit__cancel">
+                            <a href="#">작성취소</a>
+                        </button>
+
+                        <button class="delivery__edit__confirm">
+                            <a href="#">수정하기</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="aside">
+        <div class="sidebar">
+            <ul>
+                <!-- 마이페이지 -->
+                <li>
+                    <a href="/user/mypage" th:unless="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p th:text="${session.loginUser.getName()} + 님"></p>
+                    </a>
+                    <a href="#" th:if="${session.loginUser == null}">
+                        <span class="material-symbols-outlined">person</span>
+                        <p>손님</p>
+                    </a>
+                    <div class="line"></div>
+                </li>
+
+                <!-- 장바구니 -->
+                <li class="right__cart">
+                    <a href="/user/cart">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <p>장바구니</p>
+                        <div th:unless="${session.loginUser == null}" class="cart__count" th:text="${userCartsCount}"></div>
+                        <div th:if="${session.loginUser == null}" id="localSideBarCartCount" th:data-login-user="${session.loginUser}" class="cart__count"></div>
+                    </a>
+                </li>
+
+                <!-- 찜 -->
+                <li class="right__favorite">
+                    <a href="#">
+                        <span class="material-icons">favorite</span>
+                        <p>찜</p>
+                        <div th:unless="${session.loginUser == null}" class="favorite__count" th:text="${likesCount}"></div>
+                        <div th:if="${session.loginUser == null}"></div>
+                    </a>
+                    <div class="line"></div>
+                </li>
+
+                <!-- 최근 본 상품 -->
+                <li class="last">
+                    <a href="#">
+                        <p>최근 본 상품</p>
+                        <tr th:each="product : ${recentProducts}">
+                            <a th:href="@{/user/detail/{id}(id=${product.getProductId()})}">
+                                <td><img th:src="${product.getImageUrl()}"/></td>
+                            </a>
+                        </tr>
+                        <p id="TopBtn" style="text-align: center">맨위로</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</th:block>>
+</html>

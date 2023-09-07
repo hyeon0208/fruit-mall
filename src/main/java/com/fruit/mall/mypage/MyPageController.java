@@ -2,6 +2,8 @@ package com.fruit.mall.mypage;
 
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.delivery.DeliveryService;
+import com.fruit.mall.delivery.dto.DeliveryResDto;
 import com.fruit.mall.mypage.dto.OrderDetail;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class MyPageController {
     private final MyPageService myPageService;
+    private final DeliveryService deliveryService;
 
     @GetMapping("/user/mypage")
     public String mypage(@Login SessionUser sessionUser, Model model,
@@ -26,6 +31,8 @@ public class MyPageController {
 
     @GetMapping("/user/mypage/delivery")
     public String goMyPageDelivery(@Login SessionUser sessionUser, Model model) {
+        List<DeliveryResDto> deliveries = deliveryService.deliveryAllByUserId(sessionUser.getUserIdNo());
+        model.addAttribute("deliveries", deliveries);
         return "user/mypage_delivery";
     }
 
