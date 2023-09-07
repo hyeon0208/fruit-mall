@@ -9,7 +9,7 @@ $(() => {
             axios({
                 url: "/delete/delivery",
                 method: "post",
-                data: $(e.currentTarget).data("delivery-name"),
+                data: { deliveryName: $(e.currentTarget).data("delivery-name") },
                 dataType: "json",
                 headers: {'Content-Type': 'application/json'}
             }).then(res => {

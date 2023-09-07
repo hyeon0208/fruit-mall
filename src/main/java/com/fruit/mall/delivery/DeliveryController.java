@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 public class DeliveryController {
@@ -25,9 +27,8 @@ public class DeliveryController {
 
     @PostMapping("/delete/delivery")
     @ResponseBody
-    public String deleteDelivery(@Login SessionUser sessionUser, @RequestBody String deliveryName) {
-        System.out.println("deliveryName = " + deliveryName);
-        deliveryService.deleteDelivery(deliveryName, sessionUser.getUserIdNo());
+    public String deleteDelivery(@Login SessionUser sessionUser, @RequestBody Map<String, String> data) {
+        deliveryService.deleteDelivery(data.get("deliveryName"), sessionUser.getUserIdNo());
         return "success";
     }
 
