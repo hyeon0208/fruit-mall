@@ -30,41 +30,39 @@
                     <span>기간검색</span>
 
                     <div class="search__box__buttons">
-                        <button>1개월</button>
-                        <button>3개월</button>
-                        <button>6개월</button>
-                        <button>1년</button>
-                        <button>3년</button>
+                        <button class="durationBtn" value="1">1개월</button>
+                        <button class="durationBtn" value="3">3개월</button>
+                        <button class="durationBtn" value="6">6개월</button>
+                        <button class="durationBtn" value="12">1년</button>
+                        <button class="durationBtn" value="36">3년</button>
                     </div>
 
                     <div class="date">
                         <label for="date1">
-                            <input type="date" id="date1" value="2023-07-19">
+                            <input type="date" id="date1">
                         </label>
 
                         <span>~</span>
 
                         <label for="date2">
-                            <input type="date" id="date2" value="2023-07-19">
+                            <input type="date" id="date2">
                         </label>
                     </div>
                 </div>
 
                 <div class="second">
                     <select name="products" id="products">
-                        <option value="상품명">상품명</option>
-                        <option value="상품명">주문번호</option>
-                        <option value="상품명">상품번호</option>
-                        <option value="상품명">기간</option>
+                        <option>상품명</option>
+                        <option>주문번호</option>
                     </select>
 
                     <label for="search">
-                        <input type="text">
+                        <input id="searchText" type="text">
                     </label>
 
-                    <button>초기화</button>
+                    <button id="initBtn">초기화</button>
 
-                    <button>검색</button>
+                    <button id="myPageSearchBtn">검색</button>
                 </div>
             </div>
 

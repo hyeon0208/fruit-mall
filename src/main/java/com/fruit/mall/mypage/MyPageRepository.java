@@ -1,5 +1,6 @@
 package com.fruit.mall.mypage;
 
+import com.fruit.mall.mypage.dto.MyPageSearchCond;
 import com.fruit.mall.mypage.dto.OrderDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,10 @@ public class MyPageRepository implements MyPageMapper {
     @Override
     public List<OrderDetail> selectOrderDetailsByUserId(Long userIdNo) {
         return myPageMapper.selectOrderDetailsByUserId(userIdNo);
+    }
+
+    @Override
+    public List<OrderDetail> selectOrderDetailsBySearchFilter(MyPageSearchCond cond, Long id) {
+        return myPageMapper.selectOrderDetailsBySearchFilter(cond, id);
     }
 }

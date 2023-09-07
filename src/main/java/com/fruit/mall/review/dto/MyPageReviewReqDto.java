@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class MyPageReviewReqDto {
     private Long productId;
     private Long userIdNo;
-    private Long orderNumber;
+    private String orderNumber;
     private String reviewContents;
 
     public void setUserIdNo(Long userIdNo) {
@@ -18,7 +18,7 @@ public class MyPageReviewReqDto {
     }
 
     @Builder
-    public MyPageReviewReqDto(Long productId, Long userIdNo, Long orderNumber, String reviewContents) {
+    public MyPageReviewReqDto(Long productId, Long userIdNo, String orderNumber, String reviewContents) {
         this.productId = productId;
         this.userIdNo = userIdNo;
         this.orderNumber = orderNumber;
