@@ -31,7 +31,7 @@ public class SidebarAspect {
     private final CartService cartService;
     private final RecentProductService recentProductService;
 
-    @Around("execution(* com.fruit.mall..*Controller.*(..)) && args(sessionUser,model,..)")
+    @Around("execution(* com.fruit.mall..*Controller.*(..)) && args(sessionUser,model,..) && !execution(* com.fruit.mall..*Controller.goMyPageUserInfoEdit(..))")
     public Object addSidebar(ProceedingJoinPoint joinPoint, @Login SessionUser sessionUser, Model model) throws Throwable {
         if (sessionUser != null) {
             Long userId = sessionUser.getUserIdNo();
