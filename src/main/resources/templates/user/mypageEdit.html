@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<div id="mypageEdit">
+        <div class="inner">
+            <h2> 마이페이지 </h2>
+
+            <div class="tab__menu">
+                <a href="/user/mypage">
+                    <div class="history">
+                        <p>구매내역</p>
+                    </div>
+                </a>
+
+                <a href="/user/mypage/delivery">
+                    <div class="delivery">
+                        <p>배송지관리</p>
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="memberInfo">
+                        <p>회원정보</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="txt_box">
+                <p>회원정보 수정</p>
+                <span>회원정보 수정 페이지로 이동 시 정보를 안전하게 <br>
+                    보고하기 위해 현재 비밀번호 확인이 필요합니다.</span>
+            </div>
+
+            <div class="input">
+                <p>비밀번호 확인</p>
+                <div class="input_wrap">
+                    <div class="input_wrap">
+                        <input id="mypage-edit-password" type="password" placeholder="비밀번호를 입력해주세요.">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </div>
+                </div>
+                <div class="error-message" id="email-error"></div>
+            </div>
+
+            <div class="button">
+                <button>
+                    <a href="#">확인</a>
+                </button>
+
+                <span>
+                    <a href="/findPw">비밀번호 찾기</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

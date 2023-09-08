@@ -37,7 +37,12 @@ public class MyPageController {
     }
 
     @GetMapping("/user/mypage/userinfo")
-    public String goMyPageUserInfo(@Login SessionUser sessionUser, Model model) {
+    public String goMyPageUserInfo() {
         return "user/mypageEdit";
+    }
+
+    @GetMapping("/user/mypage/userinfo/edit")
+    public String goMyPageUserInfoEdit() {
+        return "user/mypageEdit02";
     }
 }

@@ -11,6 +11,8 @@ public interface UserMapper {
 
     User selectUserByUserEmail(@Param("user_email") String user_email);
 
+    String selectPwdById(@Param("userIdNo") Long userIdNo);
+
     void insertTerm(Term term);
 
     String selectEmailByUserEmail(String user_email);

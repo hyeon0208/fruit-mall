@@ -22,6 +22,14 @@ public class UserService {
         return true;
     }
 
+    public boolean myPageLoginCheck(Long userIdNo, String inputPwd) {
+        String curPwd = userRepository.selectPwdById(userIdNo);
+        if (curPwd == null || !passwordEncoder.matches(inputPwd, curPwd)) {
+            return false;
+        }
+        return true;
+    }
+
     public void insertUser(User user) {
         userRepository.insertUser(user);
     }
