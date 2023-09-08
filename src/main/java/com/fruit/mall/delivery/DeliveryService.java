@@ -1,5 +1,6 @@
 package com.fruit.mall.delivery;
 
+import com.fruit.mall.delivery.dto.DeliveryReqDto;
 import com.fruit.mall.delivery.dto.DeliveryResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,23 +15,23 @@ import java.util.Optional;
 public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
-    public void insertDelivery(Long userId, Delivery delivery) {
-        Optional<DeliveryResDto> findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, delivery.getDeliveryName());
+    public void insertDelivery(Long userId, DeliveryReqDto dto) {
+        Optional<DeliveryResDto> findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, dto.getDeliveryName());
 
         if (findDelivery.isPresent()) {
             String findName = findDelivery.get().getDeliveryName();
-            if (findName.equals(delivery.getDeliveryName())) {
+            if (findName.equals(dto.getDeliveryName())) {
                 throw new IllegalArgumentException("배송지 이름은 중복될수 없습니다.");
             }
         }
 
         Delivery newDelivery = Delivery.builder()
                 .userIdNo(userId)
-                .deliveryName(delivery.getDeliveryName())
-                .userName(delivery.getUserName())
-                .phoneNumber(delivery.getPhoneNumber())
-                .zipcode(delivery.getZipcode())
-                .address(delivery.getAddress())
+                .deliveryName(dto.getDeliveryName())
+                .userName(dto.getUserName())
+                .phoneNumber(dto.getPhoneNumber())
+                .zipcode(dto.getZipcode())
+                .address(dto.getAddress())
                 .build();
         deliveryRepository.insertDelivery(newDelivery);
     }

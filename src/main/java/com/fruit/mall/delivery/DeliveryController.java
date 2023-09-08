@@ -2,6 +2,7 @@ package com.fruit.mall.delivery;
 
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.delivery.dto.DeliveryReqDto;
 import com.fruit.mall.delivery.dto.DeliveryResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,7 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     @PostMapping("/delivery/add")
-    public String insertDelivery(@Login SessionUser sessionUser, @Validated @RequestBody Delivery delivery, BindingResult bindingResult) {
+    public String insertDelivery(@Login SessionUser sessionUser, @Validated @RequestBody DeliveryReqDto delivery, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return bindingResult.getFieldError().getDefaultMessage();
         }
