@@ -16,7 +16,8 @@ public class Delivery {
     private String address;
 
     @Builder
-    public Delivery(Long userIdNo, String deliveryName, String userName, String phoneNumber, int zipcode, String address) {
+    public Delivery(Long deliveryId, Long userIdNo, String deliveryName, String userName, String phoneNumber, int zipcode, String address) {
+        this.deliveryId = deliveryId;
         this.userIdNo = userIdNo;
         this.deliveryName = deliveryName;
         this.userName = userName;

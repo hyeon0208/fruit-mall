@@ -31,4 +31,14 @@ public class DeliveryRepository implements DeliveryMapper {
     public void deleteDelivery(String deliveryName, Long userIdNo) {
         deliveryMapper.deleteDelivery(deliveryName, userIdNo);
     }
+
+    @Override
+    public void updateDelivery(Delivery delivery) {
+        deliveryMapper.updateDelivery(delivery);
+    }
+
+    @Override
+    public Long selectDeliveryId(Long userIdNo, String deliveryName) {
+        return deliveryMapper.selectDeliveryId(userIdNo, deliveryName);
+    }
 }

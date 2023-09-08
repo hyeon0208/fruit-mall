@@ -75,13 +75,83 @@ $(() => {
     $(document).on("click", "#mypage-DaumPostcode", () => {
         new daum.Postcode({
             oncomplete: (res) => {
-                // 검색 결과에서 우편번호와 주소 정보를 가져옵니다.
                 const zonecode = res.zonecode;
                 const address = res.address;
 
-                // 주소 정보를 해당 필드에 넣습니다.
-                document.getElementById('add_1').value = zonecode; // 우편번호 필드
-                document.getElementById('add_2').value = address; // 주소 필드
+                $("#add_1").val(zonecode);
+                $("#add_2").val(address);
+            }
+        }).open();
+    });
+
+    $(document).on("click", ".editDeliveryBtn", (e) => {
+        $(".delivery__edit").show();
+        const delivery = $(e.currentTarget).closest(".delivery__wrap");
+        const deliveryName = delivery.find('li span:contains("배송지명")').next().text();
+        const userName = delivery.find('li span:contains("수령인")').next().text();
+        const phoneNumber = delivery.find('li span:contains("연락처")').next().text();
+        const address = delivery.find('li span:contains("배송주소")').next().text();
+
+        $('#edit_title').val(deliveryName);
+        $('#edit_name').val(userName);
+
+        let phoneSplit = phoneNumber.split("-");
+        $('#edit_phone1').val(phoneSplit[0]);
+        $('#edit_phone2').val(phoneSplit[1] + phoneSplit[2]);
+
+        let addressSplit = address.split(" ");
+        $('#edit_1').val(addressSplit.shift());
+        $('#edit_2').val(addressSplit.join(' '));
+
+        $(".delivery__edit .delivery__edit__buttons button:eq(0)").on("click", (e) => {
+            e.preventDefault();
+            $(".delivery__edit").hide();
+        });
+
+        $(".delivery__edit .delivery__edit__buttons button:eq(1)").on("click", (e) => {
+            e.preventDefault();
+
+            axios({
+                url: "/delivery/update",
+                method: "post",
+                data: {
+                    curDeliveryName: deliveryName,
+                    updateDeliveryName: $("#edit_title").val(),
+                    userName: $("#edit_name").val(),
+                    phoneNumber: $("#edit_phone1").val() + $("#edit_phone2").val(),
+                    zipcode: $("#edit_1").val(),
+                    address: $("#edit_2").val()
+                },
+                dataType: "json",
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => {
+                if (res.data == "success") {
+                    $(".delivery__add__confirm").css("z-index", 10).show();
+                    $(".delivery__add__confirm button").on("click", () => {
+                        $(".delivery__add__confirm").on("click", () => {
+                            $(".delivery__add__confirm").hide();
+                            $(".delivery__edit").hide();
+                            window.location.href = "/user/mypage/delivery";
+                        });
+                    });
+                } else {
+                    alert(res.data);
+                }
+            }).catch(error => {
+                alert(JSON.stringify(error.response.data));
+            });
+        });
+    });
+
+
+    $(document).on("click", "#mypage-DaumPostcode-edit", () => {
+        new daum.Postcode({
+            oncomplete: (res) => {
+                const zonecode = res.zonecode;
+                const address = res.address;
+
+                $("#edit_1").val(zonecode);
+                $("#edit_2").val(address);
             }
         }).open();
     });

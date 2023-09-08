@@ -2,6 +2,7 @@ package com.fruit.mall.delivery;
 
 import com.fruit.mall.delivery.dto.DeliveryReqDto;
 import com.fruit.mall.delivery.dto.DeliveryResDto;
+import com.fruit.mall.delivery.dto.DeliveryUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,28 @@ public class DeliveryService {
 
     public void deleteDelivery(String deliveryName, Long userIdNo) {
         deliveryRepository.deleteDelivery(deliveryName, userIdNo);
+    }
+
+    public void updateDelivery(Long userId, DeliveryUpdateDto dto) {
+        Optional<DeliveryResDto> findDelivery = deliveryRepository.selectOneByUserIdAndDeliveryName(userId, dto.getUpdateDeliveryName());
+
+        if (findDelivery.isPresent() && !dto.getUpdateDeliveryName().equals(dto.getCurDeliveryName())) {
+            String findName = findDelivery.get().getDeliveryName();
+            if (findName.equals(dto.getUpdateDeliveryName())) {
+                throw new IllegalArgumentException("변경하려는 배송지 이름이 이미 존재합니다.");
+            }
+        }
+
+        Long deliveryId = deliveryRepository.selectDeliveryId(userId, dto.getCurDeliveryName());
+        Delivery newDelivery = Delivery.builder()
+                .deliveryId(deliveryId)
+                .userIdNo(userId)
+                .deliveryName(dto.getUpdateDeliveryName())
+                .userName(dto.getUserName())
+                .phoneNumber(dto.getPhoneNumber())
+                .zipcode(dto.getZipcode())
+                .address(dto.getAddress())
+                .build();
+        deliveryRepository.updateDelivery(newDelivery);
     }
 }

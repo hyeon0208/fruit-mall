@@ -19,7 +19,24 @@
         WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_NAME = #{deliveryName};
     </select>
 
+    <select id="selectDeliveryId" resultType="Long">
+        SELECT DELIVERY_ID
+        FROM delivery
+        WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_NAME = #{deliveryName};
+    </select>
+
+
     <delete id="deleteDelivery">
         DELETE FROM delivery WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_NAME = #{deliveryName};
     </delete>
+
+    <update id="updateDelivery" parameterType="com.fruit.mall.delivery.Delivery">
+        UPDATE delivery
+        SET DELIVERY_NAME = #{deliveryName},
+            USER_NAME = #{userName},
+            PHONE_NUMBER = #{phoneNumber},
+            ZIPCODE = #{zipcode},
+            ADDRESS = #{address}
+        WHERE USER_ID_NO = #{userIdNo} AND DELIVERY_ID = #{deliveryId};
+    </update>
 </mapper>

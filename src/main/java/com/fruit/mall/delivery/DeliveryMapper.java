@@ -16,4 +16,8 @@ public interface DeliveryMapper {
     Optional<DeliveryResDto> selectOneByUserIdAndDeliveryName(@Param("userIdNo") Long userIdNo, @Param("deliveryName") String deliveryName);
 
     void deleteDelivery(@Param("deliveryName") String deliveryName, @Param("userIdNo") Long userIdNo);
+
+    void updateDelivery(Delivery delivery);
+
+    Long selectDeliveryId(@Param("userIdNo") Long userIdNo, @Param("deliveryName") String deliveryName);
 }
