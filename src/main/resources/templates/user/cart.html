@@ -52,7 +52,7 @@
                                     </span>
                                 </div>
 
-                                <div class="price" th:data-status="${product.productSaleStatus}">
+                                <div class="price" th:data-status="${product.productSaleStatus}" th:data-stock="${product.productStock}">
                                     <span id="cartPrice" th:if="${product.productSaleStatus != '품절'}" th:text="|${#numbers.formatInteger((product.productPrice), 0, 'COMMA')}원|"></span>
                                     <span id="cartSoldOut" style="color: red; display: none;">재고수량이 부족합니다.</span>
                                     <span th:if="${product.productSaleStatus == '품절'}" text="품절" style="color: red">품절</span>

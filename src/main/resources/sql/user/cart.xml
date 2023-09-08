@@ -38,6 +38,7 @@
             c.USER_ID_NO,
             c.PRODUCT_ID,
             p.PRODUCT_NAME,
+            p.PRODUCT_STOCK,
             c.PRODUCT_COUNT,
             c.PRODUCT_PRICE,
             c.PRODUCT_DISCOUNT,

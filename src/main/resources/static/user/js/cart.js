@@ -1,4 +1,19 @@
 $(() => {
+    $(".price").each((i, e) => {
+        const stock = $(e).data("stock");
+        const productCnt = $(e).closest(".td_wrap").find(".productCnt").val();
+        const cartPriceDiv = $(e).closest(".td_wrap").find("#cartPrice")
+        const cartSoldOutDiv = $(e).find("#cartSoldOut")
+
+        if (stock < productCnt) {
+            cartPriceDiv.hide();
+            cartSoldOutDiv.show();
+        } else {
+            cartPriceDiv.show();
+            cartSoldOutDiv.hide();
+        }
+    });
+
     const isChecked = $("#cartAllChk").prop("checked");
     $("input[type='checkbox']").prop("checked", isChecked);
 
@@ -107,7 +122,7 @@ $(document).on("click", "#goPaymentBtn", () => {
         const productRow = $(checkbox).closest("tr");
         const productStatus = productRow.find(".price").data("status");
 
-        if (productStatus === "품절" || $("#cartSoldOut").is(':visible')) {
+        if (productStatus === "품절" || productRow.find("#cartSoldOut").is(':visible')) {
             soldOutProducts.push(i);
         } else {
             const productId = $(checkbox).data("product-id");
@@ -116,7 +131,7 @@ $(document).on("click", "#goPaymentBtn", () => {
     });
 
     if (soldOutProducts.length > 0 || $("#cartSoldOut").is(':visible')) {
-        alert("품절상품은 구매 불가능합니다.");
+        alert("재고 부족 또는 품절상품은 구매 불가능합니다.");
         return;
     }
 

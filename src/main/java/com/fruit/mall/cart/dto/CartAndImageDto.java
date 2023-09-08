@@ -10,6 +10,7 @@ public class CartAndImageDto {
     private Long userIdNo;
     private Long productId;
     private String productName;
+    private int productStock;
     private int productCount;
     private int productPrice;
     private int productDiscount;
