@@ -191,6 +191,10 @@ function showMainProductList() {
     });
 }
 
+$(document).on("click", ".item.cart", () => {
+    window.location.href = "/user/cart";
+});
+
 
 new Swiper('.promotion .swiper', {
     slidesPerView: 1, // 한 번에 보여 줄 슬라이드 개수
