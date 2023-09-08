@@ -31,12 +31,12 @@
                 <p>나의 배송지 목록 <br>
                     <span>* 배송지는 3개까지만 저장됩니다.</span>
                 </p>
-                <button>+ 배송지추가</button>
+                <button id="addDelivery">+ 배송지추가</button>
             </div>
 
             <div class="delivery__wrap" th:each="delivery : ${deliveries}" th:data-delivery-size="${deliveries.size()}">
                 <div class="buttons">
-                    <button>수정</button>
+                    <button class="editDeliveryBtn">수정</button>
                     <button class="deleteDeliveryBtn" th:data-delivery-name="${delivery.deliveryName}">삭제</button>
                 </div>
 
@@ -51,7 +51,7 @@
                     </li>
                     <li>
                         <span class="li__title">연락처</span>
-                        <span th:text="${delivery.phoneNumber}"></span>
+                        <span th:text="|${#strings.substring(delivery.phoneNumber, 0, 3)}-${#strings.substring(delivery.phoneNumber, 3, 7)}-${#strings.substring(delivery.phoneNumber, 7)}|"></span>
                     </li>
                     <li>
                         <span class="li__title">배송주소</span>
@@ -69,28 +69,28 @@
                 </div>
 
                 <div class="bottom">
-                    <label for="title">
+                    <label for="add_title">
                         <p>배송지명</p>
-                        <input type="textbox" name="title" id="title">
+                        <input type="textbox" name="title" id="add_title">
                     </label>
 
-                    <label for="name">
+                    <label for="add_name">
                         <p>이름</p>
-                        <input type="textbox" name="name" id="name">
+                        <input type="textbox" name="name" id="add_name">
                     </label>
 
-                    <label for="phone" class="phone">
+                    <label for="add_phone1" class="phone">
                         <p>연락처</p>
-                        <input type="textbox" name="phone1" id="phone1">
-                        <input type="textbox" name="phone2" id="phone2">
+                        <input type="textbox" name="phone1" id="add_phone1">
+                        <input type="textbox" name="phone2" id="add_phone2">
                     </label>
 
-                    <label for="add" class="add">
+                    <label for="add_1" class="add">
                         <p>주소</p>
-                        <button>우편번호</button>
-                        <input type="textbox" name="add" id="add" class="postalCode">
-                        <input type="textbox" name="add2" id="add2" class="postalCode2">
-                        <input type="textbox" name="add3" id="add3" class="postalCode2">
+                        <button id="mypage-DaumPostcode">우편번호</button>
+                        <input type="textbox" name="add" id="add_1" class="postalCode">
+                        <input type="textbox" name="add2" id="add_2" class="postalCode2">
+                        <input type="textbox" name="add3" id="add_3" class="postalCode2">
                     </label>
 
 
@@ -99,7 +99,7 @@
                             작성취소
                         </button>
 
-                        <button class="delivery__add__confirm">
+                        <button class="delivery__add__confirm__btn">
                             저장하기
                         </button>
                     </div>
@@ -181,28 +181,28 @@
                 </div>
 
                 <div class="bottom">
-                    <label for="title">
+                    <label for="edit_title">
                         <p>배송지명</p>
-                        <input type="textbox" name="title" id="title">
+                        <input type="textbox" name="title" id="edit_title">
                     </label>
 
                     <label for="name">
                         <p>이름</p>
-                        <input type="textbox" name="name" id="name">
+                        <input type="textbox" name="name" id="edit_name">
                     </label>
 
                     <label for="phone" class="phone">
                         <p>연락처</p>
-                        <input type="textbox" name="phone1" id="phone1">
-                        <input type="textbox" name="phone2" id="phone2">
+                        <input type="textbox" name="phone1" id="edit_phone1">
+                        <input type="textbox" name="phone2" id="edit_phone2">
                     </label>
 
                     <label for="add" class="add">
                         <p>주소</p>
                         <button>우편번호</button>
-                        <input type="textbox" name="add" id="add" class="postalCode">
-                        <input type="textbox" name="add2" id="add2" class="postalCode2">
-                        <input type="textbox" name="add3" id="add3" class="postalCode2">
+                        <input type="textbox" name="add" id="edit_1" class="postalCode">
+                        <input type="textbox" name="add2" id="edit_2" class="postalCode2">
+                        <input type="textbox" name="add3" id="edit_3" class="postalCode2">
                     </label>
 
                     <div class="delivery__edit__buttons">

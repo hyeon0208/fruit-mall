@@ -2242,7 +2242,7 @@
   justify-content: center;
 }
 #mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__cancel,
-#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm {
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm__btn {
   border: 1px solid #252525;
   cursor: pointer;
   font: 600 16px/1 "Nanum Gothic";
@@ -2251,7 +2251,7 @@
   background-color: #fff;
   border-radius: 5px;
 }
-#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm {
+#mypage_delivery .delivery__add .delivery__add__inner .delivery__add__buttons .delivery__add__confirm__btn {
   border: 1px solid var(--primary-color);
   background-color: var(--primary-color);
 }
@@ -2260,13 +2260,11 @@
 }
 #mypage_delivery .delivery__add__confirm {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.7) fixed;
   z-index: 9;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
