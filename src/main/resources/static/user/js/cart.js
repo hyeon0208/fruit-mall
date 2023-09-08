@@ -165,12 +165,14 @@ $(document).on("click", ".increaseProductCnt", (e) => {
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
+            const cartPriceDiv = $(e.currentTarget).closest(".td_wrap").find("#cartPrice")
+            const cartSoldOutDiv = $(e.currentTarget).closest(".td_wrap").find("#cartSoldOut")
             if (res.data == "재고부족") {
-                $("#cartPrice").hide();
-                $("#cartSoldOut").show();
+                cartPriceDiv.hide();
+                cartSoldOutDiv.show();
             } else {
-                $("#cartPrice").show();
-                $("#cartSoldOut").hide();
+                cartPriceDiv.show();
+                cartSoldOutDiv.hide();
             }
         });
     }
@@ -216,12 +218,14 @@ $(document).on("click", ".decreaseProductCnt", (e) => {
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
+            const cartPriceDiv = $(e.currentTarget).closest(".td_wrap").find("#cartPrice")
+            const cartSoldOutDiv = $(e.currentTarget).closest(".td_wrap").find("#cartSoldOut")
             if (res.data == "재고부족") {
-                $("#cartPrice").hide();
-                $("#cartSoldOut").show();
+                cartPriceDiv.hide();
+                cartSoldOutDiv.show();
             } else {
-                $("#cartPrice").show();
-                $("#cartSoldOut").hide();
+                cartPriceDiv.show();
+                cartSoldOutDiv.hide();
             }
         });
     }
