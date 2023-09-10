@@ -1,5 +1,7 @@
 package com.fruit.mall.like;
 
+import com.fruit.mall.config.Login;
+import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,8 +14,8 @@ public class LikeController {
 
 
     @PostMapping("/like/disabled")
-    public String likeDisable(@RequestBody Like like) {
-        likeService.deleteLike(like.getProductId());
+    public String likeDisable(@Login SessionUser sessionUser, @RequestBody Like like) {
+        likeService.deleteLike(sessionUser.getUserIdNo(), like.getProductId());
         return "success";
     }
 

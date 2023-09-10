@@ -103,8 +103,8 @@ public class CartController {
 
     @DeleteMapping("/cart/delete/{cartId}")
     @ResponseBody
-    public String deleteCart(@PathVariable Long cartId) {
-        cartService.deleteProductToCart(cartId);
+    public String deleteCart(@Login SessionUser sessionUser, @PathVariable Long cartId) {
+        cartService.deleteProductToCart(sessionUser.getUserIdNo(), cartId);
         return "/user/cart";
     }
 

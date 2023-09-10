@@ -15,7 +15,7 @@
     </insert>
 
     <delete id="deleteLike">
-        DELETE FROM likes WHERE PRODUCT_ID = #{productId};
+        DELETE FROM likes WHERE PRODUCT_ID = #{productId} AND USER_ID_NO = #{userIdNo};
     </delete>
 
     <select id="countLikesByUserId" resultType="int">

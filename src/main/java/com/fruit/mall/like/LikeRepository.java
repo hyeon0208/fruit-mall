@@ -14,8 +14,8 @@ public class LikeRepository implements LikeMapper {
     }
 
     @Override
-    public void deleteLike(Long id) {
-        likeMapper.deleteLike(id);
+    public void deleteLike(Long userIdNo, Long id) {
+        likeMapper.deleteLike(userIdNo, id);
     }
 
     @Override

@@ -4,11 +4,16 @@ import com.fruit.mall.cart.dto.CartAndImageDto;
 import com.fruit.mall.product.Product;
 import com.fruit.mall.product.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.fruit.mall.redis.RedisCacheKey.CART_COUNT;
+import static com.fruit.mall.redis.RedisCacheKey.LIKE_COUNT;
 
 @Service
 @Transactional
@@ -17,6 +22,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final ProductService productService;
 
+    @CacheEvict(value = CART_COUNT, key = "#cart.userIdNo", cacheManager = "cacheManager")
     public Cart addProductToCart(Cart cart) {
         Optional<Cart> findCart = cartRepository.selectByUserIdAndProductId(cart.getUserIdNo(), cart.getProductId());
         if (findCart.isPresent()) {
@@ -48,10 +54,12 @@ public class CartService {
         return cartRepository.selectByCartId(cartId);
     }
 
-    public void deleteProductToCart(Long cartId) {
+    @CacheEvict(value = CART_COUNT, key = "#userId", cacheManager = "cacheManager")
+    public void deleteProductToCart(Long userId, Long cartId) {
         cartRepository.deleteProductToCart(cartId);
     }
 
+    @CacheEvict(value = CART_COUNT, key = "#userIdNo", cacheManager = "cacheManager")
     public void deleteCartByUserIdAndProductId(Long userIdNo, List<Long> productIds) {
         for (Long productId : productIds) {
             cartRepository.deleteCartByUserIdAndProductId(userIdNo, productId);
@@ -66,6 +74,7 @@ public class CartService {
         cartRepository.updateProductCnt(productCount, cartId);
     }
 
+    @Cacheable(value = CART_COUNT, key = "#userIdNo", condition = "#userIdNo != null", cacheManager = "cacheManager")
     public int countCartByUserId(Long userIdNo) {
         return cartRepository.countCartByUserId(userIdNo);
     }

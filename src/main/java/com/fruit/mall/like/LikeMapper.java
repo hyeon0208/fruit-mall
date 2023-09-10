@@ -11,7 +11,7 @@ import java.util.List;
 public interface LikeMapper {
     void insertLike(Like like);
 
-    void deleteLike(@Param("productId") Long id);
+    void deleteLike(@Param("userIdNo") Long userIdNo, @Param("productId") Long id);
 
     int countLikesByUserId(@Param("userIdNo") Long id);
 }
