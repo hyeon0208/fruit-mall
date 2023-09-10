@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+
+<div id="mypageEdit02">
+        <div class="inner">
+            <h2> 마이페이지 </h2>
+
+            <div class="tab__menu">
+                <a href="/user/mypage">
+                    <div class="history">
+                        <p>구매내역</p>
+                    </div>
+                </a>
+
+                <a href="/user/mypage/delivery">
+                    <div class="delivery">
+                        <p>배송지관리</p>
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="memberInfo">
+                        <p>회원정보</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="txt_box">
+                <p>회원정보 수정</p>
+            </div>
+
+            <label for="email" class="email">
+                <p>이메일주소(ID)</p>
+                <input type="textbox" th:value="${user.userEmail}" name="email" id="email" disabled>
+            </label>
+
+            <label for="name">
+                <p>닉네임</p>
+                <input type="textbox" th:value="${user.userName}" name="name" id="name">
+                <button id="check-name">변경</button>
+                <div style="position: relative; bottom: 30px;">
+                    <div class="name-confirm" id="check-name-name-confirm" style="color: darkgreen; display: none; margin-top: 5px; font-size: 0.85em; position: absolute;">사용가능한 닉네임입니다.</div>
+                    <div class="error-message" id="check-name-error" style="display: none; position: absolute;">이미 등록된 닉네임입니다.</div>
+                </div>
+            </label>
+            <br>
+
+<!--            <label for="phone" class="phone">-->
+<!--                <p>연락처</p>-->
+<!--                <input type="textbox" name="phone" id="phone">-->
+<!--            </label>-->
+
+            <div class="change__PW">
+                <p>비밀번호 변경</p>
+                <div class="button__box">
+                    <button>
+                        비밀번호 변경하기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 비밀번호 변경하기 버튼 클릭 시 -->
+            <div class="change__PW__button" style="display: none;">
+                <div class="button1">
+                    <p>비밀번호 변경</p>
+
+                    <div class="button__box">
+                        <button>비밀번호 변경취소</button>
+
+                        <div class="input__box">
+                            <div class="box01">
+                                <p>비밀번호</p>
+
+                                <div class="input_wrap">
+                                    <input type="text" placeholder="영문, 숫자, 특수문자(8자-20자 이내)" id="pwd1">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </div>
+                                <div class="error-message" id="pwd-regex" style="display: none;">비밀번호 입력 조건을 다시 확인해 주세요.</div>
+
+                            </div>
+
+                            <div class="box02">
+                                <p>비밀번호 확인</p>
+
+                                <div class="input_wrap">
+                                    <input type="text" placeholder="비밀번호를 한번 더 입력해주세요." id="pwd2">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </div>
+                                <div class="error-message" id="pwd-error" style="display: none;">비밀번호가 일치하지 않습니다.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 비밀번호 변경하기 버튼 클릭 시, 비밀번호 일치하지 않을 때 -->
+            <div class="change__PW__buttonWrong" style="display: none;">
+                <div class="button1">
+                    <p>비밀번호 변경</p>
+
+                    <div class="button__box">
+                        <button>비밀번호 변경취소</button>
+
+                        <div class="input__box">
+                            <div class="box01">
+                                <p>비밀번호</p>
+
+                                <div class="input_wrap">
+                                    <input type="text" placeholder="영문, 숫자, 특수문자(8자-20자 이내)">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </div>
+
+                            </div>
+
+                            <div class="box02">
+                                <p>비밀번호 확인</p>
+
+                                <div class="input_wrap">
+                                    <input type="text" placeholder="비밀번호를 한번 더 입력해주세요.">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </div>
+
+                                <p>비밀번호가 일치하지 않습니다.</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mypageEdit__button">
+                <button>
+                    <a href="#">취소하기</a>
+                </button>
+
+                <button>
+                    <a href="#">수정완료</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- 변경중이던 사항 초기화 모달 창 -->
+        <div class="mypageEdit__cancel" style="display: none;">
+            <div class="mypageEdit__cancel__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="bottom">
+                    <span>변경중이던 사항이 초기화됩니다. <br>
+                        취소 하시겠습니까?</span>
+
+
+                    <div class="mypageEdit__cancel__buttons">
+                        <button>
+                            <a href="#">취소하기</a>
+                        </button>
+                        <button>
+                            <a href="#">계속작성</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 변경중이던 사항 완료 모달 창 -->
+        <div class="mypageEdit__confirm" style="display: none;">
+            <div class="mypageEdit__confirm__inner">
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="bottom">
+                    <span>회원정보 수정이 완료되었습니다. <br>
+                        메인페이지로 이동합니다.</span>
+
+                    <div class="mypageEdit__confirm__buttons">
+                        <button>
+                            <a href="#">확인</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>>
+</html>

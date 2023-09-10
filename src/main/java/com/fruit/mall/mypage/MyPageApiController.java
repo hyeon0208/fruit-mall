@@ -4,6 +4,7 @@ import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.mypage.dto.MyPageSearchCond;
 import com.fruit.mall.mypage.dto.OrderDetail;
+import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import com.fruit.mall.user.UserService;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,20 @@ public class MyPageApiController {
         if (!userService.myPageLoginCheck(sessionUser.getUserIdNo(), inputPwd)) {
             return "비밀번호가 일치하지 않습니다.";
         }
+        return "success";
+    }
+
+    @PostMapping("/user/mypage/name-check")
+    @ResponseBody
+    public String checkName(@RequestBody Map<String, String> param) {
+        String findUsername = userService.selectUserNameByUserName(param.get("userName"));
+        return findUsername != null ? "fail" : "success";
+    }
+
+    @PostMapping("/user/mypage/userinfo-update")
+    @ResponseBody
+    public String updateUserInfo(@Login SessionUser sessionUser, @RequestBody UserInfoUpdateDto dto) {
+        userService.updateUserInfo(sessionUser.getUserIdNo(), dto);
         return "success";
     }
 }

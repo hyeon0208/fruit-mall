@@ -5,6 +5,7 @@ import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.delivery.DeliveryService;
 import com.fruit.mall.delivery.dto.DeliveryResDto;
 import com.fruit.mall.mypage.dto.OrderDetail;
+import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,9 @@ public class MyPageController {
     }
 
     @GetMapping("/user/mypage/userinfo/edit")
-    public String goMyPageUserInfoEdit() {
+    public String goMyPageUserInfoEdit(@Login SessionUser sessionUser, Model model) {
+        UserInfoUpdateDto user = myPageService.selectUserByUserId(sessionUser.getUserIdNo());
+        model.addAttribute("user", user);
         return "user/mypageEdit02";
     }
 }

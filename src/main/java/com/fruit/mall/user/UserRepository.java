@@ -1,6 +1,7 @@
 package com.fruit.mall.user;
 
 import com.fruit.mall.term.Term;
+import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -42,5 +43,10 @@ public class UserRepository implements UserMapper {
     @Override
     public void updateNewPassword(String user_email, String user_pwd) {
         userMapper.updateNewPassword(user_email, user_pwd);
+    }
+
+    @Override
+    public void updateUserInfo(Long userIdNo, UserInfoUpdateDto dto) {
+        userMapper.updateUserInfo(userIdNo, dto);
     }
 }

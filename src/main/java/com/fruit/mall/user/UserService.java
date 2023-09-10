@@ -1,6 +1,7 @@
 package com.fruit.mall.user;
 
 import com.fruit.mall.term.Term;
+import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,5 +53,13 @@ public class UserService {
 
     public void updateNewPassword(String user_email, String user_pwd) {
         userRepository.updateNewPassword(user_email, passwordEncoder.encode(user_pwd));
+    }
+
+    public void updateUserInfo(Long userIdNo, UserInfoUpdateDto dto) {
+        String pwd = dto.getUserPwd();
+        if (pwd != null && !pwd.equals("")) {
+            dto.setUserPwd(passwordEncoder.encode(dto.getUserPwd()));
+        }
+        userRepository.updateUserInfo(userIdNo, dto);
     }
 }

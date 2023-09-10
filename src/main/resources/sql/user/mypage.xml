@@ -64,4 +64,8 @@
                 </choose>
             </if>
     </select>
+
+    <select id="selectUserByUserId" resultType="com.fruit.mall.user.dto.UserInfoUpdateDto">
+        SELECT USER_EMAIL, USER_NAME, USER_PWD FROM user WHERE USER_ID_NO = #{userIdNo}
+    </select>
 </mapper>

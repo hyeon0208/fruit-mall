@@ -40,4 +40,13 @@
     <update id="updateNewPassword" parameterType="String">
         UPDATE user SET USER_PWD = #{user_pwd} WHERE USER_EMAIL = #{user_email}
     </update>
+
+    <update id="updateUserInfo">
+        UPDATE user
+        SET USER_NAME = #{dto.userName}
+        <if test="dto.userPwd != null and dto.userPwd != ''">
+            , USER_PWD = #{dto.userPwd}
+        </if>
+        WHERE USER_ID_NO = #{userIdNo}
+    </update>
 </mapper>
