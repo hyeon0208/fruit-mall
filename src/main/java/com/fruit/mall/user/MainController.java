@@ -7,14 +7,11 @@ import com.fruit.mall.product.dto.PageResDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-
-import static com.fruit.mall.redis.RedisCacheKey.LIKE_COUNT;
 
 @Controller
 @RequiredArgsConstructor
