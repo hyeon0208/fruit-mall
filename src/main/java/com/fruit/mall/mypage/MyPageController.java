@@ -27,6 +27,8 @@ public class MyPageController {
                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         PageInfo<OrderDetail> orderDetails = myPageService.getOrderDetailsByUserID(sessionUser.getUserIdNo(), pageNum, pageSize);
         model.addAttribute("orderDetails", orderDetails);
+        String loginMethod = sessionUser.getLoginMethod();
+        model.addAttribute("loginMethod", loginMethod);
         return "user/mypage";
     }
 
@@ -34,6 +36,8 @@ public class MyPageController {
     public String goMyPageDelivery(@Login SessionUser sessionUser, Model model) {
         List<DeliveryResDto> deliveries = deliveryService.deliveryAllByUserId(sessionUser.getUserIdNo());
         model.addAttribute("deliveries", deliveries);
+        String loginMethod = sessionUser.getLoginMethod();
+        model.addAttribute("loginMethod", loginMethod);
         return "user/mypage_delivery";
     }
 
