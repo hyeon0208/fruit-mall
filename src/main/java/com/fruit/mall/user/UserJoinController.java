@@ -1,9 +1,6 @@
 package com.fruit.mall.user;
 
-import com.fruit.mall.term.Term;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,43 +10,15 @@ import java.util.HashMap;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/join")
 public class UserJoinController {
     private final UserService userService;
 
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @PostMapping("/joinUser")
     public String joinConfirm(@ModelAttribute User user, @RequestParam Boolean term_flag5, @RequestParam Boolean term_flag6, RedirectAttributes redirectAttributes) {
-        User joinUser = User.builder()
-                .user_email(user.getUser_email())
-                .user_name(user.getUser_name())
-                .user_pwd(passwordEncoder.encode(user.getUser_pwd()))
-                .user_status(Role.USER)
-                .build();
-        userService.insertUser(joinUser);
-        Long user_id_no = joinUser.getUser_id_no();
-
-        Integer termFlag5 = term_flag5 ? 1 : 0;
-        Integer termFlag6 = term_flag6 ? 1 : 0;
-
-        Term term5 = Term.builder()
-                .user_id_no(user_id_no)
-                .term_name("선택약관5")
-                .term_flag(termFlag5)
-                .build();
-
-        Term term6 = Term.builder()
-                .user_id_no(user_id_no)
-                .term_name("선택약관6")
-                .term_flag(termFlag6)
-                .build();
-
-        userService.insertTerm(term5);
-        userService.insertTerm(term6);
-
-        redirectAttributes.addAttribute("email", joinUser.getUser_email());
-
-        return "redirect:/user/joinConfirm?email={email}";
+        userService.insertUser(user, term_flag5, term_flag6);
+        redirectAttributes.addAttribute("email", user.getUser_email());
+        return "redirect:/join/joinConfirm?email={email}";
     }
 
     @GetMapping("/joinConfirm")

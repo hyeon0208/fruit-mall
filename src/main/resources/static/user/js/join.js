@@ -56,7 +56,7 @@ $(document).ready(function() {
     $("#user_email").on("focusout", () => {
         axios({
             method: "post",
-            url: "/user/check-email",
+            url: "/join/check-email",
             data: "user_email=" + encodeURIComponent($("#user_email").val()),
             dataType: "String",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -68,7 +68,7 @@ $(document).ready(function() {
     $("#user_name").on("focusout", () => {
         axios({
             method: "post",
-            url: "/user/check-name",
+            url: "/join/check-name",
             data: { user_name: $("#user_name").val() } ,
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
