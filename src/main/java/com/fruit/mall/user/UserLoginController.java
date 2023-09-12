@@ -30,10 +30,10 @@ public class UserLoginController {
     }
 
     @PostMapping("/user/logout")
-    public String logout(@Login SessionUser sessionUser, HttpServletRequest request) {
+    public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (sessionUser != null) {
-            session.removeAttribute(LOGIN_USER);
+        if (session != null) {
+            session.invalidate();
         }
         return "redirect:/";
     }
