@@ -8,6 +8,10 @@
         VALUES (#{user_email}, #{user_name}, #{user_pwd}, #{user_status})
     </insert>
 
+    <insert id="insertOAuthUser"  parameterType="com.fruit.mall.user.User" useGeneratedKeys="true" keyProperty="user_id_no">
+        INSERT INTO user (USER_NAME, USER_EMAIL, LOGIN_METHOD, USER_STATUS) VALUES(#{user_name}, #{user_email}, #{loginMethod}, #{user_status})
+    </insert>
+
     <insert id="insertTerm" parameterType="com.fruit.mall.term.Term">
         INSERT INTO term (USER_ID_NO, TERM_NAME, TERM_FLAG)
         VALUES (#{user_id_no}, #{term_name}, #{term_flag})

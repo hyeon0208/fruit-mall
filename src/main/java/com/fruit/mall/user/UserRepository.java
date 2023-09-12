@@ -16,6 +16,11 @@ public class UserRepository implements UserMapper {
     }
 
     @Override
+    public void insertOAuthUser(User user) {
+        userMapper.insertOAuthUser(user);
+    }
+
+    @Override
     public String selectPwdById(Long userIdNo) {
         return userMapper.selectPwdById(userIdNo);
     }

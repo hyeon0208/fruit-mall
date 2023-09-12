@@ -35,16 +35,19 @@ public class RoleTypeHandler implements TypeHandler<Role> {
 
     // 실제 객체를 구성하는 메서드
     private Role getRole(String key) {
-        Role role = null;
+        if (key == null) {
+            return Role.GUEST; // 혹은 null을 반환하거나 예외를 던질 수 있습니다.
+        }
+
         switch (key) {
             case "ROLE_USER":
-                role = Role.USER;
-                break;
+                return Role.USER;
+
+            case "ROLE_ADMIN":
+                return Role.ADMIN;
 
             default:
-                role = Role.GUEST;
-                break;
+                return Role.GUEST;
         }
-        return role;
     }
 }

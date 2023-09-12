@@ -13,9 +13,11 @@ public class SessionUser implements Serializable {
 
     private Long userIdNo;
     private String name;
+    private String loginMethod;
 
     public SessionUser(User user) {
         this.userIdNo = user.getUser_id_no();
         this.name = user.getUser_name();
+        this.loginMethod = user.getLoginMethod();
     }
 }
