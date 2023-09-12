@@ -17,8 +17,8 @@ public class SecurityConfig {
         http.csrf().disable().headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/user/css/**", "/user/img/**", "/user/js/**", "/login", "/user/cart", "/user/detail/**", "/user/review/**").permitAll()
-                .antMatchers("/user/mypage", "/user/mypage/delivery", "/user/mypage/userinfo", "/user/mypage/userinfo/edit", "/user/review/add").hasAuthority(Role.USER.name()) // 해당 주소는 USER 권한을 가진 사람만 가능
+                .antMatchers("/", "/user/css/**", "/user/img/**", "/user/js/**", "/login", "/user/cart", "/user/detail/**", "/user/review/**", "/findPw", "/changePw", "/changeNewPw", "/user/like/**", "/user/joinUser", "/user/joinConfirm", "/user/check-email", "/user/check-name", "/user/login", "/user/check-login").permitAll()
+                .antMatchers("/user/mypage/**", "/user/review/add", "/confirm/payment", "/user/order/**", "/order/**", "/payment/**").hasAuthority(Role.USER.name()) // 해당 주소는 USER 권한을 가진 사람만 가능
                 .anyRequest().authenticated()
                 .and()
                 .logout().invalidateHttpSession(true).logoutSuccessUrl("/")
