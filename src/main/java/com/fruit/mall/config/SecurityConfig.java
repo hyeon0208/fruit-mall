@@ -1,9 +1,9 @@
 package com.fruit.mall.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fruit.mall.config.login.filter.JsonAuthenticationFilter;
 import com.fruit.mall.config.login.handler.CustomAuthenticationFailureHandler;
 import com.fruit.mall.config.login.handler.CustomAuthenticationSuccessHandler;
-import com.fruit.mall.config.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
 import com.fruit.mall.config.login.service.CustomUserDetailsService;
 import com.fruit.mall.config.oauth.service.CustomOAuth2UserService;
 import com.fruit.mall.user.Role;
@@ -37,15 +37,14 @@ public class SecurityConfig {
      * 추출한 값으로 UsernamePasswordAuthenticationToken 미인증 상태 객체를 생성해 AuthenticationManager에게 전달.
      */
     @Bean
-    public CustomJsonUsernamePasswordAuthenticationFilter customJsonUsernamePasswordAuthenticationFilter() {
-        CustomJsonUsernamePasswordAuthenticationFilter jsonFilter = new CustomJsonUsernamePasswordAuthenticationFilter(new ObjectMapper());
+    public JsonAuthenticationFilter jsonAuthenticationFilter() {
+        JsonAuthenticationFilter jsonFilter = new JsonAuthenticationFilter(new ObjectMapper());
         jsonFilter.setAuthenticationManager(authenticationManager());
         jsonFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
         jsonFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
         return jsonFilter;
     }
-
-
+    
     /**
      * 위임받은 실제 인증 작업 수행.
      * 미인증 UsernamePasswordAuthenticationToken 객체를 받아, 객체에 포함되어 있는 자격 증명이 유효한지 검사.
@@ -78,7 +77,7 @@ public class SecurityConfig {
                     .userInfoEndpoint() // 이 체인 다음에 로그인 성공 이후 사용자 정보를 가져오기 위한 설정을 담당하는 객체 등록
                     .userService(customOAuth2UserService); // OAuth2UserService 구현체를 등록
 
-        http.addFilterBefore(customJsonUsernamePasswordAuthenticationFilter(), LogoutFilter.class);
+        http.addFilterBefore(jsonAuthenticationFilter(), LogoutFilter.class);
         return http.build();
     }
 }

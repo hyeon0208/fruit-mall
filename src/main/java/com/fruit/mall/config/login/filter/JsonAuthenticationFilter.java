@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-public class CustomJsonUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class JsonAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private ObjectMapper objectMapper;
 
-    public CustomJsonUsernamePasswordAuthenticationFilter(ObjectMapper objectMapper) {
+    public JsonAuthenticationFilter(ObjectMapper objectMapper) {
         super(new AntPathRequestMatcher("/user/login", "POST")); // 해당 경로 요청을 처리하기 위한 설정
         this.objectMapper = objectMapper;
     }
