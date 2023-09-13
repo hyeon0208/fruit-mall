@@ -1,4 +1,4 @@
-package com.fruit.mall.config.oauth;
+package com.fruit.mall.config.oauth.dto;
 
 import com.fruit.mall.user.Role;
 import com.fruit.mall.user.User;

@@ -1,10 +1,11 @@
-package com.fruit.mall.config.oauth;
+package com.fruit.mall.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fruit.mall.config.CustomAuthenticationFailureHandler;
-import com.fruit.mall.config.CustomAuthenticationSuccessHandler;
-import com.fruit.mall.config.CustomJsonUsernamePasswordAuthenticationFilter;
-import com.fruit.mall.user.CustomUserDetailsService;
+import com.fruit.mall.config.login.handler.CustomAuthenticationFailureHandler;
+import com.fruit.mall.config.login.handler.CustomAuthenticationSuccessHandler;
+import com.fruit.mall.config.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
+import com.fruit.mall.config.login.service.CustomUserDetailsService;
+import com.fruit.mall.config.oauth.service.CustomOAuth2UserService;
 import com.fruit.mall.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

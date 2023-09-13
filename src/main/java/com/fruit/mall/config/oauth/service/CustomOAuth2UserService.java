@@ -1,6 +1,7 @@
-package com.fruit.mall.config.oauth;
+package com.fruit.mall.config.oauth.service;
 
 import com.fruit.mall.config.SessionUser;
+import com.fruit.mall.config.oauth.dto.OAuthAttributes;
 import com.fruit.mall.user.Role;
 import com.fruit.mall.user.User;
 import com.fruit.mall.user.UserRepository;

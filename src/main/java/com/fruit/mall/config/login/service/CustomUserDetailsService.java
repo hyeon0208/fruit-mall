@@ -1,5 +1,8 @@
-package com.fruit.mall.user;
+package com.fruit.mall.config.login.service;
 
+import com.fruit.mall.user.Role;
+import com.fruit.mall.user.User;
+import com.fruit.mall.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

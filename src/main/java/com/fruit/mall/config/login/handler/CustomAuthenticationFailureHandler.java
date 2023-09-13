@@ -1,4 +1,4 @@
-package com.fruit.mall.config;
+package com.fruit.mall.config.login.handler;
 
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;

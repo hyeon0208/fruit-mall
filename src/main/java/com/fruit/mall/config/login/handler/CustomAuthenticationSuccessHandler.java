@@ -1,5 +1,6 @@
-package com.fruit.mall.config;
+package com.fruit.mall.config.login.handler;
 
+import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.user.User;
 import com.fruit.mall.user.UserRepository;
 import com.google.gson.JsonObject;
