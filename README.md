@@ -1,19 +1,21 @@
 # 프룻 프룻 쇼핑몰 🍎
 
-
 <br>
 
 ---
 ## 🛠 사용 기술 스택
-<br>
 
-- #### 📌 BackEnd
+
+<p align="center">
+📌 BackEnd
+<br>
+<br>
 <img src="https://img.shields.io/badge/Spring Boot 2.7.6-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
 <img src="https://img.shields.io/badge/Spring Security-00AB77?style=flat-square&logo=springsecurity&logoColor=white"/>
-<br>
 <img src="https://img.shields.io/badge/java 11-007396?style=flat-square&logo=java&logoColor=white"/>
 <img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=Gradle&logoColor=white"/>
 <img src="https://img.shields.io/badge/log4j2-BEFCFF?style=flat-square&logo=&logoColor=white"/>
+
 <br>
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
 <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white"/>
@@ -21,8 +23,12 @@
 <img src="https://img.shields.io/badge/MyBatis-9EB0A2?style=flat-square&logo=&logoColor=white"/>
 <br>
 <br>
+</p>
 
-- #### 📌FrontEnd
+<p align="center">
+📌FrontEnd
+<br>
+<br>
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/>
 <img src="https://img.shields.io/badge/jQuery-0769AD?style=flat-square&logo=jQuery&logoColor=white"/>
@@ -32,10 +38,10 @@
 <img src="https://img.shields.io/badge/TinyMCE-2596BE?style=flat-square&logo=TinyMCE&logoColor=white"/>
 <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white"/>
 <br>
+</p>
 
 ---
 ## 💿 프로젝트 기능
-<br>
 
 - #### 🙍🏻‍♂️ 유저
 |      기능       |                      설명                       |                                 비고                                 |
