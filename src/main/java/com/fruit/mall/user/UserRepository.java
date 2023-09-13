@@ -2,6 +2,7 @@ package com.fruit.mall.user;
 
 import com.fruit.mall.term.Term;
 import com.fruit.mall.user.dto.UserInfoUpdateDto;
+import com.fruit.mall.user.dto.UsernameUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -26,8 +27,8 @@ public class UserRepository implements UserMapper {
     }
 
     @Override
-    public User selectUserByUserEmail(String user_email) {
-        return userMapper.selectUserByUserEmail(user_email);
+    public User selectUserByUserEmail(String user_email, String loginMethod) {
+        return userMapper.selectUserByUserEmail(user_email, loginMethod);
     }
 
     @Override
@@ -53,5 +54,10 @@ public class UserRepository implements UserMapper {
     @Override
     public void updateUserInfo(Long userIdNo, UserInfoUpdateDto dto) {
         userMapper.updateUserInfo(userIdNo, dto);
+    }
+
+    @Override
+    public void updateUserName(UsernameUpdateDto usernameUpdateDto) {
+        userMapper.updateUserName(usernameUpdateDto);
     }
 }

@@ -26,7 +26,7 @@
     </resultMap>
 
     <select id="selectUserByUserEmail" resultMap="UserResultMap">
-        SELECT * FROM user WHERE USER_EMAIL = #{user_email}
+        SELECT * FROM user WHERE USER_EMAIL = #{user_email} AND LOGIN_METHOD = #{loginMethod}
     </select>
 
     <select id="selectEmailByUserEmail" parameterType="String" resultType="String">
@@ -52,5 +52,9 @@
             , USER_PWD = #{dto.userPwd}
         </if>
         WHERE USER_ID_NO = #{userIdNo}
+    </update>
+
+    <update id="updateUserName" parameterType="com.fruit.mall.user.dto.UsernameUpdateDto">
+        UPDATE user SET USER_NAME = #{newName} WHERE USER_EMAIL = #{userEmail} AND USER_NAME = #{curName} AND LOGIN_METHOD = #{loginMethod}
     </update>
 </mapper>

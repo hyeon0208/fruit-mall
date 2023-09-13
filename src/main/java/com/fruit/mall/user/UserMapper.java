@@ -2,6 +2,7 @@ package com.fruit.mall.user;
 
 import com.fruit.mall.term.Term;
 import com.fruit.mall.user.dto.UserInfoUpdateDto;
+import com.fruit.mall.user.dto.UsernameUpdateDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +13,7 @@ public interface UserMapper {
 
     void insertOAuthUser(User user);
 
-    User selectUserByUserEmail(@Param("user_email") String user_email);
+    User selectUserByUserEmail(@Param("user_email") String user_email, @Param("loginMethod") String loginMethod);
 
     String selectPwdById(@Param("userIdNo") Long userIdNo);
 
@@ -25,4 +26,6 @@ public interface UserMapper {
     void updateNewPassword(@Param("user_email")String user_email, @Param("user_pwd")String user_pwd);
 
     void updateUserInfo(@Param("userIdNo") Long userIdNo, @Param("dto") UserInfoUpdateDto dto);
+
+    void updateUserName(UsernameUpdateDto usernameUpdateDto);
 }

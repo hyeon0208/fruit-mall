@@ -28,7 +28,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
         String username = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
-        User user = userRepository.selectUserByUserEmail(username);
+        User user = userRepository.selectUserByUserEmail(username, "일반");
         HttpSession session = request.getSession();
         session.setAttribute(LOGIN_USER, new SessionUser(user));
         log.info("로그인에 성공하였습니다. 이메일 : {}", username);

@@ -5,6 +5,7 @@ import com.fruit.mall.config.oauth.dto.OAuthAttributes;
 import com.fruit.mall.user.Role;
 import com.fruit.mall.user.User;
 import com.fruit.mall.user.UserRepository;
+import com.fruit.mall.user.dto.UsernameUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -54,13 +55,29 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     /**
-     *  이미 가입된 유저일 경우와 새로운 유저일 때 분기처리
+     * 이미 가입된 유저일 경우와 새로운 유저일 때 분기처리
      */
     private User saveOrUpdate(OAuthAttributes attributes, String registrationId) {
-        User user = userRepository.selectUserByUserEmail(attributes.getEmail());
+        User user = userRepository.selectUserByUserEmail(attributes.getEmail(), registrationId);
         if (user == null) {
             user = attributes.toEntity(registrationId);
             userRepository.insertOAuthUser(user);
+            return user;
+        }
+
+        String newName = attributes.getName();
+        String curName = user.getUser_name();
+        if (!curName.equals(newName)) {
+            UsernameUpdateDto dto = UsernameUpdateDto.builder()
+                    .newName(newName)
+                    .curName(curName)
+                    .userEmail(user.getUser_email())
+                    .loginMethod(user.getLoginMethod())
+                    .role(user.getUser_status())
+                    .build();
+
+            userRepository.updateUserName(dto);
+            return dto.toEntity(dto);
         }
         return user;
     }

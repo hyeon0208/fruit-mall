@@ -53,8 +53,8 @@ public class UserService {
         userRepository.insertTerm(term6);
     }
 
-    public User selectUserByUserEmail(String user_email) {
-        return userRepository.selectUserByUserEmail(user_email);
+    public User selectUserByUserEmail(String user_email, String loginMethod) {
+        return userRepository.selectUserByUserEmail(user_email, loginMethod);
     }
 
     public String selectEmailByUserEmail(String user_email) {
