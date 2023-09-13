@@ -1,7 +1,5 @@
 package com.fruit.mall.user;
 
-import com.fruit.mall.config.Login;
-import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,18 +15,6 @@ public class UserLoginController {
     private final UserService userService;
     public final static String LOGIN_USER = "loginUser";
 
-    @PostMapping("/user/login")
-    @ResponseBody
-    public String loginForm(@RequestBody User user, HttpServletRequest request) {
-        User loginUser = userService.selectUserByUserEmail(user.getUser_email());
-        if (!userService.loginCheck(user.getUser_pwd(), loginUser)) {
-            return "이메일 또는 비밀번호가 일치하지 않습니다.";
-        }
-        HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USER, new SessionUser(loginUser));
-        return "success";
-    }
-
     @PostMapping("/user/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -36,13 +22,6 @@ public class UserLoginController {
             session.invalidate();
         }
         return "redirect:/";
-    }
-
-    @PostMapping("/user/check-login")
-    @ResponseBody
-    public String checkLoginPwd(@RequestParam String user_email) {
-        String findEmail = userService.selectEmailByUserEmail(user_email);
-        return findEmail == null ? "이메일이 존재하지 않습니다." : "";
     }
 
     @PostMapping("/findPw")

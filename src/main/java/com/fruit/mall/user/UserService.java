@@ -14,14 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    public boolean loginCheck(String pwd, User loginUser) {
-        if (loginUser == null || !passwordEncoder.matches(pwd, loginUser.getUser_pwd())) {
-            return false;
-        }
-        return true;
-    }
+    private final PasswordEncoder passwordEncoder;
 
     public boolean myPageLoginCheck(Long userIdNo, String inputPwd) {
         String curPwd = userRepository.selectPwdById(userIdNo);
@@ -62,10 +55,6 @@ public class UserService {
 
     public User selectUserByUserEmail(String user_email) {
         return userRepository.selectUserByUserEmail(user_email);
-    }
-
-    public void insertTerm(Term term) {
-        userRepository.insertTerm(term);
     }
 
     public String selectEmailByUserEmail(String user_email) {
