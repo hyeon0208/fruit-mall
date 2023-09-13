@@ -30,7 +30,7 @@
     </select>
 
     <select id="selectEmailByUserEmail" parameterType="String" resultType="String">
-        SELECT USER_EMAIL FROM user WHERE USER_EMAIL = #{user_email}
+        SELECT USER_EMAIL FROM user WHERE USER_EMAIL = #{user_email} AND LOGIN_METHOD = #{loginMethod}
     </select>
 
     <select id="selectUserNameByUserName" parameterType="String" resultType="String">

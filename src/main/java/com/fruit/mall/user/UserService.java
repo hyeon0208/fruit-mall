@@ -58,7 +58,7 @@ public class UserService {
     }
 
     public String selectEmailByUserEmail(String user_email) {
-        return userRepository.selectEmailByUserEmail(user_email);
+        return userRepository.selectEmailByUserEmail(user_email, "일반");
     }
 
     public String selectUserNameByUserName(String user_name) {

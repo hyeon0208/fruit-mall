@@ -19,7 +19,7 @@ public interface UserMapper {
 
     void insertTerm(Term term);
 
-    String selectEmailByUserEmail(String user_email);
+    String selectEmailByUserEmail(@Param("user_email")String user_email, @Param("loginMethod") String loginMethod);
 
     String selectUserNameByUserName(String user_name);
 

@@ -37,8 +37,8 @@ public class UserRepository implements UserMapper {
     }
 
     @Override
-    public String selectEmailByUserEmail(String user_email) {
-        return userMapper.selectEmailByUserEmail(user_email);
+    public String selectEmailByUserEmail(String user_email, String loginMethod) {
+        return userMapper.selectEmailByUserEmail(user_email, loginMethod);
     }
 
     @Override
