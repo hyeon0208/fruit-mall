@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderMapper {
     void insertOrder(Orders orders);
 
-    OrderReqDto selectOneOrderInfoByProductId(@Param("productId") Long productId, @Param("productCount") int productCount);
+    OrderReqDto selectOneOrderInfoByProductId(@Param("productId") Long productId, @Param("productCount") int productCount,  @Param("userIdNo") Long userIdNo);
 
-    OrderReqDto selectOrderInfosByProductId(@Param("productId") Long productId);
+    OrderReqDto selectOrderInfosByProductId(@Param("productId") Long productId, @Param("userIdNo") Long userIdNo);
 }

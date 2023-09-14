@@ -1,6 +1,5 @@
 package com.fruit.mall.product.dto;
 
-import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.Product;
 import com.github.pagehelper.PageInfo;
 import lombok.Getter;

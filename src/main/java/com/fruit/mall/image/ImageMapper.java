@@ -7,12 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface ImageMapper {
-    void insertImage(Image image);
-
-    void updateImage(Image image);
-
-    void deleteImagesByProductId(@Param("productId") Long id);
-
     List<String> selectFileNamesByProductId(@Param("productId") Long id);
 
     String selectProductImageUrlByProductId(@Param("productId") Long id);

@@ -3,31 +3,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fruit.mall.image.ImageMapper">
-    <insert id="insertImage" parameterType="com.fruit.mall.image.Image" keyProperty="imageId">
-    INSERT INTO image (
-                       PRODUCT_ID,
-                       IMAGE_URL,
-                       IMAGE_PATH,
-                       IMAGE_FILENAME
-                       )
-                VALUES (
-                        #{productId},
-                        #{imageUrl},
-                        #{path},
-                        #{fileName}
-                        )
-    </insert>
-
-    <update id="updateImage" parameterType="com.fruit.mall.image.Image">
-        UPDATE image
-        SET
-            IMAGE_URL = #{imageUrl},
-            IMAGE_PATH = #{path},
-            IMAGE_FILENAME = #{fileName}
-        WHERE
-            IMAGE_ID = #{imageId}
-    </update>
-
     <select id="selectProductImageUrlByProductId" resultType="String">
         SELECT IMAGE_URL
         FROM image
@@ -50,8 +25,4 @@
     <select id="selectFileNamesByProductId" resultType="String">
         SELECT IMAGE_FILENAME FROM image WHERE PRODUCT_ID = #{productId};
     </select>
-
-    <delete id="deleteImagesByProductId">
-        DELETE FROM image WHERE PRODUCT_ID = #{productId};
-    </delete>
 </mapper>

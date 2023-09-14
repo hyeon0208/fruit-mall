@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    public OrderReqDto selectOneOrderInfoByProductId(Long productId, int productCount) {
-        return orderRepository.selectOneOrderInfoByProductId(productId, productCount);
+    public OrderReqDto selectOneOrderInfoByProductId(Long productId, int productCount, Long userIdNo) {
+        return orderRepository.selectOneOrderInfoByProductId(productId, productCount, userIdNo);
     }
 
-    public OrderReqDto selectOrderInfosByProductId(Long productId) {
-        return orderRepository.selectOrderInfosByProductId(productId);
+    public OrderReqDto selectOrderInfosByProductId(Long productId, Long userIdNo) {
+        return orderRepository.selectOrderInfosByProductId(productId, userIdNo);
     }
 }
