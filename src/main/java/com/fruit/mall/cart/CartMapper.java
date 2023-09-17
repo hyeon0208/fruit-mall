@@ -9,20 +9,20 @@ import java.util.Optional;
 
 @Mapper
 public interface CartMapper {
-    Long addProductToCart(Cart cart);
+    void newUserCart(@Param("userIdNo") Long userIdNo);
 
-    Optional<Cart> selectByUserIdAndProductId(@Param("userIdNo") Long userIdNo, @Param("productId") Long productId);
+    Long selectUserCartId(@Param("userIdNo") Long userIdNo);
 
-    Cart selectByCartId(@Param("cartId") Long cartId);
+    void addProductToCart(CartProduct cart);
 
-    void deleteProductToCart(@Param("cartId") Long cartId);
+    Optional<CartProduct> selectCartProductByProductId(@Param("cartId") Long cartId, @Param("productId") Long productId);
 
-    void deleteCartByUserIdAndProductId(@Param("userIdNo") Long userIdNo,  @Param("productId") Long productId);
+    void deleteProductToCart(@Param("cartId") Long cartId, @Param("productId") Long productId);
 
     List<CartAndImageDto> selectCartAndImageByUserId(@Param("userIdNo") Long userIdNo);
 
     int countCartByUserId(@Param("userIdNo") Long userIdNo);
 
-    void updateProductCnt(@Param("productCount") int productCount, @Param("cartId") Long cartId);
+    void updateProductCnt(@Param("productCount") int productCount, @Param("cartId") Long cartId, @Param("productId") Long productId);
 
 }

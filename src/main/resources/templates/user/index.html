@@ -128,7 +128,10 @@
                                 <div class="title">
                                     <span th:text="${product.productName}">상품명</span>
                                 </div>
-                                <div class="price" th:text="|${#numbers.formatInteger((product.productPrice * (1 - (product.productDiscount / 100.0))), 3, 'COMMA')}원|"></div>
+                                <div class="price"
+                                     th:data-product-discount="${product.productDiscount}"
+                                     th:data-product-price="${product.productPrice}"
+                                     th:text="|${#numbers.formatInteger((product.productPrice * (1 - (product.productDiscount / 100.0))), 3, 'COMMA')}원|"></div>
                             </div>
                         </a>
                         <div class="icons">

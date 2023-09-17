@@ -279,7 +279,9 @@ $(document).on("click", ".addCartBtn", (e) => {
                 url: "/main/cart/add",
                 data: {
                     productId: productId,
+                    productPrice: $(".price").data("product-price"),
                     productCount: 1,
+                    productDiscount: $(".price").data("product-discount"),
                     localCart: localCart
                 },
                 dataType: "json",
@@ -337,10 +339,11 @@ $(document).on("click", ".addCartBtn", (e) => {
 $(document).on("click", ".delCartProduct", (e) => {
     if ($('#cart').data('session')) {  // 회원일 경우
         const cartId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-cart-id")
+        const productId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-update-product-id");
 
         axios({
             method: "delete",
-            url: `/cart/delete/${cartId}`
+            url: `/cart/delete/${cartId}/${productId}`
         }).then(res => {
             window.location.href = res.data;
         });
@@ -348,7 +351,6 @@ $(document).on("click", ".delCartProduct", (e) => {
 
     if (!$('#cart').data('session')) { // 비회원일 경우
         const cartItems = JSON.parse(localStorage.getItem('cart'));
-        const productId = $(e.currentTarget).closest('tr').find(".productCnt").attr("data-product-id");
         const newCartItems = cartItems.filter(cart => cart.product.productId != productId);
         localStorage.setItem('cart', JSON.stringify(newCartItems));
         $(e.currentTarget).closest('tr').remove();

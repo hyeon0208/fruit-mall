@@ -1,26 +1,28 @@
-package com.fruit.mall.cart.dto;
+package com.fruit.mall.cart;
 
-import com.fruit.mall.cart.Cart;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
-public class CartAddReqDto {
+public class CartProduct {
+    private Long cartId;
     private Long productId;
     private int productPrice;
     private int productCount;
     private int productDiscount;
-    private List<Cart> localCart;
+    private Timestamp cartCreatedAt;
 
     @Builder
-    public CartAddReqDto(Long productId, int productPrice, int productCount, int productDiscount) {
+    public CartProduct(Long cartId, Long productId, int productPrice, int productCount, int productDiscount, Timestamp cartCreatedAt) {
+        this.cartId = cartId;
         this.productId = productId;
         this.productPrice = productPrice;
         this.productCount = productCount;
         this.productDiscount = productDiscount;
+        this.cartCreatedAt = cartCreatedAt;
     }
 }

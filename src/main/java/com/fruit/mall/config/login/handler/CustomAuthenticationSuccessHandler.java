@@ -1,5 +1,6 @@
 package com.fruit.mall.config.login.handler;
 
+import com.fruit.mall.cart.CartRepository;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.user.User;
 import com.fruit.mall.user.UserRepository;
@@ -23,6 +24,7 @@ import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -30,7 +32,8 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String username = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
         User user = userRepository.selectUserByUserEmail(username, "일반");
         HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USER, new SessionUser(user));
+        Long cartId = cartRepository.selectUserCartId(user.getUser_id_no());
+        session.setAttribute(LOGIN_USER, new SessionUser(user, cartId));
         log.info("로그인에 성공하였습니다. 이메일 : {}", username);
 
         response.setStatus(HttpServletResponse.SC_OK);

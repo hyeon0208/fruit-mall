@@ -1,5 +1,6 @@
 package com.fruit.mall.config.oauth.service;
 
+import com.fruit.mall.cart.CartRepository;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.config.oauth.dto.OAuthAttributes;
 import com.fruit.mall.user.Role;
@@ -25,6 +26,7 @@ import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
     private final HttpSession httpSession;
 
 
@@ -46,7 +48,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes, registrationId);
-        httpSession.setAttribute(LOGIN_USER, new SessionUser(user));
+        Long cartId = cartRepository.selectUserCartId(user.getUser_id_no());
+        httpSession.setAttribute(LOGIN_USER, new SessionUser(user, cartId));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(Role.USER.name())),
@@ -62,6 +65,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         if (user == null) {
             user = attributes.toEntity(registrationId);
             userRepository.insertOAuthUser(user);
+            cartRepository.newUserCart(user.getUser_id_no());
             return user;
         }
 

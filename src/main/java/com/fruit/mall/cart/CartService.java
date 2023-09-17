@@ -1,8 +1,7 @@
 package com.fruit.mall.cart;
 
+import com.fruit.mall.cart.dto.CartAddReqDto;
 import com.fruit.mall.cart.dto.CartAndImageDto;
-import com.fruit.mall.product.Product;
-import com.fruit.mall.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,49 +19,38 @@ import static com.fruit.mall.redis.RedisCacheKey.LIKE_COUNT;
 @RequiredArgsConstructor
 public class CartService {
     private final CartRepository cartRepository;
-    private final ProductService productService;
 
-    @CacheEvict(value = CART_COUNT, key = "#cart.userIdNo", cacheManager = "cacheManager")
-    public Cart addProductToCart(Cart cart) {
-        Optional<Cart> findCart = cartRepository.selectByUserIdAndProductId(cart.getUserIdNo(), cart.getProductId());
+    @CacheEvict(value = CART_COUNT, key = "#userId", cacheManager = "cacheManager")
+    public void addProductToCart(Long userId, Long cartId, CartAddReqDto dto) {
+        Optional<CartProduct> findCart = cartRepository.selectCartProductByProductId(cartId, dto.getProductId());
         if (findCart.isPresent()) {
-            if (findCart.get().getProductCount() != cart.getProductCount()) {
-                cartRepository.updateProductCnt(cart.getProductCount(), findCart.get().getCartId());
+            if (findCart.get().getProductCount() != dto.getProductCount()) {
+                cartRepository.updateProductCnt(dto.getProductCount(), cartId, findCart.get().getProductId());
+                return;
+            } else {
+                throw new IllegalArgumentException("이미 장바구니에 있는 상품입니다.");
             }
-            return findCart.get();
         }
 
-        Product product = productService.selectProductAllById(cart.getProductId());
-        Cart insertCart = Cart.builder()
-                .userIdNo(cart.getUserIdNo())
-                .productId(cart.getProductId())
-                .productCount(cart.getProductCount())
-                .productPrice(product.getProductPrice())
-                .productDiscount(product.getProductDiscount())
-                .productSaleStatus(product.getProductSaleStatus())
+        CartProduct cart = CartProduct.builder()
+                .cartId(cartId)
+                .productId(dto.getProductId())
+                .productPrice(dto.getProductPrice())
+                .productCount(dto.getProductCount())
+                .productDiscount(dto.getProductDiscount())
                 .build();
-
-        Long cartId = cartRepository.addProductToCart(insertCart);
-        return cartRepository.selectByCartId(cartId);
-    }
-
-    public Optional<Cart> selectByUserIdAndProductId(Long userIdNo, Long productId) {
-       return cartRepository.selectByUserIdAndProductId(userIdNo, productId);
-    }
-
-    public Cart selectByCartId(Long cartId) {
-        return cartRepository.selectByCartId(cartId);
+        cartRepository.addProductToCart(cart);
     }
 
     @CacheEvict(value = CART_COUNT, key = "#userId", cacheManager = "cacheManager")
-    public void deleteProductToCart(Long userId, Long cartId) {
-        cartRepository.deleteProductToCart(cartId);
+    public void deleteProductToCart(Long userId, Long cartId, Long productId) {
+        cartRepository.deleteProductToCart(cartId, productId);
     }
 
     @CacheEvict(value = CART_COUNT, key = "#userIdNo", cacheManager = "cacheManager")
-    public void deleteCartByUserIdAndProductId(Long userIdNo, List<Long> productIds) {
+    public void deleteCartByPaymented(Long cartId, List<Long> productIds) {
         for (Long productId : productIds) {
-            cartRepository.deleteCartByUserIdAndProductId(userIdNo, productId);
+            cartRepository.deleteProductToCart(cartId, productId);
         }
     }
 
@@ -70,8 +58,8 @@ public class CartService {
         return cartRepository.selectCartAndImageByUserId(userIdNo);
     }
 
-    public void updateProductCnt(int productCount, Long cartId) {
-        cartRepository.updateProductCnt(productCount, cartId);
+    public void updateProductCnt(int productCount, Long cartId, Long productId) {
+        cartRepository.updateProductCnt(productCount, cartId, productId);
     }
 
     @Cacheable(value = CART_COUNT, key = "#userIdNo", condition = "#userIdNo != null", cacheManager = "cacheManager")

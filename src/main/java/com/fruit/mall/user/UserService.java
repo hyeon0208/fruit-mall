@@ -1,9 +1,9 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.cart.CartRepository;
 import com.fruit.mall.term.Term;
 import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
 
     public boolean myPageLoginCheck(Long userIdNo, String inputPwd) {
@@ -32,7 +33,9 @@ public class UserService {
                 .user_status(Role.USER)
                 .build();
         userRepository.insertUser(joinUser);
+
         Long user_id_no = joinUser.getUser_id_no();
+        cartRepository.newUserCart(user_id_no);
 
         Integer termFlag5 = term_flag5 ? 1 : 0;
         Integer termFlag6 = term_flag6 ? 1 : 0;
@@ -51,10 +54,6 @@ public class UserService {
 
         userRepository.insertTerm(term5);
         userRepository.insertTerm(term6);
-    }
-
-    public User selectUserByUserEmail(String user_email, String loginMethod) {
-        return userRepository.selectUserByUserEmail(user_email, loginMethod);
     }
 
     public String selectEmailByUserEmail(String user_email) {

@@ -11,20 +11,12 @@ import java.sql.Timestamp;
 public class Cart {
     private Long cartId;
     private Long userIdNo;
-    private Long productId;
-    private int productCount;
-    private int productPrice;
-    private int productDiscount;
-    private String productSaleStatus;
-    private Timestamp cartCreatedAt;
+    private int totalPrice;
+    private Timestamp cartUpdatedAt;
 
     @Builder
-    public Cart(Long userIdNo, Long productId, int productCount, int productPrice, int productDiscount, String productSaleStatus) {
+    public Cart(Long userIdNo, int totalPrice) {
         this.userIdNo = userIdNo;
-        this.productId = productId;
-        this.productCount = productCount;
-        this.productPrice = productPrice;
-        this.productDiscount = productDiscount;
-        this.productSaleStatus = productSaleStatus;
+        this.totalPrice = totalPrice;
     }
 }

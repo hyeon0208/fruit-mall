@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,25 +29,9 @@ public class CartController {
 
     @PostMapping("/main/cart/add")
     @ResponseBody
-    public Cart addProductToCart(@Login SessionUser sessionUser, @RequestBody CartAddReqDto cartAddReqDto) {
-        Long userId = sessionUser.getUserIdNo();
-        Optional<Cart> findCart = cartService.selectByUserIdAndProductId(userId, cartAddReqDto.getProductId());
-        if (findCart.isPresent()) {
-            if (findCart.get().getProductCount() != cartAddReqDto.getProductCount()) {
-                cartService.updateProductCnt(cartAddReqDto.getProductCount(), findCart.get().getCartId());
-                return findCart.get();
-            } else {
-                throw new IllegalArgumentException("이미 장바구니에 있는 상품입니다.");
-            }
-        }
-        Cart cart = Cart.builder()
-                .userIdNo(userId)
-                .productId(cartAddReqDto.getProductId())
-                .productCount(cartAddReqDto.getProductCount())
-                .build();
-
-        Cart savedCart = cartService.addProductToCart(cart);
-        return savedCart;
+    public void addProductToCart(@Login SessionUser sessionUser, @RequestBody CartAddReqDto cartAddReqDto) {
+        Long cartId = sessionUser.getCartId();
+        cartService.addProductToCart(sessionUser.getUserIdNo(), cartId, cartAddReqDto);
     }
 
     @GetMapping("/local/cart/{productId}")
@@ -64,12 +47,13 @@ public class CartController {
     public String mergeLocalStorageCart(@Login SessionUser sessionUser, @RequestBody LocalStorageDto localStorageDto) {
         if (localStorageDto.getLocalCarts() != null) {
             for (LocalCart localCart : localStorageDto.getLocalCarts()) {
-                Cart lcart = Cart.builder()
-                        .userIdNo(sessionUser.getUserIdNo())
+                CartAddReqDto dto = CartAddReqDto.builder()
                         .productId(localCart.getProduct().getProductId())
+                        .productPrice(localCart.getProduct().getProductPrice())
                         .productCount(localCart.getProduct().getProductCount())
+                        .productDiscount(localCart.getProduct().getProductDiscount())
                         .build();
-                cartService.addProductToCart(lcart);
+                cartService.addProductToCart(sessionUser.getUserIdNo(), sessionUser.getCartId(), dto);
             }
         }
         return "success";
@@ -80,7 +64,7 @@ public class CartController {
     public String increaseProductToCart(@RequestBody CartCntUpdateDto cartCntUpdateDto) {
         int updateStock = cartCntUpdateDto.getProductCount();
         int curStock = productService.selectProductStock(cartCntUpdateDto.getProductId());
-        cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
+        cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId(), cartCntUpdateDto.getProductId());
 
         if ((curStock - updateStock) < 0) {
             return "재고부족";
@@ -93,7 +77,7 @@ public class CartController {
     public String decreaseProductToCart(@RequestBody CartCntUpdateDto cartCntUpdateDto) {
         int curStock = productService.selectProductStock(cartCntUpdateDto.getProductId());
         int updateStock = cartCntUpdateDto.getProductCount();
-        cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId());
+        cartService.updateProductCnt(cartCntUpdateDto.getProductCount(), cartCntUpdateDto.getCartId(), cartCntUpdateDto.getProductId());
 
         if ((curStock - updateStock) < 0) {
             return "재고부족";
@@ -101,17 +85,17 @@ public class CartController {
         return "success";
     }
 
-    @DeleteMapping("/cart/delete/{cartId}")
+    @DeleteMapping("/cart/delete/{cartId}/{productId}")
     @ResponseBody
-    public String deleteCart(@Login SessionUser sessionUser, @PathVariable Long cartId) {
-        cartService.deleteProductToCart(sessionUser.getUserIdNo(), cartId);
+    public String deleteCart(@Login SessionUser sessionUser, @PathVariable Long cartId, @PathVariable Long productId) {
+        cartService.deleteProductToCart(sessionUser.getUserIdNo(), cartId, productId);
         return "/user/cart";
     }
 
     @PostMapping("/cart/delete/pay/success")
     @ResponseBody
     public String deleteCartByUserId(@Login SessionUser sessionUser, @RequestBody List<Long> productIds) {
-        cartService.deleteCartByUserIdAndProductId(sessionUser.getUserIdNo(), productIds);
+        cartService.deleteCartByPaymented(sessionUser.getCartId(), productIds);
         return "success";
     }
 }

@@ -2,7 +2,6 @@ package com.fruit.mall.cart;
 
 import com.fruit.mall.cart.dto.CartAndImageDto;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,28 +13,28 @@ public class CartRepository implements CartMapper {
     private final CartMapper cartMapper;
 
     @Override
-    public Long addProductToCart(Cart cart) {
-        return cartMapper.addProductToCart(cart);
+    public void newUserCart(Long userIdNo) {
+        cartMapper.newUserCart(userIdNo);
     }
 
     @Override
-    public Optional<Cart> selectByUserIdAndProductId(Long userIdNo, Long productId) {
-        return cartMapper.selectByUserIdAndProductId(userIdNo, productId);
+    public Long selectUserCartId(Long userIdNo) {
+        return cartMapper.selectUserCartId(userIdNo);
     }
 
     @Override
-    public Cart selectByCartId(Long cartId) {
-        return cartMapper.selectByCartId(cartId);
+    public void addProductToCart(CartProduct cart) {
+        cartMapper.addProductToCart(cart);
     }
 
     @Override
-    public void deleteProductToCart(Long cartId) {
-        cartMapper.deleteProductToCart(cartId);
+    public Optional<CartProduct> selectCartProductByProductId(Long userIdNo, Long productId) {
+        return cartMapper.selectCartProductByProductId(userIdNo, productId);
     }
 
     @Override
-    public void deleteCartByUserIdAndProductId(Long userIdNo, Long productId) {
-        cartMapper.deleteCartByUserIdAndProductId(userIdNo, productId);
+    public void deleteProductToCart(Long cartId, Long productId) {
+        cartMapper.deleteProductToCart(cartId, productId);
     }
 
     @Override
@@ -44,8 +43,8 @@ public class CartRepository implements CartMapper {
     }
 
     @Override
-    public void updateProductCnt(int productCount, Long cartId) {
-        cartMapper.updateProductCnt(productCount, cartId);
+    public void updateProductCnt(int productCount, Long cartId, Long productId) {
+        cartMapper.updateProductCnt(productCount, cartId, productId);
     }
 
     @Override

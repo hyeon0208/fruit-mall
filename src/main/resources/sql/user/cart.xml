@@ -3,54 +3,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fruit.mall.cart.CartMapper">
-    <insert id="addProductToCart" parameterType="com.fruit.mall.cart.Cart" useGeneratedKeys="true" keyProperty="cartId">
-        INSERT INTO
-            cart(USER_ID_NO, PRODUCT_ID, PRODUCT_COUNT, PRODUCT_PRICE, PRODUCT_DISCOUNT, PRODUCT_SALE_STATUS)
-        VALUES
-            (#{userIdNo}, #{productId}, #{productCount}, #{productPrice}, #{productDiscount}, #{productSaleStatus})
+    <insert id="newUserCart" keyProperty="cartId">
+        INSERT INTO cart(USER_ID_NO)
+        VALUES (#{userIdNo});
     </insert>
 
-    <select id="selectByUserIdAndProductId" resultType="com.fruit.mall.cart.Cart">
-        SELECT * FROM cart WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId}
+    <select id="selectUserCartId" resultType="Long">
+        SELECT CART_ID
+        FROM cart
+        WHERE USER_ID_NO = #{userIdNo};
     </select>
 
-    <select id="selectByCartId" resultType="com.fruit.mall.cart.Cart">
-        SELECT * FROM cart WHERE CART_ID = #{cartId}
+    <insert id="addProductToCart" parameterType="com.fruit.mall.cart.CartProduct">
+        INSERT INTO
+            cart_product(CART_ID, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_COUNT, PRODUCT_DISCOUNT)
+        VALUES
+            (#{cartId}, #{productId}, #{productPrice}, #{productCount}, #{productDiscount})
+    </insert>
+
+    <select id="selectCartProductByProductId" resultType="com.fruit.mall.cart.CartProduct">
+        SELECT * FROM cart_product cp
+            WHERE CART_ID = #{cartId} AND PRODUCT_ID = #{productId};
     </select>
 
     <delete id="deleteProductToCart">
-        DELETE FROM cart WHERE CART_ID = #{cartId};
-    </delete>
-
-    <delete id="deleteCartByUserIdAndProductId">
-        DELETE FROM cart WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId};
+        DELETE FROM cart_product WHERE CART_ID = #{cartId} AND PRODUCT_ID =#{productId};
     </delete>
 
     <select id="countCartByUserId" resultType="int">
         SELECT COUNT(*)
-        FROM cart
-        WHERE USER_ID_NO = #{userIdNo}
+        FROM cart_product cp
+        JOIN cart c ON c.CART_ID = cp.CART_ID AND c.USER_ID_NO = #{userIdNo}
     </select>
 
     <select id="selectCartAndImageByUserId" resultType="com.fruit.mall.cart.dto.CartAndImageDto">
         SELECT
             c.CART_ID,
             c.USER_ID_NO,
-            c.PRODUCT_ID,
+            cp.PRODUCT_ID,
             p.PRODUCT_NAME,
             p.PRODUCT_STOCK,
-            c.PRODUCT_COUNT,
-            c.PRODUCT_PRICE,
-            c.PRODUCT_DISCOUNT,
-            c.PRODUCT_SALE_STATUS,
+            cp.PRODUCT_COUNT,
+            cp.PRODUCT_PRICE,
+            cp.PRODUCT_DISCOUNT,
+            p.PRODUCT_SALE_STATUS,
             i1.IMAGE_URL,
             i1.IMAGE_ID
-        FROM cart c
-        JOIN product p ON p.PRODUCT_ID = c.PRODUCT_ID
+        FROM cart_product cp
+            JOIN cart c ON c.CART_ID = cp.CART_ID AND c.USER_ID_NO = #{userIdNo}
+        JOIN product p ON p.PRODUCT_ID = cp.PRODUCT_ID
         JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
         WHERE
-            c.USER_ID_NO = #{userIdNo}
-          AND
             i1.IMAGE_ID = (
             SELECT MIN(i2.IMAGE_ID)
             FROM image i2
@@ -59,8 +62,8 @@
     </select>
 
     <update id="updateProductCnt">
-        UPDATE cart
+        UPDATE cart_product
         SET PRODUCT_COUNT = #{productCount}
-        WHERE CART_ID = #{cartId};
+        WHERE CART_ID = #{cartId} AND PRODUCT_ID = #{productId};
     </update>
 </mapper>
