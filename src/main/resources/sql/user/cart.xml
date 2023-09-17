@@ -66,4 +66,14 @@
         SET PRODUCT_COUNT = #{productCount}
         WHERE CART_ID = #{cartId} AND PRODUCT_ID = #{productId};
     </update>
+
+    <update id="updateCartTotalPrice">
+        UPDATE cart c
+        SET TOTAL_PRICE = (
+            SELECT FLOOR(SUM((cp.PRODUCT_PRICE * (100 - cp.PRODUCT_DISCOUNT) / 100) * cp.PRODUCT_COUNT))
+            FROM cart_product cp
+            WHERE c.CART_ID = cp.CART_ID
+        )
+        WHERE c.CART_ID = #{cartId}
+    </update>
 </mapper>

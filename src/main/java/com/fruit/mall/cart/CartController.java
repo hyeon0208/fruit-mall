@@ -23,6 +23,7 @@ public class CartController {
         if (sessionUser != null) {
             List<CartAndImageDto> cartAndImages = cartService.selectCartAndImageByUserId(sessionUser.getUserIdNo());
             model.addAttribute("cartAndImages", cartAndImages);
+            cartService.updateCartTotalPrice(sessionUser.getCartId());
         }
         return "user/cart";
     }

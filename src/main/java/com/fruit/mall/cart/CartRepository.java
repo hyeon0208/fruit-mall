@@ -48,6 +48,11 @@ public class CartRepository implements CartMapper {
     }
 
     @Override
+    public void updateCartTotalPrice(Long cartId) {
+        cartMapper.updateCartTotalPrice(cartId);
+    }
+
+    @Override
     public int countCartByUserId(Long userIdNo) {
         return cartMapper.countCartByUserId(userIdNo);
     }

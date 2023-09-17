@@ -62,6 +62,10 @@ public class CartService {
         cartRepository.updateProductCnt(productCount, cartId, productId);
     }
 
+    public void updateCartTotalPrice(Long cartId) {
+        cartRepository.updateCartTotalPrice(cartId);
+    }
+
     @Cacheable(value = CART_COUNT, key = "#userIdNo", condition = "#userIdNo != null", cacheManager = "cacheManager")
     public int countCartByUserId(Long userIdNo) {
         return cartRepository.countCartByUserId(userIdNo);
