@@ -70,4 +70,4 @@
 ## 📋 ERD
 👉🏻 **ERD 링크 바로가기 :** https://www.erdcloud.com/d/N33PiySjCTmbMZxTq
 
-![img_1.png](img_1.png)
+![img.png](img.png)
