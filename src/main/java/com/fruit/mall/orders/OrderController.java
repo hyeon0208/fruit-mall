@@ -7,7 +7,7 @@ import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.delivery.DeliveryService;
 import com.fruit.mall.delivery.dto.DeliveryResDto;
-import com.fruit.mall.orders.dto.OrderReqDto;
+import com.fruit.mall.orders.dto.OrderInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class OrderController {
         Long userId = sessionUser.getUserIdNo();
         List<DeliveryResDto> deliveries = deliveryService.deliveryAllByUserId(userId);
         List<Long> productIds = objectMapper.readValue(products, new TypeReference<List<Long>>(){});
-        List<OrderReqDto> orderReqDtos = productIds.stream()
+        List<OrderInfo> orderReqDtos = productIds.stream()
                 .map(id -> orderService.selectOrderInfosByProductId(id, userId))
                 .collect(Collectors.toList());
 
@@ -43,8 +43,8 @@ public class OrderController {
 
     @GetMapping("/user/order/one/{productId}/{productCount}")
     public String orderOneProduct(@Login SessionUser sessionUser, Model model, @PathVariable Long productId, @PathVariable int productCount) {
-        List<OrderReqDto> orderReqDtos = new ArrayList<>();
-        OrderReqDto orderReqDto = orderService.selectOneOrderInfoByProductId(productId, productCount, sessionUser.getUserIdNo());
+        List<OrderInfo> orderReqDtos = new ArrayList<>();
+        OrderInfo orderReqDto = orderService.selectOneOrderInfoByProductId(productId, productCount, sessionUser.getUserIdNo());
         orderReqDtos.add(orderReqDto);
 
         Long userId = sessionUser.getUserIdNo();

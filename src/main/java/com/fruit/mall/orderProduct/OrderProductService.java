@@ -13,19 +13,6 @@ import java.util.List;
 public class OrderProductService {
     private final OrderProductRepository orderProductRepository;
 
-    public void insertOrderProduct(List<Long> orderIds,  List<OrderSaveDto> orderSaveDtos) {
-        for (int i = 0; i < orderIds.size(); i++) {
-            OrderProduct orderProduct = OrderProduct.builder()
-                    .orderId(orderIds.get(i))
-                    .productId(orderSaveDtos.get(i).getProductId())
-                    .orderNumber(orderSaveDtos.get(i).getOrderNumber())
-                    .orderCount(orderSaveDtos.get(i).getOrderCount())
-                    .orderPrice(orderSaveDtos.get(i).getOrderPrice())
-                    .build();
-            orderProductRepository.insertOrderProduct(orderProduct);
-        }
-    }
-
     public Boolean existsOrderProductByUser(Long userIdNo, Long productId) {
         List<Long> orderProductId = orderProductRepository.selectOPIdByOrderIdAndProductId(userIdNo, productId);
         if (orderProductId.isEmpty()) {

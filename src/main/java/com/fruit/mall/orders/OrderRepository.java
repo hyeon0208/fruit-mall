@@ -1,6 +1,6 @@
 package com.fruit.mall.orders;
 
-import com.fruit.mall.orders.dto.OrderReqDto;
+import com.fruit.mall.orders.dto.OrderInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +15,12 @@ public class OrderRepository implements OrderMapper {
     }
 
     @Override
-    public OrderReqDto selectOneOrderInfoByProductId(Long productId, int productCount, Long userIdNo) {
+    public OrderInfo selectOneOrderInfoByProductId(Long productId, int productCount, Long userIdNo) {
         return orderMapper.selectOneOrderInfoByProductId(productId, productCount, userIdNo);
     }
 
     @Override
-    public OrderReqDto selectOrderInfosByProductId(Long productId, Long userIdNo) {
+    public OrderInfo selectOrderInfosByProductId(Long productId, Long userIdNo) {
         return orderMapper.selectOrderInfosByProductId(productId, userIdNo);
     }
 }

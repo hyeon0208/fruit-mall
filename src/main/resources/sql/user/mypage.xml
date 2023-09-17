@@ -4,49 +4,45 @@
 
 <mapper namespace="com.fruit.mall.mypage.MyPageMapper">
     <select id="selectOrderDetailsByUserId" resultType="com.fruit.mall.mypage.dto.OrderDetail">
-        SELECT op.ORDER_NUMBER,
+        SELECT o.ORDER_NUMBER,
                p.PRODUCT_ID,
                p.PRODUCT_NAME,
-               op.ORDER_PRICE,
-               op.ORDER_COUNT,
+               op.ORDER_PRODUCT_PRICE,
+               op.ORDER_PRODUCT_COUNT,
                o.RECEIVER_NAME,
                o.PHONE_NUMBER,
                o.ADDRESS,
                o.ORDER_REQUIRED,
-               i.IMAGE_URL,
+               op.PRODUCT_IMAGE,
                IFNULL((SELECT IF(r.REVIEW_ID IS NOT NULL, 1, 0)
                        FROM review r
-                       WHERE r.ORDER_ID = o.ORDER_ID), 0) AS IS_WRITE,
+                       WHERE r.ORDER_ID = op.ORDER_ID AND r.PRODUCT_ID = op.PRODUCT_ID), 0) AS IS_WRITE,
                o.ORDER_DATE
         FROM order_product op
                  JOIN product p ON op.PRODUCT_ID = p.PRODUCT_ID
                  JOIN orders o ON op.ORDER_ID = o.ORDER_ID
-                 JOIN image i ON i.PRODUCT_ID = p.PRODUCT_ID
         WHERE o.USER_ID_NO = #{userIdNo}
-          AND i.IMAGE_ID = (SELECT MIN(i2.IMAGE_ID) FROM image i2 WHERE i2.PRODUCT_ID = p.PRODUCT_ID)
     </select>
 
     <select id="selectOrderDetailsBySearchFilter" resultType="com.fruit.mall.mypage.dto.OrderDetail">
-        SELECT op.ORDER_NUMBER,
+        SELECT o.ORDER_NUMBER,
                p.PRODUCT_ID,
                p.PRODUCT_NAME,
-               op.ORDER_PRICE,
-               op.ORDER_COUNT,
+               op.ORDER_PRODUCT_PRICE,
+               op.ORDER_PRODUCT_COUNT,
                o.RECEIVER_NAME,
                o.PHONE_NUMBER,
                o.ADDRESS,
                o.ORDER_REQUIRED,
-               i.IMAGE_URL,
+               op.PRODUCT_IMAGE,
                IFNULL((SELECT IF(r.REVIEW_ID IS NOT NULL, 1, 0)
                        FROM review r
-                       WHERE r.ORDER_ID = o.ORDER_ID), 0) AS IS_WRITE,
+                       WHERE r.ORDER_ID = op.ORDER_ID AND r.PRODUCT_ID = op.PRODUCT_ID), 0) AS IS_WRITE,
                o.ORDER_DATE
         FROM order_product op
                  JOIN product p ON op.PRODUCT_ID = p.PRODUCT_ID
                  JOIN orders o ON op.ORDER_ID = o.ORDER_ID
-                 JOIN image i ON i.PRODUCT_ID = p.PRODUCT_ID
         WHERE o.USER_ID_NO = #{userIdNo}
-          AND i.IMAGE_ID = (SELECT MIN(i2.IMAGE_ID) FROM image i2 WHERE i2.PRODUCT_ID = p.PRODUCT_ID)
             <if test="cond.clickedDuration != null and cond.clickedDuration != ''">
                 AND o.ORDER_DATE >= DATE_SUB(CURDATE(), INTERVAL #{cond.clickedDuration} MONTH)
             </if>
@@ -59,7 +55,7 @@
                         AND p.PRODUCT_NAME LIKE CONCAT('%', #{cond.searchText}, '%')
                     </when>
                     <when test="cond.category == '주문번호'">
-                        AND op.ORDER_NUMBER = #{cond.searchText}
+                        AND o.ORDER_NUMBER = #{cond.searchText}
                     </when>
                 </choose>
             </if>

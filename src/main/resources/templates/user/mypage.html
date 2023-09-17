@@ -87,13 +87,13 @@
                             </div>
 
                             <div class="img">
-                                <img th:src="${orderDetail.imageUrl}" th:alt="${orderDetail.productName}">
+                                <img th:src="${orderDetail.productImage}" th:alt="${orderDetail.productName}">
                                 <div class="img__txt">
                                     <p th:text="${orderDetail.productName}">상품명</p>
 
                                     <div class="group">
-                                        <span class="orange" th:text="|${#numbers.formatInteger(orderDetail.orderPrice, 3, 'COMMA')}원|">상품가격</span>
-                                        <span th:text="|구매수량 ${orderDetail.orderCount}개|">구매수량</span>
+                                        <span class="orange" th:text="|${#numbers.formatInteger(orderDetail.orderProductPrice, 3, 'COMMA')}원|">상품가격</span>
+                                        <span th:text="|구매수량 ${orderDetail.orderProductCount}개|">구매수량</span>
                                     </div>
 
                                     <div class="group2">
@@ -116,7 +116,7 @@
 
                             <div class="buttons">
                                 <button class="reAddToCartBtn"
-                                        th:data-count="${orderDetail.orderCount}"
+                                        th:data-count="${orderDetail.orderProductCount}"
                                         th:data-product-id="${orderDetail.productId}"
                                         th:data-order-number="${orderDetail.orderNumber}">재구매</button>
                                 <button th:if="${!orderDetail.isWrite}" class="writeReviewAtMyPage">리뷰작성</button>

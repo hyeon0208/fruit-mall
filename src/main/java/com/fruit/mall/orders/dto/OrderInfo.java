@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class OrderReqDto {
+public class OrderInfo {
     private Long productId;
     private String productName;
     private int productPrice;

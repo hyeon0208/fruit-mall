@@ -1,6 +1,6 @@
 package com.fruit.mall.orders;
 
-import com.fruit.mall.orders.dto.OrderReqDto;
+import com.fruit.mall.orders.dto.OrderInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderMapper {
     void insertOrder(Orders orders);
 
-    OrderReqDto selectOneOrderInfoByProductId(@Param("productId") Long productId, @Param("productCount") int productCount,  @Param("userIdNo") Long userIdNo);
+    OrderInfo selectOneOrderInfoByProductId(@Param("productId") Long productId, @Param("productCount") int productCount, @Param("userIdNo") Long userIdNo);
 
-    OrderReqDto selectOrderInfosByProductId(@Param("productId") Long productId, @Param("userIdNo") Long userIdNo);
+    OrderInfo selectOrderInfosByProductId(@Param("productId") Long productId, @Param("userIdNo") Long userIdNo);
 }

@@ -38,10 +38,9 @@
 
     <select id="selectOrderCountByUserIdAndProductId" resultType="int">
         SELECT COUNT(*)
-        FROM orders o
-                 JOIN order_product op ON o.ORDER_ID = op.ORDER_ID AND op.PRODUCT_ID = #{productId}
-                 LEFT JOIN review r ON (r.PRODUCT_ID = op.PRODUCT_ID AND r.ORDER_ID = o.ORDER_ID)
-        WHERE o.USER_ID_NO = #{userIdNo};
+        FROM order_product op
+                 LEFT JOIN review r ON (r.PRODUCT_ID = op.PRODUCT_ID AND r.ORDER_ID = op.ORDER_ID)
+        WHERE r.USER_ID_NO = #{userIdNo} AND op.PRODUCT_ID = #{productId};
     </select>
 
     <select id="selectReviewCountByUserIdAndProductId" resultType="int">

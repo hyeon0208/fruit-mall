@@ -4,23 +4,22 @@
 
 <mapper namespace="com.fruit.mall.orders.OrderMapper">
     <insert id="insertOrder" parameterType="com.fruit.mall.orders.Orders" useGeneratedKeys="true" keyProperty="orderId">
-        INSERT INTO orders (USER_ID_NO, PAYMENT_METHOD, ORDER_PRICE, ORDER_COUNT, RECEIVER_NAME, PHONE_NUMBER, ZIPCODE,
-                            ADDRESS, ORDER_REQUIRED, ORDER_STATUS)
+        INSERT INTO orders (USER_ID_NO, ORDER_NUMBER, RECEIVER_NAME, PHONE_NUMBER, ZIPCODE,
+                            ADDRESS, ORDER_REQUIRED, ORDER_STATUS, PAYMENT_METHOD)
         VALUES (
                 #{userIdNo},
-                #{paymentMethod},
-                #{orderPrice},
-                #{orderCount},
+                #{orderNumber},
                 #{receiverName},
                 #{phoneNumber},
                 #{zipcode},
                 #{address},
                 #{orderRequired},
-                #{orderStatus}
+                #{orderStatus},
+                #{paymentMethod}
                );
     </insert>
 
-    <select id="selectOneOrderInfoByProductId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
+    <select id="selectOneOrderInfoByProductId" resultType="com.fruit.mall.orders.dto.OrderInfo">
         SELECT p.PRODUCT_ID,
                p.PRODUCT_NAME,
                p.PRODUCT_PRICE,
@@ -33,10 +32,9 @@
           AND i1.IMAGE_ID = (SELECT MIN(i2.IMAGE_ID)
                              FROM image i2
                              WHERE i2.PRODUCT_ID = p.PRODUCT_ID)
-          AND c.USER_ID_NO = #{userIdNo};
     </select>
 
-    <select id="selectOrderInfosByProductId" resultType="com.fruit.mall.orders.dto.OrderReqDto">
+    <select id="selectOrderInfosByProductId" resultType="com.fruit.mall.orders.dto.OrderInfo">
         SELECT p.PRODUCT_ID,
                p.PRODUCT_NAME,
                c.PRODUCT_PRICE,

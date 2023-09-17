@@ -10,6 +10,7 @@ public class OrderSaveDto {
     private Long productId;
     private int orderPrice;
     private int orderCount;
+    private int orderDiscount;
     private String receiverName;
     private String phoneNumber;
     private int zipcode;
@@ -17,4 +18,5 @@ public class OrderSaveDto {
     private String address;
     private String orderRequired;
     private String paymentMethod;
+    private String productImage;
 }

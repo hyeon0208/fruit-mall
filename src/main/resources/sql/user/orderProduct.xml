@@ -3,12 +3,12 @@
 
 <mapper namespace="com.fruit.mall.orderProduct.OrderProductMapper">
     <insert id="insertOrderProduct" parameterType="com.fruit.mall.orderProduct.OrderProduct" keyProperty="orderProductId">
-        INSERT INTO order_product (ORDER_ID, PRODUCT_ID, ORDER_NUMBER, ORDER_COUNT, ORDER_PRICE)
-        VALUES (#{orderId}, #{productId}, #{orderNumber}, #{orderCount}, #{orderPrice});
+        INSERT INTO order_product (ORDER_ID, PRODUCT_ID, ORDER_PRODUCT_PRICE, ORDER_PRODUCT_COUNT, ORDER_PRODUCT_DISCOUNT, PRODUCT_IMAGE)
+        VALUES (#{orderId}, #{productId}, #{orderProductPrice}, #{orderProductCount}, #{orderProductDiscount}, #{productImage});
     </insert>
 
     <select id="selectOPIdByOrderIdAndProductId" resultType="Long">
-        SELECT op.ORDER_PRODUCT_ID
+        SELECT op.ORDER_ID
         FROM order_product op
                  JOIN orders o ON op.ORDER_ID = o.ORDER_ID
         WHERE o.USER_ID_NO = #{userIdNo} AND op.PRODUCT_ID = #{productId}

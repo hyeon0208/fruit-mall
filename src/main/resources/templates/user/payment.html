@@ -32,26 +32,28 @@
             <div class="input">
                 <label for="where">
                     <p>배송지 선택</p>
-                    <select name="where" id="where" th:value="${deliveries}">
+                    <select name="where" id="where" th:if="${!#lists.isEmpty(deliveries)}" th:value="${deliveries}">
+                        <option selected>배송지를 선택하세요</option>
                         <option th:each="delivery : ${deliveries}" th:value="${delivery.deliveryName}" th:text="${delivery.deliveryName}"></option>
                     </select>
+                    <select name="where" th:if="${#lists.isEmpty(deliveries)}"></select>
                     <button id="newDelivery">+ 신규배송지</button>
                 </label>
 
                 <label for="name">
                     <p>이름</p>
-                    <input type="textbox" name="name" id="name" th:value="${deliveries.get(0).userName}">
+                    <input type="textbox" name="name" id="name">
                 </label>
 
                 <label for="phone" class="phone">
                     <p>연락처</p>
-                    <input type="textbox" name="phone1" id="phone1" th:value="${deliveries.get(0).phoneNumber}">
+                    <input type="textbox" name="phone1" id="phone1">
                 </label>
 
                 <label for="add" class="add">
                     <p>주소</p>
-                    <input type="textbox" name="add" id="add" class="postalCode" th:value="${deliveries.get(0).zipcode}">
-                    <input type="textbox" name="add2" id="add2" class="postalCode2" th:value="${deliveries.get(0).address}">
+                    <input type="textbox" name="add" id="add" class="postalCode">
+                    <input type="textbox" name="add2" id="add2" class="postalCode2">
                 </label>
 
                 <label for="ask">

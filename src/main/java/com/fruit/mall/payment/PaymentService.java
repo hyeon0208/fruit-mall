@@ -22,37 +22,38 @@ public class PaymentService {
     private final ProductRepository productRepository;
 
     public void saveOrder(Long userId, List<OrderSaveDto> orderSaveDtos) {
-        int curStock = productRepository.selectProductStock(orderSaveDtos.get(0).getProductId());
-        int orderStock = orderSaveDtos.get(0).getOrderCount();
+        OrderSaveDto saveDto = orderSaveDtos.get(0);
+        Orders orders = Orders.builder()
+                .userIdNo(userId)
+                .orderNumber(saveDto.getOrderNumber())
+                .receiverName(saveDto.getReceiverName())
+                .phoneNumber(saveDto.getPhoneNumber())
+                .zipcode(saveDto.getZipcode())
+                .address(saveDto.getAddress())
+                .orderRequired(saveDto.getOrderRequired())
+                .orderStatus(PayStatus.SUCCESS.getStatus())
+                .paymentMethod(saveDto.getPaymentMethod())
+                .build();
+        orderRepository.insertOrder(orders);
 
-        if (curStock - orderStock < 0) {
-            throw new IllegalArgumentException("상품 재고가 부족합니다.");
-        }
+        for (OrderSaveDto dto : orderSaveDtos) {
+            int curStock = productRepository.selectProductStock(dto.getProductId());
+            int orderStock = dto.getOrderCount();
 
-        for (OrderSaveDto orderSaveDto : orderSaveDtos) {
-            Orders orders = Orders.builder()
-                    .userIdNo(userId)
-                    .orderPrice(orderSaveDto.getOrderPrice())
-                    .orderCount(orderSaveDto.getOrderCount())
-                    .receiverName(orderSaveDto.getReceiverName())
-                    .phoneNumber(orderSaveDto.getPhoneNumber())
-                    .zipcode(orderSaveDto.getZipcode())
-                    .address(orderSaveDto.getAddress())
-                    .orderRequired(orderSaveDto.getOrderRequired())
-                    .orderStatus(PayStatus.SUCCESS.getStatus())
-                    .paymentMethod(orderSaveDto.getPaymentMethod())
-                    .build();
-            orderRepository.insertOrder(orders);
+            if (curStock - orderStock < 0) {
+                throw new IllegalArgumentException("상품 재고가 부족합니다.");
+            }
 
             OrderProduct orderProduct = OrderProduct.builder()
                     .orderId(orders.getOrderId())
-                    .productId(orderSaveDto.getProductId())
-                    .orderNumber(orderSaveDto.getOrderNumber())
-                    .orderCount(orderSaveDto.getOrderCount())
-                    .orderPrice(orderSaveDto.getOrderPrice())
+                    .productId(dto.getProductId())
+                    .orderProductPrice(dto.getOrderPrice())
+                    .orderProductCount(dto.getOrderCount())
+                    .orderProductDiscount(dto.getOrderDiscount())
+                    .productImage(dto.getProductImage())
                     .build();
             orderProductRepository.insertOrderProduct(orderProduct);
-            productRepository.updateProductStock(orderSaveDto.getProductId(), orderSaveDto.getOrderCount());
+            productRepository.updateProductStock(dto.getProductId(), dto.getOrderCount());
         }
     }
 }

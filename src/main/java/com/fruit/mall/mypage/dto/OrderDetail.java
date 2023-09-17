@@ -11,13 +11,13 @@ public class OrderDetail {
     private String orderNumber;
     private Long productId;
     private String productName;
-    private int orderPrice;
-    private int orderCount;
+    private int orderProductPrice;
+    private int orderProductCount;
     private String receiverName;
     private String phoneNumber;
     private String address;
     private String orderRequired;
-    private String imageUrl;
+    private String productImage;
     private Boolean isWrite;
     private Timestamp orderDate;
 }

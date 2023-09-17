@@ -41,7 +41,6 @@ $(() =>{
 
         $('.orderProductPrice').each((i, e) => {
             let order = {};
-
             const price = parseInt($(e).text().replace(/[^0-9]/g, ''));
             let discountRate = parseInt($('.orderProductDiscount').eq(i).text().replace(/[^0-9]/g, ''));
 
@@ -59,6 +58,8 @@ $(() =>{
             order.address = $("#add2").val();
             order.orderRequired = $("#ask").val();
             order.paymentMethod = payMethod;
+            order.orderDiscount = discountRate;
+            order.productImage =  $('.td_wrap img').eq(i).attr('src');
             orders.push(order);
         });
 
