@@ -19,18 +19,17 @@
                     </div>
                 </a>
 
-                <a th:if="${loginMethod == null}" href="/user/mypage/userinfo">
+                <a th:if="${loginMethod == '일반'}" href="/user/mypage/userinfo">
                     <div class="memberInfo">
                         <p>회원정보</p>
                     </div>
                 </a>
 
-                <a th:if="${loginMethod != null}" href="/user/mypage/userinfo/edit">
+                <a th:if="${loginMethod != '일반'}" href="/user/mypage/userinfo/edit">
                     <div class="memberInfo">
                         <p>회원정보</p>
                     </div>
                 </a>
-
             </div>
 
             <div class="txt__box">
