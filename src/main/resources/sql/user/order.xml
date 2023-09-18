@@ -37,12 +37,13 @@
     <select id="selectOrderInfosByProductId" resultType="com.fruit.mall.orders.dto.OrderInfo">
         SELECT p.PRODUCT_ID,
                p.PRODUCT_NAME,
-               c.PRODUCT_PRICE,
-               c.PRODUCT_COUNT,
-               c.PRODUCT_DISCOUNT,
+               cp.PRODUCT_PRICE,
+               cp.PRODUCT_COUNT,
+               cp.PRODUCT_DISCOUNT,
                i1.IMAGE_URL
         FROM cart c
-                 JOIN product p ON p.PRODUCT_ID = c.PRODUCT_ID
+                 JOIN cart_product cp ON c.CART_ID = cp.CART_ID
+                 JOIN product p ON p.PRODUCT_ID = cp.PRODUCT_ID
                  JOIN image i1 ON i1.PRODUCT_ID = p.PRODUCT_ID
         WHERE p.PRODUCT_ID = #{productId}
           AND i1.IMAGE_ID = (SELECT MIN(i2.IMAGE_ID)
