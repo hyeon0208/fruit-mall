@@ -27,7 +27,7 @@ public class UsernameUpdateDto {
                 .user_name(dto.getNewName())
                 .user_email(dto.getUserEmail())
                 .loginMethod(dto.loginMethod)
-                .user_status(dto.getRole())
+                .role(dto.getRole())
                 .build();
     }
 }

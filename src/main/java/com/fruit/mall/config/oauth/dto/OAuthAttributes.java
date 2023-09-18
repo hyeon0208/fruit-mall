@@ -77,7 +77,7 @@ public class OAuthAttributes {
                 .user_name(name)
                 .user_email(email)
                 .loginMethod(registrationId)
-                .user_status(Role.USER)
+                .role(Role.USER)
                 .build();
     }
 }

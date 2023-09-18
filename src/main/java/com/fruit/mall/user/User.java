@@ -1,6 +1,5 @@
 package com.fruit.mall.user;
 
-import com.fruit.mall.user.Role;
 import lombok.*;
 
 import java.io.Serializable;
@@ -15,15 +14,16 @@ public class User implements Serializable {
     private String user_email;
     private String user_name;
     private String user_pwd;
-    private Role user_status;
+    private String user_status;
+    private Role role;
     private String loginMethod;
 
     @Builder
-    public User(String user_email, String user_name, String user_pwd, Role user_status, String loginMethod) {
+    public User(String user_email, String user_name, String user_pwd, Role role, String loginMethod) {
         this.user_email = user_email;
         this.user_name = user_name;
         this.user_pwd = user_pwd;
-        this.user_status = user_status;
+        this.role = role;
         this.loginMethod = loginMethod;
     }
 }

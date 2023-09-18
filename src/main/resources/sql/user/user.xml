@@ -4,12 +4,12 @@
 
 <mapper namespace="com.fruit.mall.user.UserMapper">
     <insert id="insertUser" parameterType="com.fruit.mall.user.User" useGeneratedKeys="true" keyProperty="user_id_no">
-        INSERT INTO user (USER_EMAIL, USER_NAME, USER_PWD, USER_STATUS)
-        VALUES (#{user_email}, #{user_name}, #{user_pwd}, #{user_status})
+        INSERT INTO user (USER_EMAIL, USER_NAME, USER_PWD, ROLE)
+        VALUES (#{user_email}, #{user_name}, #{user_pwd}, #{role})
     </insert>
 
     <insert id="insertOAuthUser"  parameterType="com.fruit.mall.user.User" useGeneratedKeys="true" keyProperty="user_id_no">
-        INSERT INTO user (USER_NAME, USER_EMAIL, LOGIN_METHOD, USER_STATUS) VALUES(#{user_name}, #{user_email}, #{loginMethod}, #{user_status})
+        INSERT INTO user (USER_NAME, USER_EMAIL, LOGIN_METHOD, ROLE) VALUES(#{user_name}, #{user_email}, #{loginMethod}, #{role})
     </insert>
 
     <insert id="insertTerm" parameterType="com.fruit.mall.term.Term">
@@ -22,7 +22,7 @@
         <result property="user_email" column="user_email" />
         <result property="user_name" column="user_name" />
         <result property="user_pwd" column="user_pwd" />
-        <result property="user_status" column="user_status" typeHandler="com.fruit.mall.user.RoleTypeHandler" />
+        <result property="role" column="role" typeHandler="com.fruit.mall.user.RoleTypeHandler" />
     </resultMap>
 
     <select id="selectUserByUserEmail" resultMap="UserResultMap">

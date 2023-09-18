@@ -30,7 +30,7 @@ public class UserService {
                 .user_email(user.getUser_email())
                 .user_name(user.getUser_name())
                 .user_pwd(passwordEncoder.encode(user.getUser_pwd()))
-                .user_status(Role.USER)
+                .role(Role.USER)
                 .build();
         userRepository.insertUser(joinUser);
 

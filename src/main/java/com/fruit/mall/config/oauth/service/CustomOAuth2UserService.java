@@ -77,7 +77,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                     .curName(curName)
                     .userEmail(user.getUser_email())
                     .loginMethod(user.getLoginMethod())
-                    .role(user.getUser_status())
+                    .role(user.getRole())
                     .build();
 
             userRepository.updateUserName(dto);
