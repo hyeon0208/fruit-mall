@@ -279,9 +279,9 @@ $(document).on("click", ".addCartBtn", (e) => {
                 url: "/main/cart/add",
                 data: {
                     productId: productId,
-                    productPrice: $(".price").data("product-price"),
+                    productPrice: cart.closest("li").find(".price").data("product-price"),
                     productCount: 1,
-                    productDiscount: $(".price").data("product-discount"),
+                    productDiscount: cart.closest("li").find(".price").data("product-discount"),
                     localCart: localCart
                 },
                 dataType: "json",

@@ -43,6 +43,18 @@ public class CartService {
     }
 
     @CacheEvict(value = CART_COUNT, key = "#userId", cacheManager = "cacheManager")
+    public void repurchase(Long userId, Long cartId, CartAddReqDto dto) {
+        CartProduct cart = CartProduct.builder()
+                .cartId(cartId)
+                .productId(dto.getProductId())
+                .productPrice(dto.getProductPrice())
+                .productCount(dto.getProductCount())
+                .productDiscount(dto.getProductDiscount())
+                .build();
+        cartRepository.addProductToCart(cart);
+    }
+
+    @CacheEvict(value = CART_COUNT, key = "#userId", cacheManager = "cacheManager")
     public void deleteProductToCart(Long userId, Long cartId, Long productId) {
         cartRepository.deleteProductToCart(cartId, productId);
     }

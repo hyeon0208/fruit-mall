@@ -1,9 +1,14 @@
 package com.fruit.mall.mypage;
 
+import com.fruit.mall.cart.CartService;
+import com.fruit.mall.cart.dto.CartAddReqDto;
 import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.mypage.dto.MyPageSearchCond;
 import com.fruit.mall.mypage.dto.OrderDetail;
+import com.fruit.mall.mypage.dto.RepurchaseReqDto;
+import com.fruit.mall.product.Product;
+import com.fruit.mall.product.ProductService;
 import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import com.fruit.mall.user.UserService;
 import com.github.pagehelper.PageInfo;
@@ -17,9 +22,10 @@ import java.util.Map;
 public class MyPageApiController {
     private final MyPageService myPageService;
     private final UserService userService;
+    private final ProductService productService;
+    private final CartService cartService;
 
     @GetMapping("/user/mypage/searchfilter")
-    @ResponseBody
     public PageInfo<OrderDetail> myPageSearchFilter(
             @Login SessionUser sessionUser,
             @ModelAttribute MyPageSearchCond cond) {
@@ -27,8 +33,18 @@ public class MyPageApiController {
         return pageInfo;
     }
 
+    @PostMapping("/user/mypage/repurchase")
+    public void repurchase(@Login SessionUser sessionUser, @RequestBody RepurchaseReqDto repurchaseReqDto) {
+        Product product = productService.selectProductAllById(repurchaseReqDto.getProductId());
+        CartAddReqDto dto = CartAddReqDto.builder()
+                .productId(product.getProductId())
+                .productPrice(product.getProductPrice())
+                .productDiscount(product.getProductDiscount())
+                .productCount(repurchaseReqDto.getProductCount()).build();
+        cartService.repurchase(sessionUser.getUserIdNo(), sessionUser.getCartId(), dto);
+    }
+
     @PostMapping("/user/mypage/password/confirm")
-    @ResponseBody
     public String checkPwd(@Login SessionUser sessionUser, @RequestBody Map<String, String> param) {
         String inputPwd = param.get("inputPwd");
         if (!userService.myPageLoginCheck(sessionUser.getUserIdNo(), inputPwd)) {
@@ -38,14 +54,12 @@ public class MyPageApiController {
     }
 
     @PostMapping("/user/mypage/name-check")
-    @ResponseBody
     public String checkName(@RequestBody Map<String, String> param) {
         String findUsername = userService.selectUserNameByUserName(param.get("userName"));
         return findUsername != null ? "fail" : "success";
     }
 
     @PostMapping("/user/mypage/userinfo-update")
-    @ResponseBody
     public String updateUserInfo(@Login SessionUser sessionUser, @RequestBody UserInfoUpdateDto dto) {
         userService.updateUserInfo(sessionUser.getUserIdNo(), dto);
         return "success";

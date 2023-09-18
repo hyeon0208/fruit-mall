@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="right__txt02">
-                    <div class="right__txt02__01">
+                    <div class="right__txt02__01" th:data-detail-price="${productDetailForm.productPrice}">
                         <span id="detailDiscount" th:if="${productDetailForm.productDiscount > 0}" th:data-detail-discount="${productDetailForm.productDiscount}" th:text="|${productDetailForm.productDiscount}%|"></span>
                         <span th:if="${productDetailForm.productDiscount == 0}" text="-"></span>
 

@@ -118,6 +118,8 @@
                                 <button class="reAddToCartBtn"
                                         th:data-count="${orderDetail.orderProductCount}"
                                         th:data-product-id="${orderDetail.productId}"
+                                        th:data-product-price="${orderDetail.orderProductPrice}"
+                                        th:data-product-discount="${orderDetail}"
                                         th:data-order-number="${orderDetail.orderNumber}">재구매</button>
                                 <button th:if="${!orderDetail.isWrite}" class="writeReviewAtMyPage">리뷰작성</button>
                                 <button th:if="${orderDetail.isWrite}" class="showReview" style="background-color: #f1dacb; color: #c56206">리뷰보기</button>

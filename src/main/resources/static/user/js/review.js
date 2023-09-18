@@ -11,7 +11,6 @@ $(() => {
 
     $("#show-reply").on("click", (e) => {
         const reviewId = $(e.currentTarget).data("review-id");
-        console.log(reviewId);
         axios({
             method: "get",
             url: `/reply/${reviewId}`

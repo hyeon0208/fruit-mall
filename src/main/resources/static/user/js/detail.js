@@ -62,7 +62,9 @@ $(document).on("click", "#addDetailToCartBtn", () => {
                 url: "/main/cart/add",
                 data: {
                     productId: productId,
+                    productPrice: $(".right__txt02__01").data("detail-price"),
                     productCount : parseInt($("#detailProductCnt").val()),
+                    productDiscount: $("#detailDiscount").data("detail-discount"),
                     localCart: localCart
                 },
                 dataType: "json",

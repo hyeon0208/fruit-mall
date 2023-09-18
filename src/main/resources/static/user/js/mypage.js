@@ -164,7 +164,7 @@ $(document).on("click", ".reAddToCartBtn", (e) => {
 
     axios({
         method: "post",
-        url: "/main/cart/add",
+        url: "/user/mypage/repurchase",
         data: {
             productId: productId,
             productCount: count
