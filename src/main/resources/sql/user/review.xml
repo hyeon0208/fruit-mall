@@ -45,8 +45,9 @@
 
     <select id="selectReviewCountByUserIdAndProductId" resultType="int">
         SELECT COUNT(*)
-        FROM review r
-        WHERE USER_ID_NO = #{userIdNo} AND PRODUCT_ID = #{productId};
+        FROM order_product op
+        JOIN orders o on op.ORDER_ID = o.ORDER_ID
+        WHERE o.USER_ID_NO = #{userIdNo} AND op.PRODUCT_ID = #{productId};
     </select>
 
     <update id="updateReviewByUserId">
