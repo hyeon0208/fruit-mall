@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.mall.reply.ReplyMapper">
+    <select id="selectReplyByReviewId" resultType="com.fruit.mall.reply.dto.ReplyResDto">
+        SELECT COMMENTS, REPLY_CREATED_AT
+        FROM reply
+        WHERE REVIEW_ID = #{reviewId};
+    </select>
+</mapper>

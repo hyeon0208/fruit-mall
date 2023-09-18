@@ -273,8 +273,14 @@
                         <p id="review_contents" th:utext="${review.reviewContents}"></p>
                         <div class="review-button-group">
                             <button id="update_review" th:if="${session.loginUser != null && session.loginUser.name == review.userName}">수정하기</button>
-                            <button>답글보기</button>
+                            <button id="show-reply" th:data-review-id="${review.reviewId}">답글보기</button>
                         </div>
+                    </li>
+
+                    <li class="reply-div" hidden="hidden">
+                        <span class="id">판매자</span>
+                        <span class="date"></span>
+                        <p id="reply_contents"></p>
                     </li>
                 </ul>
 

@@ -9,6 +9,22 @@ $(() => {
         $('.count').text(inputLength + "/500");
     });
 
+    $("#show-reply").on("click", (e) => {
+        const reviewId = $(e.currentTarget).data("review-id");
+        console.log(reviewId);
+        axios({
+            method: "get",
+            url: `/reply/${reviewId}`
+        }).then(res => {
+            $(".reply-div #reply_contents").text(res.data.comments);
+            $(".reply-div .date").text(res.data.replyCreatedAt.toLocaleString("ko-KR", { year: 'numeric', month: '2-digit', day: '2-digit' }).replaceAll("-", ".").substring(0, 10));
+            $(".reply-div").slideToggle();
+        }).catch(err => {
+            $(".reply-div #reply_contents").text("답글이 없습니다.");
+            $(".reply-div").slideToggle();
+        });
+    });
+
     $("#writeReview").on("click", () => {
         $(".review__modal.write__review").show();
 
