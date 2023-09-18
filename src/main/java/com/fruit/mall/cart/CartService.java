@@ -47,8 +47,8 @@ public class CartService {
         cartRepository.deleteProductToCart(cartId, productId);
     }
 
-    @CacheEvict(value = CART_COUNT, key = "#userIdNo", cacheManager = "cacheManager")
-    public void deleteCartByPaymented(Long cartId, List<Long> productIds) {
+    @CacheEvict(value = CART_COUNT, key = "#userId", cacheManager = "cacheManager")
+    public void deleteCartByPaymented(Long userId, Long cartId, List<Long> productIds) {
         for (Long productId : productIds) {
             cartRepository.deleteProductToCart(cartId, productId);
         }
