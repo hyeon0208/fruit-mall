@@ -110,4 +110,10 @@
             WHERE i2.PRODUCT_ID = p.PRODUCT_ID
             )
     </select>
+
+    <select id="selectPriceAndDiscountById" resultType="com.fruit.mall.product.dto.ProductPriceInfo">
+        SELECT PRODUCT_PRICE, PRODUCT_DISCOUNT
+        FROM product
+        WHERE PRODUCT_ID = #{productId};
+    </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.fruit.mall.product;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
+import com.fruit.mall.product.dto.ProductPriceInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,9 @@ public class ProductService {
 
     public AddedProductToCartByNoLoginDto selectAddedProductByProductId(Long id) {
         return productRepository.selectAddedProductByProductId(id);
+    }
+
+    public ProductPriceInfo selectPriceAndDiscountById(Long id) {
+        return productRepository.selectPriceAndDiscountById(id);
     }
 }

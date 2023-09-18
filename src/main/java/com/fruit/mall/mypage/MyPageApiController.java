@@ -9,6 +9,7 @@ import com.fruit.mall.mypage.dto.OrderDetail;
 import com.fruit.mall.mypage.dto.RepurchaseReqDto;
 import com.fruit.mall.product.Product;
 import com.fruit.mall.product.ProductService;
+import com.fruit.mall.product.dto.ProductPriceInfo;
 import com.fruit.mall.user.dto.UserInfoUpdateDto;
 import com.fruit.mall.user.UserService;
 import com.github.pagehelper.PageInfo;
@@ -35,11 +36,11 @@ public class MyPageApiController {
 
     @PostMapping("/user/mypage/repurchase")
     public void repurchase(@Login SessionUser sessionUser, @RequestBody RepurchaseReqDto repurchaseReqDto) {
-        Product product = productService.selectProductAllById(repurchaseReqDto.getProductId());
+        ProductPriceInfo priceInfo = productService.selectPriceAndDiscountById(repurchaseReqDto.getProductId());
         CartAddReqDto dto = CartAddReqDto.builder()
-                .productId(product.getProductId())
-                .productPrice(product.getProductPrice())
-                .productDiscount(product.getProductDiscount())
+                .productId(repurchaseReqDto.getProductId())
+                .productPrice(priceInfo.getProductPrice())
+                .productDiscount(priceInfo.getProductDiscount())
                 .productCount(repurchaseReqDto.getProductCount()).build();
         cartService.repurchase(sessionUser.getUserIdNo(), sessionUser.getCartId(), dto);
     }

@@ -3,6 +3,7 @@ package com.fruit.mall.product;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
+import com.fruit.mall.product.dto.ProductPriceInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,4 +24,6 @@ public interface ProductMapper {
     List<ProductAndImageInfo> selectProductAndImageByFilter(@Param("category") String category, @Param("searchCond") String searchCond, @Param("userIdNo") Long userIdNo);
 
     List<Product> selectAll();
+
+    ProductPriceInfo selectPriceAndDiscountById(@Param("productId") Long id);
 }

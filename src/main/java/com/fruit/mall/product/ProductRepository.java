@@ -3,6 +3,7 @@ package com.fruit.mall.product;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;
 import com.fruit.mall.product.dto.ProductAndImageInfo;
 import com.fruit.mall.product.dto.ProductDetailForm;
+import com.fruit.mall.product.dto.ProductPriceInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -46,5 +47,10 @@ public class ProductRepository implements ProductMapper {
     @Override
     public AddedProductToCartByNoLoginDto selectAddedProductByProductId(Long id) {
         return productMapper.selectAddedProductByProductId(id);
+    }
+
+    @Override
+    public ProductPriceInfo selectPriceAndDiscountById(Long id) {
+        return productMapper.selectPriceAndDiscountById(id);
     }
 }
