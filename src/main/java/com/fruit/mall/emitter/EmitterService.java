@@ -23,7 +23,7 @@ public class EmitterService {
     private final EmitterRepository emitterRepository;
 
     @KafkaListener(topics = "comment-notifications", groupId = "group_1")
-    public void sendToClient(NotificationMessage message) {
+    public void listen(NotificationMessage message) {
         String userId = message.getUserId();
         Notifications notifications = Notifications.builder()
                 .userIdNo(Long.valueOf(userId))
