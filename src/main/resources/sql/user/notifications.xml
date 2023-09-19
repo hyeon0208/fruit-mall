@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fruit.mall.notifications.NotificationsMapper">
+    <insert id="insertNotifications" parameterType="com.fruit.mall.notifications.Notifications" useGeneratedKeys="true" keyProperty="notificationsId">
+        INSERT INTO notifications(USER_ID_NO, MESSAGE, type)
+        VALUES (#{userIdNo}, #{message}, #{type})
+    </insert>
+    
+    <delete id="deleteOldestNotificationsByUserId">
+        DELETE
+        FROM Notifications
+        WHERE NOTIFICATIONS_ID IN (SELECT tmp.NOTIFICATIONS_ID
+                     FROM (SELECT NOTIFICATIONS_ID
+                           FROM Notifications
+                           WHERE USER_ID_NO = #{userIdNo}
+                           ORDER BY NOTIFICATIONS_CREATED_AT ASC LIMIT ${delCount}) tmp)
+    </delete>
+
+    <select id="countNotificationsByUserId" resultType="int">
+        SELECT COUNT(*) FROM notifications WHERE USER_ID_NO = #{userIdNo}
+    </select>
+</mapper>
