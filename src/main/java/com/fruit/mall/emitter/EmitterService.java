@@ -5,8 +5,8 @@ import com.fruit.mall.notifications.Notifications;
 import com.fruit.mall.notifications.NotificationsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.common.errors.InvalidRequestException;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -22,6 +22,8 @@ public class EmitterService {
     private final NotificationsRepository notificationsRepository;
     private final EmitterRepository emitterRepository;
 
+    private static final int MAX_NOTIFICATIONS_COUNT = 6;
+
     @KafkaListener(topics = "comment-notifications", groupId = "group_1")
     public void listen(NotificationMessage message) {
         String userId = message.getUserId();
@@ -32,8 +34,8 @@ public class EmitterService {
 
         notificationsRepository.insertNotifications(notifications);
         int curCnt = notificationsRepository.countNotificationsByUserId(Long.valueOf(userId));
-        if (curCnt > 6) {
-            int delCount = curCnt - 6;
+        if (curCnt > MAX_NOTIFICATIONS_COUNT) {
+            int delCount = curCnt - MAX_NOTIFICATIONS_COUNT;
             notificationsRepository.deleteOldestNotificationsByUserId(Long.valueOf(userId), delCount);
         }
 
@@ -54,7 +56,7 @@ public class EmitterService {
             log.info("Kafka로 부터 전달 받은 메세지 전송. emitterId : {}, message : {}", emitterId, data);
         } catch (IOException e) {
             emitterRepository.deleteById(emitterId);
-            throw new InvalidRequestException("메시지 전송 에러", e);
+            log.error("메시지 전송 에러 : {}", e);
         }
     }
 
@@ -81,5 +83,19 @@ public class EmitterService {
                     .forEach(entry -> sendToClient(emitter, entry.getKey(), entry.getValue()));
         }
         return emitter;
+    }
+
+    @Scheduled(fixedRate = 180000) // 3분마다 heartbeat 메세지 전달.
+    public void sendHeartbeat() {
+        Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitters();
+        sseEmitters.forEach((key, emitter) -> {
+            try {
+                emitter.send(SseEmitter.event().id(key).name("heartbeat").data(""));
+                log.info("하트비트 메세지 전송");
+            } catch (IOException e) {
+                emitterRepository.deleteById(key);
+                log.error("하트비트 전송 실패: {}", e.getMessage());
+            }
+        });
     }
 }

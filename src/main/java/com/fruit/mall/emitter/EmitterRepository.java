@@ -9,6 +9,8 @@ import java.util.Map;
 public interface EmitterRepository {
     SseEmitter save(String emitterId, SseEmitter sseEmitter);
     void saveEventCache(String emitterId, Object event);
+
+    Map<String, SseEmitter> findAllEmitters();
     Map<String, SseEmitter> findAllEmitterStartWithById(String id);
     Map<String,Object> findAllEventCacheStartWithById(String id);
     void deleteById(String emitterId);

@@ -3,6 +3,7 @@ package com.fruit.mall.emitter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -24,6 +25,11 @@ public class EmitterRepositoryImpl implements EmitterRepository {
     }
 
     @Override
+    public Map<String, SseEmitter> findAllEmitters() {
+        return new HashMap<>(emitters);
+    }
+
+    @Override
     public Map<String, SseEmitter> findAllEmitterStartWithById(String memberId) {
         return emitters.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith(memberId))
@@ -40,6 +46,5 @@ public class EmitterRepositoryImpl implements EmitterRepository {
     @Override
     public void deleteById(String emitterId) {
         emitters.remove(emitterId);
-
     }
 }
