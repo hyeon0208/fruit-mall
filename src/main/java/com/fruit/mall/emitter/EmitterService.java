@@ -2,7 +2,7 @@ package com.fruit.mall.emitter;
 
 import com.fruit.common.NotificationMessage;
 import com.fruit.mall.notifications.Notifications;
-import com.fruit.mall.notifications.NotificationsRepository;
+import com.fruit.mall.notifications.NotificationsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -19,7 +19,7 @@ import static com.fruit.mall.notifications.NotificationApiController.DEFAULT_TIM
 @Slf4j
 @RequiredArgsConstructor
 public class EmitterService {
-    private final NotificationsRepository notificationsRepository;
+    private final NotificationsService notificationsService;
     private final EmitterRepository emitterRepository;
 
     private static final int MAX_NOTIFICATIONS_COUNT = 6;
@@ -32,11 +32,11 @@ public class EmitterService {
                 .message(message.getMessage())
                 .type("답글알림").build();
 
-        notificationsRepository.insertNotifications(notifications);
-        int curCnt = notificationsRepository.countNotificationsByUserId(Long.valueOf(userId));
+        notificationsService.insertNotifications(notifications);
+        int curCnt = notificationsService.countNotificationsByUserId(Long.valueOf(userId));
         if (curCnt > MAX_NOTIFICATIONS_COUNT) {
             int delCount = curCnt - MAX_NOTIFICATIONS_COUNT;
-            notificationsRepository.deleteOldestNotificationsByUserId(Long.valueOf(userId), delCount);
+            notificationsService.deleteOldestNotificationsByUserId(Long.valueOf(userId), delCount);
         }
 
         Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithById(userId);
