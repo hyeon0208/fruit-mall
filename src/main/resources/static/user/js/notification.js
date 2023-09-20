@@ -2,13 +2,27 @@ let lastHeartbeat = Date.now();
 
 $(() => {
     startSSE();
+
+    $("#showNotifications").on("click", () => {
+        $('#notificationList').slideToggle();
+        $(".notification-dot").remove();
+    });
+
+    $("#notificationList .list-group-item").on("click", (e) => {
+        console.log("클릭");
+        const target = $(e.currentTarget);
+        const id = target.find(".fw-bold").data("id")
+        console.log(id);
+        axios({
+            url: "api/v1/notifications/read",
+            method: "post",
+            data: { notificationsId: id },
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        })
+    });
 });
 
-$("#showNotifications").on("click", () => {
-    console.log("버튼 클릭");
-    $('#notificationList').slideToggle();
-    $(".notification-dot").remove();
-});
 
 function startSSE() {
     let sse = new EventSource("/api/sse-connection");

@@ -4,6 +4,16 @@
   color: red;
 }
 
+.notification-dot {
+  position: absolute;
+  top: 6px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background-color: #bd1c1c;
+  border-radius: 50%;
+}
+
 .buttons.cart-modal {
   display: flex;
 }
@@ -241,9 +251,9 @@
 }
 #login .inner .login__input .input__pw .eyes {
   position: absolute;
-  left: 75%;
-  top: 27px;
-  color: orange;
+  left: 102%;
+  top: 32px;
+  color: #282723;
 }
 
 #login .inner .login__input .input__pw .wrong__pw {
@@ -3235,7 +3245,7 @@ header .inner .main-menu .item .red .material-icons {
 
 #visual {
   width: 100%;
-  position: relative;
+  position: sticky;
   overflow: hidden;
   background-color: #f6f5f0;
   margin-top: 120px;

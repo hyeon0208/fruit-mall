@@ -21,4 +21,15 @@
     <select id="countNotificationsByUserId" resultType="int">
         SELECT COUNT(*) FROM notifications WHERE USER_ID_NO = #{userIdNo}
     </select>
+
+    <select id="selectMessagesByUserId" resultType="com.fruit.mall.notifications.dto.NotificationsResDto">
+        SELECT NOTIFICATIONS_ID, MESSAGE, TIMESTAMPDIFF(HOUR, NOTIFICATIONS_CREATED_AT, NOW()) AS CREATED_HOURS, TYPE
+        FROM notifications
+        WHERE USER_ID_NO = #{userIdNo}
+        ORDER BY NOTIFICATIONS_CREATED_AT DESC
+    </select>
+
+    <update id="updateRead">
+        UPDATE notifications SET READ_AT = CURRENT_TIMESTAMP WHERE NOTIFICATIONS_ID = #{notificationsId}
+    </update>
 </mapper>
