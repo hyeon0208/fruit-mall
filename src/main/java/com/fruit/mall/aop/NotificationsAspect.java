@@ -1,8 +1,6 @@
 package com.fruit.mall.aop;
 
-import com.fruit.mall.config.Login;
 import com.fruit.mall.config.SessionUser;
-import com.fruit.mall.notifications.NotificationsRepository;
 import com.fruit.mall.notifications.NotificationsService;
 import com.fruit.mall.notifications.dto.NotificationsResDto;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,7 +28,7 @@ public class NotificationsAspect {
     private final NotificationsService notificationsService;
 
 
-    @Around("execution(* com.fruit.mall..*Controller.*(..)) && @annotation(org.springframework.web.bind.annotation.GetMapping)")
+    @Around("execution(String com.fruit.mall..*Controller.*(..)) && @annotation(org.springframework.web.bind.annotation.GetMapping)")
     public Object showNotifications(ProceedingJoinPoint joinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
