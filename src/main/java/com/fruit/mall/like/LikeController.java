@@ -1,6 +1,6 @@
 package com.fruit.mall.like;
 
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

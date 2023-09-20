@@ -1,6 +1,6 @@
 package com.fruit.mall.delivery;
 
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.delivery.dto.DeliveryReqDto;
 import com.fruit.mall.delivery.dto.DeliveryResDto;

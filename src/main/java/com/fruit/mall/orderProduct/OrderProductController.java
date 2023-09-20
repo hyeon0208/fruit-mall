@@ -1,6 +1,6 @@
 package com.fruit.mall.orderProduct;
 
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.orderProduct.dto.PaymentInfoDto;
 import org.springframework.stereotype.Controller;

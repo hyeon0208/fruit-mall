@@ -1,6 +1,6 @@
 package com.fruit.mall.user;
 
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.PageResDto;

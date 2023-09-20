@@ -1,6 +1,6 @@
 package com.fruit.mall.product;
 
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.dto.ProductDetailForm;
 import lombok.RequiredArgsConstructor;

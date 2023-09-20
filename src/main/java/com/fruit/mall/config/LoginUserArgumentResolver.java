@@ -1,5 +1,6 @@
 package com.fruit.mall.config;
 
+import com.fruit.mall.annotaion.Login;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;

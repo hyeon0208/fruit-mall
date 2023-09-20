@@ -3,7 +3,7 @@ package com.fruit.mall.orders;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.delivery.DeliveryService;
 import com.fruit.mall.delivery.dto.DeliveryResDto;

@@ -1,6 +1,6 @@
 package com.fruit.mall.payment;
 
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.orders.dto.OrderSaveDto;
 import com.siot.IamportRestClient.IamportClient;

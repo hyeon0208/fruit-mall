@@ -1,7 +1,7 @@
 package com.fruit.mall.cart;
 
 import com.fruit.mall.cart.dto.*;
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.AddedProductToCartByNoLoginDto;

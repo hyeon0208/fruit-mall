@@ -1,7 +1,7 @@
 package com.fruit.mall.aop;
 
 import com.fruit.mall.cart.CartService;
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.like.LikeService;
 import com.fruit.mall.product.RecentProductService;

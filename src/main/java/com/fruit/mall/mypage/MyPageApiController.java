@@ -2,12 +2,11 @@ package com.fruit.mall.mypage;
 
 import com.fruit.mall.cart.CartService;
 import com.fruit.mall.cart.dto.CartAddReqDto;
-import com.fruit.mall.config.Login;
+import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import com.fruit.mall.mypage.dto.MyPageSearchCond;
 import com.fruit.mall.mypage.dto.OrderDetail;
 import com.fruit.mall.mypage.dto.RepurchaseReqDto;
-import com.fruit.mall.product.Product;
 import com.fruit.mall.product.ProductService;
 import com.fruit.mall.product.dto.ProductPriceInfo;
 import com.fruit.mall.user.dto.UserInfoUpdateDto;
