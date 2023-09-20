@@ -1,5 +1,7 @@
 package com.fruit.mall.user;
 
+import com.fruit.mall.annotaion.Login;
+import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,5 +49,11 @@ public class UserLoginController {
         String email = user.getUser_email();
         userService.updateNewPassword(email, newPassword);
         return "success";
+    }
+
+    @GetMapping("/api/v1/isLogin")
+    @ResponseBody
+    public boolean isLogin(@Login SessionUser sessionUser) {
+        return sessionUser != null;
     }
 }

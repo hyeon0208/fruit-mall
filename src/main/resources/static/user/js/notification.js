@@ -1,7 +1,14 @@
 let lastHeartbeat = Date.now();
 
 $(() => {
-    startSSE();
+    axios({
+        method: "get",
+        url: "/api/v1/isLogin"
+    }).then(res => {
+        if (res.data) {
+            startSSE();
+        }
+    })
 
     $("#showNotifications").on("click", () => {
         $('#notificationList').slideToggle();
