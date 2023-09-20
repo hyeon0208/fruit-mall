@@ -9,10 +9,8 @@ $(() => {
     });
 
     $("#notificationList .list-group-item").on("click", (e) => {
-        console.log("클릭");
         const target = $(e.currentTarget);
         const id = target.find(".fw-bold").data("id")
-        console.log(id);
         axios({
             url: "api/v1/notifications/read",
             method: "post",
@@ -43,7 +41,6 @@ function startSSE() {
     });
 
     sse.onerror = (event) => {
-        console.error(`[error] ${event.message}`);
         if (event.target.readyState === EventSource.CLOSED || Date.now() - lastHeartbeat > 60000) {
             retryCount++;
             setTimeout(startSSE, 5000); // Retry every 5 seconds
