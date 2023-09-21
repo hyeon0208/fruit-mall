@@ -64,8 +64,8 @@
                     <ol class="list-group list-group-numbered" id="notificationList" style="display: none; position: relative; z-index: 999;">
                         <li th:each="notification : ${notificationsList}" class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold" th:text="${notification.type}" th:data-id="${notification.notificationsId}"></div>
-                                <div th:text="${notification.message}"></div>
+                                <div class="fw-bold" th:data-id="${notification.notificationsId}">답글알림</div>
+                                <div th:text="${notification.notificationsMessage}"></div>
                             </div>
                             <span class="badge bg-primary rounded-pill" th:text="|약${notification.createdHours}시간 전|"></span>
                         </li>

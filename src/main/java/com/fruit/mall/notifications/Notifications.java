@@ -12,16 +12,14 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Notifications {
     private Long notificationsId;
-    private Long userIdNo;
-    private String message;
+    private Long reviewId;
+    private String notificationsMessage;
     private Timestamp notificationsCreatedAt;
-    private Timestamp readAt;
-    private String type;
+    private Timestamp isRead;
 
     @Builder
-    public Notifications(Long userIdNo, String message, String type) {
-        this.userIdNo = userIdNo;
-        this.message = message;
-        this.type = type;
+    public Notifications(Long reviewId, String notificationsMessage) {
+        this.reviewId = reviewId;
+        this.notificationsMessage = notificationsMessage;
     }
 }

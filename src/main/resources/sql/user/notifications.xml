@@ -4,32 +4,37 @@
 
 <mapper namespace="com.fruit.mall.notifications.NotificationsMapper">
     <insert id="insertNotifications" parameterType="com.fruit.mall.notifications.Notifications" useGeneratedKeys="true" keyProperty="notificationsId">
-        INSERT INTO notifications(USER_ID_NO, MESSAGE, type)
-        VALUES (#{userIdNo}, #{message}, #{type})
+        INSERT INTO notifications(REVIEW_ID, NOTIFICATIONS_MESSAGE)
+        VALUES (#{reviewId}, #{notificationsMessage})
     </insert>
     
     <delete id="deleteOldestNotificationsByUserId">
         DELETE
         FROM Notifications
-        WHERE NOTIFICATIONS_ID IN (SELECT tmp.NOTIFICATIONS_ID
+        WHERE NOTIFICATIONS_ID IN (
+                     SELECT tmp.NOTIFICATIONS_ID
                      FROM (SELECT NOTIFICATIONS_ID
-                           FROM Notifications
-                           WHERE USER_ID_NO = #{userIdNo}
+                           FROM Notifications n
+                           JOIN review r on n.REVIEW_ID = r.REVIEW_ID
+                           WHERE r.USER_ID_NO = #{userIdNo}
                            ORDER BY NOTIFICATIONS_CREATED_AT ASC LIMIT ${delCount}) tmp)
     </delete>
 
     <select id="countNotificationsByUserId" resultType="int">
-        SELECT COUNT(*) FROM notifications WHERE USER_ID_NO = #{userIdNo}
+        SELECT COUNT(*) FROM notifications n
+                        JOIN review r ON n.REVIEW_ID = r.REVIEW_ID
+                        WHERE r.USER_ID_NO = #{userIdNo}
     </select>
 
     <select id="selectMessagesByUserId" resultType="com.fruit.mall.notifications.dto.NotificationsResDto">
-        SELECT NOTIFICATIONS_ID, MESSAGE, TIMESTAMPDIFF(HOUR, NOTIFICATIONS_CREATED_AT, NOW()) AS CREATED_HOURS, TYPE
-        FROM notifications
-        WHERE USER_ID_NO = #{userIdNo}
-        ORDER BY NOTIFICATIONS_CREATED_AT DESC
+        SELECT n.NOTIFICATIONS_ID, n.NOTIFICATIONS_MESSAGE, TIMESTAMPDIFF(HOUR, n.NOTIFICATIONS_CREATED_AT, NOW()) AS CREATED_HOURS
+        FROM notifications n
+        JOIN review r ON n.REVIEW_ID = r.REVIEW_ID
+        WHERE r.USER_ID_NO = #{userIdNo}
+        ORDER BY n.NOTIFICATIONS_CREATED_AT DESC
     </select>
 
     <update id="updateRead">
-        UPDATE notifications SET READ_AT = CURRENT_TIMESTAMP WHERE NOTIFICATIONS_ID = #{notificationsId}
+        UPDATE notifications SET IS_READ = true WHERE NOTIFICATIONS_ID = #{notificationsId}
     </update>
 </mapper>

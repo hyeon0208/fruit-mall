@@ -10,15 +10,13 @@ import lombok.ToString;
 @NoArgsConstructor
 public class NotificationsResDto {
     private Long notificationsId;
-    private String message;
+    private String notificationsMessage;
     private int createdHours;
-    private String type;
 
     @Builder
-    public NotificationsResDto(Long notificationsId, String message, int createdHours, String type) {
+    public NotificationsResDto(Long notificationsId, String notificationsMessage, int createdHours) {
         this.notificationsId = notificationsId;
-        this.message = message;
+        this.notificationsMessage = notificationsMessage;
         this.createdHours = createdHours;
-        this.type = type;
     }
 }

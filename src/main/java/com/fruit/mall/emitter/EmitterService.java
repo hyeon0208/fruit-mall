@@ -28,9 +28,9 @@ public class EmitterService {
     public void listen(NotificationMessage message) {
         String userId = message.getUserId();
         Notifications notifications = Notifications.builder()
-                .userIdNo(Long.valueOf(userId))
-                .message(message.getMessage())
-                .type("답글알림").build();
+                .reviewId(message.getReviewId())
+                .notificationsMessage(message.getMessage())
+                .build();
 
         notificationsService.insertNotifications(notifications);
         int curCnt = notificationsService.countNotificationsByUserId(Long.valueOf(userId));
@@ -85,13 +85,12 @@ public class EmitterService {
         return emitter;
     }
 
-    @Scheduled(fixedRate = 180000) // 3분마다 heartbeat 메세지 전달.
+    @Scheduled(fixedRate = 60000) // 1분마다 heartbeat 메세지 전달.
     public void sendHeartbeat() {
         Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitters();
         sseEmitters.forEach((key, emitter) -> {
             try {
                 emitter.send(SseEmitter.event().id(key).name("heartbeat").data(""));
-                log.info("하트비트 메세지 전송");
             } catch (IOException e) {
                 emitterRepository.deleteById(key);
                 log.error("하트비트 전송 실패: {}", e.getMessage());

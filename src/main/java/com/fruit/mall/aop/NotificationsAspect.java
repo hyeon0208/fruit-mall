@@ -47,6 +47,6 @@ public class NotificationsAspect {
             }
         }
 
-        return joinPoint.proceed(args);
+        return joinPoint.proceed();
     }
 }
