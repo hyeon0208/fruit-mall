@@ -32,4 +32,8 @@ public class NotificationsService {
     public void updateRead(Long notificationsId) {
         notificationsRepository.updateRead(notificationsId);
     }
+
+    public Long selectProductIdByNotificationsId(Long notificationsId) {
+        return notificationsRepository.selectProductIdByNotificationsId(notificationsId);
+    }
 }

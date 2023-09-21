@@ -19,7 +19,7 @@ public class NotificationApiController {
 
     private final EmitterService emitterService;
     private final NotificationsService notificationsService;
-    public static final Long DEFAULT_TIMEOUT = 3600L * 1000;
+    public static final Long DEFAULT_TIMEOUT = 1800L * 1000;
 
     @GetMapping(value = "/api/sse-connection", produces = "text/event-stream")
     public SseEmitter stream(@Login SessionUser sessionUser, @RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) throws IOException {
@@ -30,6 +30,7 @@ public class NotificationApiController {
     public ResponseEntity<?> readNotifications(@RequestBody Map<String, Long> param) {
         Long notificationsId = param.get("notificationsId");
         notificationsService.updateRead(notificationsId);
-        return ResponseEntity.ok().build();
+        Long productId = notificationsService.selectProductIdByNotificationsId(notificationsId);
+        return ResponseEntity.ok(productId);
     }
 }

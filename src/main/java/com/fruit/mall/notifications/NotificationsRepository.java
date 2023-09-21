@@ -35,4 +35,9 @@ public class NotificationsRepository implements NotificationsMapper {
     public void updateRead(Long notificationsId) {
         notificationsMapper.updateRead(notificationsId);
     }
+
+    @Override
+    public Long selectProductIdByNotificationsId(Long notificationsId) {
+        return notificationsMapper.selectProductIdByNotificationsId(notificationsId);
+    }
 }

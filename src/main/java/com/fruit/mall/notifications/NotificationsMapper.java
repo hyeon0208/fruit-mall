@@ -17,4 +17,6 @@ public interface NotificationsMapper {
     List<NotificationsResDto> selectMessagesByUserId(@Param("userIdNo") Long userIdNo);
 
     void updateRead(@Param("notificationsId") Long notificationsId);
+
+    Long selectProductIdByNotificationsId(@Param("notificationsId") Long notificationsId);
 }

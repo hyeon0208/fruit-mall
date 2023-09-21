@@ -24,6 +24,8 @@ $(() => {
             data: { notificationsId: id },
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            window.location.href = `/user/review/${res.data}`;
         })
     });
 });
@@ -31,11 +33,6 @@ $(() => {
 
 function startSSE() {
     let sse = new EventSource("/api/sse-connection");
-    let retryCount = 0;
-
-    if (retryCount >= 3) {
-        return;
-    }
 
     sse.onmessage = (event) => {
         if (event.data != "connected!") {
@@ -49,8 +46,7 @@ function startSSE() {
 
     sse.onerror = (event) => {
         if (event.target.readyState === EventSource.CLOSED || Date.now() - lastHeartbeat > 60000) {
-            retryCount++;
-            setTimeout(startSSE, 5000); // Retry every 5 seconds
+            sse.close();
         }
     };
 }
