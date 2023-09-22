@@ -143,7 +143,7 @@ $(document).on("click", "#redirectLoginBtn", () => {
     const productId = product.data("cart-product-id");
     axios({
         method: "get",
-        url: `/local/cart/${productId}`,
+        url: `/api/v1/local/cart/${productId}`,
         params: {
             productId: productId
         },
@@ -170,8 +170,8 @@ $(document).on("click", ".increaseProductCnt", (e) => {
 
     if ($('#cart').data('session')) { // 회원일 경우
         axios({
-            method: "post",
-            url: "/cart/increaseProductCnt",
+            method: "patch",
+            url: "/api/v1/cart/count",
             data: {
                 productCount: cnt.val(),
                 productId: cnt.data("update-product-id"),
@@ -223,8 +223,8 @@ $(document).on("click", ".decreaseProductCnt", (e) => {
 
     if ($('#cart').data('session')) { // 회원일 경우
         axios({
-            method: "post",
-            url: "/cart/decreaseProductCnt",
+            method: "patch",
+            url: "/api/v1/cart/count",
             data: {
                 productCount: cnt.val(),
                 productId: cnt.data("update-product-id"),
@@ -276,7 +276,7 @@ $(document).on("click", ".addCartBtn", (e) => {
             let localCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
             axios({
                 method: "post",
-                url: "/main/cart/add",
+                url: "/api/v1/cart",
                 data: {
                     productId: productId,
                     productPrice: cart.closest("li").find(".price").data("product-price"),
@@ -304,7 +304,7 @@ $(document).on("click", ".addCartBtn", (e) => {
     if (userIdNo == 0) {
         axios({
             method: "get",
-            url: `/local/cart/${productId}`,
+            url: `/api/v1/local/cart/${productId}`,
             params: {
                 productId: productId
             },
@@ -343,7 +343,7 @@ $(document).on("click", ".delCartProduct", (e) => {
 
         axios({
             method: "delete",
-            url: `/cart/delete/${cartId}/${productId}`
+            url: `/api/v1/cart/${cartId}/product/${productId}`
         }).then(res => {
             window.location.href = res.data;
         });
@@ -351,8 +351,9 @@ $(document).on("click", ".delCartProduct", (e) => {
 
     if (!$('#cart').data('session')) { // 비회원일 경우
         const cartItems = JSON.parse(localStorage.getItem('cart'));
-        const newCartItems = cartItems.filter(cart => cart.product.productId != productId);
-        localStorage.setItem('cart', JSON.stringify(newCartItems));
+        const rowIndex = $(e.currentTarget).closest('tr').index();
+        cartItems.splice(rowIndex, 1);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
         $(e.currentTarget).closest('tr').remove();
     }
 });
