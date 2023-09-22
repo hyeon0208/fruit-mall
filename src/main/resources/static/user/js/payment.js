@@ -78,11 +78,11 @@ $(() =>{
             if (rsp.success) {
                 axios({
                     method: "post",
-                    url: `/payment/validation/${rsp.imp_uid}`
+                    url: `/api/v1/payment/${rsp.imp_uid}`
                 }).then(res => {
                     if ($("#paymentPrice").val() == res.data.response.amount) {
                         axios({
-                            url: "/order/payment",
+                            url: "/api/v1/payment",
                             method: "post",
                             data: orders,
                             dataType: "json",
@@ -90,8 +90,8 @@ $(() =>{
                         }).then(res => {
                             let productIds = orders.map(order => order.productId);
                             return axios({
-                                url: "/cart/delete/pay/success",
-                                method: "post",
+                                url: "/api/v1/cart/paymented",
+                                method: "delete",
                                 data: productIds
                             }).then(res => {
                                 const quota = rsp.card_quota;

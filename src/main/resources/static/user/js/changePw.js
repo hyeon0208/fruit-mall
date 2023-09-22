@@ -21,8 +21,8 @@ $(document).on('click', '#changePwBtn', (e) => {
     }
 
     axios({
-        method: "post",
-        url: "/changeNewPw",
+        method: "patch",
+        url: "/api/v1/password",
         data: { user_pwd: $("#newpw").val(), user_email: $("#user_email").val() },
         dataType: "json",
         headers: {'Content-Type': 'application/json'}

@@ -54,24 +54,20 @@ $(document).ready(function() {
     $('#pwd-error').hide();
 
     $("#user_email").on("focusout", () => {
+        const userEmail = encodeURIComponent($("#user_email").val())
         axios({
-            method: "post",
-            url: "/join/check-email",
-            data: "user_email=" + encodeURIComponent($("#user_email").val()),
-            dataType: "String",
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            method: "get",
+            url: `/api/v1/user/email/${userEmail}`
         }).then(res => {
             $("#email-error").text(res.data);
         })
     });
 
     $("#user_name").on("focusout", () => {
+        const userName = $("#user_name").val()
         axios({
-            method: "post",
-            url: "/join/check-name",
-            data: { user_name: $("#user_name").val() } ,
-            dataType: "json",
-            headers: {'Content-Type': 'application/json'}
+            method: "get",
+            url: `/api/v1/user/name/${userName}`
         }).then(res => {
             $("#name-error").text(res.data);
         })

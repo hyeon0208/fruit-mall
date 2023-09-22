@@ -34,10 +34,9 @@ $(() => {
                 return alert("10자 이상 500자 미만으로 작성해주세요.");
             }
 
-            // 주문번호도 넘겨서 리뷰 저장하도록 수정 ()
             axios({
                 method: "post",
-                url: "/mypage/review/add",
+                url: "/api/v1/mypage/review",
                 data: {
                     productId: productId,
                     orderNumber: orderNumber,
@@ -164,7 +163,7 @@ $(document).on("click", ".reAddToCartBtn", (e) => {
 
     axios({
         method: "post",
-        url: "/user/mypage/repurchase",
+        url: "/api/v1/mypage/product",
         data: {
             productId: productId,
             productCount: count
@@ -187,7 +186,7 @@ $(document).on("click", ".reAddToCartBtn", (e) => {
 function myPageOrderProductList() {
     axios({
         method: "get",
-        url: "/user/mypage/searchfilter",
+        url: "/api/v1/mypage/searchfilter",
         params: {
             clickedDuration: myPageClickedDuration,
             startDate: startDate,

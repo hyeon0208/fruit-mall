@@ -7,8 +7,8 @@ $(() => {
 
         $(".delivery__delete__buttons button:eq(1)").on("click", () => {
             axios({
-                url: "/delete/delivery",
-                method: "post",
+                url: "/api/v1/delivery",
+                method: "delete",
                 data: { deliveryName: $(e.currentTarget).data("delivery-name") },
                 dataType: "json",
                 headers: {'Content-Type': 'application/json'}
@@ -41,8 +41,8 @@ $(() => {
 
             $("#mypage_delivery .delivery__add__confirm__btn").on("click", () => {
                 axios({
-                    url: "/delivery/add/",
-                    method: "post",
+                    url: "/api/v1/delivery",
+                    method: "patch",
                     data: {
                         deliveryName: $("#add_title").val(),
                         userName: $("#add_name").val(),
@@ -112,8 +112,8 @@ $(() => {
             e.preventDefault();
 
             axios({
-                url: "/delivery/update",
-                method: "post",
+                url: "/api/v1/delivery",
+                method: "patch",
                 data: {
                     curDeliveryName: deliveryName,
                     updateDeliveryName: $("#edit_title").val(),

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
-import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
+import static com.fruit.mall.user.LoginApiController.LOGIN_USER;
 
 @Aspect
 @Slf4j

@@ -20,7 +20,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
-import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
+import static com.fruit.mall.user.LoginApiController.LOGIN_USER;
+
 
 @RequiredArgsConstructor
 @Service

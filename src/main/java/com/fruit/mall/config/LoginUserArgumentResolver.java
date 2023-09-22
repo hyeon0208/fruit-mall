@@ -10,7 +10,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
+import static com.fruit.mall.user.LoginApiController.LOGIN_USER;
 
 /**
  * 사용자의 세션 정보를 컨트롤러 메서드의 파라미터로 전달하기 위해 사용되는 클래스

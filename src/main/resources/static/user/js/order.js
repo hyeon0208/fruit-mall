@@ -34,7 +34,7 @@ $(() => {
 
         axios({
             method: "get",
-            url: `/delivery/get/${encodeURIComponent(selectedDeliveryName)}`
+            url: `/api/v1/delivery/${encodeURIComponent(selectedDeliveryName)}`
         }).then(res => {
             const delivery = res.data;
             $('#name').val(delivery.userName);
@@ -71,7 +71,7 @@ function clickDeliveryModal() {
 
     $(document).on("click", "#delivery_add_btn", () => {
         axios({
-            url: "/delivery/add/",
+            url: "/api/v1/delivery",
             method: "post",
             data: {
                 deliveryName: $("#title").val(),

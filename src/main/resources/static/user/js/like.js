@@ -14,8 +14,8 @@ $(document).on('click', '.red__heart', (e) => {
     // 좋아요 취소
     if (heart.val() == 0) {
         axios({
-            method: "post",
-            url: "/like/disabled",
+            method: "delete",
+            url: "/api/v1/like",
             data: {
                 productId: productId,
                 userIdNo: userIdNo
@@ -29,7 +29,7 @@ $(document).on('click', '.red__heart', (e) => {
     if (heart.val() == 1) {
         axios({
             method: "post",
-            url: "/like/activate",
+            url: "/api/v1/like",
             data: {
                 productId: productId,
                 userIdNo: userIdNo

@@ -19,13 +19,14 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class MyPageApiController {
     private final MyPageService myPageService;
     private final UserService userService;
     private final ProductService productService;
     private final CartService cartService;
 
-    @GetMapping("/user/mypage/searchfilter")
+    @GetMapping("/mypage/searchfilter")
     public PageInfo<OrderDetail> myPageSearchFilter(
             @Login SessionUser sessionUser,
             @ModelAttribute MyPageSearchCond cond) {
@@ -33,7 +34,7 @@ public class MyPageApiController {
         return pageInfo;
     }
 
-    @PostMapping("/user/mypage/repurchase")
+    @PostMapping("/mypage/product")
     public void repurchase(@Login SessionUser sessionUser, @RequestBody RepurchaseReqDto repurchaseReqDto) {
         ProductPriceInfo priceInfo = productService.selectPriceAndDiscountById(repurchaseReqDto.getProductId());
         CartAddReqDto dto = CartAddReqDto.builder()
@@ -44,7 +45,7 @@ public class MyPageApiController {
         cartService.repurchase(sessionUser.getUserIdNo(), sessionUser.getCartId(), dto);
     }
 
-    @PostMapping("/user/mypage/password/confirm")
+    @PostMapping("/mypage/password-confirm")
     public String checkPwd(@Login SessionUser sessionUser, @RequestBody Map<String, String> param) {
         String inputPwd = param.get("inputPwd");
         if (!userService.myPageLoginCheck(sessionUser.getUserIdNo(), inputPwd)) {
@@ -53,13 +54,13 @@ public class MyPageApiController {
         return "success";
     }
 
-    @PostMapping("/user/mypage/name-check")
+    @PostMapping("/mypage/name-check")
     public String checkName(@RequestBody Map<String, String> param) {
         String findUsername = userService.selectUserNameByUserName(param.get("userName"));
         return findUsername != null ? "fail" : "success";
     }
 
-    @PostMapping("/user/mypage/userinfo-update")
+    @PatchMapping("/mypage/user")
     public String updateUserInfo(@Login SessionUser sessionUser, @RequestBody UserInfoUpdateDto dto) {
         userService.updateUserInfo(sessionUser.getUserIdNo(), dto);
         return "success";

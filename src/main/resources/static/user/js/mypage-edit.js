@@ -2,7 +2,7 @@ $(() => {
     $("#mypageEdit .button button:eq(0)").on("click", (e) => {
         e.preventDefault();
         axios({
-            url: "/user/mypage/password/confirm",
+            url: "/api/v1/mypage/password-confirm",
             method: "post",
             data: { inputPwd: $("#mypage-edit-password").val() },
             dataType: "json",
@@ -60,8 +60,8 @@ $(() => {
         }
 
         axios({
-            url: "/user/mypage/userinfo-update",
-            method: "post",
+            url: "/api/v1/mypage/user",
+            method: "patch",
             data: {
                 userEmail: $("#email").val(),
                 userName: $("#name").val(),
@@ -81,7 +81,7 @@ $(() => {
     // 변경 버튼 클릭
     $("#check-name").on("click", () => {
         axios({
-            url: "/user/mypage/name-check",
+            url: "/api/v1/mypage/name-check",
             method: "post",
             data: { userName: $("#name").val() },
             dataType: "json",

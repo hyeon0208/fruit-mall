@@ -59,7 +59,7 @@ $(document).on("click", "#addDetailToCartBtn", () => {
             let localCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
             axios({
                 method: "post",
-                url: "/main/cart/add",
+                url: "/api/v1/cart",
                 data: {
                     productId: productId,
                     productPrice: $(".right__txt02__01").data("detail-price"),
@@ -87,7 +87,7 @@ $(document).on("click", "#addDetailToCartBtn", () => {
     if (userIdNo == 0) {
         axios({
             method: "get",
-            url: `/local/cart/${productId}`,
+            url: `/api/v1/local/cart/${productId}`,
             params: {
                 productId: productId
             },

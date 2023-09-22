@@ -13,7 +13,7 @@ $(() => {
         const reviewId = $(e.currentTarget).data("review-id");
         axios({
             method: "get",
-            url: `/reply/${reviewId}`
+            url: `/api/v1/reply/${reviewId}`
         }).then(res => {
             $(".reply-div #reply_contents").text(res.data.comments);
             $(".reply-div .date").text(res.data.replyCreatedAt.toLocaleString("ko-KR", { year: 'numeric', month: '2-digit', day: '2-digit' }).replaceAll("-", ".").substring(0, 10));
@@ -54,7 +54,7 @@ $(() => {
 
             axios({
                 method: "post",
-                url: "/review/add",
+                url: "/api/v1/review",
                 data: {
                     productId: $(".right__txt01").data("product-id"),
                     reviewContents: reviewContents
@@ -99,8 +99,8 @@ $(() => {
             }
 
             axios({
-                method: "post",
-                url: "/review/update",
+                method: "patch",
+                url: "/api/v1/review",
                 data: updateContents,
                 dataType: "json",
                 headers: {'Content-Type': 'application/json'}

@@ -16,7 +16,7 @@ $(() => {
                 let localCarts = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
                 axios({
                     method: "post",
-                    url: "/user/update-cart",
+                    url: "/api/v1/cart/merge",
                     data: { localCarts },
                     headers: {'Content-Type': 'application/json'}
                 }).then(() => {

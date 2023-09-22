@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static com.fruit.mall.user.UserLoginController.LOGIN_USER;
+import static com.fruit.mall.user.LoginApiController.LOGIN_USER;
 
 @RequiredArgsConstructor
 @Slf4j

@@ -40,25 +40,4 @@ public class ReviewController {
         model.addAttribute("productId", productId);
         return "user/review";
     }
-
-    @PostMapping("/review/add")
-    @ResponseBody
-    public String addReview(@Login SessionUser sessionUser, @RequestBody ReviewSaveReqDto dto) {
-        reviewService.insertReview(sessionUser.getUserIdNo(), dto);
-        return "success";
-    }
-
-    @PostMapping("/mypage/review/add")
-    @ResponseBody
-    public String mypageReviewAdd(@Login SessionUser sessionUser, @RequestBody MyPageReviewReqDto dto) {
-        reviewService.insertMypageReview(sessionUser.getUserIdNo(), dto);
-        return "success";
-    }
-
-    @PostMapping("/review/update")
-    @ResponseBody
-    public String updateReview(@Login SessionUser sessionUser, @RequestBody String updateContents) {
-        reviewService.updateReviewByUserId(updateContents, sessionUser.getUserIdNo());
-        return "success";
-    }
 }

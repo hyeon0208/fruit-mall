@@ -3,23 +3,21 @@ package com.fruit.mall.like;
 import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class LikeController {
+@RequestMapping("/api/v1")
+public class LikeApiController {
     private final LikeService likeService;
 
-
-    @PostMapping("/like/disabled")
+    @DeleteMapping("/like")
     public String likeDisable(@Login SessionUser sessionUser, @RequestBody Like like) {
         likeService.deleteLike(sessionUser.getUserIdNo(), like.getProductId());
         return "success";
     }
 
-    @PostMapping("/like/activate")
+    @PostMapping("/like")
     public String likeActivate(@RequestBody Like like) {
         likeService.insertLike(like);
         return "success";

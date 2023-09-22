@@ -1,4 +1,4 @@
-package com.fruit.mall.user;
+package com.fruit.mall.home;
 
 import com.fruit.mall.annotaion.Login;
 import com.fruit.mall.config.SessionUser;
@@ -11,17 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class HomeController {
     private final ProductService productService;
-
-    @GetMapping("favicon.ico")
-    @ResponseBody
-    void noFavicon() {
-    }
 
     @GetMapping("/")
     public String home(
@@ -35,7 +32,7 @@ public class MainController {
         return "user/index";
     }
 
-    @GetMapping("/user/searchfilter")
+    @GetMapping("/api/v1/home/searchfilter")
     @ResponseBody
     public PageResDto userMainSearchFilter(
             @Login SessionUser sessionUser,
@@ -52,5 +49,26 @@ public class MainController {
     @GetMapping("/{pageName}")
     public String goSubPage(@PathVariable String pageName) {
         return "user/" + pageName;
+    }
+
+    @GetMapping("/join/{email}")
+    public String joinConfirm(@PathVariable String email, Model model) {
+        model.addAttribute("email", email);
+        return "user/joinConfirm";
+    }
+
+    @PostMapping("/user/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/changePw")
+    public String changePw(@RequestParam String user_email, Model model) {
+        model.addAttribute("email", user_email);
+        return "user/changePw";
     }
 }

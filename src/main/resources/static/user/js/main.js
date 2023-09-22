@@ -4,10 +4,9 @@ let userPageSize = 9;
 
 $(document).on('click', '#recentProductBtn', (e) => {
     const productId = $(e.currentTarget).data('product-id');
-
     axios({
         method: "post",
-        url: `/recent-products/${productId}`
+        url: `/api/v1/recentproduct/${productId}`
     })
 });
 
@@ -52,7 +51,7 @@ $(document).on("click", "#searchCond-userBtn", () => {
 function showMainProductList() {
     axios({
         method: "get",
-        url: "/user/searchfilter",
+        url: "/api/v1/home/searchfilter",
         params: {
             category: userSelectedCategory,
             searchCond: userSelectedSearch,

@@ -3,7 +3,7 @@ let lastHeartbeat = Date.now();
 $(() => {
     axios({
         method: "get",
-        url: "/api/v1/isLogin"
+        url: "/api/v1/login-status"
     }).then(res => {
         if (res.data) {
             startSSE();

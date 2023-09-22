@@ -1,10 +1,7 @@
 $(document).on('click', '#findPwBtn', () => {
     axios({
-        method: "post",
-        url: "/findPw",
-        data: "user_email=" + encodeURIComponent($("#user_email").val()),
-        dataType: "String",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        method: "get",
+        url: `/api/v1/findPw/${encodeURIComponent($("#user_email").val())}`
     }).then(res => {
         if (res.data === "success") {
             $('.txt04').show(); // 이메일이 확인되었을 때
