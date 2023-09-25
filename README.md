@@ -76,16 +76,19 @@
 
 ### - 로그인
 - 소셜 로그인 (카카오, 네이버, 구글 소셜 로그인 지원)
+
 ![ezgif com-video-to-gif](https://github.com/Hyeon0208/fruit-mall/assets/99153215/7094a903-2664-437b-8fef-c914b99f3441)
 
 <br>
 
 - 일반 로그인
+
 ![ezgif com-video-to-gif (1)](https://github.com/Hyeon0208/fruit-mall/assets/99153215/1525c517-c83f-4d83-b035-f65e75c4a88a)
   
 <br>
 
 - 소셜 회원가입 이메일과 프룹샷 회원가입 이메일 중복을 방지하기 위해 "로그인방법" 컬럼으로 구별하여 회원 저장.
+
 ![user테이블.png](img/user테이블.png)
 
 <br>
@@ -220,4 +223,5 @@
 - 알림 내용 클릭 시 리뷰 작성한 상품의 리뷰 페이지로 redirect
 
 ![실시간알림표시.png](img/실시간알림표시.png)
+
 <img src="img/리뷰답글알림.png"  width="600" height="400"/>
