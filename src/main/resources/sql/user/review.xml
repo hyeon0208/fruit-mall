@@ -9,10 +9,12 @@
                 (SELECT o.ORDER_ID
                  FROM orders o
                           JOIN order_product op ON o.ORDER_ID = op.ORDER_ID
+                          LEFT JOIN review r ON o.ORDER_ID = r.ORDER_ID AND r.PRODUCT_ID = op.PRODUCT_ID
                  WHERE o.USER_ID_NO = #{userIdNo}
                    AND op.PRODUCT_ID = #{productId}
-                   AND NOT EXISTS (SELECT 1 FROM review r WHERE r.ORDER_ID = o.ORDER_ID)
-                 ORDER BY o.ORDER_DATE DESC LIMIT 1), #{reviewContents} )
+                   AND r.ORDER_ID IS NULL
+                 ORDER BY ORDER_DATE DESC LIMIT 1),
+                #{reviewContents} )
     </insert>
 
     <insert id="insertMypageReview" parameterType="map" useGeneratedKeys="true" keyProperty="review.reviewId">
