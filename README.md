@@ -77,7 +77,7 @@
 ### - 로그인
 - 소셜 로그인 (카카오, 네이버, 구글 소셜 로그인 지원)
 
-![ezgif com-video-to-gif](https://github.com/Hyeon0208/fruit-mall/assets/99153215/7094a903-2664-437b-8fef-c914b99f3441)
+![ezgif com-video-to-gif444](https://github.com/Hyeon0208/fruit-mall/assets/99153215/bd81e45c-030b-4201-ab56-7d9f252431ea)
 
 <br>
 
