@@ -187,7 +187,7 @@
   - 배송지는 3개까지 저장
   - 배송지 등록, 수정, 삭제 가능
 
-![ezgif com-video-to-gif (5)](https://github.com/Hyeon0208/fruit-mall/assets/99153215/86d0fd1a-59ee-4dd7-a28b-80197fdce16c)
+![ezgif com-video-to-gif (11)](https://github.com/Hyeon0208/fruit-mall/assets/99153215/5cf0346b-e04d-4d10-81a4-b053e2f7b6f4)
 
 <br>
 
@@ -213,7 +213,7 @@
   - 리뷰 작성 시 리뷰보기 버튼 활성화.
   - 리뷰 보기 클릭 시 해당 상품의 리뷰 페이지로 이동
 
-![ezgif com-video-to-gif (3)](https://github.com/Hyeon0208/fruit-mall/assets/99153215/83976c7a-5ac2-4a9e-a89d-7a58256ba04c)
+![ezgif com-video-to-gif (10)](https://github.com/Hyeon0208/fruit-mall/assets/99153215/1257255d-74f4-4b95-9cdd-70988f9f9749)
 
 <br>
 
