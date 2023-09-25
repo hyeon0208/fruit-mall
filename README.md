@@ -95,7 +95,7 @@
 
 ### ✔ 회원가입
 
-![ezgif com-video-to-gif](https://github.com/Hyeon0208/fruit-mall/assets/99153215/dbc96a02-4742-43ee-a5b9-9d61d40faacf)
+![회원가입com-video-to-gif (1)](https://github.com/Hyeon0208/fruit-mall/assets/99153215/6b4698fb-418d-4b45-87da-1913aba232cf)
 
 - 이메일, 닉네임, 비밀번호, 약관동의 정보 입력
 - 이메일주소와 닉네임은 중복 불가로, 중복 입력 값을 즉시 확인할 수 있도록 해당 필드 비동기로 처리.
