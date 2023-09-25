@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class UserService {
+    public static final String COMMON = "일반";
 
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
@@ -57,7 +58,7 @@ public class UserService {
     }
 
     public String selectEmailByUserEmail(String user_email) {
-        return userRepository.selectEmailByUserEmail(user_email, "일반");
+        return userRepository.selectEmailByUserEmail(user_email, COMMON);
     }
 
     public String selectUserNameByUserName(String user_name) {
