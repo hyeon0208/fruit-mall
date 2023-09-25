@@ -42,7 +42,7 @@ $(() => {
             $("#mypage_delivery .delivery__add__confirm__btn").on("click", () => {
                 axios({
                     url: "/api/v1/delivery",
-                    method: "patch",
+                    method: "post",
                     data: {
                         deliveryName: $("#add_title").val(),
                         userName: $("#add_name").val(),
