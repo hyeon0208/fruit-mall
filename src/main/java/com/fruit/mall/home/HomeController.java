@@ -20,6 +20,11 @@ import java.util.HashMap;
 public class HomeController {
     private final ProductService productService;
 
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    void noFavicon() {
+    }
+
     @GetMapping("/")
     public String home(
             @Login SessionUser sessionUser,
