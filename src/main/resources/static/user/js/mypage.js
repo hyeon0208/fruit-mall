@@ -257,7 +257,7 @@ function myPageOrderProductList() {
                         $("<div>")
                             .addClass("img")
                             .append(
-                                $("<img>").attr({src: orderDetail.imageUrl}),
+                                $("<img>").attr({src: orderDetail.productImage}),
                                 $("<div>")
                                     .addClass('img__txt')
                                     .append(
@@ -265,8 +265,8 @@ function myPageOrderProductList() {
                                         $("<div>")
                                             .addClass('group')
                                             .append(
-                                                $("<span>").addClass('orange').text(`${(orderDetail.orderPrice * 1).toLocaleString()}원`),
-                                                $("<span>").text(`구매수량 ${orderDetail.orderCount}개`)
+                                                $("<span>").addClass('orange').text(`${(orderDetail.orderProductPrice * 1).toLocaleString()}원`),
+                                                $("<span>").text(`구매수량 ${orderDetail.orderProductCount}개`)
                                             ),
                                         // 배송지 확인 영역 추가
                                         $('<div>')
