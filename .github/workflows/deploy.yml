@@ -48,7 +48,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Clean up Disk Space on EC2
+    - name: EC2 Docker Run
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -58,18 +58,10 @@ jobs:
         script: |
           sudo docker stop fruit-mall || true
           sudo docker rm -f fruit-mall || true
-          docker rmi -f $(docker images '${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall' -q) || true
-          docker system prune -a -f
-          docker volume prune -f
-        
-    - name: EC2 Docker Run
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ec2-user
-        key: ${{ secrets.EC2_KEY }}
-        port: 22
-        script: |
+          sudo docker rmi -f $(docker images '${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall' -q) || true
+          sudo docker system prune -a -f
+          sudo docker volume prune -f
+          
           sudo docker stop fruit-mall
           sudo docker rm -f fruit-mall
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} 
