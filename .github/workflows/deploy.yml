@@ -31,19 +31,16 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
-    # Gradle build
     - name: Build with Gradle
       run: ./gradlew bootJar
 
 
-    # Spring 어플리케이션 Docker Image 빌드
     - name: Build Docker Image For Spring
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
 
-    # Configure AWS Credentials (6) - AWS 접근 권한 취득(IAM)
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with: 
@@ -51,7 +48,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
         
-    # 서버에서 Docker 이미지 실행
     - name: EC2 Docker Run
       uses: appleboy/ssh-action@master
       with:
@@ -60,7 +56,7 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         port: 22
         script: |
-          docker rm -f $(docker ps -qa)
-          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
+          sudo docker stop fruit-mall
+          sudo docker rm -f fruit-mall
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
           sudo docker run -it -d -p 8080:8080 --name fruit-mall ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
