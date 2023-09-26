@@ -38,8 +38,8 @@ jobs:
     - name: Build Docker Image For Spring
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} .
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -58,6 +58,6 @@ jobs:
         script: |
           sudo docker stop fruit-mall
           sudo docker rm -f fruit-mall
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} 
           sudo docker run -it -d -p 8080:8080 --name fruit-mall \
-          ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
+          ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
