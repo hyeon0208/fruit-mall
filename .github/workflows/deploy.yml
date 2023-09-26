@@ -28,6 +28,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
+    # Gradle build
+    - name: Build with Gradle
+      run: ./gradlew bootJar
+
+
     # Spring 어플리케이션 Docker Image 빌드
     - name: Build Docker Image For Spring
       run: |
