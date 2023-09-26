@@ -63,4 +63,6 @@ jobs:
           docker rm -f $(docker ps -qa)
           docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
-          sudo docker run -it -d -p 8080:8080 --name fruit-mall ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
+          sudo docker run -it -d -p 8080:8080 --name fruit-mall \
+          -v /home/ec2-user/app:/app \
+          ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
