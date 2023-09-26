@@ -12,6 +12,7 @@ build/
 application-oper.properties
 application-dev.properties
 application-oauth.properties
+application-real-db.properties
 
 ### STS ###
 .apt_generated
