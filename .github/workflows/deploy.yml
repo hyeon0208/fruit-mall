@@ -42,13 +42,21 @@ jobs:
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall
+
+    # Configure AWS Credentials (6) - AWS 접근 권한 취득(IAM)
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with: 
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
         
     # 서버에서 Docker 이미지 실행
     - name: EC2 Docker Run
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
-        username: ubuntu
+        username: hyeon
         key: ${{ secrets.EC2_KEY }}
         script: |
           docker rm -f $(docker ps -qa)
