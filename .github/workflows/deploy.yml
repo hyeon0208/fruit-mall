@@ -1,68 +1,68 @@
-name: deploy to ec2
-
-on:
-  push:
-    branches: [ "master" ]
-
-jobs:
-  deploy: 
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-
-    - name: Gradle Caching
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-
-    - name: Build with Gradle
-      run: ./gradlew bootJar
-
-
-    - name: Build Docker Image For Spring
-      run: |
-        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
-
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with: 
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-
-    - name: EC2 Docker Run
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ec2-user
-        key: ${{ secrets.EC2_KEY }}
-        port: 22
-        script: |
-          sudo docker stop fruit-mall || true
-          sudo docker rm -f fruit-mall || true
-          sudo docker rmi -f $(docker images '${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall' -q) || true
-          sudo docker system prune -a -f
-          sudo docker volume prune -f
-          
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} 
-          sudo docker run -it -d -p 8080:8080 --name fruit-mall \
-          -v /home/ec2-user/app:/home/ec2-user/app \
-          ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
+#name: deploy to ec2
+#
+#on:
+#  push:
+#    branches: [ "master" ]
+#
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v3
+#
+#    - name: Set up JDK 11
+#      uses: actions/setup-java@v3
+#      with:
+#        java-version: '11'
+#        distribution: 'temurin'
+#
+#    - name: Gradle Caching
+#      uses: actions/cache@v3
+#      with:
+#        path: |
+#          ~/.gradle/caches
+#          ~/.gradle/wrapper
+#        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#        restore-keys: |
+#          ${{ runner.os }}-gradle-
+#
+#    - name: Make gradlew executable
+#      run: chmod +x ./gradlew
+#
+#    - name: Build with Gradle
+#      run: ./gradlew bootJar
+#
+#
+#    - name: Build Docker Image For Spring
+#      run: |
+#        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+#        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} .
+#        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
+#
+#    - name: Configure AWS Credentials
+#      uses: aws-actions/configure-aws-credentials@v1
+#      with:
+#        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#        aws-region: us-east-1
+#
+#    - name: EC2 Docker Run
+#      uses: appleboy/ssh-action@master
+#      with:
+#        host: ${{ secrets.EC2_HOST }}
+#        username: ec2-user
+#        key: ${{ secrets.EC2_KEY }}
+#        port: 22
+#        script: |
+#          sudo docker stop fruit-mall || true
+#          sudo docker rm -f fruit-mall || true
+#          sudo docker rmi -f $(docker images '${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall' -q) || true
+#          sudo docker system prune -a -f
+#          sudo docker volume prune -f
+#
+#          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
+#          sudo docker run -it -d -p 8080:8080 --name fruit-mall \
+#          -v /home/ec2-user/app:/home/ec2-user/app \
+#          ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }}
