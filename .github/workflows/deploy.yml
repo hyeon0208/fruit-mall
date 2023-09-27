@@ -62,8 +62,6 @@ jobs:
           sudo docker system prune -a -f
           sudo docker volume prune -f
           
-          sudo docker stop fruit-mall
-          sudo docker rm -f fruit-mall
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fruit-mall:${{ github.run_number }} 
           sudo docker run -it -d -p 8080:8080 --name fruit-mall \
           -v /home/ec2-user/app:/home/ec2-user/app \
