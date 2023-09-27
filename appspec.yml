@@ -1,0 +1,32 @@
+# CodeDeploy 버전 (테스트 모드 : 0.0 )
+version: 0.0
+
+# 배포할 서버의 운영체제
+os: linux
+
+files:
+  - source: / # CodeDeploy에서 전달해 준 파일 중 destination으로 이동시킬 대상을 지정 (루트 경로 : 전체 파일)
+    destination: /home/ec2-user/app/deploy/zip/ # source에서 지정된 파일을 받을 위치
+    overwrite: yes # 기존 파일들을 덮어 쓰기
+
+# CodeDeploy에서 EC2로 넘겨준 파일들을 모두 ec2-user 권한 부여.
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
+
+# CodeDeploy 배포 단계에서 실행할 명령어를 지정. (차례 대로 스크립트들이 실행 )
+hooks:
+  AfterInstall:
+    - location: stop.sh # 엔진엑스와 연결되어 있지 않은 스프링 부트를 종료.
+      timeout: 60
+      runas: ec2-user
+  ApplicationStart:
+    - location: start.sh # Nginx와 연결되어 있지 않은 Port로 새 버전의 스프링 부트 시작.
+      timeout: 60
+      runas: ec2-user
+  ValidateService:
+    - location: health.sh # 새 스프링 부트가 정상적으로 실행됬는지 확인.
+      timeout: 60
+      runas: ec2-user

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.fruit'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
 
 java {
 	sourceCompatibility = '11'
@@ -40,7 +40,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.0'

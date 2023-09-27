@@ -65,7 +65,7 @@ public class SecurityConfig {
                 .csrf().disable().headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/",  "/changePw", "/findPw", "/api/v1/**", "/user/css/**", "/user/img/**", "/user/js/**", "/user/login", "/login",  "/user/cart", "/user/detail/**", "/user/review/**", "/join/**", "/join").permitAll()
+                    .antMatchers("/",  "/changePw", "/findPw", "/api/v1/**", "/user/css/**", "/user/img/**", "/user/js/**", "/user/login", "/login",  "/user/cart", "/user/detail/**", "/user/review/**", "/join/**", "/join", "/profile").permitAll()
                     .antMatchers("/user/mypage", "/confirm/payment", "/user/order/**", "/order/**", "/payment/**").hasAuthority(Role.USER.name()) // 해당 주소는 USER 권한을 가진 사람만 가능
                     .anyRequest().authenticated()
                 .and()
