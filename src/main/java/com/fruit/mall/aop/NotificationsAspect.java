@@ -21,7 +21,7 @@ import java.util.List;
 import static com.fruit.mall.user.LoginApiController.LOGIN_USER;
 
 @Aspect
-@Slf4j
+@Slf4j(topic = "elk")
 @Component
 @RequiredArgsConstructor
 public class NotificationsAspect {

@@ -16,7 +16,7 @@ import java.util.Map;
 import static com.fruit.mall.notifications.NotificationApiController.DEFAULT_TIMEOUT;
 
 @Service
-@Slf4j
+@Slf4j(topic = "elkr")
 @RequiredArgsConstructor
 public class EmitterService {
     private final NotificationsService notificationsService;

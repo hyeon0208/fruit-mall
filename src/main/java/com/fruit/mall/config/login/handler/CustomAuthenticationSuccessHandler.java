@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import static com.fruit.mall.user.LoginApiController.LOGIN_USER;
 
 @RequiredArgsConstructor
-@Slf4j
+@Slf4j(topic = "elk")
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final UserRepository userRepository;

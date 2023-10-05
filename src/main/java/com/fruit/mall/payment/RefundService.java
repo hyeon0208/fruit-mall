@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.Map;
 
 @Transactional
-@Slf4j
+@Slf4j(topic = "elk")
 @RequiredArgsConstructor
 @Service
 public class RefundService {

@@ -35,6 +35,8 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'com.github.iamport:iamport-rest-client-java:0.1.6'
+	implementation 'com.github.danielwegener:logback-kafka-appender:0.1.0'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.2'
 	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
 	implementation group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.4.5'
 	compileOnly 'org.projectlombok:lombok'

@@ -24,7 +24,7 @@ import static com.fruit.mall.product.RecentProductService.RECENT_PRODUCTS;
 
 @Aspect
 @Component
-@Slf4j
+@Slf4j(topic = "elk")
 @RequiredArgsConstructor
 public class SidebarAspect {
     private final LikeService likeService;

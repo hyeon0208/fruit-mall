@@ -1,0 +1,44 @@
+<configuration>
+    <!--  <appender> KafkaAppender 클래스를 사용하여 Kafka에 로그 메시지를 전송  -->
+    <appender name="LOG-KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+        <!--  <encoder> 로그 메시지를 Kafka가 처리할 수 있는 형식으로 변환  -->
+        <encoder class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">
+            <!--  <layout> 로그 메시지 출력 패턴 지정  -->
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
+            </layout>
+        </encoder>
+        <!-- <topic> Kafka에 전송될 토픽의 이름을 지정  -->
+        <topic>ek-log</topic>
+        <!-- <keyingStrategy> 키 생성 전략을 Round Robin으로 설정 (모든 파티션에 균등하게 분산되도록 메시지들이 순환적으로 파티션에 할당)  -->
+        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.RoundRobinKeyingStrategy"/>
+        <!-- <deliveryStrategy> 비동기적 방식으로 로그 메시지 전송  -->
+        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
+        <!-- <producerConfig> Kafka producer의 설정값 (순서대로, 재전송 횟수, 전송 서버 주소, 압축 타입, 데이터 전송 최대 대기 시간  -->
+        <producerConfig>retries=1</producerConfig>
+        <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
+        <producerConfig>compression.type=snappy</producerConfig>
+        <producerConfig>max.block.ms=1000</producerConfig>
+    </appender>
+
+    <!-- <appender> 콘솔에 로그를 출력하기 위한 appender  -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+    <logger> elk 이름의 logger를 정의하여, INFO 레벨 메시지만 처리
+    <appender-ref> elk 이름의 logger가 사용할 appender 지정
+     -->
+    <logger name="elk" level="INFO" additivity="false">
+        <appender-ref ref="LOG-KAFKA"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- <root> 모든 logger에 대한 기본 설정을 정의 (INFO 레벨 이상의 메시지만 처리) -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

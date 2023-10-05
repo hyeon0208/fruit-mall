@@ -19,7 +19,7 @@ import java.io.*;
 import java.util.List;
 
 @RestController
-@Slf4j
+@Slf4j(topic = "elk")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class PaymentApiController {

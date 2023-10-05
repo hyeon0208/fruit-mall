@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@Slf4j
+@Slf4j(topic = "elk")
 @RequiredArgsConstructor
 public class NotificationApiController {
 
